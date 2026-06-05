@@ -1,13 +1,12 @@
-import ProductCard from "./components/ProductCard.tsx";
+import ProductCard from './components/ProductCard.tsx';
 
 function App() {
-
   return (
     <>
       <h1>Hello</h1>
-        <ProductCard />
+      <ProductCard />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

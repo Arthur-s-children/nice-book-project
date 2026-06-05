@@ -1,0 +1,138 @@
+// COLORS
+$color-primary: #313237;
+$color-secondary: #89939a;
+$color-icons: #b4bdc3;
+$color-elements: #e2e6e9;
+$color-hover-bg: #fafbfc;
+$color-white: #ffffff;
+$color-green: #27ae60;
+$color-red: #eb5757;
+
+// BREAKPOINTS
+$breakpoint-tablet: 1199px;
+$breakpoint-mobile: 639px;
+
+// FONTS
+@font-face {
+  font-family: 'Manrope';
+  src: url('../assets/fonts/Manrope-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../assets/fonts/Manrope-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../assets/fonts/Manrope-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+// font family
+$font-main: 'Manrope', sans-serif;
+
+// font weights
+$font-regular: 400;
+$font-semibold: 600;
+$font-bold: 700;
+
+// font mixins
+@mixin h1 {
+  font-family: $font-main;
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: $font-bold;
+  letter-spacing: -0.02em;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -0.01em;
+  }
+}
+
+@mixin h2 {
+  font-family: $font-main;
+  font-size: 32px;
+  line-height: 41px;
+  font-weight: $font-bold;
+  letter-spacing: -0.01em;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 22px;
+    line-height: 31px;
+    letter-spacing: 0;
+  }
+}
+
+@mixin h3 {
+  font-family: $font-main;
+  font-size: 22px;
+  line-height: 31px;
+  font-weight: $font-semibold;
+  letter-spacing: 0;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+@mixin h4 {
+  font-family: $font-main;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: $font-semibold;
+  letter-spacing: 0;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+@mixin h5 {
+  font-family: $font-main;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: $font-semibold;
+  letter-spacing: 0;
+}
+
+@mixin uppercase-text {
+  font-family: $font-main;
+  font-size: 12px;
+  line-height: 11px;
+  font-weight: $font-bold;
+  letter-spacing: 0.01em;
+}
+
+@mixin button-text {
+  font-family: $font-main;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: $font-semibold;
+  letter-spacing: 0;
+}
+
+@mixin body-text {
+  font-family: $font-main;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: $font-regular;
+  letter-spacing: 0;
+}
+
+@mixin small-text {
+  font-family: $font-main;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: $font-semibold;
+  letter-spacing: 0;
+}
