@@ -1,0 +1,30 @@
+@use '../styles/variables.scss' as *;
+@use '../styles/product-grid' as grid;
+
+.catalog {
+  @include grid.page-container;
+}
+
+.catalog-title {
+  @include h1;
+  color: $color-primary;
+  margin-bottom: 4px;
+}
+
+.catalog-count {
+  @include body-text;
+  color: $color-secondary;
+  margin-bottom: 16px;
+}
+
+.catalog-grid {
+  @include grid.product-grid;
+  margin-top: 24px;
+}
+
+.catalog-empty {
+  @include body-text;
+  color: $color-secondary;
+  text-align: center;
+  padding: 48px 0;
+}
