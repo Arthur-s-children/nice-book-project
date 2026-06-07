@@ -1,7 +1,7 @@
-import { bookService } from '../services/bookService';
-import { useCart } from '../hooks/useCart';
-import { CartItem } from '../components/layout/CartItem';
-import type { Book } from '../types/Book';
+import { bookService } from '../../services/bookService.ts';
+import { useCart } from '../../hooks/useCart.tsx';
+import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
+import type { Book } from '../../types/Book.ts';
 import './CartPage.scss';
 
 function getPrice(book: Book) {

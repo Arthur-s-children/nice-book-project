@@ -1,4 +1,4 @@
-import type { SortOption, PerPage } from '../../hooks/useCatalogParams';
+import type { SortOption, PerPage } from '../../../hooks/useCatalogParams.tsx';
 import './CatalogControls.scss';
 
 const PER_PAGE_OPTIONS: PerPage[] = [8, 16, 32];
