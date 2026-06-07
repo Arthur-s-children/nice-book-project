@@ -1,5 +1,5 @@
-import { Icon } from '../Icon';
-import type { Book } from '../../types/Book';
+import { Icon } from '../../Icon';
+import type { Book } from '../../../types/Book.ts';
 import './CartItem.scss';
 
 type Props = {

@@ -1,8 +1,8 @@
-import { bookService } from '../services/bookService';
-import { useCart } from '../hooks/useCart';
-import { useFavorites } from '../hooks/useFavorites';
-import { BookCard } from '../components/layout/BookCard';
-import type { Book } from '../types/Book';
+import { bookService } from '../../services/bookService.ts';
+import { useCart } from '../../hooks/useCart.tsx';
+import { useFavorites } from '../../hooks/useFavorites.tsx';
+import { BookCard } from '../../components/shared/BookCard/BookCard.tsx';
+import type { Book } from '../../types/Book.ts';
 import './FavoritesPage.scss';
 
 export function FavoritesPage() {

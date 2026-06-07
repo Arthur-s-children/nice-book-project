@@ -1,11 +1,11 @@
-import { bookService } from '../services/bookService';
-import { useCatalogParams } from '../hooks/useCatalogParams';
-import { useCart } from '../hooks/useCart';
-import { useFavorites } from '../hooks/useFavorites';
-import { BookCard } from '../components/layout/BookCard';
-import { CatalogControls } from '../components/layout/CatalogControls';
-import { Pagination } from '../components/layout/Pagination';
-import type { Book } from '../types/Book';
+import { bookService } from '../../services';
+import { useCatalogParams } from '../../hooks/useCatalogParams.tsx';
+import { useCart } from '../../hooks/useCart.tsx';
+import { useFavorites } from '../../hooks/useFavorites.tsx';
+import { BookCard } from '../../components/shared/BookCard/BookCard.tsx';
+import { CatalogControls } from '../../components/ui/CatalogControls/CatalogControls.tsx';
+import { Pagination } from '../../components/ui/Pagination/Pagination.tsx';
+import type { Book } from '../../types/Book.ts';
 import './CatalogPage.scss';
 
 const TITLES: Record<string, string> = {
