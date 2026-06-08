@@ -11,21 +11,19 @@ function getPrice(book: Book) {
 export function CartPage() {
   const { items, updateQuantity, removeFromCart } = useCart();
 
-  const cartBooks: { book: Book; quantity: number }[] = [];
+  const cartBooks = items
+    .map((item) => ({
+      book: bookService.getById(item.productId),
+      quantity: item.quantity,
+    }))
+    .filter(
+      (item): item is { book: Book; quantity: number } => item.book !== null,
+    );
 
-  for (const item of items) {
-    const book = bookService.getById(item.productId);
-
-    if (book) {
-      cartBooks.push({ book, quantity: item.quantity });
-    }
-  }
-
-  let total = 0;
-
-  for (const line of cartBooks) {
-    total += getPrice(line.book) * line.quantity;
-  }
+  const total = cartBooks.reduce(
+    (sum, line) => sum + getPrice(line.book) * line.quantity,
+    0,
+  );
 
   return (
     <section className="cart-page">

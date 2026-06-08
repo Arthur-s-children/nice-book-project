@@ -3,9 +3,12 @@
 .book-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  width: 272px;
+  height: 506px;
   border: 1px solid $color-elements;
+  border-radius: 16px;
   background: $color-white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .book-card__image-wrap {
@@ -13,7 +16,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 196px;
+  width: 208px;
+  height: 263px;
   padding: 24px;
   background: $color-hover-bg;
 
@@ -101,6 +105,7 @@
   flex: 1;
   height: 40px;
   border: none;
+  border-radius: 16px;
   background: $color-primary;
   color: $color-white;
   cursor: pointer;
@@ -111,6 +116,7 @@
   flex: 1;
   height: 40px;
   border: none;
+  border-radius: 16px;
   background: transparent;
   color: $color-green;
   cursor: default;
@@ -124,6 +130,7 @@
   width: 40px;
   height: 40px;
   border: 1px solid $color-elements;
+  border-radius: 16px;
   background: $color-white;
   cursor: pointer;
 }
@@ -135,11 +142,7 @@
   width: 40px;
   height: 40px;
   border: 1px solid $color-red;
+  border-radius: 16px;
   background: $color-white;
   cursor: pointer;
-
-  img {
-    filter: invert(38%) sepia(63%) saturate(2878%) hue-rotate(340deg)
-      brightness(95%) contrast(92%);
-  }
 }

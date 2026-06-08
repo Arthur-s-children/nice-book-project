@@ -5,6 +5,7 @@ type IconName =
   | 'search'
   | 'cart'
   | 'heart'
+  | 'heart-filled'
   | 'minus'
   | 'plus'
   | 'close'
