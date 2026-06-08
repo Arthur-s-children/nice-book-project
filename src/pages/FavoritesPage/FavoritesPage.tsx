@@ -9,15 +9,9 @@ export function FavoritesPage() {
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
 
-  const favoriteBooks: Book[] = [];
-
-  for (const id of favoriteIds) {
-    const book = bookService.getById(id);
-
-    if (book) {
-      favoriteBooks.push(book);
-    }
-  }
+  const favoriteBooks = favoriteIds
+    .map((id) => bookService.getById(id))
+    .filter((book): book is Book => book !== null);
 
   return (
     <section className="page">
