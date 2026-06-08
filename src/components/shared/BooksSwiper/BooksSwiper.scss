@@ -1,0 +1,26 @@
+@use '../../../styles/variables' as *;
+
+.books-swiper {
+  height: 570px;
+  padding: 0 32px;
+  margin-bottom: 48px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &__placeholder {
+    height: 400px;
+    background: $color-hover-bg;
+    border: 1px solid $color-elements;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-secondary;
+    font-family: $font-main;
+    font-size: 14px;
+  }
+}
