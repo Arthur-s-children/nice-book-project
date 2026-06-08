@@ -26,7 +26,7 @@ type Props = {
 export const Icon = ({ name }: Props) => {
   return (
     <img
-      src={`/icons/${name}.svg`}
+      src={`${import.meta.env.BASE_URL}icons/${name}.svg`}
       className={styles.icon}
       alt={name}
     />
