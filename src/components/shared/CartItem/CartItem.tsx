@@ -18,7 +18,7 @@ export function CartItem({
   onRemove,
 }: Props) {
   const price = book.priceDiscount ?? book.priceRegular;
-  const imageSrc = `${import.meta.env.BASE_URL}${book.images[0]}`;
+  const imageSrc = `/src/assets/${book.images[0]}`;
 
   return (
     <div className="cart-item">
