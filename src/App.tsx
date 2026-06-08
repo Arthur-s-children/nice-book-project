@@ -1,7 +1,9 @@
+import { ItemCard } from './components/ItemCard';
+
 function App() {
   return (
     <>
-      <h1>Hello</h1>
+      <ItemCard />
     </>
   );
 }
