@@ -5,14 +5,15 @@ import './HomePage.scss';
 
 export const HomePage = () => {
   return (
-    <div className="home-page">
+    <>
       <HeroSection />
+      <div className="home-page">
+        <BooksSwiper title="New books" />
 
-      <BooksSwiper title="New books" />
+        <CategoriesSection />
 
-      <CategoriesSection />
-
-      <BooksSwiper title="You might like" />
-    </div>
+        <BooksSwiper title="You might like" />
+      </div>
+    </>
   );
 };
