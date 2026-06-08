@@ -2,7 +2,7 @@ import './Footer.scss';
 import { Logo } from '../../Logo';
 import { Icon } from '../../Icon';
 
-const Footer: React.FC = () => {
+export function Footer() {
   const handleBackToTop = (): void => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -49,6 +49,6 @@ const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;
