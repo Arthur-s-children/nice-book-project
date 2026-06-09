@@ -1,4 +1,4 @@
-import { Icon } from '../../ui/Icon/index.ts';
+import { Icon } from '../../ui/Icon';
 import type { Book } from '../../../types/Book.ts';
 import './BookCard.scss';
 
@@ -18,7 +18,7 @@ export function BookCard({
   isFavorite,
 }: Props) {
   const price = book.priceDiscount ?? book.priceRegular;
-  const imageSrc = `${import.meta.env.BASE_URL}src/assets/${book.images[0]}`;
+  const imageSrc = `${import.meta.env.BASE_URL}${book.images[0]}`;
 
   return (
     <article className="book-card">
