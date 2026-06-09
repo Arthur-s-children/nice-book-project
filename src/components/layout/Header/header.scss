@@ -6,10 +6,11 @@ body {
 }
 
 .header {
-  width: 100%;
+  max-width: 1440px;
   background-color: $color-white;
   border-bottom: 1px solid $color-elements;
   font-family: 'Manrope';
+  margin: 0 auto;
 }
 
 .top-bar {
@@ -283,11 +284,16 @@ body {
 @media (min-width: $breakpoint-tablet) {
   .top-bar {
     height: 64px;
-    padding-left: 24px;
+    padding-left: 0px;
     padding-right: 0;
 
     &__logo {
+      display: flex;
       margin-right: 48px;
+      padding-left: 24px;
+      height: 100%;
+
+      border-left: 1px solid $color-elements;
     }
 
     &__icons {
@@ -307,6 +313,7 @@ body {
         width: 64px;
         height: 100%;
         border-left: 1px solid $color-elements;
+        border-right: 1px solid $color-elements;
       }
 
       .input {
