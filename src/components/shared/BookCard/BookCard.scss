@@ -67,7 +67,8 @@
 .book-card__name {
   @include body-text;
   font-weight: $font-semibold;
-  color: $color-primary;
+  color: $color-primary !important;
+  text-decoration: none !important;
 }
 
 .book-card__prices {

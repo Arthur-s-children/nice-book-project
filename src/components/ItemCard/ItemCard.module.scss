@@ -4,6 +4,15 @@
   padding-inline: 8px;
   max-width: 1136px;
   margin-inline: auto;
+  padding: 26.5px 16px 32px;
+
+  @media (min-width: 640px) {
+    padding: 24px 24px 80px;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 24px 32px 80px;
+  }
 }
 
 .book_grid {
@@ -97,9 +106,16 @@
   grid-area: image;
   text-align: center;
   align-self: start;
+  max-width: 280px;
+  margin: 0;
+
+  @media (min-width: 640px) {
+    max-width: 300px;
+    margin: 0;
+  }
 
   @media (min-width: 1200px) {
-    max-width: 337px;
+    max-width: 520px;
     width: 100%;
     text-align: left;
   }
