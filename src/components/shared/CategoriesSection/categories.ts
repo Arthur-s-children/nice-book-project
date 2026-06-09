@@ -1,10 +1,10 @@
-import paperVideo from '../../../assets/img/categories/paper.mp4';
-import audioVideo from '../../../assets/img/categories/audio.mp4';
-import kindleVideo from '../../../assets/img/categories/kindlebook.mp4';
+import paperVideo from '../../../../public/img/categories/paper.mp4';
+import audioVideo from '../../../../public/img/categories/audio.mp4';
+import kindleVideo from '../../../../public/img/categories/kindlebook.mp4';
 
-import paperPoster from '../../../assets/img/categories/paper_poster.webp';
-import audioPoster from '../../../assets/img/categories/audio_poster.webp';
-import kindlePoster from '../../../assets/img/categories/kindlebook_poster.webp';
+import paperPoster from '../../../../public/img/categories/paper_poster.webp';
+import audioPoster from '../../../../public/img/categories/audio_poster.webp';
+import kindlePoster from '../../../../public/img/categories/kindlebook_poster.webp';
 
 export const categories = [
   {
