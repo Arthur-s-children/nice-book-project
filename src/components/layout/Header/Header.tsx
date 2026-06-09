@@ -29,7 +29,7 @@ export function Header() {
           href="#"
           className="top-bar__logo"
         >
-          <Logo />
+          <Logo className="top-bar__logo-image" />
         </a>
 
         <nav className="nav header__nav">
