@@ -2,14 +2,14 @@ import styles from './ItemCard.module.scss';
 
 export const ItemCard = () => {
   return (
-    <div className={styles.itemCard}>
+    <div className={styles.item_card}>
       <h1 className={styles.title}>
         Chip War. The Fight for the World's Most Critical Technology
       </h1>
       <p className={styles.paragraph}>Chris Miller</p>
 
-      <div className={styles.bookGrid}>
-        <div className={styles.imageContainer}>
+      <div className={styles.book_grid}>
+        <div className={styles.image_container}>
           <picture>
             {/* desktop */}
             <source
@@ -30,41 +30,41 @@ export const ItemCard = () => {
           </picture>
         </div>
 
-        <section className={styles.categoryBlock}>
+        <section className={styles.category_block}>
           <div className={styles.category}>
-            <h5 className={styles.blockLabelGray}>Category</h5>
+            <h5 className={styles.block_label_gray}>Category</h5>
 
-            <button className={styles.btnCategory}>Tech/Business</button>
+            <button className={styles.btn_category}>Tech/Business</button>
           </div>
 
           <div className={styles.languages}>
-            <h5 className={styles.blockLabelGray}>Select language</h5>
+            <h5 className={styles.block_label_gray}>Select language</h5>
 
             <div className={styles.btnLang}>
-              <button className={styles.btnLangUa}>UA</button>
+              <button className={styles.btn_lang_ua}>UA</button>
 
-              <button className={styles.btnLangEng}>ENG</button>
+              <button className={styles.btn_lang_eng}>ENG</button>
             </div>
           </div>
 
-          <div className={styles.priceContainer}>
+          <div className={styles.price_container}>
             <div className={styles.price}>
-              <span className={styles.newPrice}>₴258</span>
+              <span className={styles.new_price}>₴258</span>
 
-              <span className={styles.oldPrice}>₴540</span>
+              <span className={styles.old_price}>₴540</span>
             </div>
 
             <div className={styles.actions}>
-              <button className={styles.btnAdd}>Add to cart</button>
+              <button className={styles.btn_add}>Add to cart</button>
 
               <button
-                className={styles.btnFavorite}
+                className={styles.btn_favorite}
                 aria-label="Favorite"
               >
                 <img
                   src="/icons/heart.svg"
                   alt=""
-                  className={styles.iconHeart}
+                  className={styles.icon_heart}
                 />
               </button>
             </div>
@@ -93,9 +93,9 @@ export const ItemCard = () => {
         </section>
 
         <section className={styles.about}>
-          <h3 className={styles.sectionTitle}>About</h3>
+          <h3 className={styles.section_title}>About</h3>
 
-          <h5 className={styles.blockLabelBlack}>
+          <h5 className={styles.block_label_black}>
             An epic account of the decades-long battle to control the world's
             most critical resource—microchip technology
           </h5>
@@ -129,8 +129,8 @@ export const ItemCard = () => {
           </p>
         </section>
 
-        <section className={styles.characteristicsSection}>
-          <h3 className={styles.sectionTitle}>Characteristics</h3>
+        <section className={styles.characteristics_section}>
+          <h3 className={styles.section_title}>Characteristics</h3>
 
           <table className={styles.characteristics}>
             <tbody>

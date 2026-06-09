@@ -1,12 +1,12 @@
 @use '../../styles/variables' as *;
 
-.itemCard {
+.item_card {
   padding-inline: 8px;
   max-width: 1136px;
   margin-inline: auto;
 }
 
-.bookGrid {
+.book_grid {
   display: grid;
   gap: 32px;
 
@@ -65,7 +65,7 @@
   color: $color-primary;
 }
 
-.sectionTitle {
+.section_title {
   font-family: $font-main;
   font-size: 20px;
   font-weight: $font-semibold;
@@ -81,7 +81,7 @@
   }
 }
 
-.blockLabelGray {
+.block_label_gray {
   font-family: $font-main;
   font-size: 16px;
   line-height: 24px;
@@ -91,7 +91,7 @@
   font-weight: $font-bold;
 }
 
-.blockLabelBlack {
+.block_label_black {
   font-family: $font-main;
   font-size: 16px;
   line-height: 24px;
@@ -102,7 +102,7 @@
   margin-top: 24px;
 }
 
-.imageContainer {
+.image_container {
   grid-area: image;
   text-align: center;
   align-self: start;
@@ -120,7 +120,7 @@
   object-fit: cover;
 }
 
-.categoryBlock {
+.category_block {
   grid-area: category;
 
   padding-bottom: 16px;
@@ -147,7 +147,7 @@
   }
 }
 
-.characteristicsSection {
+.characteristics_section {
   grid-area: chars;
 
   @media (min-width: 1200px) {
@@ -157,7 +157,7 @@
   }
 }
 
-.btnCategory {
+.btn_category {
   font-family: $font-main;
   font-size: 14px;
   line-height: 21px;
@@ -182,13 +182,13 @@
   border-bottom: solid 1px $color-elements;
 }
 
-.btnLang {
+.btn_lang {
   margin-top: 8px;
   display: flex;
   gap: 8px;
 }
 
-.btnLangUa {
+.btn_lang_ua {
   font-family: $font-main;
   font-size: 14px;
   line-height: 21px;
@@ -203,7 +203,7 @@
   cursor: pointer;
 }
 
-.btnLangEng {
+.btn_lang_eng {
   font-family: $font-main;
   font-size: 14px;
   line-height: 21px;
@@ -217,7 +217,7 @@
   cursor: pointer;
 }
 
-.priceContainer {
+.price_container {
   margin-top: 16px;
 }
 
@@ -227,7 +227,7 @@
   gap: 8px;
 }
 
-.newPrice {
+.new_price {
   color: $color-primary;
   font-size: 22px;
   font-weight: $font-bold;
@@ -241,7 +241,7 @@
   }
 }
 
-.oldPrice {
+.old_price {
   color: $color-secondary;
   font-weight: $font-semibold;
   font-family: $font-main;
@@ -257,7 +257,7 @@
   margin-top: 16px;
 }
 
-.btnAdd {
+.btn_add {
   font-family: $font-main;
   font-size: 14px;
   line-height: 21px;
@@ -273,7 +273,7 @@
   cursor: pointer;
 }
 
-.btnFavorite {
+.btn_favorite {
   background-color: transparent;
   border: 1px solid $color-elements;
   border-radius: 8px;
@@ -284,7 +284,7 @@
   padding: 0;
 }
 
-.iconHeart {
+.icon_heart {
   width: 16px;
   height: 16px;
   padding: 12px;
