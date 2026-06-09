@@ -8,6 +8,7 @@ import { FavoritesPage } from '../pages/FavoritesPage';
 import { CartPage } from '../pages/CartPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { ProductPage } from '../pages/ProductPage';
+import { RightsPage } from '../pages/RightsPage';
 
 export const router = createHashRouter([
   {
@@ -37,6 +38,10 @@ export const router = createHashRouter([
       {
         path: 'products/:slug',
         element: <ProductPage />,
+      },
+      {
+        path: 'rights',
+        element: <RightsPage />,
       },
     ],
   },
