@@ -2,31 +2,20 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Logo } from '../../Logo';
 import { Icon } from '../../Icon';
 import '../Header/header.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
-
-export const NavigationItem = {
-  Home: 'HOME',
-  Paper: 'PAPER',
-  Kindle: 'KINDLE',
-  AudioBook: 'AUDIOBOOK',
-} as const;
-
-export type NavigationItemType =
-  (typeof NavigationItem)[keyof typeof NavigationItem];
 
 export function Header() {
   const [isMenuOpen, setIsOpenMenu] = useState(false);
 
   const location = useLocation();
 
-  const [prevPathname, setPrevPathname] = useState(location.pathname);
-
-  // Close Menu when URL changes
-  if (location.pathname !== prevPathname) {
-    setPrevPathname(location.pathname);
-    setIsOpenMenu(false);
-  }
+  useEffect(() => {
+    const closeMenu = async () => {
+      await setIsOpenMenu(false);
+    };
+    closeMenu();
+  }, [location.pathname]);
 
   const toggleMenu = (event: React.MouseEvent) => {
     event.preventDefault();
