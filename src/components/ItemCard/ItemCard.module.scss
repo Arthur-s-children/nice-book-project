@@ -19,6 +19,7 @@
     'chars';
 
   @media (min-width: 640px) {
+    margin-top: 32px;
     grid-template-columns: 300px 1fr;
 
     grid-template-areas:
@@ -28,6 +29,7 @@
   }
 
   @media (min-width: 1200px) {
+    margin-top: 40px;
     grid-template-columns: 560px 1fr;
 
     grid-template-areas:
@@ -91,17 +93,6 @@
   font-weight: $font-bold;
 }
 
-.block_label_black {
-  font-family: $font-main;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0;
-  margin-block: 0px;
-  color: $color-primary;
-  font-weight: $font-bold;
-  margin-top: 24px;
-}
-
 .image_container {
   grid-area: image;
   text-align: center;
@@ -122,18 +113,22 @@
 
 .category_block {
   grid-area: category;
-
   padding-bottom: 16px;
 
   @media (min-width: 1200px) {
     width: 100%;
     max-width: 320px;
+    gap: 40px;
   }
 }
 
-.category {
+.categories {
   border-bottom: solid 1px $color-elements;
   padding-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .about {
@@ -168,7 +163,6 @@
   background-color: $color-hover-bg;
   border-radius: 5px;
   border: 1px solid $color-elements;
-  width: 119px;
   height: 32px;
   margin-top: 8px;
   cursor: pointer;
@@ -282,12 +276,20 @@
   height: 40px;
   cursor: pointer;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon_heart {
   width: 16px;
   height: 16px;
-  padding: 12px;
+  padding: 0;
+  display: block;
+}
+
+.description {
+  padding-top: 24px;
 }
 
 .characteristics {

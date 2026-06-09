@@ -3,6 +3,8 @@ import { AppButton } from '../../ui/Button';
 import { LikeButton } from '../../ui/LikeButton';
 import type { Book } from '../../../types/Book.ts';
 import './BookCard.scss';
+import { Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 type Props = {
   book: Book;
@@ -39,7 +41,13 @@ export function BookCard({
 
       <div className="book-card__body">
         <p className="book-card__author">{book.author}</p>
-        <h3 className="book-card__name">{book.name}</h3>
+        <Link
+          component={RouterLink}
+          to={`/products/${book.slug}`}
+          className="book-card__name"
+        >
+          {book.name}
+        </Link>
         <div className="book-card__prices">
           <span className="book-card__price">₴{price}</span>
           {book.priceDiscount && (
