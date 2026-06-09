@@ -1,7 +1,7 @@
 import { HeroSection } from '../../components/shared/HeroSection/HeroSection.tsx';
 import { BooksSwiper } from '../../components/shared/BooksSwiper/BooksSwiper.tsx';
 import { CategoriesSection } from '../../components/shared/CategoriesSection/CategoriesSection.tsx';
-import { bookService } from '../../services/bookService.ts';
+import { bookService } from '../../services';
 import './HomePage.scss';
 
 export const HomePage = () => {
