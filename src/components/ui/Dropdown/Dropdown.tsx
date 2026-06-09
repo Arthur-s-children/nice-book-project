@@ -1,6 +1,6 @@
 import { FormControl, MenuItem, Select } from '@mui/material';
 import styles from './Dropdown.module.scss';
-import { Icon } from '../ui/Icon';
+import { Icon } from '../Icon';
 import { useState } from 'react';
 
 type Props = {
