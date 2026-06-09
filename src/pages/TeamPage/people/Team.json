@@ -1,0 +1,44 @@
+[
+  {
+    "photo": "./photos/placeholder-photo.png",
+    "first_name": "Dmytro",
+    "last_name": "Stelmashuk",
+    "role": "Techlead, Full-Stack Developer",
+    "quote": "..."
+  },
+  {
+    "photo": "./photos/placeholder-photo.png",
+    "first_name": "Dmytro",
+    "last_name": "Khromiak",
+    "role": "Manager, Full-Stack Developer",
+    "quote": "..."
+  },
+  {
+    "photo": "./photos/placeholder-photo.png",
+    "first_name": "Dmytro",
+    "last_name": "Shevchuk",
+    "role": "Full-Stack Developer",
+    "quote": "..."
+  },
+  {
+    "photo": "./photos/placeholder-photo.png",
+    "first_name": "Daria",
+    "last_name": "Melnyk",
+    "role": "Full-Stack Developer",
+    "quote": "..."
+  },
+  {
+    "photo": "./photos/placeholder-photo.png",
+    "first_name": "Nazar",
+    "last_name": "Rehalov",
+    "role": "Full-Stack Developer",
+    "quote": "..."
+  },
+  {
+    "photo": "./photos/placeholder-photo.png",
+    "first_name": "Yaroslav",
+    "last_name": "Yashchuk",
+    "role": "Full-Stack Developer",
+    "quote": "Скажи мені своє ім'я, і я скажу як тебе звати"
+  }
+]
