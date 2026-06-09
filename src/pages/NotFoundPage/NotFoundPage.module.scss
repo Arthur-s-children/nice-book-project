@@ -1,0 +1,72 @@
+@use '../../styles/variables.scss' as *;
+
+.not-found {
+  position: relative;
+  margin: 0 auto;
+
+  &__gif {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    right: 80px;
+    transform: translateY(-50%);
+    padding: 10px;
+
+    max-width: 420px;
+    color: #fff;
+    text-align: right;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__title {
+    font-size: 30px;
+  }
+
+  &__desc {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  &__button {
+    width: 150px;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .not-found__gif {
+    height: 520px;
+  }
+
+  .not-found__content {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .not-found__title {
+    font-size: 20px;
+  }
+
+  .not-found__desc {
+    font-size: 17px;
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .not-found__content {
+    right: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
