@@ -1,0 +1,14 @@
+@use '../../styles/variables.scss' as *;
+
+.button {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  padding: 0 !important;
+  background-color: $color-white !important;
+  color: $color-primary !important;
+
+  &:disabled {
+    color: $color-elements !important;
+  }
+}

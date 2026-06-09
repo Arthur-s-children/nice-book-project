@@ -1,0 +1,24 @@
+@use '../../styles/variables.scss' as *;
+
+.button {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px !important;
+  @include button-text;
+  text-transform: none !important;
+}
+
+.primary {
+  background-color: $color-primary !important;
+  color: $color-white !important;
+
+  &:hover {
+    box-shadow: $shadow-button;
+  }
+}
+
+.selected {
+  background-color: $color-white !important;
+  color: $color-green !important;
+  border: 1px solid $color-elements !important;
+}

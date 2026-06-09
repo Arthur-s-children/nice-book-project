@@ -1,0 +1,43 @@
+@use '../../styles/variables' as *;
+
+.formControl {
+  width: 176px !important;
+  height: 40px !important;
+}
+
+.select {
+  height: 40px !important;
+  border-radius: 8px !important;
+  background-color: $color-white !important;
+  @include body-text;
+
+  fieldset {
+    border-color: $color-elements !important;
+  }
+
+  &:hover fieldset {
+    border-color: $color-primary !important;
+  }
+
+  &.Mui-focused fieldset {
+    border-color: $color-primary !important;
+    border-width: 1px !important;
+  }
+
+  & img {
+    right: 12px !important;
+    position: absolute !important;
+    pointer-events: none;
+  }
+}
+
+.menuItem {
+  @include body-text;
+  color: $color-secondary !important;
+  border-radius: 0;
+
+  &:hover {
+    background-color: $color-hover-bg !important;
+    color: $color-primary !important;
+  }
+}

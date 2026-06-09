@@ -19,16 +19,16 @@ type IconName =
 
 type Props = {
   name: IconName;
+  size?: number;
 };
 
-// use it like this -> <Icon name='heart' />
-
-export const Icon = ({ name }: Props) => {
+export const Icon = ({ name, size = 16 }: Props) => {
   return (
     <img
       src={`${import.meta.env.BASE_URL}icons/${name}.svg`}
       className={styles.icon}
       alt={name}
+      height={size}
     />
   );
 };
