@@ -18,7 +18,7 @@ export function BookCard({
   isFavorite,
 }: Props) {
   const price = book.priceDiscount ?? book.priceRegular;
-  const imageSrc = `/src/assets/${book.images[0]}`;
+  const imageSrc = `${import.meta.env.BASE_URL}src/assets/${book.images[0]}`;
 
   return (
     <article className="book-card">
