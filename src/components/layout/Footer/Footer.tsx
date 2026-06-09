@@ -1,6 +1,6 @@
 import './Footer.scss';
 import { Logo } from '../../Logo';
-import { Icon } from '../../Icon';
+import { Icon } from '../../ui/Icon';
 
 export function Footer() {
   const handleBackToTop = (): void => {

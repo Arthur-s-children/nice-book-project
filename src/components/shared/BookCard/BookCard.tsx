@@ -1,4 +1,4 @@
-import { Icon } from '../../Icon';
+import { Icon } from '../../ui/Icon/index.ts';
 import type { Book } from '../../../types/Book.ts';
 import './BookCard.scss';
 
