@@ -1,0 +1,148 @@
+@use '../../../styles/variables' as *;
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  width: 272px;
+  height: 506px;
+  border: 1px solid $color-elements;
+  border-radius: 16px;
+  background: $color-white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-card__image-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 208px;
+  height: 263px;
+  padding: 24px;
+  background: $color-hover-bg;
+
+  @media (max-width: $breakpoint-mobile) {
+    height: 160px;
+    padding: 16px;
+  }
+}
+
+.book-card__image {
+  max-width: 100%;
+  max-height: 148px;
+  object-fit: contain;
+
+  @media (max-width: $breakpoint-mobile) {
+    max-height: 120px;
+  }
+}
+
+.book-card__badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $color-white;
+}
+
+.book-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.book-card__author {
+  @include small-text;
+  color: $color-secondary;
+}
+
+.book-card__name {
+  @include body-text;
+  font-weight: $font-semibold;
+  color: $color-primary;
+}
+
+.book-card__prices {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: auto;
+}
+
+.book-card__price {
+  @include h4;
+  color: $color-primary;
+}
+
+.book-card__old-price {
+  @include body-text;
+  color: $color-secondary;
+  text-decoration: line-through;
+}
+
+.book-card__stock {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  @include small-text;
+  color: $color-green;
+}
+
+.book-card__actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 16px;
+}
+
+.book-card__cart-btn {
+  flex: 1;
+  height: 40px;
+  border: none;
+  border-radius: 16px;
+  background: $color-primary;
+  color: $color-white;
+  cursor: pointer;
+  @include button-text;
+}
+
+.book-card__added-btn {
+  flex: 1;
+  height: 40px;
+  border: none;
+  border-radius: 16px;
+  background: transparent;
+  color: $color-green;
+  cursor: default;
+  @include button-text;
+}
+
+.book-card__fav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid $color-elements;
+  border-radius: 16px;
+  background: $color-white;
+  cursor: pointer;
+}
+
+.book-card__fav-btn--active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid $color-red;
+  border-radius: 16px;
+  background: $color-white;
+  cursor: pointer;
+}

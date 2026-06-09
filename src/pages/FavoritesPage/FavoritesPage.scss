@@ -1,0 +1,29 @@
+@use '../../styles/variables' as *;
+@use '../../styles/product-grid' as grid;
+
+.page {
+  @include grid.page-container;
+}
+
+.favorites-title {
+  @include h1;
+  color: $color-primary;
+  margin-bottom: 4px;
+}
+
+.favorites-count {
+  @include body-text;
+  color: $color-secondary;
+  margin-bottom: 24px;
+}
+
+.favorites-grid {
+  @include grid.product-grid;
+}
+
+.favorites-empty {
+  @include body-text;
+  color: $color-secondary;
+  text-align: center;
+  padding: 48px 0;
+}

@@ -1,0 +1,123 @@
+@use '../../../styles/variables' as *;
+
+// .footer,
+// .footer * {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+// }
+
+.footer {
+  width: 100%;
+  background: $color-white;
+  color: $color-secondary;
+  font-family: $font-main;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 33px 17px 39px;
+  box-sizing: border-box;
+}
+
+.logo {
+  min-height: 1px;
+  width: fit-content;
+  display: block;
+  text-decoration: none;
+
+  img {
+    display: block;
+  }
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 32px 0 0 0;
+}
+
+.category {
+  text-transform: uppercase;
+  font-family: $font-main;
+  font-size: 14px;
+  line-height: 20px;
+  color: $color-secondary;
+  text-decoration: none;
+  font-weight: $font-semibold;
+}
+
+.backTop {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-family: $font-main;
+  align-self: center;
+  margin: 40px auto 0;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: transparent;
+  color: $color-secondary;
+  font-size: 14px;
+  line-height: 18px;
+  cursor: pointer;
+  font-weight: $font-semibold;
+
+  .backTopIcon {
+    display: block;
+    width: 14px;
+    height: 8px;
+    object-fit: contain;
+  }
+}
+
+@media (min-width: $breakpoint-mobile) {
+  .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 25px;
+    height: 96px;
+  }
+
+  .categories {
+    flex-direction: row;
+    margin: 0;
+    gap: 17px;
+  }
+
+  .backTop {
+    align-self: auto;
+    margin: 0;
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 96px;
+    max-width: 1136px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .categories {
+    flex-direction: row;
+    gap: 111px;
+    margin: 0 auto;
+  }
+
+  .backTop {
+    margin: 0;
+  }
+}

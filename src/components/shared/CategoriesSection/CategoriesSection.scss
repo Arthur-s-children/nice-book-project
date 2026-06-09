@@ -1,0 +1,66 @@
+@use '../../../styles/variables' as *;
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.categories__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.category-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-card__media {
+  overflow: hidden;
+  margin-bottom: 16px;
+  aspect-ratio: 1.4 / 1;
+  border-radius: 8px;
+  transition: transform 300ms ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.category-card__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .category-card__media {
+    aspect-ratio: 1.25 / 1;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .category-card__media {
+    aspect-ratio: 1.5 / 1;
+  }
+}
+
+.category-card--audiobook .category-card__video {
+  object-position: 75% 20%;
+}
+
+.category-card__title {
+  margin-bottom: 4px;
+}
+
+.category-card__amount {
+  color: $color-secondary;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .categories__grid {
+    grid-template-columns: 1fr;
+  }
+}

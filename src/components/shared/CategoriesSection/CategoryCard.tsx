@@ -1,0 +1,64 @@
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+
+type Props = {
+  title: string;
+  type: string;
+  video: string;
+  poster: string;
+  amount: number;
+};
+
+export const CategoryCard = ({ title, type, video, poster, amount }: Props) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isMobile = window.innerWidth <= 639;
+
+  const handleMouseEnter = () => {
+    videoRef.current?.play();
+  };
+
+  const handleMouseLeave = () => {
+    if (!videoRef.current) {
+      return;
+    }
+
+    videoRef.current.pause();
+    videoRef.current.currentTime = 0;
+  };
+
+  return (
+    <Link
+      to={`/catalog?type=${type}`}
+      className={`category-card category-card--${type}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="category-card__media">
+        {isMobile ?
+          <img
+            src={poster}
+            alt={title}
+            className="category-card__video"
+          />
+        : <video
+            ref={videoRef}
+            className="category-card__video"
+            poster={poster}
+            muted
+            playsInline
+            preload="metadata"
+          >
+            <source
+              src={video}
+              type="video/mp4"
+            />
+          </video>
+        }
+      </div>
+
+      <h3 className="category-card__title">{title}</h3>
+
+      <p className="category-card__amount">{amount} books</p>
+    </Link>
+  );
+};

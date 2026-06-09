@@ -1,0 +1,82 @@
+@use '../../../styles/variables' as *;
+
+.hero {
+  display: grid;
+  grid-template-columns: 32px 1fr 32px;
+  align-items: center;
+  gap: 16px;
+  max-width: 1136px;
+  margin: 0 auto;
+  padding: 40px 32px 40px;
+}
+
+.hero__swiper {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.hero__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: $color-white;
+
+  cursor: pointer;
+  transition: transform 300ms ease;
+
+  &:hover {
+    transform: scale(1.5);
+  }
+}
+
+.hero__image {
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .hero {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .hero {
+    display: block;
+    padding: 24px 0;
+  }
+
+  .hero__button {
+    display: none;
+  }
+
+  .hero__image {
+    border-radius: 0;
+  }
+}
+
+.swiper-pagination {
+  position: static;
+  margin-top: 16px;
+}
+
+.swiper-pagination-bullet {
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+
+  background: $color-elements;
+  opacity: 1;
+
+  transition: background-color 300ms ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: $color-primary;
+}

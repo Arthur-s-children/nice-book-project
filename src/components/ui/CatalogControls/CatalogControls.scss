@@ -1,0 +1,40 @@
+@use '../../../styles/variables' as *;
+
+.catalog-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+}
+
+.catalog-controls__select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.catalog-controls__label {
+  @include body-text;
+  color: $color-secondary;
+}
+
+.catalog-controls__select {
+  height: 32px;
+  padding: 0 28px 0 12px;
+  border: 1px solid $color-elements;
+  background-color: $color-white;
+  color: $color-primary;
+  cursor: pointer;
+  @include body-text;
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 100%;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .catalog-controls__select-wrap {
+    width: 100%;
+  }
+}
