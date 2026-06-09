@@ -1,26 +1,165 @@
-@use '../../../styles/variables' as *;
-
 .books-swiper {
-  height: 570px;
-  padding: 0 32px;
-  margin-bottom: 48px;
+  position: relative;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 32px;
+  padding: 0;
+  box-sizing: border-box;
+
+  @media (min-width: 320px) and (max-width: 1199px) {
+    width: 100%;
+    padding: 0 16px;
+    overflow: visible;
+  }
+
+  @media (min-width: 320px) and (max-width: 639px) {
+    min-height: 455px;
+  }
+
+  @media (min-width: 640px) and (max-width: 1199px) {
+    min-height: 571px;
+  }
+
+  @media (min-width: 1200px) {
+    width: 1136px;
+    min-height: 571px;
+    padding: 0;
+    overflow: hidden;
+  }
 
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+
+    @media (min-width: 320px) and (max-width: 639px) {
+      margin-bottom: 24px;
+    }
+    @media (min-width: 640px) {
+      margin-bottom: 24px;
+    }
   }
 
-  &__placeholder {
-    height: 400px;
-    background: $color-hover-bg;
-    border: 1px solid $color-elements;
+  &__title {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-weight: 700;
+    color: #000000;
+
+    @media (min-width: 320px) and (max-width: 639px) {
+      font-size: 22px;
+    }
+    @media (min-width: 640px) {
+      font-size: 32px;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+
+    @media (max-width: 639px) {
+      display: none;
+    }
+
+    @media (min-width: 640px) {
+      margin-right: 8px;
+    }
+  }
+
+  &__arrow {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $color-secondary;
-    font-family: $font-main;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #000000;
+    transition:
+      color 0.2s ease,
+      opacity 0.2s ease;
+
+    &.swiper-button-disabled {
+      color: #b3b3b3;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--prev {
+      margin-right: 40px;
+    }
+  }
+
+  &__slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    @media (max-width: 1199px) {
+      overflow: visible !important;
+    }
+
+    @media (min-width: 1200px) {
+      overflow: hidden !important;
+    }
+  }
+
+  &__slide {
+    width: auto !important;
+    flex-shrink: 0 !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__card-placeholder {
+    background: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666666;
+    font-family: sans-serif;
     font-size: 14px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+
+    @media (min-width: 320px) and (max-width: 639px) {
+      width: 215px;
+      height: 400px;
+    }
+
+    @media (min-width: 640px) and (max-width: 1199px) {
+      width: 272px;
+      height: 506px;
+    }
+
+    @media (min-width: 1200px) {
+      width: 272px;
+      height: 506px;
+    }
   }
 }

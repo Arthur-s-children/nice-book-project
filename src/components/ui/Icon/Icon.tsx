@@ -10,9 +10,12 @@ type IconName =
   | 'plus'
   | 'close'
   | 'arrow-left'
+  | 'arrow-left-dark'
   | 'arrow-right'
+  | 'arrow-right-dark'
   | 'arrow-down'
   | 'arrow-up'
+  | 'arrow-up-dark'
   | 'burger'
   | 'truck'
   | 'headphones';
