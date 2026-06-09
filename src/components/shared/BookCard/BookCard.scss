@@ -16,10 +16,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 208px;
+  width: 100%;
   height: 263px;
   padding: 24px;
-  background: $color-hover-bg;
+  background: $color-white;
 
   @media (max-width: $breakpoint-mobile) {
     height: 160px;
@@ -29,11 +29,12 @@
 
 .book-card__image {
   max-width: 100%;
-  max-height: 148px;
+  max-height: 220px;
   object-fit: contain;
+  margin: 0 auto;
 
   @media (max-width: $breakpoint-mobile) {
-    max-height: 120px;
+    max-height: 160px;
   }
 }
 
@@ -99,50 +100,12 @@
   display: flex;
   gap: 8px;
   padding: 0 16px 16px;
-}
 
-.book-card__cart-btn {
-  flex: 1;
-  height: 40px;
-  border: none;
-  border-radius: 16px;
-  background: $color-primary;
-  color: $color-white;
-  cursor: pointer;
-  @include button-text;
-}
+  > button {
+    width: auto !important;
+  }
 
-.book-card__added-btn {
-  flex: 1;
-  height: 40px;
-  border: none;
-  border-radius: 16px;
-  background: transparent;
-  color: $color-green;
-  cursor: default;
-  @include button-text;
-}
-
-.book-card__fav-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid $color-elements;
-  border-radius: 16px;
-  background: $color-white;
-  cursor: pointer;
-}
-
-.book-card__fav-btn--active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid $color-red;
-  border-radius: 16px;
-  background: $color-white;
-  cursor: pointer;
+  > button:first-child {
+    flex: 1;
+  }
 }
