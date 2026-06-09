@@ -1,6 +1,6 @@
 import { InputAdornment, TextField } from '@mui/material';
 import styles from './Input.module.scss';
-import { Icon } from '../Icon';
+import { Icon } from '../ui/Icon';
 
 type Props = {
   value?: string;

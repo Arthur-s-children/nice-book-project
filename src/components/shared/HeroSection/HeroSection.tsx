@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { heroSlides } from './HeroSlides';
-import { Icon } from '../../Icon';
+import { Icon } from '../../ui/Icon';
 
 import './HeroSection.scss';
 
