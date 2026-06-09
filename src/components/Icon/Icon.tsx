@@ -5,6 +5,7 @@ type IconName =
   | 'search'
   | 'cart'
   | 'heart'
+  | 'heart-filled'
   | 'minus'
   | 'plus'
   | 'close'
@@ -18,16 +19,16 @@ type IconName =
 
 type Props = {
   name: IconName;
+  size?: number;
 };
 
-// use it like this -> <Icon name='heart' />
-
-export const Icon = ({ name }: Props) => {
+export const Icon = ({ name, size = 16 }: Props) => {
   return (
     <img
       src={`/icons/${name}.svg`}
       className={styles.icon}
       alt={name}
+      height={size}
     />
   );
 };
