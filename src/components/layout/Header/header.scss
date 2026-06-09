@@ -1,0 +1,341 @@
+@import '../../../styles/variables.scss';
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  width: 100%;
+  background-color: $color-white;
+  border-bottom: 1px solid $color-elements;
+  font-family: 'Manrope';
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding-left: 16px;
+  padding-right: 0;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 64px;
+    height: 22px;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .input,
+    .dropdouwn,
+    .icon--search,
+    .icon--favourite,
+    .icon--cart {
+      display: none;
+    }
+
+    .icon--menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 48px;
+      border-left: 1px solid $color-elements;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.nav__link {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: $color-secondary;
+  font-weight: 700;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &--active {
+    color: $color-primary;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: $color-primary;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .header--menu-open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: $color-white;
+    z-index: 999;
+
+    .top-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      height: 100%;
+      padding: 0;
+
+      &__logo {
+        position: absolute;
+        margin: 13px 16px;
+        width: 64px;
+        display: flex;
+        align-items: center;
+      }
+
+      .header__nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 100px 0 32px 0;
+
+        .nav__list {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .nav__link {
+          font-size: 18px;
+          padding-bottom: 8px;
+        }
+      }
+
+      &__icons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0 16px;
+        gap: 8px;
+        box-sizing: border-box;
+
+        .input {
+          display: block;
+          width: 288px;
+          height: 40px;
+          border: 1px solid $color-elements;
+          border-radius: 8px;
+          background-color: $color-white;
+          box-sizing: border-box;
+          color: $color-primary;
+
+          &::placeholder {
+            color: $color-elements;
+          }
+        }
+
+        .dropdouwn {
+          display: block;
+          width: 288px;
+          height: 40px;
+          border: 1px solid $color-elements;
+          border-radius: 8px;
+          font-size: 16px;
+          background-color: $color-white;
+          box-sizing: border-box;
+          color: $color-primary;
+        }
+
+        .icon--menu {
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 48px;
+          width: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-left: 1px solid $color-elements;
+        }
+
+        .icon--favourite {
+          display: flex;
+          box-sizing: border-box;
+          position: fixed;
+          bottom: 0;
+          height: 64px;
+          width: 50%;
+          border-top: 1px solid $color-elements;
+          border-right: 1px solid $color-elements;
+          align-items: center;
+          justify-content: center;
+          background-color: $color-white;
+          z-index: 1000;
+        }
+        .icon--cart {
+          display: flex;
+          box-sizing: border-box;
+          position: fixed;
+          bottom: 0;
+          height: 64px;
+          width: 50%;
+          border-top: 1px solid $color-elements;
+          align-items: center;
+          justify-content: center;
+          background-color: $color-white;
+          z-index: 1000;
+        }
+
+        .icon--favourite {
+          left: 0;
+          border-right: 1px solid $color-elements;
+        }
+
+        .icon--cart {
+          right: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $breakpoint-mobile) {
+  .top-bar {
+    height: 48px;
+    padding-left: 16px;
+    padding-right: 0;
+    justify-content: flex-start;
+
+    &__logo {
+      margin-right: 32px;
+    }
+
+    .header__nav {
+      display: block;
+    }
+
+    &__icons {
+      display: flex;
+      margin-left: auto;
+      height: 100%;
+      gap: 0;
+
+      .icon--menu,
+      .dropdouwn,
+      .input {
+        display: none;
+      }
+
+      .icon--search,
+      .icon--favourite,
+      .icon--cart {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 100%;
+        border-left: 1px solid $color-elements;
+        cursor: pointer;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .nav__list {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__link {
+    height: 48px;
+    padding-bottom: 0;
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .top-bar {
+    height: 64px;
+    padding-left: 24px;
+    padding-right: 0;
+
+    &__logo {
+      margin-right: 48px;
+    }
+
+    &__icons {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      .icon--search {
+        display: none;
+      }
+
+      .icon--favourite,
+      .icon--cart {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 100%;
+        border-left: 1px solid $color-elements;
+      }
+
+      .input {
+        display: block;
+        width: 298px;
+        height: 40px;
+        border: 1px solid $color-elements;
+        border-radius: 8px;
+        padding: 0 12px;
+        margin-right: 16px;
+      }
+
+      .dropdouwn {
+        display: block;
+        width: 176px;
+        height: 40px;
+        border: 1px solid $color-elements;
+        border-radius: 8px;
+        padding: 0 12px;
+        margin-right: 24px;
+      }
+    }
+  }
+
+  .nav__list {
+    gap: 64px;
+  }
+
+  .nav__link {
+    height: 64px;
+  }
+}
