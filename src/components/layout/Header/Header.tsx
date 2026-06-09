@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { Logo } from '../../Logo';
-import { Icon } from '../../Icon';
+import { Icon } from '../../ui/Icon';
 import '../Header/header.scss';
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
