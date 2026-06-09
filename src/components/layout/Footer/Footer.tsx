@@ -17,21 +17,23 @@ export function Footer() {
           <Logo />
         </a>
 
-        <nav className="categories">
+        <nav className="footer__categories">
           <a
-            className="category"
-            href="#github"
+            className="footer__category"
+            href="https://github.com/Arthur-s-children/nice-book-project"
+            target="_blank"
+            rel="noreferrer noopener"
           >
             GITHUB
           </a>
           <a
-            className="category"
+            className="footer__category"
             href="#contacts"
           >
             CONTACTS
           </a>
           <a
-            className="category"
+            className="footer__category"
             href="#rights"
           >
             RIGHTS
