@@ -1,4 +1,5 @@
 import type { SortOption, PerPage } from '../../../hooks/useCatalogParams.tsx';
+import { Dropdown } from '../Dropdown';
 import './CatalogControls.scss';
 
 const PER_PAGE_OPTIONS: PerPage[] = [8, 16, 32];
@@ -17,6 +18,9 @@ interface Props {
 }
 
 export function CatalogControls({ sort, perPage, onParamChange }: Props) {
+  const sortLabel =
+    SORT_OPTIONS.find((o) => o.value === sort)?.label || 'Newest';
+
   return (
     <div className="catalog-controls">
       <div className="catalog-controls__select-wrap">
@@ -26,21 +30,15 @@ export function CatalogControls({ sort, perPage, onParamChange }: Props) {
         >
           Sort by:
         </label>
-        <select
-          id="catalog-sort"
-          className="catalog-controls__select"
-          value={sort}
-          onChange={(e) => onParamChange('sort', e.target.value)}
-        >
-          {SORT_OPTIONS.map((o) => (
-            <option
-              key={o.value}
-              value={o.value}
-            >
-              {o.label}
-            </option>
-          ))}
-        </select>
+        <Dropdown
+          value={sortLabel}
+          onChange={(value) => {
+            const option = SORT_OPTIONS.find((o) => o.label === value);
+            if (option) onParamChange('sort', option.value);
+          }}
+          options={SORT_OPTIONS.map((o) => o.label)}
+          placeholder="Newest"
+        />
       </div>
 
       <div className="catalog-controls__select-wrap">
@@ -50,21 +48,12 @@ export function CatalogControls({ sort, perPage, onParamChange }: Props) {
         >
           Items on page:
         </label>
-        <select
-          id="catalog-per-page"
-          className="catalog-controls__select"
-          value={perPage}
-          onChange={(e) => onParamChange('perPage', e.target.value)}
-        >
-          {PER_PAGE_OPTIONS.map((n) => (
-            <option
-              key={n}
-              value={n}
-            >
-              {n}
-            </option>
-          ))}
-        </select>
+        <Dropdown
+          value={String(perPage)}
+          onChange={(value) => onParamChange('perPage', value)}
+          options={PER_PAGE_OPTIONS.map((n) => String(n))}
+          placeholder="8"
+        />
       </div>
     </div>
   );
