@@ -11,7 +11,6 @@ export function Header() {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const location = useLocation();
 
-  // Closing the menu when clicking a link is better handled by an onClick
   const closeMenu = () => setIsOpenMenu(false);
 
   const toggleMenu = (event: React.MouseEvent) => {
