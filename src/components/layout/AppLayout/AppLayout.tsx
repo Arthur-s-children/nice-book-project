@@ -10,7 +10,7 @@ export function AppLayout() {
 
       <Header />
 
-      <main>
+      <main className="main-content">
         <Outlet />
       </main>
 
