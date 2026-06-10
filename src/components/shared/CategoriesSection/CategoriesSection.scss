@@ -6,6 +6,10 @@
   gap: 24px;
 }
 
+.categories__title {
+  @include h2;
+}
+
 .categories__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -44,6 +48,10 @@
 @media (max-width: $breakpoint-mobile) {
   .category-card__media {
     aspect-ratio: 1.5 / 1;
+  }
+
+  .categories__title {
+    font-size: 22px;
   }
 }
 

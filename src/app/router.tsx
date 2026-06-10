@@ -9,6 +9,7 @@ import { CartPage } from '../pages/CartPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { ProductPage } from '../pages/ProductPage';
 import { RightsPage } from '../pages/RightsPage';
+import { TeamPage } from '../pages/TeamPage';
 
 export const router = createHashRouter([
   {
@@ -42,6 +43,10 @@ export const router = createHashRouter([
       {
         path: 'rights',
         element: <RightsPage />,
+      },
+      {
+        path: 'contacts',
+        element: <TeamPage />,
       },
     ],
   },
