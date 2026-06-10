@@ -4,7 +4,7 @@ import { NotFoundPage } from '../NotFoundPage';
 import { useCart } from '../../hooks/useCart';
 import { useFavorites } from '../../hooks/useFavorites';
 import styles from './ProductPage.module.scss';
-import heartFilled from '../../assets/icons/heart-filled.svg';
+// import heartFilled from '../../assets/icons/heart-filled.svg';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();

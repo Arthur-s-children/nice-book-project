@@ -1,0 +1,347 @@
+@use '../../styles/variables' as *;
+
+.item_card {
+  padding-inline: 8px;
+  max-width: 1136px;
+  margin-inline: auto;
+  padding: 26.5px 16px 32px;
+
+  @media (min-width: 640px) {
+    padding: 24px 24px 80px;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 24px 32px 80px;
+  }
+}
+
+.book_grid {
+  display: grid;
+  gap: 32px;
+
+  grid-template-columns: 1fr;
+
+  grid-template-areas:
+    'image'
+    'category'
+    'about'
+    'chars';
+
+  @media (min-width: 640px) {
+    margin-top: 32px;
+    grid-template-columns: 300px 1fr;
+
+    grid-template-areas:
+      'image category'
+      'about about'
+      'chars chars';
+  }
+
+  @media (min-width: 1200px) {
+    margin-top: 40px;
+    grid-template-columns: 560px 1fr;
+
+    grid-template-areas:
+      'image category'
+      'about chars';
+
+    column-gap: 64px;
+    row-gap: 32px;
+
+    align-items: start;
+  }
+}
+
+.title {
+  font-family: $font-main;
+  font-size: 22px;
+  line-height: 140%;
+  font-weight: $font-bold;
+  letter-spacing: 0;
+  color: $color-primary;
+
+  @media (min-width: $breakpoint-mobile) {
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -1%;
+  }
+}
+
+.paragraph {
+  font-family: $font-main;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0;
+  font-weight: $font-medium;
+  color: $color-primary;
+}
+
+.section_title {
+  font-family: $font-main;
+  font-size: 20px;
+  font-weight: $font-semibold;
+  letter-spacing: 0;
+  margin-block: 0;
+  color: $color-primary;
+  line-height: 100%;
+  border-bottom: solid 1px $color-elements;
+  padding-bottom: 16px;
+
+  @media (min-width: 640px) {
+    font-size: 22px;
+  }
+}
+
+.block_label_gray {
+  font-family: $font-main;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  margin-block: 0px;
+  color: $color-secondary;
+  font-weight: $font-bold;
+}
+
+.image_container {
+  grid-area: image;
+  text-align: center;
+  align-self: start;
+  max-width: 280px;
+  margin: 0;
+
+  @media (min-width: 640px) {
+    max-width: 300px;
+    margin: 0;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 520px;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.category_block {
+  grid-area: category;
+  padding-bottom: 16px;
+
+  @media (min-width: 1200px) {
+    width: 100%;
+    max-width: 320px;
+    gap: 40px;
+  }
+}
+
+.categories {
+  border-bottom: solid 1px $color-elements;
+  padding-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.about {
+  grid-area: about;
+
+  @media (min-width: 1200px) {
+    width: 100%;
+    max-width: 560px;
+    margin-top: 0;
+    justify-self: start;
+  }
+}
+
+.characteristics_section {
+  grid-area: chars;
+
+  @media (min-width: 1200px) {
+    max-width: 512px;
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+.btn_category {
+  font-family: $font-main;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0;
+  font-weight: $font-medium;
+  color: $color-primary;
+  text-align: center;
+  background-color: $color-hover-bg;
+  border-radius: 5px;
+  border: 1px solid $color-elements;
+  height: 32px;
+  margin-top: 8px;
+  cursor: pointer;
+  width: fit-content;
+  padding-inline: 12px;
+  min-height: 32px;
+}
+
+.languages {
+  padding: 16px 0;
+  border-bottom: solid 1px $color-elements;
+}
+
+.btn_lang {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.btn_lang_ua {
+  font-family: $font-main;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0;
+  font-weight: $font-medium;
+  color: $color-white;
+  background-color: $color-primary;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: 1px solid $color-primary;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn_lang_eng {
+  font-family: $font-main;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0;
+  font-weight: $font-medium;
+  color: $color-primary;
+  background-color: $color-hover-bg;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: 1px solid $color-elements;
+  cursor: pointer;
+}
+
+.price_container {
+  margin-top: 16px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.new_price {
+  color: $color-primary;
+  font-size: 22px;
+  font-weight: $font-bold;
+  font-family: $font-main;
+  line-height: 140%;
+
+  @media (min-width: 640px) {
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -1%;
+  }
+}
+
+.old_price {
+  color: $color-secondary;
+  font-weight: $font-semibold;
+  font-family: $font-main;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-decoration: line-through;
+  font-size: 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.btn_add {
+  font-family: $font-main;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0;
+  background-color: $color-primary;
+  color: $color-white;
+  font-weight: $font-bold;
+  width: 100%;
+  height: 40px;
+  padding: 9.5px;
+  border: 1px solid $color-primary;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn_favorite {
+  background-color: transparent;
+  border: 1px solid $color-elements;
+  border-radius: 8px;
+  color: $color-elements;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon_heart {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  display: block;
+}
+
+.description {
+  padding-top: 24px;
+}
+
+.characteristics {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  table-layout: fixed;
+  border-spacing: 0;
+
+  tr {
+    border-bottom: solid 1px $color-elements;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  td:first-child {
+    font-family: $font-main;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0;
+    font-weight: $font-medium;
+    padding: 6px 0;
+    color: $color-secondary;
+    text-align: left;
+  }
+
+  td:last-child {
+    font-family: $font-main;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0;
+    font-weight: $font-medium;
+    padding: 6px 0;
+    color: $color-primary;
+    text-align: right;
+  }
+}
