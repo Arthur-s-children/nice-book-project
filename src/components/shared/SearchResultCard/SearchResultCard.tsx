@@ -1,0 +1,41 @@
+import { Link } from 'react-router-dom';
+import type { Book } from '../../../types/Book';
+import './SearchResultCard.scss';
+
+type Props = {
+  book: Book;
+  onCardClick?: () => void;
+};
+
+export function SearchResultCard({ book, onCardClick }: Props) {
+  const price = book.priceDiscount ?? book.priceRegular;
+  const imageSrc = `${import.meta.env.BASE_URL}${book.images[0]}`;
+
+  return (
+    <Link
+      to={`/products/${book.slug}`}
+      className="search-result-card"
+      onClick={onCardClick}
+    >
+      <img
+        src={imageSrc}
+        alt={book.name}
+        className="search-result-card__image"
+      />
+      <div className="search-result-card__info">
+        <p className="search-result-card__author">{book.author}</p>
+        <h3 className="search-result-card__name">{book.name}</h3>
+        {book.priceDiscount ?
+          <div className="search-result-card__prices">
+            <p className="search-result-card__price search-result-card__price--discount">
+              ₴{book.priceDiscount}
+            </p>
+            <p className="search-result-card__price search-result-card__price--regular">
+              ₴{book.priceRegular}
+            </p>
+          </div>
+        : <p className="search-result-card__price">₴{price}</p>}
+      </div>
+    </Link>
+  );
+}
