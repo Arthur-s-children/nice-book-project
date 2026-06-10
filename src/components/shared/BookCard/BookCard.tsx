@@ -3,6 +3,7 @@ import { AppButton } from '../../ui/Button';
 import { LikeButton } from '../../ui/LikeButton';
 import type { Book } from '../../../types/Book.ts';
 import './BookCard.scss';
+import { Link } from 'react-router-dom';
 
 type Props = {
   book: Book;
@@ -25,11 +26,13 @@ export function BookCard({
   return (
     <article className="book-card">
       <div className="book-card__image-wrap">
-        <img
-          src={imageSrc}
-          alt={book.name}
-          className="book-card__image"
-        />
+        <Link to={`/products/${book.slug}`}>
+          <img
+            src={imageSrc}
+            alt={book.name}
+            className="book-card__image"
+          />
+        </Link>
         {book.type === 'audiobook' && (
           <span className="book-card__badge">
             <Icon name="headphones" />
@@ -39,7 +42,12 @@ export function BookCard({
 
       <div className="book-card__body">
         <p className="book-card__author">{book.author}</p>
-        <h3 className="book-card__name">{book.name}</h3>
+        <Link
+          to={`/products/${book.slug}`}
+          className="book-card__name"
+        >
+          {book.name}
+        </Link>
         <div className="book-card__prices">
           <span className="book-card__price">₴{price}</span>
           {book.priceDiscount && (
