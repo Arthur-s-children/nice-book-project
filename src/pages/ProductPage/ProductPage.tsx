@@ -4,7 +4,6 @@ import { NotFoundPage } from '../NotFoundPage';
 import { useCart } from '../../hooks/useCart';
 import { useFavorites } from '../../hooks/useFavorites';
 import styles from './ProductPage.module.scss';
-// import heartFilled from '../../assets/icons/heart-filled.svg';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -96,7 +95,9 @@ export const ProductPage = () => {
                 onClick={() => toggleFavorite(book.id)}
               >
                 <img
-                  src={isFavorite ? heartFilled : '/icons/heart.svg'}
+                  src={
+                    isFavorite ? '/icons/heart-filled.svg' : '/icons/heart.svg'
+                  }
                   alt="favorite"
                   className={styles.icon_heart}
                 />
