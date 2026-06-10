@@ -1,4 +1,6 @@
 import { Icon } from '../../ui/Icon';
+import { AppButton } from '../../ui/Button';
+import { LikeButton } from '../../ui/LikeButton';
 import type { Book } from '../../../types/Book.ts';
 import './BookCard.scss';
 
@@ -51,24 +53,16 @@ export function BookCard({
       </div>
 
       <div className="book-card__actions">
-        <button
-          type="button"
-          className={inCart ? 'book-card__added-btn' : 'book-card__cart-btn'}
+        <AppButton
+          variant={inCart ? 'selected' : 'primary'}
           onClick={() => !inCart && onAddToCart(book.id)}
         >
           {inCart ? 'Added' : 'Add to cart'}
-        </button>
-        <button
-          type="button"
-          className={
-            isFavorite ?
-              'book-card__fav-btn book-card__fav-btn--active'
-            : 'book-card__fav-btn'
-          }
+        </AppButton>
+        <LikeButton
+          isSelected={isFavorite}
           onClick={() => onToggleFavorite(book.id)}
-        >
-          <Icon name={isFavorite ? 'heart-filled' : 'heart'} />
-        </button>
+        />
       </div>
     </article>
   );

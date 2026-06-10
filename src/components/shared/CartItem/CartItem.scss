@@ -18,7 +18,7 @@
   height: 80px;
   flex-shrink: 0;
   object-fit: contain;
-  background: $color-hover-bg;
+  background: $color-white;
 
   @media (max-width: $breakpoint-mobile) {
     width: 64px;

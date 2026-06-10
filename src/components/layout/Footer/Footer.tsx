@@ -46,7 +46,10 @@ export function Footer() {
           onClick={handleBackToTop}
         >
           Back to top
-          <Icon name="arrow-up" />
+          <Icon
+            name="arrow-up-dark"
+            size={8}
+          />
         </button>
       </div>
     </footer>
