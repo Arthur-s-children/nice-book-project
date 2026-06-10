@@ -1,14 +1,18 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { bookService } from '../../services';
 import { NotFoundPage } from '../NotFoundPage';
 import { useCart } from '../../hooks/useCart';
 import { useFavorites } from '../../hooks/useFavorites';
 import styles from './ProductPage.module.scss';
+import { useState } from 'react';
+import { BooksSwiper } from '../../components/shared/BooksSwiper/BooksSwiper';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
 
   const book = bookService.getAll().find((b) => b.slug === slug);
+
+  const [activeImage, setActiveImage] = useState<string>();
 
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
@@ -21,20 +25,86 @@ export const ProductPage = () => {
   const isFavorite = favoriteIds.includes(book.id);
 
   // const imageSrc = `/images/${book.images[0]}`;
-  const imageSrc = `${import.meta.env.BASE_URL}${book.images[0]}`;
+  const imageSrc = `${import.meta.env.BASE_URL}${activeImage || book.images[0]}`;
+
+  const relatedBooks = bookService
+    .getAll()
+    .filter(
+      (item) =>
+        item.id !== book.id &&
+        item.category.some((cat) => book.category.includes(cat)),
+    )
+    .slice(0, 10);
 
   return (
     <div className={styles.item_card}>
+      <nav className={styles.breadcrumbs}>
+        <Link
+          to="/"
+          className={styles.link}
+        >
+          <img
+            src="/icons/home.svg"
+            alt="Home"
+          />
+        </Link>
+
+        <span className={styles.separator}>
+          <img
+            src="/icons/arrow-right.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </span>
+
+        <Link
+          to="/books/all"
+          className={styles.link}
+        >
+          Books
+        </Link>
+
+        {book && (
+          <>
+            <span className={styles.separator}>
+              <img
+                src="/icons/arrow-right.svg"
+                alt=""
+                aria-hidden="true"
+              />
+            </span>
+            <span className={styles.current}>{book.name}</span>
+          </>
+        )}
+      </nav>
       <h1 className={styles.title}>{book.name}</h1>
       <p className={styles.paragraph}>{book.author}</p>
 
       <div className={styles.book_grid}>
         <div className={styles.image_container}>
-          <img
-            src={imageSrc}
-            alt={book.name}
-            className={styles.image}
-          />
+          <div className={styles.main_image_wrap}>
+            <img
+              src={imageSrc}
+              alt={book.name}
+              className={styles.main_image}
+            />
+          </div>
+
+          <div className={styles.thumbs}>
+            {book.images.map((img) => (
+              <button
+                key={img}
+                className={styles.thumb}
+                onClick={() => setActiveImage(img)}
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}${img}`}
+                  alt={book.name}
+                  className={styles.thumbnail_image}
+                />
+              </button>
+            ))}
+          </div>
         </div>
 
         <section className={styles.category_block}>
@@ -203,6 +273,13 @@ export const ProductPage = () => {
           </table>
         </section>
       </div>
+
+      <section className={styles.recommended}>
+        <BooksSwiper
+          title="You may also like"
+          books={relatedBooks}
+        />
+      </section>
     </div>
   );
 };
