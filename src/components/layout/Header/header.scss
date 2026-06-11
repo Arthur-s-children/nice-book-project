@@ -258,6 +258,7 @@ body {
       .icon--favourite,
       .icon--cart {
         display: flex;
+        position: relative;
         align-items: center;
         justify-content: center;
         width: 48px;
@@ -265,6 +266,21 @@ body {
         border-left: 1px solid $color-elements;
         cursor: pointer;
         text-decoration: none;
+      }
+
+      .favorites-counter,
+      .cart-counter {
+        position: absolute;
+        top: 20%;
+        right: 20%;
+        color: $color-white;
+        background-color: $color-red;
+        font-size: 9px;
+        font-weight: $font-semibold;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        text-align: center;
       }
     }
   }
@@ -316,6 +332,12 @@ body {
         height: 100%;
         border-left: 1px solid $color-elements;
         border-right: 1px solid $color-elements;
+      }
+
+      .favorites-counter,
+      .cart-counter {
+        top: 28%;
+        right: 27%;
       }
 
       .input {
