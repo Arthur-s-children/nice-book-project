@@ -8,17 +8,17 @@
   padding: 0;
   box-sizing: border-box;
   width: 100%;
-  overflow: hidden; // Повністю ізолює секцію від вильотів у DevTools
+  overflow: hidden;
 
-  @media (min-width: 320px) and (max-width: 1199px) {
+  @media (min-width: 320px) and (max-width: $breakpoint-tablet) {
     padding: 0 16px;
   }
 
-  @media (min-width: 320px) and (max-width: 639px) {
+  @media (min-width: 320px) and (max-width: $breakpoint-mobile) {
     min-height: 455px;
   }
 
-  @media (min-width: 640px) and (max-width: 1199px) {
+  @media (min-width: 640px) and (max-width: $breakpoint-tablet) {
     min-height: 571px;
   }
 
@@ -41,15 +41,9 @@
 
   &__title {
     @include h2;
+    color: $color-primary;
     margin: 0;
     padding: 0;
-
-    @media (min-width: 320px) and (max-width: 639px) {
-      font-size: 22px;
-    }
-    @media (min-width: 640px) {
-      font-size: 32px;
-    }
   }
 
   &__nav {
@@ -59,7 +53,7 @@
     margin: 0;
     padding: 0;
 
-    @media (max-width: 639px) {
+    @media (max-width: $breakpoint-mobile) {
       display: none;
     }
 
@@ -79,7 +73,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #000000;
+    color: $color-primary;
     transition:
       color 0.2s ease,
       opacity 0.2s ease,
@@ -90,7 +84,7 @@
     }
 
     &.swiper-button-disabled {
-      color: #b3b3b3;
+      color: $color-secondary;
       opacity: 0.5;
       cursor: not-allowed;
 
@@ -111,29 +105,32 @@
     padding: 0;
     display: flex;
     align-items: stretch;
-    min-width: 0; // Запобігає розтягуванню флекс-контейнера
+    min-width: 0;
   }
 
   &__container {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden !important; // Надійно обрізає картки, що виходять за межі
+    overflow: hidden !important;
   }
 
   &__slide {
     display: flex;
     justify-content: center;
+    align-items: stretch;
     margin: 0;
     padding: 0;
+    height: auto;
 
-    // ЖОРСТКА ФІКСАЦІЯ РОЗМІРУ:
-    width: 215px !important;
-    flex-shrink: 0 !important; // НАДВАЖЛИВО: забороняє браузеру та Swiper стискати картку
-    overflow: hidden;
-
-    @media (min-width: 640px) {
-      width: 272px !important; // Десктопна фіксована ширина
+    .book-card {
+      width: 100%;
+      max-width: 272px;
+      margin: 0 auto;
+      overflow: hidden !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
   }
 
@@ -141,9 +138,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    width: 100%; // Повертаємо 100%, щоб картка заповнила фіксований слайд
+    width: 100%;
 
-    @media (min-width: 320px) and (max-width: 639px) {
+    @media (min-width: 320px) and (max-width: $breakpoint-mobile) {
       height: 400px;
     }
 

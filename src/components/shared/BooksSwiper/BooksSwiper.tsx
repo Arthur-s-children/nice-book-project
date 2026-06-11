@@ -56,8 +56,7 @@ export const BooksSwiper = ({
       <div className="books-swiper__slider-wrapper">
         <Swiper
           modules={[Navigation]}
-          spaceBetween={16} // Фіксована відстань між картками
-          slidesPerView="auto" // Дозволяє карткам зберігати свій фіксований розмір із CSS
+          spaceBetween={16}
           slidesPerGroup={1}
           navigation={true}
           onBeforeInit={(swiper) => {
@@ -68,6 +67,20 @@ export const BooksSwiper = ({
               swiper.params.navigation.prevEl = prevRef.current;
               swiper.params.navigation.nextEl = nextRef.current;
             }
+          }}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+            },
+            480: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1120: {
+              slidesPerView: 4,
+            },
           }}
           className="books-swiper__container"
         >
