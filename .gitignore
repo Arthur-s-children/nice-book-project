@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# supabase files
+.env
+.env.local
+.env.production
