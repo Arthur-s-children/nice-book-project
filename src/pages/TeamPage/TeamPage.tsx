@@ -2,6 +2,7 @@ import React from 'react';
 import { TeamMemberCard } from '../../components/shared/TeamMemberCard';
 import Team from './people/Team.json';
 import './TeamPage.scss';
+import { useTranslation } from 'react-i18next';
 
 export interface TeamMember {
   photo: string;
@@ -14,10 +15,12 @@ export interface TeamMember {
 export const TeamPage: React.FC = () => {
   const teamMembers = Team as TeamMember[];
 
+  const { t } = useTranslation();
+
   return (
     <div className="team-page">
       <div className="team-page__title-section">
-        <h1 className="team-page__title">Our Team</h1>
+        <h1 className="team-page__title">{t('common.ourTeam')}</h1>
       </div>
 
       <div className="team-page__grid">

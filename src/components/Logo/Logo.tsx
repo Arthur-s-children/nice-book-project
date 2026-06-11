@@ -9,7 +9,7 @@ export const Logo = ({ className }: Props) => {
     <img
       src={logo}
       className={className}
-      alt="Nice Boooks"
+      alt="Nice Books"
     />
   );
 };

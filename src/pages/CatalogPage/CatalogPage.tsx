@@ -7,13 +7,7 @@ import { CatalogControls } from '../../components/ui/CatalogControls/CatalogCont
 import { Pagination } from '../../components/ui/Pagination/Pagination.tsx';
 import type { Book } from '../../types/Book.ts';
 import './CatalogPage.scss';
-
-const TITLES: Record<string, string> = {
-  all: 'All books',
-  paperback: 'Paper books',
-  kindle: 'Kindle books',
-  audiobook: 'Audiobooks',
-};
+import { useTranslation } from 'react-i18next';
 
 function getPrice(book: Book) {
   return book.priceDiscount ?? book.priceRegular;
@@ -39,6 +33,7 @@ export function CatalogPage() {
   const { sort, type, perPage, page, setParam } = useCatalogParams();
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
+  const { t } = useTranslation();
 
   let books = bookService.getAll();
 
@@ -50,6 +45,13 @@ export function CatalogPage() {
   const totalPages = Math.max(1, Math.ceil(sortedBooks.length / perPage));
   const start = (page - 1) * perPage;
   const booksOnPage = sortedBooks.slice(start, start + perPage);
+
+  const TITLES: Record<string, string> = {
+    all: t('catalog.title.all'),
+    paperback: t('catalog.title.paperback'),
+    kindle: t('catalog.title.kindle'),
+    audiobook: t('catalog.title.audiobook'),
+  };
 
   return (
     <section className="catalog">
@@ -65,7 +67,7 @@ export function CatalogPage() {
       />
 
       {booksOnPage.length === 0 ?
-        <p className="catalog-empty">No books found.</p>
+        <p className="catalog-empty">{t('catalog.empty')}</p>
       : <div className="catalog-grid">
           {booksOnPage.map((book) => (
             <BookCard

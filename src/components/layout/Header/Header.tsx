@@ -4,6 +4,8 @@ import { Icon } from '../../ui/Icon';
 import '../Header/header.scss';
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../../locales/i18n';
 
 export function Header() {
   const [isMenuOpen, setIsOpenMenu] = useState(false);
@@ -21,6 +23,8 @@ export function Header() {
     event.preventDefault();
     setIsOpenMenu(!isMenuOpen);
   };
+
+  const { t } = useTranslation();
 
   return (
     <header className={isMenuOpen ? 'header header--menu-open' : 'header'}>
@@ -43,7 +47,7 @@ export function Header() {
                 }}
                 to="/"
               >
-                Home
+                {t('common.home')}
               </NavLink>
             </li>
 
@@ -58,7 +62,7 @@ export function Header() {
                 }}
                 to="/catalog?type=paperback"
               >
-                Paper
+                {t('header.paper')}
               </NavLink>
             </li>
 
@@ -73,7 +77,7 @@ export function Header() {
                 }}
                 to="/catalog?type=kindle"
               >
-                Kindle
+                {t('header.kindle')}
               </NavLink>
             </li>
 
@@ -88,7 +92,7 @@ export function Header() {
                 }}
                 to="/catalog?type=audiobook"
               >
-                Audiobook
+                {t('header.audio')}
               </NavLink>
             </li>
           </ul>
@@ -131,6 +135,10 @@ export function Header() {
           >
             <Icon name={isMenuOpen ? 'close' : 'burger'} />
           </a>
+
+          <button onClick={() => i18n.changeLanguage('uk')}>UA</button>
+
+          <button onClick={() => i18n.changeLanguage('en')}>EN</button>
         </div>
       </div>
     </header>

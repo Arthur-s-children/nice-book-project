@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   title: string;
@@ -25,6 +26,8 @@ export const CategoryCard = ({ title, type, video, poster, amount }: Props) => {
     videoRef.current.pause();
     videoRef.current.currentTime = 0;
   };
+
+  const { t } = useTranslation();
 
   return (
     <Link
@@ -58,7 +61,9 @@ export const CategoryCard = ({ title, type, video, poster, amount }: Props) => {
 
       <h3 className="category-card__title">{title}</h3>
 
-      <p className="category-card__amount">{amount} books</p>
+      <p className="category-card__amount">
+        {amount} {t('product.books')}
+      </p>
     </Link>
   );
 };

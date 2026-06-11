@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { AppButton } from '../../components/ui/Button';
 import styles from './NotFoundPage.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const NotFoundPage = () => {
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   return (
     <div className={styles['not-found']}>
@@ -15,20 +18,18 @@ export const NotFoundPage = () => {
 
       <div className={styles['not-found__content']}>
         <div className={styles['not-found__title']}>
-          <h1>Chapter 404</h1>
-          <h2>The Missing Page</h2>
+          <h1>{t('notFound.chapter')}</h1>
+          <h2>{t('notFound.title')}</h2>
         </div>
 
-        <p className={styles['not-found__desc']}>
-          The page you're looking for seems to be missing from our story.
-        </p>
+        <p className={styles['not-found__desc']}>{t('notFound.description')}</p>
 
         <div className={styles['not-found__button']}>
           <AppButton
             variant="primary"
             onClick={() => navigate('/')}
           >
-            Go Home
+            {t('notFound.goHome')}
           </AppButton>
         </div>
       </div>

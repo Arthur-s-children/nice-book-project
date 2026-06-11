@@ -1,40 +1,75 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { bookService } from '../../services';
 import { NotFoundPage } from '../NotFoundPage';
 import { useCart } from '../../hooks/useCart';
 import { useFavorites } from '../../hooks/useFavorites';
 import styles from './ProductPage.module.scss';
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { BooksSwiper } from '../../components/shared/BooksSwiper/BooksSwiper';
+import { useTranslation } from 'react-i18next';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
-
-  const book = bookService.getAll().find((b) => b.slug === slug);
-
-  const [activeImage, setActiveImage] = useState<string>();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
 
-  if (!book) {
-    return <NotFoundPage />;
-  }
+  const books = bookService.getAll();
+  const book = books.find((b) => b.slug === slug);
 
-  const inCart = cartIds.includes(book?.id);
+  const [activeImage, setActiveImage] = useState<string>(() => {
+    return book?.images?.[0] ?? '';
+  });
+
+  const relatedBooks = useMemo(() => {
+    if (!book) return [];
+
+    return books
+      .filter(
+        (item) =>
+          item.id !== book.id &&
+          item.category.some((cat) => book.category.includes(cat)),
+      )
+      .slice(0, 10);
+  }, [books, book]);
+
+  const languageVersions = useMemo(() => {
+    if (!book) return [];
+
+    return books
+      .filter((item) => item.namespaceId === book.namespaceId)
+      .reduce(
+        (acc, item) => {
+          if (!acc.find((i) => i.lang === item.lang)) {
+            acc.push(item);
+          }
+          return acc;
+        },
+        [] as (typeof books)[number][],
+      );
+  }, [books, book]);
+
+  const handleLanguageChange = useCallback(
+    (lang: string) => {
+      const translatedBook = languageVersions.find(
+        (item) => item.lang === lang,
+      );
+
+      if (translatedBook) {
+        navigate(`/products/${translatedBook.slug}`);
+      }
+    },
+    [languageVersions, navigate],
+  );
+
+  if (!book) return <NotFoundPage />;
+
+  const inCart = cartIds.includes(book.id);
   const isFavorite = favoriteIds.includes(book.id);
 
-  // const imageSrc = `/images/${book.images[0]}`;
   const imageSrc = `${import.meta.env.BASE_URL}${activeImage || book.images[0]}`;
-
-  const relatedBooks = bookService
-    .getAll()
-    .filter(
-      (item) =>
-        item.id !== book.id &&
-        item.category.some((cat) => book.category.includes(cat)),
-    )
-    .slice(0, 10);
 
   return (
     <div className={styles.item_card}>
@@ -45,7 +80,7 @@ export const ProductPage = () => {
         >
           <img
             src="/icons/home.svg"
-            alt="Home"
+            alt={t('common.home')}
           />
         </Link>
 
@@ -61,22 +96,20 @@ export const ProductPage = () => {
           to="/books/all"
           className={styles.link}
         >
-          Books
+          {t('common.books')}
         </Link>
 
-        {book && (
-          <>
-            <span className={styles.separator}>
-              <img
-                src="/icons/arrow-right.svg"
-                alt=""
-                aria-hidden="true"
-              />
-            </span>
-            <span className={styles.current}>{book.name}</span>
-          </>
-        )}
+        <span className={styles.separator}>
+          <img
+            src="/icons/arrow-right.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </span>
+
+        <span className={styles.current}>{book.name}</span>
       </nav>
+
       <h1 className={styles.title}>{book.name}</h1>
       <p className={styles.paragraph}>{book.author}</p>
 
@@ -93,6 +126,7 @@ export const ProductPage = () => {
           <div className={styles.thumbs}>
             {book.images.map((img) => (
               <button
+                type="button"
                 key={img}
                 className={styles.thumb}
                 onClick={() => setActiveImage(img)}
@@ -108,7 +142,7 @@ export const ProductPage = () => {
         </div>
 
         <section className={styles.category_block}>
-          <h5 className={styles.block_label_gray}>Category</h5>
+          <h5 className={styles.block_label_gray}>{t('product.category')}</h5>
 
           <div className={styles.categories}>
             {book.category.map((category) => (
@@ -122,20 +156,25 @@ export const ProductPage = () => {
           </div>
 
           <div className={styles.languages}>
-            <h5 className={styles.block_label_gray}>Select language</h5>
+            <h5 className={styles.block_label_gray}>
+              {t('product.selectLanguage')}
+            </h5>
 
             <div className={styles.btn_lang}>
-              {book.langAvailable.map((lang) => (
-                <span
-                  key={lang}
+              {languageVersions.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  disabled={item.lang === book.lang}
+                  onClick={() => handleLanguageChange(item.lang)}
                   className={
-                    lang === book.lang ?
+                    item.lang === book.lang ?
                       styles.btn_lang_ua
                     : styles.btn_lang_eng
                   }
                 >
-                  {lang.toUpperCase()}
-                </span>
+                  {item.lang.toUpperCase()}
+                </button>
               ))}
             </div>
           </div>
@@ -143,11 +182,11 @@ export const ProductPage = () => {
           <div className={styles.price_container}>
             <div className={styles.price}>
               <span className={styles.new_price}>
-                ₴{book.priceDiscount ?? book.priceRegular}
+                ${book.priceDiscount ?? book.priceRegular}
               </span>
 
               {book.priceDiscount && (
-                <span className={styles.old_price}>₴{book.priceRegular}</span>
+                <span className={styles.old_price}>${book.priceRegular}</span>
               )}
             </div>
 
@@ -156,7 +195,7 @@ export const ProductPage = () => {
                 className={styles.btn_add}
                 onClick={() => !inCart && addToCart(book.id)}
               >
-                {inCart ? 'Added' : 'Add to cart'}
+                {inCart ? t('product.added') : t('product.addToCart')}
               </button>
 
               <button
@@ -178,25 +217,25 @@ export const ProductPage = () => {
           <table className={styles.characteristics}>
             <tbody>
               <tr>
-                <td>Author</td>
+                <td>{t('product.author')}</td>
                 <td>{book.author}</td>
               </tr>
               {'coverType' in book && book.coverType && (
                 <tr>
-                  <td>Cover type</td>
+                  <td>{t('product.coverType')}</td>
                   <td>{book.coverType}</td>
                 </tr>
               )}
 
               {'numberOfPages' in book && (
                 <tr>
-                  <td>Number of pages</td>
+                  <td>{t('product.numberOfPages')}</td>
                   <td>{book.numberOfPages}</td>
                 </tr>
               )}
 
               <tr>
-                <td>Year of publication</td>
+                <td>{t('product.publicationYear')}</td>
                 <td>{book.publicationYear}</td>
               </tr>
             </tbody>
@@ -204,7 +243,7 @@ export const ProductPage = () => {
         </section>
 
         <section className={styles.about}>
-          <h3 className={styles.section_title}>About</h3>
+          <h3 className={styles.section_title}>{t('product.about')}</h3>
           <div className={styles.description}>
             {book.description.map((paragraph, index) => (
               <p
@@ -218,55 +257,59 @@ export const ProductPage = () => {
         </section>
 
         <section className={styles.characteristics_section}>
-          <h3 className={styles.section_title}>Characteristics</h3>
+          <h3 className={styles.section_title}>
+            {t('product.characteristics')}
+          </h3>
 
           <table className={styles.characteristics}>
             <tbody>
               <tr>
-                <td>Author</td>
+                <td>{t('product.author')}</td>
                 <td>{book.author}</td>
               </tr>
 
               {'coverType' in book && book.coverType && (
                 <tr>
-                  <td>Cover type</td>
+                  <td>{t('product.coverType')}</td>
                   <td>{book.coverType}</td>
                 </tr>
               )}
 
               {'numberOfPages' in book && (
                 <tr>
-                  <td>Number of pages</td>
+                  <td>{t('product.numberOfPages')}</td>
                   <td>{book.numberOfPages}</td>
                 </tr>
               )}
 
               <tr>
-                <td>Year of publication</td>
+                <td>{t('product.publicationYear')}</td>
                 <td>{book.publicationYear}</td>
               </tr>
 
               <tr>
-                <td>Publication</td>
+                <td>{t('product.publication')}</td>
                 <td>{book.publication}</td>
               </tr>
 
               {'format' in book && (
                 <tr>
-                  <td>Format</td>
+                  <td>{t('product.format')}</td>
                   <td>{book.format}</td>
                 </tr>
               )}
 
               <tr>
-                <td>Language</td>
+                <td>{t('product.language')}</td>
                 <td>{book.lang.toUpperCase()}</td>
               </tr>
 
               {'illustrations' in book && (
                 <tr>
-                  <td>Illustrations</td>
-                  <td>{book.illustrations ? 'Yes' : 'No'}</td>
+                  <td>{t('product.illustrations')}</td>
+                  <td>
+                    {book.illustrations ? t('product.yes') : t('product.no')}
+                  </td>
                 </tr>
               )}
             </tbody>
@@ -276,7 +319,7 @@ export const ProductPage = () => {
 
       <section className={styles.recommended}>
         <BooksSwiper
-          title="You may also like"
+          title={t('product.recommended')}
           books={relatedBooks}
         />
       </section>
