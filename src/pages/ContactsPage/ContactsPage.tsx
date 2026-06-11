@@ -15,7 +15,7 @@ export const ContactsPage: React.FC = () => {
             </li>
             <li className="contacts-page__item">
               <strong>Email:</strong>{' '}
-              <a href="mailto:info@consultagency.com">info@consultagency.com</a>
+              <a href="mailto:info@consultagency.com">email</a>
             </li>
             <li className="contacts-page__item">
               <strong>Address:</strong> 123 Business Street, Suite 100, City,
