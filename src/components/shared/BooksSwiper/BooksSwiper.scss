@@ -146,3 +146,19 @@
     }
   }
 }
+
+[data-theme='dark'] {
+  .books-swiper {
+    &__title {
+      color: $color-primary-dark;
+    }
+
+    &__arrow {
+      color: $color-primary-dark;
+
+      &.swiper-button-disabled {
+        color: $color-icons-dark;
+      }
+    }
+  }
+}

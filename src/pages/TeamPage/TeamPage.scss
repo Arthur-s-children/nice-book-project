@@ -48,3 +48,15 @@
     }
   }
 }
+
+[data-theme='dark'] {
+  .team-page {
+    &__title {
+      color: $color-primary-dark;
+    }
+
+    &__subtitle {
+      color: $color-icons-dark;
+    }
+  }
+}

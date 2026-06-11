@@ -27,3 +27,14 @@
   text-align: center;
   padding: 48px 0;
 }
+
+[data-theme='dark'] {
+  .favorites-title {
+    color: $color-primary-dark;
+  }
+
+  .favorites-count,
+  .favorites-empty {
+    color: $color-icons-dark;
+  }
+}

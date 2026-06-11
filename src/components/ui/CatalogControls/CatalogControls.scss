@@ -38,3 +38,15 @@
     width: 100%;
   }
 }
+
+[data-theme='dark'] {
+  .catalog-controls__label {
+    color: $color-icons-dark;
+  }
+
+  .catalog-controls__select {
+    border-color: $color-elements-dark;
+    background-color: $color-surface-dark;
+    color: $color-primary-dark;
+  }
+}

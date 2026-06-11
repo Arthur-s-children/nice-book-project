@@ -122,3 +122,19 @@
     margin: 0;
   }
 }
+
+[data-theme='dark'] {
+  .footer {
+    background-color: $color-surface-dark;
+    border-top-color: $color-elements-dark;
+    color: $color-primary-dark;
+  }
+
+  .footer__category {
+    color: $color-primary-dark;
+  }
+
+  .backTop {
+    color: $color-primary-dark;
+  }
+}

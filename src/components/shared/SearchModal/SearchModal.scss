@@ -268,3 +268,86 @@
 .search-modal__sidebar::-webkit-scrollbar-thumb:hover {
   background: $color-elements;
 }
+
+[data-theme='dark'] {
+  .search-modal {
+    &__content {
+      background-color: $color-surface-dark;
+    }
+
+    &__sidebar {
+      background-color: $color-surface-dark;
+      border-right-color: $color-elements-dark;
+    }
+
+    &__input {
+      background-color: $color-bg-dark;
+      border-color: $color-elements-dark;
+      color: $color-primary-dark;
+
+      &::placeholder {
+        color: $color-icons-dark;
+      }
+
+      &:focus {
+        border-color: $color-primary-dark;
+      }
+    }
+
+    &__category-btn {
+      border-color: $color-elements-dark;
+      color: $color-primary-dark;
+
+      &:hover {
+        background-color: $color-hover-bg-dark;
+        color: $color-primary-dark;
+      }
+
+      &--active {
+        background-color: $color-hover-bg-dark;
+        border-color: $color-elements-dark;
+      }
+    }
+
+    &__subcategory-btn {
+      border-color: $color-elements-dark;
+      color: $color-icons-dark;
+
+      &:hover {
+        background-color: $color-hover-bg-dark;
+        color: $color-primary-dark;
+      }
+
+      &--active {
+        background-color: $color-hover-bg-dark;
+        border-color: $color-elements-dark;
+        color: $color-primary-dark;
+      }
+    }
+
+    &__empty-text {
+      color: $color-primary-dark;
+    }
+
+    &__footer {
+      background-color: $color-bg-dark;
+      border-top-color: $color-elements-dark;
+    }
+
+    &__prev-btn,
+    &__next-btn {
+      background-color: $color-surface-dark;
+      border-color: $color-elements-dark;
+      color: $color-primary-dark;
+
+      &:hover {
+        background-color: $color-hover-bg-dark;
+      }
+    }
+  }
+
+  .search-modal__results::-webkit-scrollbar-track,
+  .search-modal__sidebar::-webkit-scrollbar-track {
+    background: $color-bg-dark;
+  }
+}

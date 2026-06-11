@@ -72,3 +72,17 @@
     grid-template-columns: 1fr;
   }
 }
+
+[data-theme='dark'] {
+  .categories__title {
+    color: $color-primary-dark;
+  }
+
+  .category-card {
+    color: $color-primary-dark;
+  }
+
+  .category-card__amount {
+    color: $color-icons-dark;
+  }
+}

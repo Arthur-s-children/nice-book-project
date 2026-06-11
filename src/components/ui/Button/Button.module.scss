@@ -27,3 +27,14 @@
   color: $color-green !important;
   border: 1px solid $color-elements !important;
 }
+
+[data-theme='dark'] {
+  .primary {
+    color: $color-white !important;
+  }
+
+  .selected {
+    background-color: $color-elements-dark !important;
+    border-color: $color-hover-bg-dark !important;
+  }
+}

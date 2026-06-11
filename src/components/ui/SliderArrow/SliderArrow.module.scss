@@ -12,3 +12,14 @@
     color: $color-elements !important;
   }
 }
+
+[data-theme='dark'] {
+  .button {
+    background-color: $color-surface-dark !important;
+    color: $color-primary-dark !important;
+
+    &:disabled {
+      color: $color-icons-dark !important;
+    }
+  }
+}

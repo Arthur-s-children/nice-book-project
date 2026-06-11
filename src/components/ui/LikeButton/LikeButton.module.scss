@@ -19,3 +19,19 @@
 .selected {
   border-color: $color-elements !important;
 }
+
+[data-theme='dark'] {
+  .button {
+    border-color: $color-elements-dark !important;
+    background-color: $color-surface-dark !important;
+    color: $color-primary-dark !important;
+
+    &:hover {
+      border-color: $color-primary-dark !important;
+    }
+  }
+
+  .selected {
+    border-color: $color-elements-dark !important;
+  }
+}

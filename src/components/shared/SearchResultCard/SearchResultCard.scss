@@ -64,3 +64,31 @@
     align-items: center;
   }
 }
+
+[data-theme='dark'] {
+  .search-result-card {
+    &:hover {
+      background-color: $color-hover-bg-dark;
+    }
+
+    &__author {
+      color: $color-icons-dark;
+    }
+
+    &__name {
+      color: $color-primary-dark;
+    }
+
+    &__price {
+      color: $color-primary-dark;
+
+      &--discount {
+        color: $color-green;
+      }
+
+      &--regular {
+        color: $color-red;
+      }
+    }
+  }
+}

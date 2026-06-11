@@ -19,3 +19,12 @@ body {
   // display: flex;
   // flex-direction: column;
 }
+
+[data-theme='dark'] {
+  background-color: $color-hover-bg-dark;
+  color: $color-primary-dark;
+}
+
+[data-theme='dark'] #root {
+  background-color: $color-bg-dark;
+}

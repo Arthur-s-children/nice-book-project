@@ -120,3 +120,24 @@
     flex: 1;
   }
 }
+
+[data-theme='dark'] {
+  .book-card {
+    background: $color-surface-dark;
+    border-color: $color-elements-dark;
+  }
+
+  .book-card__image-wrap {
+    background: $color-surface-dark;
+  }
+
+  .book-card__badge {
+    background: $color-surface-dark;
+  }
+
+  .book-card__author,
+  .book-card__name,
+  .book-card__price {
+    color: $color-primary-dark;
+  }
+}

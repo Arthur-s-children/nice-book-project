@@ -70,6 +70,7 @@ export function BookCard({
         <LikeButton
           isSelected={isFavorite}
           onClick={() => onToggleFavorite(book.id)}
+          colored
         />
       </div>
     </article>

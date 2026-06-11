@@ -5,6 +5,7 @@ import { SearchModal } from '../../shared/SearchModal/SearchModal';
 import '../Header/header.scss';
 import { useRef, useEffect, useState } from 'react';
 import cn from 'classnames';
+import { useTheme } from './useTheme';
 
 export function Header() {
   const [isMenuOpen, setIsOpenMenu] = useState(false);
@@ -14,6 +15,7 @@ export function Header() {
     width: 0,
     visible: false,
   });
+  const { isDark, toggleTheme } = useTheme();
 
   const navListRef = useRef<HTMLUListElement>(null);
 
@@ -157,6 +159,12 @@ export function Header() {
           >
             <Icon name="cart" />
           </NavLink>
+          <button
+            className="icon icon--theme"
+            onClick={toggleTheme}
+          >
+            {isDark ? '☀️' : '🌘'}
+          </button>
           <a
             href=""
             className="icon icon--menu"
