@@ -1,15 +1,41 @@
 import { categories } from './categories';
 import { CategoryCard } from './CategoryCard';
-import { bookService } from '../../../services';
 import './CategoriesSection.scss';
+import { useBooks } from '../../../hooks/useBooks.ts';
+import { useTimeCounter } from '../../../hooks/useTimeCounter.ts';
+import { useInView } from 'react-intersection-observer';
 
 export const CategoriesSection = () => {
-  const audiobooksCount = bookService.getByType('audiobook').length * 33;
-  const kindlesCount = bookService.getByType('kindle').length * 44;
-  const paperbacksCount = bookService.getByType('paperback').length * 25;
+  const { data = [] } = useBooks();
+  const counts = data.reduce(
+    (acc, book) => {
+      acc[book.type]++;
+
+      return acc;
+    },
+    {
+      audiobook: 0,
+      kindle: 0,
+      paperback: 0,
+    },
+  );
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.8,
+  });
+
+  const audiobooksCount = useTimeCounter(counts.audiobook * 33, 3, inView);
+
+  const kindlesCount = useTimeCounter(counts.kindle * 39, 4, inView);
+
+  const paperbacksCount = useTimeCounter(counts.paperback * 29, 6, inView);
 
   return (
-    <section className="categories">
+    <section
+      className="categories"
+      ref={ref}
+    >
       <h2 className="categories__title">Shop by category</h2>
 
       <div className="categories__grid">
