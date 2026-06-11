@@ -1,17 +1,15 @@
-import { bookService } from '../../services/bookService.ts';
 import { useCart } from '../../hooks/useCart.tsx';
 import { useFavorites } from '../../hooks/useFavorites.tsx';
 import { BookCard } from '../../components/shared/BookCard/BookCard.tsx';
-import type { Book } from '../../types/Book.ts';
 import './FavoritesPage.scss';
+import { useBooks } from '../../hooks/useBooks.ts';
 
 export function FavoritesPage() {
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
+  const { data: books = [] } = useBooks();
 
-  const favoriteBooks = favoriteIds
-    .map((id) => bookService.getById(id))
-    .filter((book): book is Book => book !== null);
+  const favoriteBooks = books.filter((book) => favoriteIds.includes(book.id));
 
   return (
     <section className="page">

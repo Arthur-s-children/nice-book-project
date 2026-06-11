@@ -1,40 +1,49 @@
 import { Link, useParams } from 'react-router-dom';
-import { bookService } from '../../services';
 import { NotFoundPage } from '../NotFoundPage';
 import { useCart } from '../../hooks/useCart';
 import { useFavorites } from '../../hooks/useFavorites';
 import styles from './ProductPage.module.scss';
 import { useState } from 'react';
 import { BooksSwiper } from '../../components/shared/BooksSwiper/BooksSwiper';
+import { useBook } from '../../hooks/useBook.ts';
+import { useBooks } from '../../hooks/useBooks.ts';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { data: books = [], isLoading: isBooksLoading } = useBooks();
 
-  const book = bookService.getAll().find((b) => b.slug === slug);
-
-  const [activeImage, setActiveImage] = useState<string>();
+  const {
+    data: book,
+    isPending: isBookPending,
+    error: isBookError,
+  } = useBook(slug ?? '');
 
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
 
-  if (!book) {
+  const [activeImage, setActiveImage] = useState<string>();
+
+  if (isBookPending) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (isBookError) {
     return <NotFoundPage />;
   }
 
-  const inCart = cartIds.includes(book?.id);
+  const inCart = cartIds.includes(book.id);
   const isFavorite = favoriteIds.includes(book.id);
 
   // const imageSrc = `/images/${book.images[0]}`;
   const imageSrc = `${import.meta.env.BASE_URL}${activeImage || book.images[0]}`;
 
-  const relatedBooks = bookService
-    .getAll()
+  const relatedBooks = books
     .filter(
       (item) =>
         item.id !== book.id &&
         item.category.some((cat) => book.category.includes(cat)),
     )
-    .slice(0, 10);
+    .slice(70, 80);
 
   return (
     <div className={styles.item_card}>
@@ -125,7 +134,7 @@ export const ProductPage = () => {
             <h5 className={styles.block_label_gray}>Select language</h5>
 
             <div className={styles.btn_lang}>
-              {book.langAvailable.map((lang) => (
+              {book.lang_available.map((lang) => (
                 <span
                   key={lang}
                   className={
@@ -143,11 +152,11 @@ export const ProductPage = () => {
           <div className={styles.price_container}>
             <div className={styles.price}>
               <span className={styles.new_price}>
-                ₴{book.priceDiscount ?? book.priceRegular}
+                ₴{book.price_discount ?? book.price_regular}
               </span>
 
-              {book.priceDiscount && (
-                <span className={styles.old_price}>₴{book.priceRegular}</span>
+              {book.price_discount && (
+                <span className={styles.old_price}>₴{book.price_regular}</span>
               )}
             </div>
 
@@ -181,23 +190,23 @@ export const ProductPage = () => {
                 <td>Author</td>
                 <td>{book.author}</td>
               </tr>
-              {'coverType' in book && book.coverType && (
+              {book.cover_type && (
                 <tr>
                   <td>Cover type</td>
-                  <td>{book.coverType}</td>
+                  <td>{book.cover_type}</td>
                 </tr>
               )}
 
-              {'numberOfPages' in book && (
+              {book.number_of_pages && (
                 <tr>
                   <td>Number of pages</td>
-                  <td>{book.numberOfPages}</td>
+                  <td>{book.number_of_pages}</td>
                 </tr>
               )}
 
               <tr>
                 <td>Year of publication</td>
-                <td>{book.publicationYear}</td>
+                <td>{book.publication_year}</td>
               </tr>
             </tbody>
           </table>
@@ -206,9 +215,9 @@ export const ProductPage = () => {
         <section className={styles.about}>
           <h3 className={styles.section_title}>About</h3>
           <div className={styles.description}>
-            {book.description.map((paragraph, index) => (
+            {book.description.split('\n').map((paragraph) => (
               <p
-                key={index}
+                key={paragraph}
                 className={styles.paragraph}
               >
                 {paragraph}
@@ -227,23 +236,23 @@ export const ProductPage = () => {
                 <td>{book.author}</td>
               </tr>
 
-              {'coverType' in book && book.coverType && (
+              {book.cover_type && (
                 <tr>
                   <td>Cover type</td>
-                  <td>{book.coverType}</td>
+                  <td>{book.cover_type}</td>
                 </tr>
               )}
 
-              {'numberOfPages' in book && (
+              {book.number_of_pages && (
                 <tr>
                   <td>Number of pages</td>
-                  <td>{book.numberOfPages}</td>
+                  <td>{book.number_of_pages}</td>
                 </tr>
               )}
 
               <tr>
                 <td>Year of publication</td>
-                <td>{book.publicationYear}</td>
+                <td>{book.publication_year}</td>
               </tr>
 
               <tr>
@@ -278,6 +287,7 @@ export const ProductPage = () => {
         <BooksSwiper
           title="You may also like"
           books={relatedBooks}
+          isLoading={isBooksLoading}
         />
       </section>
     </div>
