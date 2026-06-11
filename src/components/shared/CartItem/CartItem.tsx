@@ -1,5 +1,5 @@
-import { Icon } from '../../ui/Icon/index.ts';
-import type { Book } from '../../../types/Book.ts';
+import { Icon } from '../../ui/Icon';
+import type { Book } from '../../../types/BooksAPI.ts';
 import './CartItem.scss';
 
 type Props = {
@@ -17,7 +17,7 @@ export function CartItem({
   onDecrease,
   onRemove,
 }: Props) {
-  const price = book.priceDiscount ?? book.priceRegular;
+  const price = book.price_discount ?? book.price_regular;
   const imageSrc = `${import.meta.env.BASE_URL}${book.images[0]}`;
 
   return (
