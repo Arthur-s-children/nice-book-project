@@ -9,7 +9,7 @@ export const NotFoundPage = () => {
     <div className={styles['not-found']}>
       <img
         className={styles['not-found__gif']}
-        src="../../../public/not-found-fire.gif"
+        src={`${import.meta.env.BASE_URL}not-found-fire.gif`}
         alt="Lost page"
       />
 

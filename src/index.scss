@@ -6,3 +6,15 @@ body {
   color: $color-primary;
   background: $color-white;
 }
+
+#root {
+  display: flex;
+  background-color: $color-hover-bg;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}

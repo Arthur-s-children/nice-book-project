@@ -1,6 +1,7 @@
 import './Footer.scss';
 import { Logo } from '../../Logo';
 import { Icon } from '../../ui/Icon';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   const handleBackToTop = (): void => {
@@ -18,26 +19,26 @@ export function Footer() {
         </a>
 
         <nav className="footer__categories">
-          <a
+          <Link
             className="footer__category"
-            href="https://github.com/Arthur-s-children/nice-book-project"
+            to="https://github.com/Arthur-s-children/nice-book-project"
             target="_blank"
             rel="noreferrer noopener"
           >
             GITHUB
-          </a>
-          <a
+          </Link>
+          <Link
             className="footer__category"
-            href="#contacts"
+            to="contacts"
           >
             CONTACTS
-          </a>
-          <a
+          </Link>
+          <Link
             className="footer__category"
-            href="#rights"
+            to="rights"
           >
             RIGHTS
-          </a>
+          </Link>
         </nav>
 
         <button

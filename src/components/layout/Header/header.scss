@@ -6,7 +6,7 @@ body {
 }
 
 .header {
-  max-width: 1440px;
+  width: 100%;
   background-color: $color-white;
   border-bottom: 1px solid $color-elements;
   margin: 0 auto;
@@ -46,12 +46,12 @@ body {
 
     .input,
     .dropdouwn,
-    .icon--search,
     .icon--favourite,
     .icon--cart {
       display: none;
     }
 
+    .icon--search,
     .icon--menu {
       display: flex;
       align-items: center;

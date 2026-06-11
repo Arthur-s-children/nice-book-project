@@ -1,12 +1,12 @@
-import { bookService } from '../../services';
 import { useCatalogParams } from '../../hooks/useCatalogParams.tsx';
 import { useCart } from '../../hooks/useCart.tsx';
 import { useFavorites } from '../../hooks/useFavorites.tsx';
 import { BookCard } from '../../components/shared/BookCard/BookCard.tsx';
 import { CatalogControls } from '../../components/ui/CatalogControls/CatalogControls.tsx';
 import { Pagination } from '../../components/ui/Pagination/Pagination.tsx';
-import type { Book } from '../../types/Book.ts';
+import type { Book } from '../../types/BooksAPI.ts';
 import './CatalogPage.scss';
+import { useBooks } from '../../hooks/useBooks.ts';
 
 const TITLES: Record<string, string> = {
   all: 'All books',
@@ -16,7 +16,7 @@ const TITLES: Record<string, string> = {
 };
 
 function getPrice(book: Book) {
-  return book.priceDiscount ?? book.priceRegular;
+  return book.price_discount ?? book.price_regular;
 }
 
 function sortBooks(books: Book[], sort: string) {
@@ -27,9 +27,9 @@ function sortBooks(books: Book[], sort: string) {
   } else if (sort === 'price-desc') {
     list.sort((a, b) => getPrice(b) - getPrice(a));
   } else if (sort === 'oldest') {
-    list.sort((a, b) => a.publicationYear - b.publicationYear);
+    list.sort((a, b) => a.publication_year - b.publication_year);
   } else {
-    list.sort((a, b) => b.publicationYear - a.publicationYear);
+    list.sort((a, b) => b.publication_year - a.publication_year);
   }
 
   return list;
@@ -40,16 +40,23 @@ export function CatalogPage() {
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
 
-  let books = bookService.getAll();
+  const { data: books = [], isLoading, error } = useBooks();
 
-  if (type !== 'all') {
-    books = books.filter((book) => book.type === type);
-  }
+  const filteredBooks =
+    type === 'all' ? books : books.filter((book) => book.type === type);
 
-  const sortedBooks = sortBooks(books, sort);
+  const sortedBooks = sortBooks(filteredBooks, sort);
   const totalPages = Math.max(1, Math.ceil(sortedBooks.length / perPage));
   const start = (page - 1) * perPage;
   const booksOnPage = sortedBooks.slice(start, start + perPage);
+
+  if (isLoading) {
+    return <h2>Loading books...</h2>;
+  }
+
+  if (error) {
+    return <h2>Failed to load books</h2>;
+  }
 
   return (
     <section className="catalog">

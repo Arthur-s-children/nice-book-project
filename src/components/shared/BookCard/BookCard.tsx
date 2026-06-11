@@ -1,8 +1,9 @@
 import { Icon } from '../../ui/Icon';
 import { AppButton } from '../../ui/Button';
 import { LikeButton } from '../../ui/LikeButton';
-import type { Book } from '../../../types/Book.ts';
+import type { Book } from '../../../types/BooksAPI.ts';
 import './BookCard.scss';
+import { Link } from 'react-router-dom';
 
 type Props = {
   book: Book;
@@ -19,17 +20,19 @@ export function BookCard({
   inCart,
   isFavorite,
 }: Props) {
-  const price = book.priceDiscount ?? book.priceRegular;
+  const price = book.price_discount ?? book.price_regular;
   const imageSrc = `${import.meta.env.BASE_URL}${book.images[0]}`;
 
   return (
     <article className="book-card">
       <div className="book-card__image-wrap">
-        <img
-          src={imageSrc}
-          alt={book.name}
-          className="book-card__image"
-        />
+        <Link to={`/products/${book.slug}`}>
+          <img
+            src={imageSrc}
+            alt={book.name}
+            className="book-card__image"
+          />
+        </Link>
         {book.type === 'audiobook' && (
           <span className="book-card__badge">
             <Icon name="headphones" />
@@ -39,11 +42,16 @@ export function BookCard({
 
       <div className="book-card__body">
         <p className="book-card__author">{book.author}</p>
-        <h3 className="book-card__name">{book.name}</h3>
+        <Link
+          to={`/products/${book.slug}`}
+          className="book-card__name"
+        >
+          {book.name}
+        </Link>
         <div className="book-card__prices">
           <span className="book-card__price">₴{price}</span>
-          {book.priceDiscount && (
-            <span className="book-card__old-price">₴{book.priceRegular}</span>
+          {book.price_discount && (
+            <span className="book-card__old-price">₴{book.price_regular}</span>
           )}
         </div>
         <p className="book-card__stock">
