@@ -8,9 +8,11 @@
   border: 1px solid $color-elements !important;
   background-color: $color-white !important;
   color: $color-primary !important;
+  transition: transform 300ms ease;
 
   &:hover {
     border-color: $color-primary !important;
+    transform: scale(1.02);
   }
 }
 

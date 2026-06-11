@@ -3,12 +3,20 @@ import { Logo } from '../../Logo';
 import { Icon } from '../../ui/Icon';
 import { SearchModal } from '../../shared/SearchModal/SearchModal';
 import '../Header/header.scss';
-import { useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 export function Header() {
   const [isMenuOpen, setIsOpenMenu] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [indicator, setIndicator] = useState({
+    left: 0,
+    width: 0,
+    visible: false,
+  });
+
+  const navListRef = useRef<HTMLUListElement>(null);
+
   const location = useLocation();
 
   const closeMenu = () => setIsOpenMenu(false);
@@ -23,6 +31,21 @@ export function Header() {
     setIsSearchModalOpen(true);
   };
 
+  useEffect(() => {
+    const activeLink = navListRef.current?.querySelector(
+      '.nav__link--active',
+    ) as HTMLElement;
+    if (activeLink && navListRef.current) {
+      const navRect = navListRef.current.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+      setIndicator({
+        left: linkRect.left - navRect.left,
+        width: linkRect.width,
+        visible: true,
+      });
+    }
+  }, [location]);
+
   return (
     <header className={isMenuOpen ? 'header header--menu-open' : 'header'}>
       <div className="top-bar">
@@ -35,7 +58,10 @@ export function Header() {
         </a>
 
         <nav className="nav header__nav">
-          <ul className="nav__list">
+          <ul
+            className="nav__list"
+            ref={navListRef}
+          >
             <li className="nav__item">
               <NavLink
                 onClick={closeMenu}
@@ -92,6 +118,14 @@ export function Header() {
                 Audiobook
               </NavLink>
             </li>
+            <div
+              className="nav__indicator"
+              style={{
+                left: indicator.left,
+                width: indicator.width,
+                opacity: indicator.visible ? 1 : 0,
+              }}
+            />
           </ul>
         </nav>
 

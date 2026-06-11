@@ -6,14 +6,19 @@
   border-radius: 8px !important;
   @include button-text;
   text-transform: none !important;
+  transition: transform 300ms ease !important;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
 .primary {
-  background-color: $color-primary !important;
+  background-color: $color-accent !important;
   color: $color-white !important;
 
   &:hover {
-    box-shadow: $shadow-button;
+    box-shadow: $shadow-card;
   }
 }
 
