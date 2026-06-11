@@ -9,15 +9,15 @@
   width: 100%;
   overflow: visible;
 
-  @media (min-width: 320px) and (max-width: 1199px) {
+  @media (min-width: 320px) and (max-width: $breakpoint-tablet) {
     padding: 0 16px;
   }
 
-  @media (min-width: 320px) and (max-width: 639px) {
+  @media (min-width: 320px) and (max-width: $breakpoint-mobile) {
     min-height: 455px;
   }
 
-  @media (min-width: 640px) and (max-width: 1199px) {
+  @media (min-width: 640px) and (max-width: $breakpoint-tablet) {
     min-height: 571px;
   }
 
@@ -40,15 +40,9 @@
 
   &__title {
     @include h2;
+    color: $color-primary;
     margin: 0;
     padding: 0;
-
-    @media (min-width: 320px) and (max-width: 639px) {
-      font-size: 22px;
-    }
-    @media (min-width: 640px) {
-      font-size: 32px;
-    }
   }
 
   &__nav {
@@ -58,7 +52,7 @@
     margin: 0;
     padding: 0;
 
-    @media (max-width: 639px) {
+    @media (max-width: $breakpoint-mobile) {
       display: none;
     }
 
@@ -78,6 +72,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
+    color: $color-primary;
     color: $color-primary;
     transition:
       color 0.2s ease,
@@ -122,6 +117,7 @@
   &__slide {
     display: flex;
     justify-content: center;
+    align-items: stretch;
     margin: 0;
     padding: 0;
 
@@ -139,8 +135,9 @@
     padding: 0;
     box-sizing: border-box;
     width: 100%;
+    width: 100%;
 
-    @media (min-width: 320px) and (max-width: 639px) {
+    @media (min-width: 320px) and (max-width: $breakpoint-mobile) {
       height: 400px;
     }
 
