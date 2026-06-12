@@ -1,28 +1,22 @@
-import paperVideo from '/img/categories/paper.mp4';
-import audioVideo from '/img/categories/audio.mp4';
-import kindleVideo from '/img/categories/kindlebook.mp4';
-
-import paperPoster from '/img/categories/paper_poster.webp';
-import audioPoster from '/img/categories/audio_poster.webp';
-import kindlePoster from '/img/categories/kindlebook_poster.webp';
+import { getImageUrl } from '../../../services/getImageUrl.ts';
 
 export const categories = [
   {
     title: 'Paper books',
     type: 'paperback',
-    video: paperVideo,
-    poster: paperPoster,
+    video: getImageUrl('categories/paper.mp4'),
+    poster: getImageUrl('categories/paper_poster.webp'),
   },
   {
     title: 'Audiobooks',
     type: 'audiobook',
-    video: audioVideo,
-    poster: audioPoster,
+    video: getImageUrl('categories/audio.mp4'),
+    poster: getImageUrl('categories/audio_poster.webp'),
   },
   {
     title: 'Kindle books',
     type: 'kindle',
-    video: kindleVideo,
-    poster: kindlePoster,
+    video: getImageUrl('categories/kindlebook.mp4'),
+    poster: getImageUrl('categories/kindlebook_poster.webp'),
   },
 ];
