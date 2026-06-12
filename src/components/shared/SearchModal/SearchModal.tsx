@@ -1,8 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
-import { bookService } from '../../../services/bookService';
 import { SearchResultCard } from '../SearchResultCard/SearchResultCard';
 import { Icon } from '../../ui/Icon';
 import './SearchModal.scss';
+import { categoryStructure } from './searchCategories.ts';
+import { useBooks } from '../../../hooks/useBooks.ts';
 
 type Props = {
   isOpen: boolean;
@@ -18,105 +19,23 @@ export function SearchModal({ isOpen, onClose }: Props) {
   const [showSales, setShowSales] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
-
-  const categoryStructure = useMemo(
-    () => [
-      {
-        id: 'fiction',
-        name: 'Fiction',
-        subcategories: [
-          {
-            id: 'sci-fi',
-            name: 'Sci-Fi',
-            keywords: ['Sci-Fi', 'Science Fiction'],
-          },
-          { id: 'fantasy', name: 'Fantasy', keywords: ['Fantasy'] },
-          {
-            id: 'mystery',
-            name: 'Mystery & Thrillers',
-            keywords: ['Mystery', 'Thriller'],
-          },
-          {
-            id: 'romance',
-            name: 'Romance',
-            keywords: ['Romance', 'Classic', 'Literature'],
-          },
-          {
-            id: 'historical',
-            name: 'Historical Fiction',
-            keywords: ['Historical Fiction'],
-          },
-          { id: 'horror', name: 'Horror', keywords: ['Horror'] },
-        ],
-      },
-      {
-        id: 'non-fiction',
-        name: 'Non-Fiction',
-        subcategories: [
-          {
-            id: 'business',
-            name: 'Business & Management',
-            keywords: ['Business', 'Management'],
-          },
-          { id: 'psychology', name: 'Psychology', keywords: ['Psychology'] },
-          {
-            id: 'finance',
-            name: 'Finance & Investments',
-            keywords: ['Finance', 'Investments', 'Securities'],
-          },
-          {
-            id: 'biographies',
-            name: 'Biographies',
-            keywords: ['Biographies', 'Company Stories', 'Success Stories'],
-          },
-        ],
-      },
-      {
-        id: 'technology',
-        name: 'Technology',
-        subcategories: [
-          {
-            id: 'programming',
-            name: 'Programming',
-            keywords: ['Programming', 'Software Development', 'Algorithms'],
-          },
-          {
-            id: 'design',
-            name: 'Design',
-            keywords: ['Graphic Design', 'Design', 'Data Visualization'],
-          },
-          {
-            id: 'gaming',
-            name: 'Computer Games',
-            keywords: ['Computer games'],
-          },
-        ],
-      },
-      {
-        id: 'children',
-        name: "Children's Books",
-        subcategories: [
-          {
-            id: 'fairy-tales',
-            name: 'Fairy Tales',
-            keywords: ['Fairy tales', "Children's fiction"],
-          },
-          {
-            id: 'educational',
-            name: 'Educational',
-            keywords: ['Educational', "Children's and YA"],
-          },
-        ],
-      },
-    ],
-    [],
-  );
+  const { data: books = [], isLoading } = useBooks();
 
   const filteredBooks = useMemo(() => {
-    let results = bookService.search(searchQuery);
+    let results = books;
+
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+
+      results = results.filter(
+        (book) =>
+          book.name.toLowerCase().includes(query) ||
+          book.author.toLowerCase().includes(query),
+      );
+    }
 
     if (showSales) {
-      results = results.filter((book) => book.priceDiscount !== null);
+      results = results.filter((book) => book.price_discount !== null);
     }
 
     if (selectedCategory !== 'all') {
@@ -153,18 +72,16 @@ export function SearchModal({ isOpen, onClose }: Props) {
     }
 
     return results;
-  }, [
-    searchQuery,
-    selectedCategory,
-    selectedSubcategory,
-    showSales,
-    categoryStructure,
-  ]);
+  }, [books, searchQuery, showSales, selectedCategory, selectedSubcategory]);
 
   const totalPages = Math.ceil(filteredBooks.length / RESULTS_PER_PAGE);
-  const paginatedBooks = filteredBooks.slice(
-    (currentPage - 1) * RESULTS_PER_PAGE,
-    currentPage * RESULTS_PER_PAGE,
+  const paginatedBooks = useMemo(
+    () =>
+      filteredBooks.slice(
+        (currentPage - 1) * RESULTS_PER_PAGE,
+        currentPage * RESULTS_PER_PAGE,
+      ),
+    [filteredBooks, currentPage],
   );
 
   useEffect(() => {
@@ -181,6 +98,10 @@ export function SearchModal({ isOpen, onClose }: Props) {
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <div
