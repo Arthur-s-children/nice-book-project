@@ -43,7 +43,7 @@ export const ProductPage = () => {
         item.id !== book.id &&
         item.category.some((cat) => book.category.includes(cat)),
     )
-    .slice(70, 80);
+    .slice(0, 10);
 
   return (
     <div className={styles.item_card}>
