@@ -1,15 +1,29 @@
-import { useState } from 'react';
-import { favoritesService } from '../services/favoritesService';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
+import { favoritesService } from '../services';
+
+import { favoritesKeys } from '../services/favorites/favorites.keys';
 
 export function useFavorites() {
-  const [favoriteIds, setFavoriteIds] = useState<string[]>(() =>
-    favoritesService.getAll(),
-  );
+  const queryClient = useQueryClient();
+
+  const { data: favoriteIds = [] } = useQuery({
+    queryKey: favoritesKeys.all,
+    queryFn: favoritesService.getAll,
+
+    staleTime: Infinity,
+  });
 
   const toggleFavorite = (id: string) => {
     favoritesService.toggle(id);
-    setFavoriteIds(favoritesService.getAll());
+
+    queryClient.setQueryData(favoritesKeys.all, favoritesService.getAll());
   };
 
-  return { favoriteIds, toggleFavorite };
+  return {
+    favoriteIds,
+    favoritesCount: favoriteIds.length,
+
+    toggleFavorite,
+  };
 }
