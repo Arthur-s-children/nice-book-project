@@ -11,7 +11,7 @@ export const HomePage = () => {
 
   return (
     <>
-      <HeroSection />
+      <HeroSection isLoading={isLoading} />
       <div className="home-page">
         <BooksSwiper
           title="New books"
@@ -19,7 +19,7 @@ export const HomePage = () => {
           isLoading={isLoading}
         />
 
-        <CategoriesSection />
+        <CategoriesSection isLoading={isLoading} />
 
         <BooksSwiper
           title="You might like"
