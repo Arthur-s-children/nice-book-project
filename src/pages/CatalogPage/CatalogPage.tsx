@@ -55,9 +55,11 @@ export function CatalogPage() {
 
   return (
     <section className="catalog">
-      <h1 className="catalog-title">{TITLES[type] ?? 'All books'}</h1>
+      <h1 className="catalog-title">
+        {TITLES[type] ?? t('catalog.title.all')}
+      </h1>
       <p className="catalog-count">
-        {sortedBooks.length.toLocaleString()} books
+        {t('catalog.count', { count: sortedBooks.length })}
       </p>
 
       <CatalogControls

@@ -13,7 +13,7 @@ export const NotFoundPage = () => {
       <img
         className={styles['not-found__gif']}
         src="../../../public/not-found-fire.gif"
-        alt="Lost page"
+        alt={t('notFound.imageAlt')}
       />
 
       <div className={styles['not-found__content']}>

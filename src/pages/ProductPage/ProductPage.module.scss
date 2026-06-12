@@ -26,13 +26,34 @@
   margin-bottom: 16px;
 }
 
+.separator {
+  display: flex;
+  justify-content: center;
+}
+
 .link {
   color: $color-secondary;
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1%;
+  font-size: 12px;
+  line-height: 11px;
+  font-weight: $font-bold;
+  font-family: $font-main;
 
   &:hover {
     color: $color-primary;
   }
+}
+
+.current {
+  color: $color-secondary;
+  text-transform: uppercase;
+  letter-spacing: 1%;
+  font-size: 12px;
+  line-height: 11px;
+  font-weight: $font-bold;
+  font-family: $font-main;
 }
 
 .separator {

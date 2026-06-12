@@ -3,6 +3,7 @@ import { useCart } from '../../hooks/useCart.tsx';
 import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
 import type { Book } from '../../types/Book.ts';
 import './CartPage.scss';
+import { useTranslation } from 'react-i18next';
 
 function getPrice(book: Book) {
   return book.priceDiscount ?? book.priceRegular;
@@ -10,6 +11,8 @@ function getPrice(book: Book) {
 
 export function CartPage() {
   const { items, updateQuantity, removeFromCart } = useCart();
+
+  const { t } = useTranslation();
 
   const cartBooks = items
     .map((item) => ({
@@ -27,10 +30,10 @@ export function CartPage() {
 
   return (
     <section className="cart-page">
-      <h1 className="cart-page__title">Cart</h1>
+      <h1 className="cart-page__title">{t('cart.title')}</h1>
 
       {cartBooks.length === 0 ?
-        <p className="cart-page__empty">Your cart is empty.</p>
+        <p className="cart-page__empty">{t('cart.empty')}</p>
       : <div className="cart-page__content">
           <div className="cart-page__list">
             {cartBooks.map(({ book, quantity }) => (
@@ -46,13 +49,13 @@ export function CartPage() {
           </div>
 
           <aside className="cart-page__sidebar">
-            <p className="cart-page__total-label">Total</p>
+            <p className="cart-page__total-label">{t('cart.total')}</p>
             <p className="cart-page__total-value">₴{total.toFixed(2)}</p>
             <button
               type="button"
               className="cart-page__checkout-btn"
             >
-              Checkout
+              {t('cart.checkout')}
             </button>
           </aside>
         </div>

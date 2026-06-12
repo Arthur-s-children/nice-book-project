@@ -19,9 +19,15 @@ export const ProductPage = () => {
   const books = bookService.getAll();
   const book = books.find((b) => b.slug === slug);
 
-  const [activeImage, setActiveImage] = useState<string>(() => {
-    return book?.images?.[0] ?? '';
-  });
+  const [activeImage, setActiveImage] = useState<number>(0);
+
+  const currentImage = book?.images?.[activeImage] ?? book?.images?.[0] ?? '';
+
+  const TITLES: Record<string, string> = {
+    paperback: t('catalog.title.paperback'),
+    kindle: t('catalog.title.kindle'),
+    audiobook: t('catalog.title.audiobook'),
+  };
 
   const relatedBooks = useMemo(() => {
     if (!book) return [];
@@ -69,7 +75,9 @@ export const ProductPage = () => {
   const inCart = cartIds.includes(book.id);
   const isFavorite = favoriteIds.includes(book.id);
 
-  const imageSrc = `${import.meta.env.BASE_URL}${activeImage || book.images[0]}`;
+  const imageSrc = `${import.meta.env.BASE_URL}${currentImage}`;
+
+  const type = book.type;
 
   return (
     <div className={styles.item_card}>
@@ -93,10 +101,10 @@ export const ProductPage = () => {
         </span>
 
         <Link
-          to="/books/all"
+          to={`/catalog?type=${type}`}
           className={styles.link}
         >
-          {t('common.books')}
+          {TITLES[type]}
         </Link>
 
         <span className={styles.separator}>
@@ -124,12 +132,12 @@ export const ProductPage = () => {
           </div>
 
           <div className={styles.thumbs}>
-            {book.images.map((img) => (
+            {book?.images?.map((img, index) => (
               <button
                 type="button"
                 key={img}
                 className={styles.thumb}
-                onClick={() => setActiveImage(img)}
+                onClick={() => setActiveImage(index)}
               >
                 <img
                   src={`${import.meta.env.BASE_URL}${img}`}
@@ -193,7 +201,8 @@ export const ProductPage = () => {
             <div className={styles.actions}>
               <button
                 className={styles.btn_add}
-                onClick={() => !inCart && addToCart(book.id)}
+                onClick={() => addToCart(book.id)}
+                disabled={inCart}
               >
                 {inCart ? t('product.added') : t('product.addToCart')}
               </button>
