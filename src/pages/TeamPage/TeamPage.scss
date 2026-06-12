@@ -33,7 +33,7 @@
 
   &__subtitle {
     @include h3;
-    color: $color-secondary;
+    color: $color-elements;
     margin: 0;
   }
 
@@ -45,6 +45,18 @@
     @media (max-width: $breakpoint-mobile) {
       grid-template-columns: 1fr;
       row-gap: 32px;
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .team-page {
+    &__title {
+      color: $color-primary-dark;
+    }
+
+    &__subtitle {
+      color: $color-icons-dark;
     }
   }
 }

@@ -3,12 +3,11 @@
 .books-swiper {
   position: relative;
   margin-top: 0;
-  margin-left: auto;
-  margin-right: auto;
+  gap: 16px;
   padding: 0;
   box-sizing: border-box;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
 
   @media (min-width: 320px) and (max-width: $breakpoint-tablet) {
     padding: 0 16px;
@@ -74,6 +73,7 @@
     border: none;
     cursor: pointer;
     color: $color-primary;
+    color: $color-primary;
     transition:
       color 0.2s ease,
       opacity 0.2s ease,
@@ -84,7 +84,7 @@
     }
 
     &.swiper-button-disabled {
-      color: $color-secondary;
+      color: $color-icons;
       opacity: 0.5;
       cursor: not-allowed;
 
@@ -100,19 +100,18 @@
 
   &__slider-wrapper {
     position: relative;
-    width: 100%;
-    margin: 0;
-    padding: 0;
     display: flex;
     align-items: stretch;
     min-width: 0;
+    overflow-x: clip;
+    padding: 12px;
+    margin: 0 -12px;
+    width: calc(100% + 24px);
   }
 
   &__container {
     width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
   &__slide {
@@ -121,16 +120,13 @@
     align-items: stretch;
     margin: 0;
     padding: 0;
-    height: auto;
 
-    .book-card {
-      width: 100%;
-      max-width: 272px;
-      margin: 0 auto;
-      overflow: hidden !important;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    width: 215px !important;
+    flex-shrink: 0 !important;
+    overflow: visible;
+
+    @media (min-width: 640px) {
+      width: 272px !important;
     }
   }
 
@@ -139,6 +135,7 @@
     padding: 0;
     box-sizing: border-box;
     width: 100%;
+    width: 100%;
 
     @media (min-width: 320px) and (max-width: $breakpoint-mobile) {
       height: 400px;
@@ -146,6 +143,22 @@
 
     @media (min-width: 640px) {
       height: 506px;
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .books-swiper {
+    &__title {
+      color: $color-primary-dark;
+    }
+
+    &__arrow {
+      color: $color-primary-dark;
+
+      &.swiper-button-disabled {
+        color: $color-icons-dark;
+      }
     }
   }
 }

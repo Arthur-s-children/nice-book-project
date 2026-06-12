@@ -33,11 +33,11 @@
 
 .menuItem {
   @include body-text;
-  color: $color-secondary !important;
+  color: $color-elements !important;
   border-radius: 0;
 
   &:hover {
-    background-color: $color-hover-bg !important;
+    background-color: $color-icons !important;
     color: $color-primary !important;
   }
 }

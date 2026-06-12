@@ -6,14 +6,19 @@
   border-radius: 8px !important;
   @include button-text;
   text-transform: none !important;
+  transition: transform 300ms ease !important;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
 .primary {
-  background-color: $color-primary !important;
+  background-color: $color-accent !important;
   color: $color-white !important;
 
   &:hover {
-    box-shadow: $shadow-button;
+    box-shadow: $shadow-card;
   }
 }
 
@@ -21,4 +26,15 @@
   background-color: $color-white !important;
   color: $color-green !important;
   border: 1px solid $color-elements !important;
+}
+
+[data-theme='dark'] {
+  .primary {
+    color: $color-white !important;
+  }
+
+  .selected {
+    background-color: $color-elements-dark !important;
+    border-color: $color-hover-bg-dark !important;
+  }
 }
