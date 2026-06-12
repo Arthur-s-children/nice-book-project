@@ -2,14 +2,34 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Logo } from '../../Logo';
 import { Icon } from '../../ui/Icon';
 import { SearchModal } from '../../shared/SearchModal/SearchModal';
+import { AuthModal } from '../../ui/AuthModal';
+import { UserMenu } from '../../ui/UserMenu';
+import { SettingsMenu } from '../../ui/SettingsMenu';
+import { useAuthContext } from '../../../contexts/AuthContext';
 import '../Header/header.scss';
 import { useState } from 'react';
 import cn from 'classnames';
 
-export function Header() {
+interface Props {
+  isAuthModalOpen?: boolean;
+  setIsAuthModalOpen?: (open: boolean) => void;
+}
+
+export function Header({
+  isAuthModalOpen: externalIsAuthModalOpen,
+  setIsAuthModalOpen: externalSetIsAuthModalOpen,
+}: Props) {
   const [isMenuOpen, setIsOpenMenu] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [internalIsAuthModalOpen, setInternalIsAuthModalOpen] = useState(false);
+  const [language, setLanguage] = useState<'en' | 'uk'>('en');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const location = useLocation();
+  const { user, isAuthenticated, isLoading } = useAuthContext();
+
+  const isAuthModalOpen = externalIsAuthModalOpen ?? internalIsAuthModalOpen;
+  const setIsAuthModalOpen =
+    externalSetIsAuthModalOpen ?? setInternalIsAuthModalOpen;
 
   const closeMenu = () => setIsOpenMenu(false);
 
@@ -96,6 +116,15 @@ export function Header() {
         </nav>
 
         <div className="top-bar__icons">
+          {!isLoading && !isAuthenticated && (
+            <button
+              className="header__sign-up-btn"
+              onClick={() => setIsAuthModalOpen(true)}
+            >
+              Sign Up
+            </button>
+          )}
+
           <input
             type="text"
             className="input"
@@ -123,6 +152,24 @@ export function Header() {
           >
             <Icon name="cart" />
           </NavLink>
+
+          {!isLoading && isAuthenticated && user ?
+            <UserMenu
+              avatarUrl={user.avatar_url}
+              language={language}
+              theme={theme}
+              onLanguageChange={setLanguage}
+              onThemeChange={setTheme}
+            />
+          : !isLoading && !isAuthenticated ?
+            <SettingsMenu
+              language={language}
+              theme={theme}
+              onLanguageChange={setLanguage}
+              onThemeChange={setTheme}
+            />
+          : null}
+
           <a
             href=""
             className="icon icon--menu"
@@ -137,6 +184,10 @@ export function Header() {
         key={String(isSearchModalOpen)}
         isOpen={isSearchModalOpen}
         onClose={() => setIsSearchModalOpen(false)}
+      />
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
       />
     </header>
   );
