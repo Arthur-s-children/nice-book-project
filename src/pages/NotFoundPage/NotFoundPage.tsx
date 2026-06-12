@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { AppButton } from '../../components/ui/Button';
 import styles from './NotFoundPage.module.scss';
+import { getImageUrl } from '../../services/getImageUrl.ts';
 
 export const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ export const NotFoundPage = () => {
     <div className={styles['not-found']}>
       <img
         className={styles['not-found__gif']}
-        src={`${import.meta.env.BASE_URL}not-found-fire.gif`}
+        src={getImageUrl('not-found-fire.gif')}
         alt="Lost page"
       />
 
