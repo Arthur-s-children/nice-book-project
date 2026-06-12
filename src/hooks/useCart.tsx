@@ -1,25 +1,52 @@
-import { useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
 import { cartService, type CartItem } from '../services/cartService';
 
+import { cartKeys } from '../services/cart/cart.keys';
+
 export function useCart() {
-  const [items, setItems] = useState<CartItem[]>(() => cartService.getAll());
+  const queryClient = useQueryClient();
+
+  const { data: items = [] } = useQuery<CartItem[]>({
+    queryKey: cartKeys.all,
+    queryFn: cartService.getAll,
+    staleTime: Infinity,
+  });
 
   const cartIds = items.map((item) => item.productId);
 
   const addToCart = (id: string) => {
     cartService.add(id);
-    setItems(cartService.getAll());
+
+    queryClient.setQueryData(cartKeys.all, cartService.getAll());
   };
 
   const removeFromCart = (id: string) => {
     cartService.remove(id);
-    setItems(cartService.getAll());
+
+    queryClient.setQueryData(cartKeys.all, cartService.getAll());
   };
 
   const updateQuantity = (id: string, quantity: number) => {
     cartService.updateQuantity(id, quantity);
-    setItems(cartService.getAll());
+
+    queryClient.setQueryData(cartKeys.all, cartService.getAll());
   };
 
-  return { items, cartIds, addToCart, removeFromCart, updateQuantity };
+  const clearCart = () => {
+    localStorage.removeItem('cart');
+
+    queryClient.setQueryData(cartKeys.all, []);
+  };
+
+  return {
+    items,
+    cartIds,
+    cartCount: items.length,
+
+    addToCart,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+  };
 }

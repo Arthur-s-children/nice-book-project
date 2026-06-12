@@ -6,6 +6,8 @@ import '../Header/header.scss';
 import { useRef, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useTheme } from './useTheme';
+import { useCart } from '../../../hooks/useCart.tsx';
+import { useFavorites } from '../../../hooks/useFavorites.tsx';
 
 export function Header() {
   const [isMenuOpen, setIsOpenMenu] = useState(false);
@@ -20,6 +22,8 @@ export function Header() {
   const navListRef = useRef<HTMLUListElement>(null);
 
   const location = useLocation();
+  const { cartCount } = useCart();
+  const { favoritesCount } = useFavorites();
 
   const closeMenu = () => setIsOpenMenu(false);
 
@@ -151,6 +155,9 @@ export function Header() {
             to={'favorites'}
           >
             <Icon name="heart" />
+            {favoritesCount > 0 && (
+              <span className="favorites-counter">{favoritesCount}</span>
+            )}
           </NavLink>
           <NavLink
             onClick={closeMenu}
@@ -158,6 +165,7 @@ export function Header() {
             to={'cart'}
           >
             <Icon name="cart" />
+            {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
           </NavLink>
           <button
             className="icon icon--theme"

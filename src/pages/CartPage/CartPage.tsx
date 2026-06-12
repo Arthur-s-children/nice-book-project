@@ -1,29 +1,44 @@
-import { bookService } from '../../services/bookService.ts';
 import { useCart } from '../../hooks/useCart.tsx';
 import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
-import type { Book } from '../../types/Book.ts';
+import type { Book } from '../../types/BooksAPI.ts';
 import './CartPage.scss';
+import { useBooks } from '../../hooks/useBooks.ts';
 
 function getPrice(book: Book) {
-  return book.priceDiscount ?? book.priceRegular;
+  return book.price_discount ?? book.price_regular;
 }
 
 export function CartPage() {
   const { items, updateQuantity, removeFromCart } = useCart();
 
+  const { data: books = [], isLoading, error } = useBooks();
+
   const cartBooks = items
     .map((item) => ({
-      book: bookService.getById(item.productId),
+      book: books.find((book) => book.id === item.productId),
       quantity: item.quantity,
     }))
     .filter(
-      (item): item is { book: Book; quantity: number } => item.book !== null,
+      (
+        item,
+      ): item is {
+        book: Book;
+        quantity: number;
+      } => Boolean(item.book),
     );
 
   const total = cartBooks.reduce(
     (sum, line) => sum + getPrice(line.book) * line.quantity,
     0,
   );
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (error) {
+    return <h2>Failed to load books</h2>;
+  }
 
   return (
     <section className="cart-page">
