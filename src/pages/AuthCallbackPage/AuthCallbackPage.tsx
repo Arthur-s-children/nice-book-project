@@ -13,14 +13,12 @@ export function AuthCallbackPage() {
   useEffect(() => {
     const handleEmailConfirmation = async () => {
       try {
-        // Parse URL hash for tokens
         const hash = window.location.hash;
         const params = new URLSearchParams(hash.substring(1));
         const accessToken = params.get('access_token');
         const refreshToken = params.get('refresh_token');
 
         if (accessToken && refreshToken) {
-          // Set the session with tokens from URL
           const { error } = await supabase.auth.setSession({
             access_token: accessToken,
             refresh_token: refreshToken,
@@ -31,12 +29,10 @@ export function AuthCallbackPage() {
           setStatus('success');
           setMessage('Email confirmed successfully! You are now signed in.');
 
-          // Redirect to home after 2 seconds
           setTimeout(() => {
             navigate('/');
           }, 2000);
         } else {
-          // Check if we already have a session
           const { data, error } = await supabase.auth.getSession();
           if (error) throw error;
 
