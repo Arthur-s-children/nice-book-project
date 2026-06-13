@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import type { Book } from '../../../types/Book';
+import type { Book } from '../../../types/BooksAPI.ts';
 import './SearchResultCard.scss';
+import { getImageUrl } from '../../../services/getImageUrl.ts';
 
 type Props = {
   book: Book;
@@ -8,8 +9,8 @@ type Props = {
 };
 
 export function SearchResultCard({ book, onCardClick }: Props) {
-  const price = book.priceDiscount ?? book.priceRegular;
-  const imageSrc = `${import.meta.env.BASE_URL}${book.images[0]}`;
+  const price = book.price_discount ?? book.price_regular;
+  const imageSrc = getImageUrl(book.images[0]);
 
   return (
     <Link
@@ -25,13 +26,13 @@ export function SearchResultCard({ book, onCardClick }: Props) {
       <div className="search-result-card__info">
         <p className="search-result-card__author">{book.author}</p>
         <h3 className="search-result-card__name">{book.name}</h3>
-        {book.priceDiscount ?
+        {book.price_discount ?
           <div className="search-result-card__prices">
             <p className="search-result-card__price search-result-card__price--discount">
-              ₴{book.priceDiscount}
+              ₴{book.price_discount}
             </p>
             <p className="search-result-card__price search-result-card__price--regular">
-              ₴{book.priceRegular}
+              ₴{book.price_regular}
             </p>
           </div>
         : <p className="search-result-card__price">₴{price}</p>}

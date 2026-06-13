@@ -13,7 +13,7 @@
 
 .catalog-count {
   @include body-text;
-  color: $color-secondary;
+  color: $color-elements;
   margin-bottom: 16px;
 }
 
@@ -24,7 +24,18 @@
 
 .catalog-empty {
   @include body-text;
-  color: $color-secondary;
+  color: $color-elements;
   text-align: center;
   padding: 48px 0;
+}
+
+[data-theme='dark'] {
+  .catalog-title {
+    color: $color-primary-dark;
+  }
+
+  .catalog-count,
+  .catalog-empty {
+    color: $color-icons-dark;
+  }
 }

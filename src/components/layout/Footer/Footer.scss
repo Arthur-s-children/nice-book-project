@@ -10,7 +10,7 @@
 .footer {
   width: 100%;
   background: $color-white;
-  color: $color-secondary;
+  color: $color-primary;
   font-family: $font-main;
   border-top: 1px solid $color-elements;
 }
@@ -60,7 +60,7 @@
   font-family: $font-main;
   font-size: 14px;
   line-height: 20px;
-  color: $color-secondary;
+  color: $color-primary;
   text-decoration: none;
   font-weight: $font-semibold;
 }
@@ -75,7 +75,7 @@
   padding: 12px 20px;
   border: none;
   background: transparent;
-  color: $color-secondary;
+  color: $color-primary;
   font-size: 14px;
   line-height: 18px;
   cursor: pointer;
@@ -120,5 +120,21 @@
 
   .backTop {
     margin: 0;
+  }
+}
+
+[data-theme='dark'] {
+  .footer {
+    background-color: $color-surface-dark;
+    border-top-color: $color-elements-dark;
+    color: $color-primary-dark;
+  }
+
+  .footer__category {
+    color: $color-primary-dark;
+  }
+
+  .backTop {
+    color: $color-primary-dark;
   }
 }

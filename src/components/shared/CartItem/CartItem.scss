@@ -33,7 +33,7 @@
 
 .cart-item__author {
   @include small-text;
-  color: $color-secondary;
+  color: $color-elements;
 }
 
 .cart-item__name {
@@ -83,5 +83,30 @@
 
   &:hover {
     opacity: 1;
+  }
+}
+
+[data-theme='dark'] {
+  .cart-item {
+    border-bottom-color: $color-elements-dark;
+  }
+
+  .cart-item__image {
+    background: $color-surface-dark;
+  }
+
+  .cart-item__author {
+    color: $color-icons-dark;
+  }
+
+  .cart-item__name,
+  .cart-item__price {
+    color: $color-primary-dark;
+  }
+
+  .cart-item__qty-btn {
+    border-color: $color-elements-dark;
+    background: $color-surface-dark;
+    color: $color-primary-dark;
   }
 }

@@ -4,6 +4,7 @@ import { LikeButton } from '../../ui/LikeButton';
 import type { Book } from '../../../types/BooksAPI.ts';
 import './BookCard.scss';
 import { Link } from 'react-router-dom';
+import { getImageUrl } from '../../../services/getImageUrl.ts';
 
 type Props = {
   book: Book;
@@ -21,7 +22,7 @@ export function BookCard({
   isFavorite,
 }: Props) {
   const price = book.price_discount ?? book.price_regular;
-  const imageSrc = `${import.meta.env.BASE_URL}${book.images[0]}`;
+  const imageSrc = getImageUrl(book.images[0]);
 
   return (
     <article className="book-card">
@@ -70,6 +71,7 @@ export function BookCard({
         <LikeButton
           isSelected={isFavorite}
           onClick={() => onToggleFavorite(book.id)}
+          colored
         />
       </div>
     </article>

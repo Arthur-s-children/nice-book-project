@@ -21,13 +21,13 @@
   gap: 8px;
 
   font-size: 14px;
-  color: $color-secondary;
+  color: $color-elements;
 
   margin-bottom: 16px;
 }
 
 .link {
-  color: $color-secondary;
+  color: $color-elements;
   text-decoration: none;
 
   &:hover {
@@ -36,11 +36,11 @@
 }
 
 .separator {
-  color: $color-secondary;
+  color: $color-icons;
 }
 
 .current {
-  color: $color-secondary;
+  color: $color-primary;
   font-weight: $font-medium;
 }
 
@@ -127,7 +127,7 @@
   line-height: 24px;
   letter-spacing: 0;
   margin-block: 0px;
-  color: $color-secondary;
+  color: $color-primary;
   font-weight: $font-bold;
 }
 
@@ -297,7 +297,7 @@
   font-weight: $font-medium;
 
   color: $color-primary;
-  background-color: $color-hover-bg;
+  background-color: $color-icons;
   border-radius: 5px;
   border: 1px solid $color-elements;
 }
@@ -320,7 +320,7 @@
   letter-spacing: 0;
   font-weight: $font-medium;
   color: $color-white;
-  background-color: $color-primary;
+  background-color: $color-elements;
   border-radius: 5px;
   padding: 5px 10px;
   border: 1px solid $color-primary;
@@ -335,7 +335,7 @@
   letter-spacing: 0;
   font-weight: $font-medium;
   color: $color-primary;
-  background-color: $color-hover-bg;
+  background-color: $color-white;
   border-radius: 5px;
   padding: 5px 10px;
   border: 1px solid $color-elements;
@@ -367,7 +367,7 @@
 }
 
 .old_price {
-  color: $color-secondary;
+  color: $color-red;
   font-weight: $font-semibold;
   font-family: $font-main;
   line-height: 100%;
@@ -387,15 +387,21 @@
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0;
-  background-color: $color-primary;
+  background-color: $color-accent;
   color: $color-white;
   font-weight: $font-bold;
   width: 100%;
   height: 40px;
   padding: 9.5px;
-  border: 1px solid $color-primary;
+  border: 1px solid $color-accent;
   border-radius: 8px;
   cursor: pointer;
+  transition: all 300ms ease;
+
+  &:hover {
+    background-color: $color-accent-hover;
+    transform: scale(1.02);
+  }
 }
 
 .btn_favorite {
@@ -410,6 +416,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 300ms ease;
+
+  &:hover {
+    transform: scale(1.02);
+    border-color: $color-primary;
+  }
 }
 
 .icon_heart {
@@ -445,7 +457,7 @@
     letter-spacing: 0;
     font-weight: $font-medium;
     padding: 6px 0;
-    color: $color-secondary;
+    color: $color-elements;
     text-align: left;
   }
 
@@ -466,5 +478,83 @@
 
   @media (min-width: 640px) {
     margin-top: 80px;
+  }
+}
+
+[data-theme='dark'] {
+  .breadcrumbs,
+  .link,
+  .separator {
+    color: $color-icons-dark;
+  }
+
+  .current,
+  .title,
+  .paragraph,
+  .section_title,
+  .block_label_gray,
+  .new_price {
+    color: $color-primary-dark;
+  }
+
+  .section_title {
+    border-bottom-color: $color-elements-dark;
+  }
+
+  .thumb {
+    border-color: $color-elements-dark;
+  }
+
+  .thumb_active {
+    border-color: $color-primary-dark;
+  }
+
+  .categories {
+    border-bottom-color: $color-elements-dark;
+  }
+
+  .btn_category {
+    color: $color-primary-dark;
+    background-color: $color-surface-dark;
+    border-color: $color-elements-dark;
+  }
+
+  .languages {
+    border-bottom-color: $color-elements-dark;
+  }
+
+  .btn_lang_ua {
+    color: $color-primary-dark;
+    background-color: $color-elements-dark;
+    border-color: $color-primary-dark;
+  }
+
+  .btn_lang_eng {
+    color: $color-primary-dark;
+    background-color: $color-surface-dark;
+    border-color: $color-elements-dark;
+  }
+
+  .btn_favorite {
+    border-color: $color-elements-dark;
+    color: $color-icons-dark;
+
+    &:hover {
+      border-color: $color-primary-dark;
+    }
+  }
+
+  .characteristics {
+    tr {
+      border-bottom-color: $color-elements-dark;
+    }
+
+    td:first-child {
+      color: $color-icons-dark;
+    }
+
+    td:last-child {
+      color: $color-primary-dark;
+    }
   }
 }

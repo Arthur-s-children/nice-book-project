@@ -1,4 +1,5 @@
 import styles from './Icon.module.scss';
+import { getImageUrl } from '../../../services/getImageUrl.ts';
 
 type IconName =
   | 'home'
@@ -23,13 +24,14 @@ type IconName =
 type Props = {
   name: IconName;
   size?: number;
+  colored?: boolean;
 };
 
-export const Icon = ({ name, size = 16 }: Props) => {
+export const Icon = ({ name, size = 16, colored = false }: Props) => {
   return (
     <img
-      src={`${import.meta.env.BASE_URL}icons/${name}.svg`}
-      className={styles.icon}
+      src={getImageUrl(`icons/${name}.svg`)}
+      className={`${styles.icon} ${colored ? styles.icon__colored : ''}`}
       alt={name}
       height={size}
     />

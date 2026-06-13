@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { BooksSwiper } from '../../components/shared/BooksSwiper/BooksSwiper';
 import { useBook } from '../../hooks/useBook.ts';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { getImageUrl } from '../../services/getImageUrl.ts';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -35,7 +36,7 @@ export const ProductPage = () => {
   const isFavorite = favoriteIds.includes(book.id);
 
   // const imageSrc = `/images/${book.images[0]}`;
-  const imageSrc = `${import.meta.env.BASE_URL}${activeImage || book.images[0]}`;
+  const imageSrc = getImageUrl(activeImage || book.images[0]);
 
   const relatedBooks = books
     .filter(
@@ -43,7 +44,7 @@ export const ProductPage = () => {
         item.id !== book.id &&
         item.category.some((cat) => book.category.includes(cat)),
     )
-    .slice(70, 80);
+    .slice(0, 10);
 
   return (
     <div className={styles.item_card}>
@@ -107,7 +108,7 @@ export const ProductPage = () => {
                 onClick={() => setActiveImage(img)}
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}${img}`}
+                  src={getImageUrl(img)}
                   alt={book.name}
                   className={styles.thumbnail_image}
                 />
