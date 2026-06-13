@@ -4,8 +4,13 @@ import './CategoriesSection.scss';
 import { useBooks } from '../../../hooks/useBooks.ts';
 import { useTimeCounter } from '../../../hooks/useTimeCounter.ts';
 import { useInView } from 'react-intersection-observer';
+import { CategoriesSectionSkeleton } from './CategoriesSectionSkeleton.tsx';
 
-export const CategoriesSection = () => {
+interface CategoriesSectionProps {
+  isLoading: boolean;
+}
+
+export const CategoriesSection = ({ isLoading }: CategoriesSectionProps) => {
   const { data = [] } = useBooks();
   const counts = data.reduce(
     (acc, book) => {
@@ -31,29 +36,29 @@ export const CategoriesSection = () => {
 
   const paperbacksCount = useTimeCounter(counts.paperback * 29, 6, inView);
 
-  return (
-    <section
-      className="categories"
-      ref={ref}
-    >
-      <h2 className="categories__title">Shop by category</h2>
+  return isLoading ?
+      <CategoriesSectionSkeleton />
+    : <section
+        className="categories"
+        ref={ref}
+      >
+        <h2 className="categories__title">Shop by category</h2>
 
-      <div className="categories__grid">
-        <CategoryCard
-          {...categories[0]}
-          amount={audiobooksCount}
-        />
+        <div className="categories__grid">
+          <CategoryCard
+            {...categories[0]}
+            amount={audiobooksCount}
+          />
 
-        <CategoryCard
-          {...categories[1]}
-          amount={kindlesCount}
-        />
+          <CategoryCard
+            {...categories[1]}
+            amount={kindlesCount}
+          />
 
-        <CategoryCard
-          {...categories[2]}
-          amount={paperbacksCount}
-        />
-      </div>
-    </section>
-  );
+          <CategoryCard
+            {...categories[2]}
+            amount={paperbacksCount}
+          />
+        </div>
+      </section>;
 };

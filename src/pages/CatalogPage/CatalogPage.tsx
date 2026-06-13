@@ -7,6 +7,7 @@ import { Pagination } from '../../components/ui/Pagination/Pagination.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
 import './CatalogPage.scss';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { BookCardSkeleton } from '../../components/shared/BookCard/BookCardSkeleton.tsx';
 
 const TITLES: Record<string, string> = {
   all: 'All books',
@@ -50,10 +51,6 @@ export function CatalogPage() {
   const start = (page - 1) * perPage;
   const booksOnPage = sortedBooks.slice(start, start + perPage);
 
-  if (isLoading) {
-    return <h2>Loading books...</h2>;
-  }
-
   if (error) {
     return <h2>Failed to load books</h2>;
   }
@@ -71,7 +68,13 @@ export function CatalogPage() {
         onParamChange={setParam}
       />
 
-      {booksOnPage.length === 0 ?
+      {isLoading ?
+        <div className="catalog-grid">
+          {Array.from({ length: perPage }).map((_, index) => (
+            <BookCardSkeleton key={`catalog-skeleton-${index}`} />
+          ))}
+        </div>
+      : booksOnPage.length === 0 ?
         <p className="catalog-empty">No books found.</p>
       : <div className="catalog-grid">
           {booksOnPage.map((book) => (

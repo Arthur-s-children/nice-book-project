@@ -8,60 +8,65 @@ import { heroSlides } from './HeroSlides';
 import { Icon } from '../../ui/Icon';
 
 import './HeroSection.scss';
+import { HeroSectionSkeleton } from './HeroSectionSkeleton';
 
-export const HeroSection = () => {
-  return (
-    <section className="hero">
-      <button
-        className="hero__button hero__button--prev"
-        type="button"
-      >
-        <Icon name="arrow-left" />
-      </button>
+interface HeroSectionProps {
+  isLoading: boolean;
+}
 
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        navigation={{
-          prevEl: '.hero__button--prev',
-          nextEl: '.hero__button--next',
-        }}
-        pagination={{ clickable: true }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        loop
-        className="hero__swiper"
-      >
-        {heroSlides.map((slide, index) => (
-          <SwiperSlide key={index}>
-            <picture>
-              <source
-                media="(max-width: 639px)"
-                srcSet={slide.mobile}
-              />
+export const HeroSection = ({ isLoading }: HeroSectionProps) => {
+  return isLoading ?
+      <HeroSectionSkeleton />
+    : <section className="hero">
+        <button
+          className="hero__button hero__button--prev"
+          type="button"
+        >
+          <Icon name="arrow-left" />
+        </button>
 
-              <source
-                media="(max-width: 1199px)"
-                srcSet={slide.tablet}
-              />
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          navigation={{
+            prevEl: '.hero__button--prev',
+            nextEl: '.hero__button--next',
+          }}
+          pagination={{ clickable: true }}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          loop
+          className="hero__swiper"
+        >
+          {heroSlides.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <picture>
+                <source
+                  media="(max-width: 639px)"
+                  srcSet={slide.mobile}
+                />
 
-              <img
-                src={slide.desktop}
-                alt="Promotion banner"
-                className="hero__image"
-              />
-            </picture>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+                <source
+                  media="(max-width: 1199px)"
+                  srcSet={slide.tablet}
+                />
 
-      <button
-        className="hero__button hero__button--next"
-        type="button"
-      >
-        <Icon name="arrow-right" />
-      </button>
-    </section>
-  );
+                <img
+                  src={slide.desktop}
+                  alt="Promotion banner"
+                  className="hero__image"
+                />
+              </picture>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <button
+          className="hero__button hero__button--next"
+          type="button"
+        >
+          <Icon name="arrow-right" />
+        </button>
+      </section>;
 };

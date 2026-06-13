@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { BookCard } from '../BookCard/BookCard';
+import { BookCardSkeleton } from '../BookCard/BookCardSkeleton.tsx';
 import { Icon } from '../../ui/Icon';
 import { useCart } from '../../../hooks/useCart';
 import { useFavorites } from '../../../hooks/useFavorites';
@@ -69,27 +70,27 @@ export const BooksSwiper = ({
             }
           }}
           breakpoints={{
-            320: {
-              slidesPerView: 1,
-            },
-            480: {
-              slidesPerView: 2,
-            },
-            768: {
-              slidesPerView: 3,
-            },
-            1120: {
-              slidesPerView: 4,
-            },
+            320: { slidesPerView: 1 },
+            480: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1120: { slidesPerView: 4 },
           }}
           className="books-swiper__container"
         >
-          {books.map((book) => (
-            <SwiperSlide
-              key={book.id}
-              className="books-swiper__slide"
-            >
-              {!isLoading ?
+          {isLoading ?
+            Array.from({ length: 4 }).map((_, index) => (
+              <SwiperSlide
+                key={`skeleton-${index}`}
+                className="books-swiper__slide"
+              >
+                <BookCardSkeleton />
+              </SwiperSlide>
+            ))
+          : books.map((book) => (
+              <SwiperSlide
+                key={book.id}
+                className="books-swiper__slide"
+              >
                 <BookCard
                   book={book}
                   onAddToCart={addToCart}
@@ -97,9 +98,9 @@ export const BooksSwiper = ({
                   inCart={cartIds.includes(book.id)}
                   isFavorite={favoriteIds.includes(book.id)}
                 />
-              : <h2>Loading...</h2>}
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            ))
+          }
         </Swiper>
       </div>
     </section>
