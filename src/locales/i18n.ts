@@ -4,6 +4,8 @@ import { initReactI18next } from 'react-i18next';
 import { en } from './en';
 import { uk } from './uk';
 
+const savedLanguage = localStorage.getItem('language') || 'en';
+
 i18n.use(initReactI18next).init({
   resources: {
     en: {
@@ -15,7 +17,7 @@ i18n.use(initReactI18next).init({
     },
   },
 
-  lng: 'en',
+  lng: savedLanguage,
 
   fallbackLng: 'en',
 

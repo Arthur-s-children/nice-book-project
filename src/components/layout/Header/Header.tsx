@@ -5,7 +5,7 @@ import '../Header/header.scss';
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import i18n from '../../../locales/i18n';
+import { LanguageSwitcher } from '../../ui/LanguageSwitcher/LanguageSwitcher';
 
 export function Header() {
   const [isMenuOpen, setIsOpenMenu] = useState(false);
@@ -135,11 +135,9 @@ export function Header() {
           >
             <Icon name={isMenuOpen ? 'close' : 'burger'} />
           </a>
-
-          <button onClick={() => i18n.changeLanguage('uk')}>UA</button>
-
-          <button onClick={() => i18n.changeLanguage('en')}>EN</button>
         </div>
+
+        <LanguageSwitcher />
       </div>
     </header>
   );
