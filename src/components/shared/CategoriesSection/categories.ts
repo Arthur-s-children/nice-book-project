@@ -8,19 +8,19 @@ import kindlePoster from '/img/categories/kindlebook_poster.webp';
 
 export const categories = [
   {
-    title: 'Paper books',
+    titleKey: 'catalog.title.paperback',
     type: 'paperback',
     video: paperVideo,
     poster: paperPoster,
   },
   {
-    title: 'Audiobooks',
+    titleKey: 'catalog.title.audiobook',
     type: 'audiobook',
     video: audioVideo,
     poster: audioPoster,
   },
   {
-    title: 'Kindle books',
+    titleKey: 'catalog.title.kindle',
     type: 'kindle',
     video: kindleVideo,
     poster: kindlePoster,

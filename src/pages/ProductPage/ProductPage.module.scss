@@ -2,7 +2,7 @@
 
 .item_card {
   padding-inline: 8px;
-  max-width: 1136px;
+  max-width: 1200px;
   margin-inline: auto;
   padding: 26.5px 16px 32px;
 
@@ -29,6 +29,7 @@
 .separator {
   display: flex;
   justify-content: center;
+  color: $color-secondary;
 }
 
 .link {
@@ -54,15 +55,6 @@
   line-height: 11px;
   font-weight: $font-bold;
   font-family: $font-main;
-}
-
-.separator {
-  color: $color-secondary;
-}
-
-.current {
-  color: $color-secondary;
-  font-weight: $font-medium;
 }
 
 .book_grid {

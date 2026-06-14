@@ -104,7 +104,7 @@ export const ProductPage = () => {
           to={`/catalog?type=${type}`}
           className={styles.link}
         >
-          {TITLES[type]}
+          {TITLES[type] ?? type}
         </Link>
 
         <span className={styles.separator}>
@@ -132,7 +132,7 @@ export const ProductPage = () => {
           </div>
 
           <div className={styles.thumbs}>
-            {book?.images?.map((img, index) => (
+            {book.images.map((img, index) => (
               <button
                 type="button"
                 key={img}

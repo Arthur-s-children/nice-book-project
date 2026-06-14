@@ -3,14 +3,20 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
-  title: string;
+  titleKey: string;
   type: string;
   video: string;
   poster: string;
   amount: number;
 };
 
-export const CategoryCard = ({ title, type, video, poster, amount }: Props) => {
+export const CategoryCard = ({
+  titleKey,
+  type,
+  video,
+  poster,
+  amount,
+}: Props) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isMobile = window.innerWidth <= 639;
 
@@ -40,7 +46,7 @@ export const CategoryCard = ({ title, type, video, poster, amount }: Props) => {
         {isMobile ?
           <img
             src={poster}
-            alt={title}
+            alt={t(titleKey)}
             className="category-card__video"
           />
         : <video
@@ -59,7 +65,7 @@ export const CategoryCard = ({ title, type, video, poster, amount }: Props) => {
         }
       </div>
 
-      <h3 className="category-card__title">{title}</h3>
+      <h3 className="category-card__title">{t(titleKey)}</h3>
 
       <p className="category-card__amount">
         {amount} {t('product.books')}
