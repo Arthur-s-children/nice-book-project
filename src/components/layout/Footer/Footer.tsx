@@ -38,6 +38,12 @@ export function Footer() {
           </Link>
           <Link
             className="footer__category"
+            to="team"
+          >
+            TEAM
+          </Link>
+          <Link
+            className="footer__category"
             to="rights"
           >
             {t('footer.rights')}

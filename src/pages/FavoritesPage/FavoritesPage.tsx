@@ -1,19 +1,17 @@
-import { bookService } from '../../services/bookService.ts';
 import { useCart } from '../../hooks/useCart.tsx';
 import { useFavorites } from '../../hooks/useFavorites.tsx';
 import { BookCard } from '../../components/shared/BookCard/BookCard.tsx';
-import type { Book } from '../../types/Book.ts';
 import './FavoritesPage.scss';
 import { useTranslation } from 'react-i18next';
+import { useBooks } from '../../hooks/useBooks.ts';
 
 export function FavoritesPage() {
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
   const { t } = useTranslation();
+  const { data: books = [] } = useBooks();
 
-  const favoriteBooks = favoriteIds
-    .map((id) => bookService.getById(id))
-    .filter((book): book is Book => book !== null);
+  const favoriteBooks = books.filter((book) => favoriteIds.includes(book.id));
 
   const count = favoriteBooks.length;
 

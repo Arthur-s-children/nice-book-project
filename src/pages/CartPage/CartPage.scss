@@ -13,7 +13,7 @@
 
 .cart-page__empty {
   @include body-text;
-  color: $color-secondary;
+  color: $color-elements;
   text-align: center;
   padding: 48px 0;
 }
@@ -69,5 +69,31 @@
 
   &:hover {
     opacity: 0.9;
+  }
+}
+
+[data-theme='dark'] {
+  .cart-page__title,
+  .cart-page__total-label,
+  .cart-page__total-value {
+    color: $color-primary-dark;
+  }
+
+  .cart-page__empty {
+    color: $color-icons-dark;
+  }
+
+  .cart-page__list {
+    border-top-color: $color-elements-dark;
+  }
+
+  .cart-page__sidebar {
+    background: $color-surface-dark;
+    border-color: $color-elements-dark;
+  }
+
+  .cart-page__checkout-btn {
+    background: $color-primary-dark;
+    color: $color-bg-dark;
   }
 }

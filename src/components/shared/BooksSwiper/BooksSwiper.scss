@@ -3,22 +3,21 @@
 .books-swiper {
   position: relative;
   margin-top: 0;
-  margin-left: auto;
-  margin-right: auto;
+  gap: 16px;
   padding: 0;
   box-sizing: border-box;
   width: 100%;
-  overflow: hidden; // Повністю ізолює секцію від вильотів у DevTools
+  overflow: visible;
 
-  @media (min-width: 320px) and (max-width: 1199px) {
+  @media (min-width: 320px) and (max-width: $breakpoint-tablet) {
     padding: 0 16px;
   }
 
-  @media (min-width: 320px) and (max-width: 639px) {
+  @media (min-width: 320px) and (max-width: $breakpoint-mobile) {
     min-height: 455px;
   }
 
-  @media (min-width: 640px) and (max-width: 1199px) {
+  @media (min-width: 640px) and (max-width: $breakpoint-tablet) {
     min-height: 571px;
   }
 
@@ -41,15 +40,9 @@
 
   &__title {
     @include h2;
+    color: $color-primary;
     margin: 0;
     padding: 0;
-
-    @media (min-width: 320px) and (max-width: 639px) {
-      font-size: 22px;
-    }
-    @media (min-width: 640px) {
-      font-size: 32px;
-    }
   }
 
   &__nav {
@@ -59,7 +52,7 @@
     margin: 0;
     padding: 0;
 
-    @media (max-width: 639px) {
+    @media (max-width: $breakpoint-mobile) {
       display: none;
     }
 
@@ -79,7 +72,8 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #000000;
+    color: $color-primary;
+    color: $color-primary;
     transition:
       color 0.2s ease,
       opacity 0.2s ease,
@@ -90,7 +84,7 @@
     }
 
     &.swiper-button-disabled {
-      color: #b3b3b3;
+      color: $color-icons;
       opacity: 0.5;
       cursor: not-allowed;
 
@@ -106,34 +100,33 @@
 
   &__slider-wrapper {
     position: relative;
-    width: 100%;
-    margin: 0;
-    padding: 0;
     display: flex;
     align-items: stretch;
-    min-width: 0; // Запобігає розтягуванню флекс-контейнера
+    min-width: 0;
+    overflow-x: clip;
+    padding: 12px;
+    margin: 0 -12px;
+    width: calc(100% + 24px);
   }
 
   &__container {
     width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden !important; // Надійно обрізає картки, що виходять за межі
+    overflow: visible !important;
   }
 
   &__slide {
     display: flex;
     justify-content: center;
+    align-items: stretch;
     margin: 0;
     padding: 0;
 
-    // ЖОРСТКА ФІКСАЦІЯ РОЗМІРУ:
     width: 215px !important;
-    flex-shrink: 0 !important; // НАДВАЖЛИВО: забороняє браузеру та Swiper стискати картку
-    overflow: hidden;
+    flex-shrink: 0 !important;
+    overflow: visible;
 
     @media (min-width: 640px) {
-      width: 272px !important; // Десктопна фіксована ширина
+      width: 272px !important;
     }
   }
 
@@ -141,14 +134,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    width: 100%; // Повертаємо 100%, щоб картка заповнила фіксований слайд
+    width: 100%;
+    width: 100%;
 
-    @media (min-width: 320px) and (max-width: 639px) {
+    @media (min-width: 320px) and (max-width: $breakpoint-mobile) {
       height: 400px;
     }
 
     @media (min-width: 640px) {
       height: 506px;
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .books-swiper {
+    &__title {
+      color: $color-primary-dark;
+    }
+
+    &__arrow {
+      color: $color-primary-dark;
+
+      &.swiper-button-disabled {
+        color: $color-icons-dark;
+      }
     }
   }
 }

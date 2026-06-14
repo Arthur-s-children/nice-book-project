@@ -1,12 +1,24 @@
 // COLORS
-$color-primary: #313237;
-$color-secondary: #89939a;
-$color-icons: #b4bdc3;
-$color-elements: #e2e6e9;
-$color-hover-bg: #fafbfc;
-$color-white: #ffffff;
-$color-green: #27ae60;
+$color-green: #0ca24a;
 $color-red: #eb5757;
+$color-accent: #ff6b2b;
+$color-accent-hover: #e55a1a;
+$color-accent-active: #c2410c;
+
+// LIGHT THEME
+$color-primary: #513b35;
+$color-white: #f0e7da;
+$color-icons: #c4a99e;
+$color-elements: #7a5c54;
+$color-hover-bg: #6b4f47;
+
+// DARK THEME
+$color-bg-dark: #2e1f1a;
+$color-surface-dark: #513b35;
+$color-primary-dark: #f0e7da;
+$color-icons-dark: #c4a99e;
+$color-elements-dark: #6b4f47;
+$color-hover-bg-dark: #7a5c54;
 
 // BREAKPOINTS
 $breakpoint-tablet: 1199px;
@@ -119,6 +131,7 @@ $font-bold: 700;
   line-height: 11px;
   font-weight: $font-bold;
   letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
 @mixin button-text {
@@ -147,3 +160,4 @@ $font-bold: 700;
 
 // SHADOW
 $shadow-button: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
+$shadow-card: 0 0 12px rgba(249, 115, 22, 0.5);

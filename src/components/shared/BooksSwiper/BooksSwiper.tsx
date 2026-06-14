@@ -5,7 +5,7 @@ import { BookCard } from '../BookCard/BookCard';
 import { Icon } from '../../ui/Icon';
 import { useCart } from '../../../hooks/useCart';
 import { useFavorites } from '../../../hooks/useFavorites';
-import type { Book } from '../../../types/Book';
+import type { Book } from '../../../types/BooksAPI.ts';
 import './BooksSwiper.scss';
 
 import 'swiper/css';
@@ -13,9 +13,14 @@ import 'swiper/css';
 interface BooksSwiperProps {
   title: string;
   books: Book[];
+  isLoading: boolean;
 }
 
-export const BooksSwiper = ({ title, books = [] }: BooksSwiperProps) => {
+export const BooksSwiper = ({
+  title,
+  books = [],
+  isLoading,
+}: BooksSwiperProps) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const { cartIds, addToCart } = useCart();
@@ -51,8 +56,7 @@ export const BooksSwiper = ({ title, books = [] }: BooksSwiperProps) => {
       <div className="books-swiper__slider-wrapper">
         <Swiper
           modules={[Navigation]}
-          spaceBetween={16} // Фіксована відстань між картками
-          slidesPerView="auto" // Дозволяє карткам зберігати свій фіксований розмір із CSS
+          spaceBetween={16}
           slidesPerGroup={1}
           navigation={true}
           onBeforeInit={(swiper) => {
@@ -64,6 +68,20 @@ export const BooksSwiper = ({ title, books = [] }: BooksSwiperProps) => {
               swiper.params.navigation.nextEl = nextRef.current;
             }
           }}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+            },
+            480: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1120: {
+              slidesPerView: 4,
+            },
+          }}
           className="books-swiper__container"
         >
           {books.map((book) => (
@@ -71,13 +89,15 @@ export const BooksSwiper = ({ title, books = [] }: BooksSwiperProps) => {
               key={book.id}
               className="books-swiper__slide"
             >
-              <BookCard
-                book={book}
-                onAddToCart={addToCart}
-                onToggleFavorite={toggleFavorite}
-                inCart={cartIds.includes(book.id)}
-                isFavorite={favoriteIds.includes(book.id)}
-              />
+              {!isLoading ?
+                <BookCard
+                  book={book}
+                  onAddToCart={addToCart}
+                  onToggleFavorite={toggleFavorite}
+                  inCart={cartIds.includes(book.id)}
+                  isFavorite={favoriteIds.includes(book.id)}
+                />
+              : <h2>Loading...</h2>}
             </SwiperSlide>
           ))}
         </Swiper>

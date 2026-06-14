@@ -10,6 +10,10 @@ import { NotFoundPage } from '../pages/NotFoundPage';
 import { ProductPage } from '../pages/ProductPage';
 import { RightsPage } from '../pages/RightsPage';
 import { TeamPage } from '../pages/TeamPage';
+import { ContactsPage } from '../pages/ContactsPage/ContactsPage';
+import { ProfilePage } from '../pages/ProfilePage';
+import { OrderHistoryPage } from '../pages/OrderHistoryPage';
+import { AuthCallbackPage } from '../pages/AuthCallbackPage';
 
 export const router = createHashRouter([
   {
@@ -46,7 +50,23 @@ export const router = createHashRouter([
       },
       {
         path: 'contacts',
+        element: <ContactsPage />,
+      },
+      {
+        path: 'team',
         element: <TeamPage />,
+      },
+      {
+        path: 'profile',
+        element: <ProfilePage />,
+      },
+      {
+        path: 'orders',
+        element: <OrderHistoryPage />,
+      },
+      {
+        path: 'auth/callback',
+        element: <AuthCallbackPage />,
       },
     ],
   },

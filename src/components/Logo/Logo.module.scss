@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as *;
+@use '../../styles/variables' as *;
 
 .logo {
   display: block;
@@ -10,9 +10,3 @@
     height: 22px;
   }
 }
-
-// Footer.module.scss:
-// .logo {
-//   width: 89px;
-//   height: 32px;
-// }

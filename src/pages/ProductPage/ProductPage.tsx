@@ -6,12 +6,22 @@ import { useFavorites } from '../../hooks/useFavorites';
 import styles from './ProductPage.module.scss';
 import { useState, useCallback, useMemo } from 'react';
 import { BooksSwiper } from '../../components/shared/BooksSwiper/BooksSwiper';
+import { useBook } from '../../hooks/useBook.ts';
+import { useBooks } from '../../hooks/useBooks.ts';
+import { getImageUrl } from '../../services/getImageUrl.ts';
 import { useTranslation } from 'react-i18next';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { data: books = [], isLoading: isBooksLoading } = useBooks();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const {
+    data: book,
+    isPending: isBookPending,
+    error: isBookError,
+  } = useBook(slug ?? '');
 
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
@@ -140,7 +150,7 @@ export const ProductPage = () => {
                 onClick={() => setActiveImage(index)}
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}${img}`}
+                  src={getImageUrl(img)}
                   alt={book.name}
                   className={styles.thumbnail_image}
                 />
@@ -229,14 +239,14 @@ export const ProductPage = () => {
                 <td>{t('product.author')}</td>
                 <td>{book.author}</td>
               </tr>
-              {'coverType' in book && book.coverType && (
+              {book.cover_type && (
                 <tr>
                   <td>{t('product.coverType')}</td>
                   <td>{book.coverType}</td>
                 </tr>
               )}
 
-              {'numberOfPages' in book && (
+              {book.number_of_pages && (
                 <tr>
                   <td>{t('product.numberOfPages')}</td>
                   <td>{book.numberOfPages}</td>
@@ -254,9 +264,9 @@ export const ProductPage = () => {
         <section className={styles.about}>
           <h3 className={styles.section_title}>{t('product.about')}</h3>
           <div className={styles.description}>
-            {book.description.map((paragraph, index) => (
+            {book.description.split('\n').map((paragraph) => (
               <p
-                key={index}
+                key={paragraph}
                 className={styles.paragraph}
               >
                 {paragraph}
@@ -277,14 +287,14 @@ export const ProductPage = () => {
                 <td>{book.author}</td>
               </tr>
 
-              {'coverType' in book && book.coverType && (
+              {book.cover_type && (
                 <tr>
                   <td>{t('product.coverType')}</td>
                   <td>{book.coverType}</td>
                 </tr>
               )}
 
-              {'numberOfPages' in book && (
+              {book.number_of_pages && (
                 <tr>
                   <td>{t('product.numberOfPages')}</td>
                   <td>{book.numberOfPages}</td>
@@ -330,6 +340,7 @@ export const ProductPage = () => {
         <BooksSwiper
           title={t('product.recommended')}
           books={relatedBooks}
+          isLoading={isBooksLoading}
         />
       </section>
     </div>

@@ -1,10 +1,11 @@
 import { Icon } from '../../ui/Icon';
 import { AppButton } from '../../ui/Button';
 import { LikeButton } from '../../ui/LikeButton';
-import type { Book } from '../../../types/Book.ts';
+import type { Book } from '../../../types/BooksAPI.ts';
 import './BookCard.scss';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { getImageUrl } from '../../../services/getImageUrl.ts';
 
 type Props = {
   book: Book;
@@ -21,8 +22,8 @@ export function BookCard({
   inCart,
   isFavorite,
 }: Props) {
-  const price = book.priceDiscount ?? book.priceRegular;
-  const imageSrc = `${import.meta.env.BASE_URL}${book.images[0]}`;
+  const price = book.price_discount ?? book.price_regular;
+  const imageSrc = getImageUrl(book.images[0]);
 
   const { t } = useTranslation();
 
@@ -53,8 +54,8 @@ export function BookCard({
         </Link>
         <div className="book-card__prices">
           <span className="book-card__price">₴{price}</span>
-          {book.priceDiscount && (
-            <span className="book-card__old-price">₴{book.priceRegular}</span>
+          {book.price_discount && (
+            <span className="book-card__old-price">₴{book.price_regular}</span>
           )}
         </div>
         <p className="book-card__stock">
@@ -73,6 +74,7 @@ export function BookCard({
         <LikeButton
           isSelected={isFavorite}
           onClick={() => onToggleFavorite(book.id)}
+          colored
         />
       </div>
     </article>

@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as *;
+@use '../../styles/variables' as *;
 
 .button {
   width: 32px !important;
@@ -10,5 +10,16 @@
 
   &:disabled {
     color: $color-elements !important;
+  }
+}
+
+[data-theme='dark'] {
+  .button {
+    background-color: $color-surface-dark !important;
+    color: $color-primary-dark !important;
+
+    &:disabled {
+      color: $color-icons-dark !important;
+    }
   }
 }

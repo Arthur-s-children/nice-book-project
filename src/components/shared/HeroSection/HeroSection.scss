@@ -42,6 +42,7 @@
       width: 32px;
       height: 32px;
       border: none;
+      border-radius: 8px;
       background: $color-white;
 
       cursor: pointer;
@@ -73,7 +74,25 @@
     transition: background-color 300ms ease;
 
     &-active {
-      background: $color-primary;
+      background: $color-accent;
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .hero {
+    &__button {
+      background: $color-surface-dark;
+    }
+  }
+
+  .swiper-pagination {
+    &-bullet {
+      background: $color-elements-dark;
+
+      &-active {
+        background: $color-accent;
+      }
     }
   }
 }
