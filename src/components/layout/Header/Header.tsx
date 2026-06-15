@@ -54,7 +54,7 @@ export function Header({
     setIsOpenMenu(!isMenuOpen);
   };
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const openSearchModal = (event: React.MouseEvent) => {
     event.preventDefault();
     setIsSearchModalOpen(true);
@@ -73,7 +73,7 @@ export function Header({
         visible: true,
       });
     }
-  }, [location]);
+  }, [location, i18n.language]);
 
   return (
     <header className={isMenuOpen ? 'header header--menu-open' : 'header'}>
