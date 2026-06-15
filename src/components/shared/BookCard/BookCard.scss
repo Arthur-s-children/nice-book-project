@@ -79,6 +79,8 @@
   @include body-text;
   font-weight: $font-semibold;
   color: $color-primary;
+  max-height: 60px;
+  overflow: hidden;
 }
 
 .book-card__prices {
