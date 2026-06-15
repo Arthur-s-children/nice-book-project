@@ -1,87 +1,91 @@
 export const categoryStructure = [
   {
     id: 'fiction',
-    name: 'Fiction',
+    nameKey: 'categories.fiction',
     subcategories: [
       {
         id: 'sci-fi',
-        name: 'Sci-Fi',
+        nameKey: 'categories.sciFi',
         keywords: ['Sci-Fi', 'Science Fiction'],
       },
-      { id: 'fantasy', name: 'Fantasy', keywords: ['Fantasy'] },
+      { id: 'fantasy', nameKey: 'categories.fantasy', keywords: ['Fantasy'] },
       {
         id: 'mystery',
-        name: 'Mystery & Thrillers',
+        nameKey: 'categories.mystery',
         keywords: ['Mystery', 'Thriller'],
       },
       {
         id: 'romance',
-        name: 'Romance',
+        nameKey: 'categories.romance',
         keywords: ['Romance', 'Classic', 'Literature'],
       },
       {
         id: 'historical',
-        name: 'Historical Fiction',
+        nameKey: 'categories.historical',
         keywords: ['Historical Fiction'],
       },
-      { id: 'horror', name: 'Horror', keywords: ['Horror'] },
+      { id: 'horror', nameKey: 'categories.horror', keywords: ['Horror'] },
     ],
   },
   {
     id: 'non-fiction',
-    name: 'Non-Fiction',
+    nameKey: 'categories.nonFiction',
     subcategories: [
       {
         id: 'business',
-        name: 'Business & Management',
+        nameKey: 'categories.business',
         keywords: ['Business', 'Management'],
       },
-      { id: 'psychology', name: 'Psychology', keywords: ['Psychology'] },
+      {
+        id: 'psychology',
+        nameKey: 'categories.psychology',
+        keywords: ['Psychology'],
+      },
       {
         id: 'finance',
-        name: 'Finance & Investments',
+        nameKey: 'categories.finance',
         keywords: ['Finance', 'Investments', 'Securities'],
       },
       {
         id: 'biographies',
-        name: 'Biographies',
+        nameKey: 'categories.biographies',
         keywords: ['Biographies', 'Company Stories', 'Success Stories'],
       },
     ],
   },
   {
     id: 'technology',
-    name: 'Technology',
+    nameKey: 'categories.technology',
     subcategories: [
       {
         id: 'programming',
-        name: 'Programming',
+        nameKey: 'categories.programming',
         keywords: ['Programming', 'Software Development', 'Algorithms'],
       },
       {
         id: 'design',
-        name: 'Design',
+        nameKey: 'categories.design',
         keywords: ['Graphic Design', 'Design', 'Data Visualization'],
       },
       {
         id: 'gaming',
-        name: 'Computer Games',
+        nameKey: 'categories.gaming',
         keywords: ['Computer games'],
       },
     ],
   },
   {
     id: 'children',
-    name: "Children's Books",
+    nameKey: 'categories.children',
     subcategories: [
       {
         id: 'fairy-tales',
-        name: 'Fairy Tales',
+        nameKey: 'categories.fairyTales',
         keywords: ['Fairy tales', "Children's fiction"],
       },
       {
         id: 'educational',
-        name: 'Educational',
+        nameKey: 'categories.educational',
         keywords: ['Educational', "Children's and YA"],
       },
     ],

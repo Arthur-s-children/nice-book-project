@@ -4,7 +4,6 @@ import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
 import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
-import './CartPage.scss';
 
 function getPrice(book: Book) {
   return book.price_discount ?? book.price_regular;
@@ -98,7 +97,7 @@ export function CartPage() {
 
   const handleCheckout = async () => {
     if (!selectedWarehouse) {
-      alert('Будь ласка, оберіть відділення або поштомат для доставки.');
+      alert(t('cart.pleaseSelectWarehouse'));
       return;
     }
 
@@ -142,8 +141,8 @@ export function CartPage() {
     }
   };
 
-  if (isLoading) return <h2>Loading...</h2>;
-  if (error) return <h2>Failed to load books</h2>;
+  if (isLoading) return <h2>{t('common.loading')}</h2>;
+  if (error) return <h2>{t('common.errorLoading')}</h2>;
 
   return (
     <section className="cart-page">
@@ -167,7 +166,9 @@ export function CartPage() {
 
           <aside className="cart-page__sidebar">
             <div className="cart-page__delivery">
-              <p className="cart-page__section-title">Доставка Нова Пошта</p>
+              <p className="cart-page__section-title">
+                {t('cart.deliveryTitle')}
+              </p>
 
               <div className="cart-page__delivery-types">
                 <label
@@ -184,7 +185,7 @@ export function CartPage() {
                     onChange={() => setDeliveryType('warehouse')}
                   />
                   <span className="cart-page__delivery-type-title">
-                    Відділення
+                    {t('cart.warehouse')}
                   </span>
                 </label>
 
@@ -202,7 +203,7 @@ export function CartPage() {
                     onChange={() => setDeliveryType('poshtomat')}
                   />
                   <span className="cart-page__delivery-type-title">
-                    Поштомат
+                    {t('cart.poshtomat')}
                   </span>
                 </label>
               </div>
@@ -210,7 +211,7 @@ export function CartPage() {
               <div className="cart-page__field">
                 <input
                   type="text"
-                  placeholder="Введіть місто, наприклад Київ"
+                  placeholder={t('cart.cityPlaceholder')}
                   value={searchCity}
                   onChange={(e) => {
                     const value = e.target.value;
@@ -248,7 +249,12 @@ export function CartPage() {
                     onChange={(e) => setSelectedWarehouse(e.target.value)}
                     className="cart-page__select"
                   >
-                    <option value="">Оберіть адресу призначення</option>
+                    <option
+                      value=""
+                      disabled
+                    >
+                      {t('cart.selectWarehouse')}
+                    </option>
                     {warehouses.map((w) => (
                       <option
                         key={w.ref}
@@ -263,14 +269,14 @@ export function CartPage() {
             </div>
 
             <div className="cart-page__summary">
-              <p className="cart-page__total-label">Total</p>
+              <p className="cart-page__total-label">{t('cart.total')}</p>
               <p className="cart-page__total-value">₴{total.toFixed(2)}</p>
               <button
                 type="button"
                 className="cart-page__checkout-btn"
                 onClick={handleCheckout}
               >
-                Checkout
+                {t('cart.checkout')}
               </button>
             </div>
           </aside>

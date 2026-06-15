@@ -52,11 +52,11 @@ export function CatalogPage() {
     audiobook: t('catalog.title.audiobook'),
   };
   if (isLoading) {
-    return <h2>Loading books...</h2>;
+    return <h2>{t('common.loading')}</h2>;
   }
 
   if (error) {
-    return <h2>Failed to load books</h2>;
+    return <h2>{t('common.errorLoading')}</h2>;
   }
 
   return (

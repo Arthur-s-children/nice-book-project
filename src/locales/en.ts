@@ -3,12 +3,14 @@ export const en = {
     home: 'Home',
     books: 'Books',
     ourTeam: 'Our team',
+    loading: 'Loading...',
+    errorLoading: 'Failed to load data',
   },
 
   header: {
-    paper: 'Paper',
-    kindle: 'Kindle',
-    audio: 'Audiobook',
+    paper: 'Paperbacks',
+    kindle: 'Kindles',
+    audio: 'Audiobooks',
   },
 
   footer: {
@@ -16,9 +18,8 @@ export const en = {
     contacts: 'Contacts',
     rights: 'Rights',
     backToTop: 'Back to top',
+    team: 'Team',
   },
-
-  breadcrunmbs: {},
 
   product: {
     inStock: 'It stock',
@@ -44,6 +45,31 @@ export const en = {
 
   category: {
     shopByCategory: 'Shop by category',
+  },
+
+  categories: {
+    fiction: 'Fiction',
+    sciFi: 'Sci-Fi',
+    fantasy: 'Fantasy',
+    mystery: 'Mystery & Thrillers',
+    romance: 'Romance',
+    historical: 'Historical Fiction',
+    horror: 'Horror',
+
+    nonFiction: 'Non-Fiction',
+    business: 'Business & Management',
+    psychology: 'Psychology',
+    finance: 'Finance & Investments',
+    biographies: 'Biographies',
+
+    technology: 'Technology',
+    programming: 'Programming',
+    design: 'Design',
+    gaming: 'Computer Games',
+
+    children: "Children's Books",
+    fairyTales: 'Fairy Tales',
+    educational: 'Educational',
   },
 
   notFound: {
@@ -86,6 +112,12 @@ export const en = {
   cart: {
     title: 'Cart',
     empty: 'Your cart is empty.',
+    deliveryTitle: 'Nova Post delivery',
+    warehouse: 'Branch',
+    poshtomat: 'Parcel locker',
+    cityPlaceholder: 'Enter city, e.g. Kyiv',
+    selectWarehouse: 'Select delivery address',
+    pleaseSelectWarehouse: 'Please select a delivery warehouse.',
     total: 'Total',
     checkout: 'Checkout',
   },
@@ -127,5 +159,101 @@ export const en = {
     contactsTitle: 'Contact Us',
     contactsText:
       'If you have any questions regarding these Terms & Conditions, please contact our support team through the contact form available on the website.',
+  },
+
+  contacts: {
+    title: 'Contact information',
+    phone: 'Phone:',
+    email: 'Email:',
+    address: 'Address:',
+    website: 'Website:',
+    hoursTitle: 'Hours of operation',
+    mondayFriday: 'Monday - Friday: 9:00 - 18:00',
+    saturday: 'Saturday: 10:00 - 16:00',
+    sunday: 'Sunday: Closed',
+    mapTitle: 'Google Map location',
+  },
+
+  authCallback: {
+    confirmTitle: 'Confirming your email...',
+    confirmText: 'Please wait while we verify your account.',
+    successTitle: 'Success!',
+    emailConfirm: 'Email confirmed successfully! You are now signed in.',
+    alreadySignIn: 'You are already signed in.',
+    redirect: 'Redirecting to home page...',
+    errorTitle: 'Error',
+    invalidLink: 'Invalid confirmation link or no session found.',
+    confirmError: 'An error occurred during email confirmation.',
+    goHome: 'Go to Home',
+  },
+
+  search: {
+    sales: 'Sales',
+    allCategories: 'All Categories',
+    previous: 'Previous',
+    next: 'Next',
+    startTyping: 'Start typing...',
+    notFound: 'Nothing found',
+    placeholder: 'Search by keywords, topics, or messages',
+  },
+
+  orderHistory: {
+    status: {
+      completed: 'Completed',
+      processing: 'Processing',
+      cancelled: 'Cancelled',
+      pending: 'Pending',
+    },
+    title: 'Order History',
+    pleaseSignIn: 'Please sign in to view your order history',
+    loading: 'Loading orders...',
+    emptyTitle: 'No orders yet',
+    emptyText: 'Start shopping to see your orders here',
+    order: 'Order',
+    date: 'Date',
+    total: 'Total',
+    shippingAddress: 'Shipping Address',
+    phone: 'Phone',
+    items: 'Items',
+    qty: 'Qty',
+  },
+
+  userMenu: {
+    personalData: 'Personal Data',
+    orderHistory: 'Order History',
+    changeLanguage: 'Change Language',
+    changeTheme: 'Change Theme',
+    signOut: 'Sign Out',
+  },
+
+  settingsMenu: {
+    changeLanguage: 'Change Language',
+    changeTheme: 'Change Theme',
+  },
+
+  auth: {
+    signIn: 'Sign In',
+    signUp: 'Sign Up',
+    fullName: 'Full Name',
+    emailRequired: 'Email is required',
+    invalidEmail: 'Invalid email address',
+    passwordRequired: 'Password is required',
+    passwordMin: 'Password must be at least 6 characters',
+    loading: 'Loading...',
+    or: 'or',
+    continueWithGoogle: 'Continue with Google',
+    noAccount: "Don't have an account?",
+    haveAccount: 'Already have an account?',
+    error: 'An error occurred',
+    email: 'Email',
+    password: 'Password',
+    registrationSuccess:
+      'Registration successful! Please check your email to confirm your account.',
+  },
+
+  authPrompt: {
+    title: 'Sign In',
+    text: 'Sign in to access your personal data, order history, and more features.',
+    maybeLater: 'Maybe later',
   },
 } as const;

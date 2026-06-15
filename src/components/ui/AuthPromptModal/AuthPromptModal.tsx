@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import './AuthPromptModal.scss';
+import { useTranslation } from 'react-i18next';
 
 export function AuthPromptModal() {
   const { isAuthenticated } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Check if already shown in this session
@@ -31,11 +33,8 @@ export function AuthPromptModal() {
         onClick={() => setIsOpen(false)}
       />
       <div className="auth-prompt-modal__content">
-        <h2 className="auth-prompt-modal__title">Sign In</h2>
-        <p className="auth-prompt-modal__text">
-          Sign in to access your personal data, order history, and more
-          features.
-        </p>
+        <h2 className="auth-prompt-modal__title">{t('authPrompt.title')}</h2>
+        <p className="auth-prompt-modal__text">{t('authPrompt.text')}</p>
         <button
           className="auth-prompt-modal__button"
           onClick={() => {
@@ -45,13 +44,13 @@ export function AuthPromptModal() {
             window.dispatchEvent(event);
           }}
         >
-          Sign In
+          {t('authPrompt.title')}
         </button>
         <button
           className="auth-prompt-modal__close"
           onClick={() => setIsOpen(false)}
         >
-          Maybe later
+          {t('authPrompt.maybeLater')}
         </button>
       </div>
     </div>

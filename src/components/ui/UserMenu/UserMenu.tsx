@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import './UserMenu.scss';
+import { useTranslation } from 'react-i18next';
 
 type Language = 'en' | 'uk';
 type Theme = 'light' | 'dark';
@@ -25,6 +26,7 @@ export function UserMenu({
   const menuRef = useRef<HTMLDivElement>(null);
   const { signOut } = useAuthContext();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -71,33 +73,33 @@ export function UserMenu({
             className="user-menu__item"
             onClick={() => handleNavigate('/profile')}
           >
-            Personal Data
+            {t('userMenu.personalData')}
           </button>
           <button
             className="user-menu__item"
             onClick={() => handleNavigate('/orders')}
           >
-            Order History
+            {t('userMenu.orderHistory')}
           </button>
           <div className="user-menu__divider" />
           <button
             className="user-menu__item"
             onClick={() => onLanguageChange(language === 'en' ? 'uk' : 'en')}
           >
-            Change Language
+            {t('userMenu.changeLanguage')}
           </button>
           <button
             className="user-menu__item"
             onClick={() => onThemeChange(theme === 'light' ? 'dark' : 'light')}
           >
-            Change Theme
+            {t('userMenu.changeTheme')}
           </button>
           <div className="user-menu__divider" />
           <button
             className="user-menu__item user-menu__item--danger"
             onClick={handleSignOut}
           >
-            Sign Out
+            {t('userMenu.signOut')}
           </button>
         </div>
       )}
