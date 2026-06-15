@@ -43,7 +43,7 @@ export const authService = {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/nice-book-project/#/auth/callback`,
+        redirectTo: 'https://arthur-s-children.github.io/nice-book-project/',
       },
     });
 
