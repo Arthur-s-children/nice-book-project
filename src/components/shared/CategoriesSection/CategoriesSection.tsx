@@ -35,7 +35,10 @@ export const CategoriesSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="categories" ref={ref}>
+    <section
+      className="categories"
+      ref={ref}
+    >
       <h2 className="categories__title">{t('category.shopByCategory')}</h2>
 
       <div className="categories__grid">
