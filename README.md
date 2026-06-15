@@ -1,73 +1,125 @@
-# React + TypeScript + Vite
+# 📚 Nice Book Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern online bookstore built with React, TypeScript, and Supabase.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Nice Book is a full-featured e-commerce web application that allows users to discover, browse, and purchase books through a modern and intuitive interface. The project focuses on performance, scalability, accessibility, and clean architecture while delivering a smooth shopping experience across all devices.
 
-## React Compiler
+## Technology Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
 
-## Expanding the ESLint configuration
+* React 19
+* TypeScript
+* Vite
+* React Router 7
+* SCSS
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### State & Data Management
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* TanStack React Query
+* React Context API
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Forms & Validation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+* React Hook Form
+
+### Backend & Services
+
+* Supabase
+* Cloudflare CDN
+
+### UI & Libraries
+
+* Shadcn
+* Swiper
+* Classnames
+
+### Development Tools
+
+* ESLint
+* Prettier
+* Husky
+
+## Key Features
+
+### 📖 Book Catalog
+
+* Browse books by categories
+* Product details pages
+* Dynamic filtering and sorting
+* Responsive product grid
+
+### 🔍 Smart Search
+
+* Fast book discovery
+* Search modal interface
+* Real-time filtering experience
+
+### ❤️ User Experience
+
+* Favorites management
+* Persistent shopping cart
+* Recently viewed products
+* Smooth UI interactions and animations
+
+### 👤 Authentication & Profile
+
+* Secure authentication with Supabase
+* Personal profile management
+* Order history tracking
+* User-specific favorites and cart synchronization
+
+### 🌍 Internationalization
+
+* English localization
+* Ukrainian localization
+* Instant language switching
+
+### 💳 Commerce Features
+
+* Shopping cart system
+* Checkout workflow
+* Payment integration support
+* Delivery service integration 
+
+## Project Structure
+
+The application follows a scalable architecture based on reusable components, custom hooks, service layers, and feature separation to maintain code quality and long-term maintainability.
+
+## Performance & Quality
+
+* Responsive design
+* Optimized asset loading
+* Type-safe codebase
+* Modular architecture
+* Reusable UI components
+* Modern development workflow
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Production Build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+npm run build
 ```
+
+---
+
+
+### 👥 Developed By
+
+- **Dmytro Stelmashuk** — Tech Lead, Full-Stack Developer
+- **Dmytro Khromiak** — Project Manager, Full-Stack Developer
+- **Dmytro Shevchuk** — Full-Stack Developer
+- **Daria Melnyk** — Full-Stack Developer
+- **Nazar Rehalov** — Full-Stack Developer
+- **Yaroslav Yashchuk** — Full-Stack Developer
+
+The team collaborated using modern development workflows, including Git-based version control, pull request reviews, code standards enforcement, and agile project organization.
