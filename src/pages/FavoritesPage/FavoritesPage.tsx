@@ -3,11 +3,19 @@ import { useFavorites } from '../../hooks/useFavorites.tsx';
 import { BookCard } from '../../components/shared/BookCard/BookCard.tsx';
 import './FavoritesPage.scss';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
 
 export function FavoritesPage() {
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
-  const { data: books = [] } = useBooks();
+  const { data: books = [], isLoading } = useBooks();
+
+  const showLoader = useMinimumLoader(isLoading, 1500);
+
+  if (showLoader) {
+    return <PageLoader />;
+  }
 
   const favoriteBooks = books.filter((book) => favoriteIds.includes(book.id));
 

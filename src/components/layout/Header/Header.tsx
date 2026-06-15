@@ -42,7 +42,7 @@ export function Header({
 
   const navListRef = useRef<HTMLUListElement>(null);
 
-  const location = useLocation();
+  // const location = useLocation();
   const { cartCount } = useCart();
   const { favoritesCount } = useFavorites();
 

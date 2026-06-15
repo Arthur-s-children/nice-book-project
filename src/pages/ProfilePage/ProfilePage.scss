@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables.scss' as *;
 
 .profile-page {
   padding: 60px 20px;
@@ -36,9 +36,10 @@
     background: linear-gradient(
       135deg,
       $color-primary 0%,
-      $color-secondary 100%
+      $color-elements 100%
     );
     background-size: cover;
+    font: 1em sans-serif;
     background-position: center;
     cursor: pointer;
     display: flex;
@@ -73,7 +74,7 @@
     transition: all 0.3s ease;
 
     &:hover {
-      background: $color-secondary;
+      background: $color-elements;
     }
   }
 
@@ -141,7 +142,7 @@
     margin-top: 16px;
 
     &:hover:not(:disabled) {
-      background: $color-secondary;
+      background: $color-elements;
     }
 
     &:disabled {

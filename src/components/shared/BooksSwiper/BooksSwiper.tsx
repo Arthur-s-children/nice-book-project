@@ -9,6 +9,7 @@ import type { Book } from '../../../types/BooksAPI.ts';
 import './BooksSwiper.scss';
 
 import 'swiper/css';
+import { PageLoader } from '../PageLoader/PageLoader.tsx';
 
 interface BooksSwiperProps {
   title: string;
@@ -97,7 +98,7 @@ export const BooksSwiper = ({
                   inCart={cartIds.includes(book.id)}
                   isFavorite={favoriteIds.includes(book.id)}
                 />
-              : <h2>Loading...</h2>}
+              : <PageLoader />}
             </SwiperSlide>
           ))}
         </Swiper>

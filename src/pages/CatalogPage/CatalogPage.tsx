@@ -7,6 +7,8 @@ import { Pagination } from '../../components/ui/Pagination/Pagination.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
 import './CatalogPage.scss';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
+import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
 
 const TITLES: Record<string, string> = {
   all: 'All books',
@@ -50,8 +52,10 @@ export function CatalogPage() {
   const start = (page - 1) * perPage;
   const booksOnPage = sortedBooks.slice(start, start + perPage);
 
-  if (isLoading) {
-    return <h2>Loading books...</h2>;
+  const showLoader = useMinimumLoader(isLoading, 1500);
+
+  if (showLoader) {
+    return <PageLoader />;
   }
 
   if (error) {

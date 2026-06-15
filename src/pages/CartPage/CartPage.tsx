@@ -3,6 +3,8 @@ import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
 import './CartPage.scss';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
+import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
 
 function getPrice(book: Book) {
   return book.price_discount ?? book.price_regular;
@@ -32,8 +34,10 @@ export function CartPage() {
     0,
   );
 
-  if (isLoading) {
-    return <h2>Loading...</h2>;
+  const showLoader = useMinimumLoader(isLoading, 1500);
+
+  if (showLoader) {
+    return <PageLoader />;
   }
 
   if (error) {

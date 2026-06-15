@@ -8,6 +8,8 @@ import { BooksSwiper } from '../../components/shared/BooksSwiper/BooksSwiper';
 import { useBook } from '../../hooks/useBook.ts';
 import { useBooks } from '../../hooks/useBooks.ts';
 import { getImageUrl } from '../../services/getImageUrl.ts';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
+import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -24,8 +26,11 @@ export const ProductPage = () => {
 
   const [activeImage, setActiveImage] = useState<string>();
 
-  if (isBookPending) {
-    return <h2>Loading...</h2>;
+  const isLoading = isBookPending || isBooksLoading;
+  const showLoader = useMinimumLoader(isLoading, 1500);
+
+  if (showLoader) {
+    return <PageLoader />;
   }
 
   if (isBookError) {
