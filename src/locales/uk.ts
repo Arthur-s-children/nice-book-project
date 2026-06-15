@@ -3,12 +3,14 @@ export const uk = {
     home: 'Головна',
     books: 'Книги',
     ourTeam: 'Наша команда',
+    loading: 'Завантаження...',
+    errorLoading: 'Не вдалося завантажити дані',
   },
 
   header: {
-    paper: 'Паперова книга',
-    kindle: 'Електронна',
-    audio: 'Аудіокнига',
+    paper: 'Паперові книги',
+    kindle: 'Електронні',
+    audio: 'Аудіокниги',
   },
 
   footer: {
@@ -16,6 +18,7 @@ export const uk = {
     contacts: 'Контакти',
     rights: 'Права',
     backToTop: 'Вгору',
+    team: 'Команда',
   },
 
   product: {
@@ -42,6 +45,31 @@ export const uk = {
 
   category: {
     shopByCategory: 'Перегляд за категоріями',
+  },
+
+  categories: {
+    fiction: 'Художня література',
+    sciFi: 'Наукова фантастика',
+    fantasy: 'Фентезі',
+    mystery: 'Детективи та трилери',
+    romance: 'Романтика',
+    historical: 'Історична проза',
+    horror: 'Жахи',
+
+    nonFiction: 'Нон-фікшн',
+    business: 'Бізнес та менеджмент',
+    psychology: 'Психологія',
+    finance: 'Фінанси та інвестиції',
+    biographies: 'Біографії',
+
+    technology: 'Технології',
+    programming: 'Програмування',
+    design: 'Дизайн',
+    gaming: 'Комп’ютерні ігри',
+
+    children: 'Дитячі книги',
+    fairyTales: 'Казки',
+    educational: 'Навчальні',
   },
 
   notFound: {
@@ -84,6 +112,13 @@ export const uk = {
   cart: {
     title: 'Кошик',
     empty: 'Ваш кошик порожній.',
+    deliveryTitle: 'Доставка Нова Пошта',
+    warehouse: 'Відділення',
+    poshtomat: 'Поштомат',
+    cityPlaceholder: 'Введіть місто, наприклад Київ',
+    selectWarehouse: 'Оберіть адресу призначення',
+    pleaseSelectWarehouse:
+      'Будь ласка, оберіть відділення або поштомат для доставки.',
     total: 'Разом',
     checkout: 'Оформити замовлення',
   },
@@ -134,5 +169,103 @@ export const uk = {
     contactsTitle: 'Контакти',
     contactsText:
       'Якщо у вас є питання, звертайтесь до нашої служби підтримки через контактну форму на сайті.',
+  },
+
+  contacts: {
+    title: 'Контактна інформація',
+    phone: 'Телефон:',
+    email: 'Email:',
+    address: 'Адреса:',
+    website: 'Вебсайт:',
+    hoursTitle: 'Години роботи',
+    mondayFriday: 'Понеділок - П`ятниця: 9:00 - 18:00',
+    saturday: 'Субота: 10:00 - 16:00',
+    sunday: 'Неділя: Зачинено',
+    mapTitle: 'Мапа Google',
+  },
+
+  authCallback: {
+    confirmTitle: 'Підтвердження електронної пошти...',
+    confirmText:
+      'Будь ласка, зачекайте, поки ми перевіримо ваш обліковий запис.',
+    successTitle: 'Успішно!',
+    emailConfirm:
+      'Електронну пошту успішно підтверджено! Ви увійшли в систему.',
+    alreadySignIn: 'Ви вже увійшли в систему.',
+    redirect: 'Перенаправлення на головну сторінку...',
+    errorTitle: 'Помилка',
+    invalidLink: 'Недійсне посилання для підтвердження або сесію не знайдено.',
+    confirmError: 'Під час підтвердження електронної пошти сталася помилка.',
+    goHome: 'На головну',
+  },
+
+  search: {
+    sales: 'Знижки',
+    allCategories: 'Усі категорії',
+    previous: ' Попередня',
+    next: 'Наступна',
+    startTyping: 'Почніть вводити...',
+    notFound: 'Нічого не знайдено',
+    placeholder: 'Пошук за ключовими словами, темами або повідомленнями',
+  },
+
+  orderHistory: {
+    status: {
+      completed: 'Завершено',
+      processing: 'Обробляється',
+      cancelled: 'Скасовано',
+      pending: 'Очікує',
+    },
+    title: 'Історія замовлень',
+    pleaseSignIn: 'Увійдіть, щоб переглянути історію замовлень',
+    loading: 'Завантаження замовлень...',
+    emptyTitle: 'Замовлень ще немає',
+    emptyText: 'Почніть покупки, щоб побачити їх тут',
+    order: 'Замовлення',
+    date: 'Дата',
+    total: 'Сума',
+    shippingAddress: 'Адреса доставки',
+    phone: 'Телефон',
+    items: 'Товари',
+    qty: 'К-сть',
+  },
+
+  userMenu: {
+    personalData: 'Особисті дані',
+    orderHistory: 'Історія замовлень',
+    changeLanguage: 'Змінити мову',
+    changeTheme: 'Змінити тему',
+    signOut: 'Вийти',
+  },
+
+  settingsMenu: {
+    changeLanguage: 'Змінити мову',
+    changeTheme: 'Змінити тему',
+  },
+
+  auth: {
+    signIn: 'Увійти',
+    signUp: 'Реєстрація',
+    fullName: 'Повне ім’я',
+    emailRequired: 'Email обов’язковий',
+    invalidEmail: 'Невірний email',
+    passwordRequired: 'Пароль обов’язковий',
+    passwordMin: 'Пароль має містити мінімум 6 символів',
+    loading: 'Завантаження...',
+    or: 'або',
+    continueWithGoogle: 'Продовжити з Google',
+    noAccount: 'Немає акаунта?',
+    haveAccount: 'Вже маєте акаунт?',
+    error: 'Сталася помилка',
+    email: 'Електронна пошта',
+    password: 'Пароль',
+    registrationSuccess:
+      'Реєстрація успішна! Перевірте свою електронну пошту для підтвердження акаунта.',
+  },
+
+  authPrompt: {
+    title: 'Увійти',
+    text: 'Увійдіть у свій акаунт, щоб отримати доступ до особистих даних, історії замовлень та інших можливостей.',
+    maybeLater: 'Можливо пізніше',
   },
 } as const;

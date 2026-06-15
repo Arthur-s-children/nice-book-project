@@ -4,6 +4,7 @@ import { Icon } from '../../ui/Icon';
 import './SearchModal.scss';
 import { categoryStructure } from './searchCategories.ts';
 import { useBooks } from '../../../hooks/useBooks.ts';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
   const { data: books = [], isLoading } = useBooks();
+  const { t } = useTranslation();
 
   const filteredBooks = useMemo(() => {
     let results = books;
@@ -100,7 +102,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
   if (!isOpen) return null;
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <h2>{t('common.loading')}</h2>;
   }
 
   return (
@@ -122,7 +124,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
                 setCurrentPage(1);
               }}
             >
-              Sales
+              {t('search.sales')}
             </button>
           </div>
 
@@ -136,7 +138,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
                 setCurrentPage(1);
               }}
             >
-              All Categories
+              {t('search.allCategories')}
             </button>
             {categoryStructure.map((category) => (
               <div
@@ -154,7 +156,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
                     setCurrentPage(1);
                   }}
                 >
-                  {category.name}
+                  {t(category.nameKey)}
                   <span className="search-modal__category-arrow">
                     {expandedCategory === category.id ? '▼' : '▶'}
                   </span>
@@ -170,7 +172,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
                           setCurrentPage(1);
                         }}
                       >
-                        {subcategory.name}
+                        {t(subcategory.nameKey)}
                       </button>
                     ))}
                   </div>
@@ -185,7 +187,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
             <input
               type="text"
               className="search-modal__input"
-              placeholder="Search by keywords, topics, or messages"
+              placeholder={t('search.placeholder')}
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -204,7 +206,9 @@ export function SearchModal({ isOpen, onClose }: Props) {
                     size={48}
                   />
                 </div>
-                <p className="search-modal__empty-text">Start typing...</p>
+                <p className="search-modal__empty-text">
+                  {t('search.startTyping')}
+                </p>
               </div>
             : filteredBooks.length === 0 ?
               <div className="search-modal__empty">
@@ -214,7 +218,9 @@ export function SearchModal({ isOpen, onClose }: Props) {
                     size={48}
                   />
                 </div>
-                <p className="search-modal__empty-text">Nothing found</p>
+                <p className="search-modal__empty-text">
+                  {t('search.notFound')}
+                </p>
               </div>
             : <div className="search-modal__results-list">
                 {paginatedBooks.map((book) => (
@@ -235,7 +241,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
                   className="search-modal__prev-btn"
                   onClick={() => setCurrentPage((prev) => prev - 1)}
                 >
-                  Previous
+                  {t('search.previous')}
                 </button>
               )}
               {totalPages > 1 && currentPage < totalPages && (
@@ -243,7 +249,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
                   className="search-modal__next-btn"
                   onClick={() => setCurrentPage((prev) => prev + 1)}
                 >
-                  Next
+                  {t('search.next')}
                 </button>
               )}
             </div>

@@ -164,7 +164,7 @@ export function Header({
               className="header__sign-up-btn"
               onClick={() => setIsAuthModalOpen(true)}
             >
-              Sign Up
+              {t('auth.signUp')}
             </button>
           )}
 

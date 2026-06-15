@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../api/supabase';
 import './AuthCallbackPage.scss';
+import { useTranslation } from 'react-i18next';
 
 export function AuthCallbackPage() {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>(
@@ -9,6 +10,8 @@ export function AuthCallbackPage() {
   );
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleEmailConfirmation = async () => {
@@ -27,7 +30,7 @@ export function AuthCallbackPage() {
           if (error) throw error;
 
           setStatus('success');
-          setMessage('Email confirmed successfully! You are now signed in.');
+          setMessage(t('authCallback.emailConfirm'));
 
           setTimeout(() => {
             navigate('/');
@@ -38,13 +41,13 @@ export function AuthCallbackPage() {
 
           if (data.session) {
             setStatus('success');
-            setMessage('You are already signed in.');
+            setMessage(t('authCallback.alreadySignIn'));
             setTimeout(() => {
               navigate('/');
             }, 2000);
           } else {
             setStatus('error');
-            setMessage('Invalid confirmation link or no session found.');
+            setMessage(t('authCallback.invalidLink'));
           }
         }
       } catch (error: unknown) {
@@ -53,7 +56,7 @@ export function AuthCallbackPage() {
         setMessage(
           error instanceof Error ?
             error.message
-          : 'An error occurred during email confirmation.',
+          : t('authCallback.confirmError'),
         );
       }
     };
@@ -66,24 +69,26 @@ export function AuthCallbackPage() {
       <div className="auth-callback-page__container">
         {status === 'loading' && (
           <div className="auth-callback-page__loading">
-            <h1>Confirming your email...</h1>
-            <p>Please wait while we verify your account.</p>
+            <h1>{t('authCallback.confirmTitle')}</h1>
+            <p>{t('authCallback.confirmText')}</p>
           </div>
         )}
 
         {status === 'success' && (
           <div className="auth-callback-page__success">
-            <h1>Success!</h1>
+            <h1>{t('authCallback.successTitle')}</h1>
             <p>{message}</p>
-            <p>Redirecting to home page...</p>
+            <p>{t('authCallback.redirect')}</p>
           </div>
         )}
 
         {status === 'error' && (
           <div className="auth-callback-page__error">
-            <h1>Error</h1>
+            <h1>{t('authCallback.errorTitle')}</h1>
             <p>{message}</p>
-            <button onClick={() => navigate('/')}>Go to Home</button>
+            <button onClick={() => navigate('/')}>
+              {t('authCallback.goHome')}
+            </button>
           </div>
         )}
       </div>
