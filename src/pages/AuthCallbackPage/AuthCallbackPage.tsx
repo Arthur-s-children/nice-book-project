@@ -62,7 +62,7 @@ export function AuthCallbackPage() {
     };
 
     handleEmailConfirmation();
-  }, [navigate]);
+  }, [navigate, t]);
 
   return (
     <div className="auth-callback-page">
