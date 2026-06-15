@@ -1,15 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import type { SortOption, PerPage } from '../../../hooks/useCatalogParams.tsx';
 import { Dropdown } from '../Dropdown';
 import './CatalogControls.scss';
 
 const PER_PAGE_OPTIONS: PerPage[] = [8, 16, 32];
-
-const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: 'newest', label: 'Newest' },
-  { value: 'oldest', label: 'Oldest' },
-  { value: 'price-asc', label: 'Price: Low to High' },
-  { value: 'price-desc', label: 'Price: High to Low' },
-];
 
 interface Props {
   sort: SortOption;
@@ -18,8 +12,18 @@ interface Props {
 }
 
 export function CatalogControls({ sort, perPage, onParamChange }: Props) {
+  const { t } = useTranslation();
+
+  const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+    { value: 'newest', label: t('catalog.sort.newest') },
+    { value: 'oldest', label: t('catalog.sort.oldest') },
+    { value: 'price-asc', label: t('catalog.sort.priceAsc') },
+    { value: 'price-desc', label: t('catalog.sort.priceDesc') },
+  ];
+
   const sortLabel =
-    SORT_OPTIONS.find((o) => o.value === sort)?.label || 'Newest';
+    SORT_OPTIONS.find((o) => o.value === sort)?.label ||
+    t('catalog.sort.newest');
 
   return (
     <div className="catalog-controls">
@@ -28,7 +32,7 @@ export function CatalogControls({ sort, perPage, onParamChange }: Props) {
           className="catalog-controls__label"
           htmlFor="catalog-sort"
         >
-          Sort by:
+          {t('catalog.sortBy')}
         </label>
         <Dropdown
           value={sortLabel}
@@ -37,7 +41,7 @@ export function CatalogControls({ sort, perPage, onParamChange }: Props) {
             if (option) onParamChange('sort', option.value);
           }}
           options={SORT_OPTIONS.map((o) => o.label)}
-          placeholder="Newest"
+          placeholder={t('catalog.sort.newest')}
         />
       </div>
 
@@ -46,7 +50,7 @@ export function CatalogControls({ sort, perPage, onParamChange }: Props) {
           className="catalog-controls__label"
           htmlFor="catalog-per-page"
         >
-          Items on page:
+          {t('catalog.itemsOnPage')}
         </label>
         <Dropdown
           value={String(perPage)}

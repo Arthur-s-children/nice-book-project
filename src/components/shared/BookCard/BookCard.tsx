@@ -4,6 +4,7 @@ import { LikeButton } from '../../ui/LikeButton';
 import type { Book } from '../../../types/BooksAPI.ts';
 import './BookCard.scss';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
 
 type Props = {
@@ -23,6 +24,8 @@ export function BookCard({
 }: Props) {
   const price = book.price_discount ?? book.price_regular;
   const imageSrc = getImageUrl(book.images[0]);
+
+  const { t } = useTranslation();
 
   return (
     <article className="book-card">
@@ -57,7 +60,7 @@ export function BookCard({
         </div>
         <p className="book-card__stock">
           <Icon name="truck" />
-          In stock
+          {t('product.inStock')}
         </p>
       </div>
 
@@ -66,7 +69,7 @@ export function BookCard({
           variant={inCart ? 'selected' : 'primary'}
           onClick={() => !inCart && onAddToCart(book.id)}
         >
-          {inCart ? 'Added' : 'Add to cart'}
+          {inCart ? t('product.added') : t('product.addToCart')}
         </AppButton>
         <LikeButton
           isSelected={isFavorite}

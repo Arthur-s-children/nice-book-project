@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useCart } from '../../hooks/useCart.tsx';
 import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
+import './CartPage.scss';
+import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
 import './CartPage.scss';
 
@@ -11,6 +13,8 @@ function getPrice(book: Book) {
 
 export function CartPage() {
   const { items, updateQuantity, removeFromCart } = useCart();
+
+  const { t } = useTranslation();
   const { data: books = [], isLoading, error } = useBooks();
 
   const [deliveryType, setDeliveryType] = useState<'warehouse' | 'poshtomat'>(
@@ -144,10 +148,10 @@ export function CartPage() {
 
   return (
     <section className="cart-page">
-      <h1 className="cart-page__title">Cart</h1>
+      <h1 className="cart-page__title">{t('cart.title')}</h1>
 
       {cartBooks.length === 0 ?
-        <p className="cart-page__empty">Your cart is empty.</p>
+        <p className="cart-page__empty">{t('cart.empty')}</p>
       : <div className="cart-page__content">
           <div className="cart-page__list">
             {cartBooks.map(({ book, quantity }) => (
