@@ -7,6 +7,7 @@ import { Pagination } from '../../components/ui/Pagination/Pagination.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
 import './CatalogPage.scss';
 import { useTranslation } from 'react-i18next';
+import { useBooks } from '../../hooks/useBooks.ts';
 
 function getPrice(book: Book) {
   return book.price_discount ?? book.price_regular;

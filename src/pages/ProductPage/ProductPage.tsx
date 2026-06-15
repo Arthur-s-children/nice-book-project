@@ -1,5 +1,4 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { bookService } from '../../services';
 import { NotFoundPage } from '../NotFoundPage';
 import { useCart } from '../../hooks/useCart';
 import { useFavorites } from '../../hooks/useFavorites';
@@ -10,6 +9,7 @@ import { useBook } from '../../hooks/useBook.ts';
 import { useBooks } from '../../hooks/useBooks.ts';
 import { getImageUrl } from '../../services/getImageUrl.ts';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '../../components/ui/Icon';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -26,12 +26,7 @@ export const ProductPage = () => {
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
 
-  const books = bookService.getAll();
-  const book = books.find((b) => b.slug === slug);
-
-  const [activeImage, setActiveImage] = useState<number>(0);
-
-  const currentImage = book?.images?.[activeImage] ?? book?.images?.[0] ?? '';
+  const [activeImage, setActiveImage] = useState<string>();
 
   const TITLES: Record<string, string> = {
     paperback: t('catalog.title.paperback'),
@@ -55,7 +50,7 @@ export const ProductPage = () => {
     if (!book) return [];
 
     return books
-      .filter((item) => item.namespaceId === book.namespaceId)
+      .filter((item) => item.namespace_id === book.namespace_id)
       .reduce(
         (acc, item) => {
           if (!acc.find((i) => i.lang === item.lang)) {
@@ -80,14 +75,20 @@ export const ProductPage = () => {
     [languageVersions, navigate],
   );
 
-  if (!book) return <NotFoundPage />;
+  if (isBookPending) {
+    return <h2>{t('common.loading')}</h2>;
+  }
+
+  if (isBookError || !book) {
+    return <NotFoundPage />;
+  }
 
   const inCart = cartIds.includes(book.id);
   const isFavorite = favoriteIds.includes(book.id);
 
-  const imageSrc = `${import.meta.env.BASE_URL}${currentImage}`;
-
   const type = book.type;
+
+  const imageSrc = getImageUrl(activeImage || book.images[0]);
 
   return (
     <div className={styles.item_card}>
@@ -96,18 +97,11 @@ export const ProductPage = () => {
           to="/"
           className={styles.link}
         >
-          <img
-            src="/icons/home.svg"
-            alt={t('common.home')}
-          />
+          <Icon name="home" />
         </Link>
 
         <span className={styles.separator}>
-          <img
-            src="/icons/arrow-right.svg"
-            alt=""
-            aria-hidden="true"
-          />
+          <Icon name="arrow-right" />
         </span>
 
         <Link
@@ -118,11 +112,7 @@ export const ProductPage = () => {
         </Link>
 
         <span className={styles.separator}>
-          <img
-            src="/icons/arrow-right.svg"
-            alt=""
-            aria-hidden="true"
-          />
+          <Icon name="arrow-right" />
         </span>
 
         <span className={styles.current}>{book.name}</span>
@@ -142,12 +132,12 @@ export const ProductPage = () => {
           </div>
 
           <div className={styles.thumbs}>
-            {book.images.map((img, index) => (
+            {book.images.map((img) => (
               <button
-                type="button"
                 key={img}
+                type="button"
                 className={styles.thumb}
-                onClick={() => setActiveImage(index)}
+                onClick={() => setActiveImage(img)}
               >
                 <img
                   src={getImageUrl(img)}
@@ -200,11 +190,11 @@ export const ProductPage = () => {
           <div className={styles.price_container}>
             <div className={styles.price}>
               <span className={styles.new_price}>
-                ${book.priceDiscount ?? book.priceRegular}
+                ₴{book.price_discount ?? book.price_regular}
               </span>
 
-              {book.priceDiscount && (
-                <span className={styles.old_price}>${book.priceRegular}</span>
+              {book.price_discount && (
+                <span className={styles.old_price}>${book.price_regular}</span>
               )}
             </div>
 
@@ -222,13 +212,9 @@ export const ProductPage = () => {
                 aria-label="Favorite"
                 onClick={() => toggleFavorite(book.id)}
               >
-                <img
-                  src={
-                    isFavorite ? '/icons/heart-filled.svg' : '/icons/heart.svg'
-                  }
-                  alt="favorite"
-                  className={styles.icon_heart}
-                />
+                {isFavorite ?
+                  <Icon name="heart-filled" />
+                : <Icon name="heart" />}
               </button>
             </div>
           </div>
@@ -242,20 +228,20 @@ export const ProductPage = () => {
               {book.cover_type && (
                 <tr>
                   <td>{t('product.coverType')}</td>
-                  <td>{book.coverType}</td>
+                  <td>{book.cover_type}</td>
                 </tr>
               )}
 
               {book.number_of_pages && (
                 <tr>
                   <td>{t('product.numberOfPages')}</td>
-                  <td>{book.numberOfPages}</td>
+                  <td>{book.number_of_pages}</td>
                 </tr>
               )}
 
               <tr>
                 <td>{t('product.publicationYear')}</td>
-                <td>{book.publicationYear}</td>
+                <td>{book.publication_year}</td>
               </tr>
             </tbody>
           </table>
@@ -290,20 +276,20 @@ export const ProductPage = () => {
               {book.cover_type && (
                 <tr>
                   <td>{t('product.coverType')}</td>
-                  <td>{book.coverType}</td>
+                  <td>{book.cover_type}</td>
                 </tr>
               )}
 
               {book.number_of_pages && (
                 <tr>
                   <td>{t('product.numberOfPages')}</td>
-                  <td>{book.numberOfPages}</td>
+                  <td>{book.number_of_pages}</td>
                 </tr>
               )}
 
               <tr>
                 <td>{t('product.publicationYear')}</td>
-                <td>{book.publicationYear}</td>
+                <td>{book.publication_year}</td>
               </tr>
 
               <tr>
