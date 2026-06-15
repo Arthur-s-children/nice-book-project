@@ -194,7 +194,7 @@ export const ProductPage = () => {
               </span>
 
               {book.price_discount && (
-                <span className={styles.old_price}>${book.price_regular}</span>
+                <span className={styles.old_price}>₴{book.price_regular}</span>
               )}
             </div>
 

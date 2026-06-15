@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useCart } from '../../hooks/useCart.tsx';
 import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
-import './CartPage.scss';
 import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
 import './CartPage.scss';
