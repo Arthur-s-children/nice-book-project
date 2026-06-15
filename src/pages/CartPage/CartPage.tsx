@@ -4,6 +4,7 @@ import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
 import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
+import './CartPage.scss';
 
 function getPrice(book: Book) {
   return book.price_discount ?? book.price_regular;
