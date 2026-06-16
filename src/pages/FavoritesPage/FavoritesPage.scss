@@ -3,6 +3,11 @@
 
 .page {
   @include grid.page-container;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: calc(100dvh + 120px);
+  padding-bottom: 140px;
 }
 
 .favorites-title {
@@ -26,6 +31,11 @@
   color: $color-elements;
   text-align: center;
   padding: 48px 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
 }
 
 [data-theme='dark'] {

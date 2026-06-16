@@ -31,16 +31,19 @@ export function AuthModal({ isOpen, onClose }: Props) {
 
   const onSubmit = async (data: FormData) => {
     setError('');
+
     try {
       if (isLogin) {
         await signIn(data.email, data.password);
         onClose();
-      } else {
-        await signUp(data.email, data.password, data.fullName);
-        setError('');
-        alert(t('auth.registrationSuccess'));
-        onClose();
+        return;
       }
+
+      await signUp(data.email, data.password, data.fullName);
+      alert(
+        'Registration successful! Please check your email to confirm your account.',
+      );
+      onClose();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : t('auth.error'));
     }
@@ -79,9 +82,10 @@ export function AuthModal({ isOpen, onClose }: Props) {
           <Icon name="close" />
         </button>
 
-        <h2 className="auth-modal__title">
-          {isLogin ? t('auth.signIn') : t('auth.signUp')}
-        </h2>
+        <h2 className="auth-modal__title">{isLogin ? 'Sign In' : 'Sign Up'}</h2>
+        <p className="auth-modal__promo">
+          Зареєструйся та отримай бонус на 10% на перше замовлення
+        </p>
 
         {error && <div className="auth-modal__error">{error}</div>}
 

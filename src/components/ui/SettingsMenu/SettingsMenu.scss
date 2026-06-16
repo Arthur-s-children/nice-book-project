@@ -1,54 +1,121 @@
+@use '../../../styles/variables' as *;
+
 .settings-menu {
   position: relative;
-  padding: 0 8px;
+  padding: 0 4px;
 
   &__button {
-    background: none;
     border: none;
     cursor: pointer;
     padding: 8px;
-    color: #1a1a1a;
-    transition: color 0.2s;
+    color: $color-brown;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: $border-radius-md;
+    width: 36px;
+    height: 36px;
 
     &:hover {
-      color: #667eea;
+      transform: scale(1.05);
     }
   }
 
   &__icon {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
   }
 
-  &__dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 8px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    min-width: 200px;
-    z-index: 100;
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 72px 20px 20px;
+
+    backdrop-filter: blur(6px);
+  }
+
+  &__modal {
+    background: transparent;
+    border-radius: $border-radius-lg;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    min-width: 240px;
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid rgba(122, 99, 85, 0.2);
+  }
+
+  &__title {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: $font-semibold;
+    color: $color-primary;
   }
 
   &__option {
     background: none;
     border: none;
     text-align: left;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 10px 12px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 14px;
-    color: #333;
+    color: $color-primary;
     transition: all 0.2s;
 
     &:hover {
-      background: #f5f5f5;
+      background: rgba(196, 127, 107, 0.12);
+      color: $color-accent;
+    }
+
+    &--primary {
+      background: $color-accent;
+      color: $color-white;
+      font-weight: $font-semibold;
+      text-align: center;
+
+      &:hover {
+        background: darken($color-accent, 5%);
+        color: $color-white;
+      }
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .settings-menu {
+    &__modal {
+      background: $color-surface-dark;
+      border-color: $color-elements-dark;
+    }
+
+    &__title {
+      color: $color-primary-dark;
+    }
+
+    &__option {
+      color: $color-primary-dark;
+
+      &:hover {
+        background: rgba(0, 188, 212, 0.12);
+        color: $color-aquamarine;
+      }
+
+      &--primary {
+        background: $color-aquamarine;
+        color: $color-white;
+
+        &:hover {
+          background: $color-aquamarine-hover;
+          color: $color-white;
+        }
+      }
     }
   }
 }

@@ -1,23 +1,32 @@
 @use '../../styles/variables' as *;
 
 .order-history {
-  padding: 60px 20px;
-  min-height: calc(100vh - 200px);
-  background: $color-hover-bg;
+  padding: 100px 20px 60px;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 240, 232, 0.96) 0%,
+    rgba(232, 220, 200, 0.72) 100%
+  );
+  display: flex;
+  flex-direction: column;
 
   &__container {
     max-width: 900px;
     margin: 0 auto;
-    background: $color-white;
-    padding: 48px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 16px 42px rgba(45, 34, 26, 0.12);
+    border: 1px solid rgba(122, 99, 85, 0.16);
+    backdrop-filter: blur(10px);
+    min-height: 400px;
   }
 
   &__title {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     color: $color-primary;
     text-align: center;
   }
@@ -28,33 +37,33 @@
   }
 
   &__empty-text {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 600;
     color: $color-primary;
     margin-bottom: 12px;
   }
 
   &__empty-subtext {
-    font-size: 16px;
-    color: $color-icons;
+    font-size: 15px;
+    color: $color-elements;
   }
 
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
   }
 
   &__card {
-    background: $color-hover-bg;
-    border-radius: 12px;
+    background: rgba(245, 240, 232, 0.85);
+    border-radius: 16px;
     overflow: hidden;
     transition: all 0.3s ease;
-    border: 1px solid $color-elements;
+    border: 1px solid rgba(122, 99, 85, 0.18);
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 26px rgba(45, 34, 26, 0.12);
     }
   }
 
@@ -62,8 +71,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
-    background: $color-primary;
+    padding: 18px 22px;
+    background: linear-gradient(
+      135deg,
+      $color-primary-light 0%,
+      $color-terracotta-light 100%
+    );
     color: $color-white;
   }
 
@@ -76,14 +89,14 @@
   &__status {
     font-weight: 700;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   &__card-body {
-    padding: 24px;
+    padding: 20px 22px 24px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
   }
 
   &__info {
@@ -103,50 +116,50 @@
 
     &--price {
       font-weight: 700;
-      font-size: 18px;
+      font-size: 17px;
     }
   }
 
   &__items {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid $color-elements;
+    margin-top: 8px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(122, 99, 85, 0.18);
   }
 
   &__items-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     color: $color-primary;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   &__items-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   &__item {
     display: flex;
-    gap: 16px;
-    padding: 12px;
+    gap: 14px;
+    padding: 10px;
     background: $color-white;
-    border-radius: 8px;
-    border: 1px solid $color-elements;
+    border-radius: 10px;
+    border: 1px solid rgba(122, 99, 85, 0.16);
     transition: all 0.2s ease;
     cursor: pointer;
 
     &:hover {
-      border-color: $color-primary;
-      box-shadow: 0 2px 8px rgba(49, 50, 55, 0.1);
+      border-color: $color-terracotta-light;
+      box-shadow: 0 4px 12px rgba(229, 92, 59, 0.12);
     }
   }
 
   &__item-image {
-    width: 60px;
-    height: 80px;
+    width: 56px;
+    height: 76px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 6px;
     flex-shrink: 0;
   }
 
@@ -164,13 +177,13 @@
     transition: color 0.2s ease;
 
     &:hover {
-      color: $color-primary;
+      color: $color-terracotta-light;
     }
   }
 
   &__item-author {
     font-size: 13px;
-    color: $color-primary;
+    color: $color-elements;
   }
 
   &__item-meta {
@@ -183,6 +196,74 @@
 
   &__item-price {
     font-weight: 700;
-    color: $color-primary;
+    color: $color-terracotta-light;
+  }
+}
+
+[data-theme='dark'] {
+  .order-history {
+    background: linear-gradient(
+      135deg,
+      rgba(17, 20, 26, 0.96) 0%,
+      rgba(27, 31, 39, 0.72) 100%
+    );
+
+    &__container {
+      background: rgba(27, 31, 39, 0.9);
+      border-color: $color-elements-dark;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.4);
+    }
+
+    &__title,
+    &__empty-text,
+    &__label,
+    &__value,
+    &__items-title,
+    &__item-name,
+    &__item-meta {
+      color: $color-primary-dark;
+    }
+
+    &__empty-subtext,
+    &__item-author {
+      color: $color-icons-dark;
+    }
+
+    &__card {
+      background: rgba(27, 31, 39, 0.85);
+      border-color: $color-elements-dark;
+
+      &:hover {
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    &__card-header {
+      background: linear-gradient(
+        135deg,
+        $color-aquamarine 0%,
+        $color-primary-dark 100%
+      );
+    }
+
+    &__item {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: $color-elements-dark;
+
+      &:hover {
+        border-color: $color-aquamarine;
+        box-shadow: 0 4px 12px rgba(31, 99, 108, 0.12);
+      }
+    }
+
+    &__item-name {
+      &:hover {
+        color: $color-aquamarine;
+      }
+    }
+
+    &__item-price {
+      color: $color-aquamarine;
+    }
   }
 }

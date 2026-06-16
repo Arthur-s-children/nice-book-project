@@ -16,18 +16,20 @@ export function useAuth() {
     staleTime: Infinity,
   });
 
+  const invalidateUser = () => {
+    void queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+  };
+
   const signInMutation = useMutation({
     mutationFn: (credentials: LoginCredentials) =>
       authService.signInWithPassword(credentials),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] }),
+    onSuccess: invalidateUser,
   });
 
   const signUpMutation = useMutation({
     mutationFn: (credentials: SignupCredentials) =>
       authService.signUpWithPassword(credentials),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] }),
+    onSuccess: invalidateUser,
   });
 
   const signInWithGoogleMutation = useMutation({
@@ -37,7 +39,7 @@ export function useAuth() {
   const signOutMutation = useMutation({
     mutationFn: () => authService.signOut(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      invalidateUser();
       queryClient.clear();
     },
   });
@@ -45,17 +47,17 @@ export function useAuth() {
   useEffect(() => {
     const {
       data: { subscription },
-    } = authService.onAuthStateChange((user) => {
-      queryClient.setQueryData(['currentUser'], user);
+    } = authService.onAuthStateChange((nextUser) => {
+      queryClient.setQueryData(['currentUser'], nextUser);
     });
 
     return () => subscription.unsubscribe();
   }, [queryClient]);
 
   return {
-    user: user || null,
+    user: user ?? null,
     isLoading,
-    isAuthenticated: !!user && user.id !== '',
+    isAuthenticated: Boolean(user?.id),
     error,
     signIn: signInMutation.mutateAsync,
     signUp: signUpMutation.mutateAsync,

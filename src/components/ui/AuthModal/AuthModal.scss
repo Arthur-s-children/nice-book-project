@@ -1,21 +1,24 @@
+@use '../../../styles/variables' as *;
+
 .auth-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 1000;
+  padding: 88px 16px 24px;
+  background: rgba(26, 21, 18, 0.35);
 
   &__content {
-    background: white;
-    padding: 40px;
+    background: $color-cream;
+    padding: 32px 24px;
     width: 100%;
     max-width: 400px;
     position: relative;
+    border-radius: 24px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.16);
+    border: 1px solid rgba(122, 99, 85, 0.18);
   }
 
   &__close {
@@ -35,14 +38,22 @@
   &__title {
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 24px;
+    margin-bottom: 8px;
     text-align: center;
-    color: #1a1a1a;
+    color: $color-primary;
+  }
+
+  &__promo {
+    margin: 0 0 20px;
+    text-align: center;
+    color: $color-elements;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   &__error {
-    background: #fee;
-    color: #c33;
+    background: rgba(196, 127, 107, 0.1);
+    color: $color-accent;
     padding: 12px;
     border-radius: 4px;
     margin-bottom: 16px;
@@ -64,31 +75,37 @@
 
   &__input {
     padding: 12px 16px;
-    border: 1px solid #e2e6e9;
-    font-size: 14px;
+    border: none;
+    box-shadow: none;
     outline: none;
+    font-size: 14px;
+    background: $color-white;
+    border-radius: 12px;
 
     &::placeholder {
-      color: #999;
+      color: $color-icons;
     }
   }
 
   &__error-text {
-    color: #c33;
+    color: $color-accent;
     font-size: 12px;
   }
 
   &__submit {
     padding: 12px 24px;
-    background: #1a1a1a;
+    background: $color-accent;
     color: white;
     border: none;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.2s ease;
 
     &:hover:not(:disabled) {
-      background: #333;
+      background: $color-accent-hover;
+      transform: translateY(-1px);
     }
 
     &:disabled {
@@ -101,7 +118,7 @@
     display: flex;
     align-items: center;
     margin: 16px 0;
-    color: #999;
+    color: $color-icons;
     font-size: 14px;
 
     &::before,
@@ -109,7 +126,7 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: #e2e6e9;
+      background: rgba(122, 99, 85, 0.2);
     }
 
     span {
@@ -123,17 +140,20 @@
     justify-content: center;
     gap: 12px;
     padding: 12px 24px;
-    background: white;
-    color: #1a1a1a;
-    border: 1px solid #e2e6e9;
+    background: $color-cream;
+    color: $color-primary;
+    border: 1px solid rgba(122, 99, 85, 0.2);
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     margin-bottom: 16px;
     width: 100%;
+    border-radius: 12px;
+    transition: all 0.2s ease;
 
     &:hover {
-      background: #f5f5f5;
+      background: rgba(232, 220, 200, 0.8);
+      transform: translateY(-1px);
     }
   }
 
@@ -145,19 +165,96 @@
   &__switch {
     text-align: center;
     font-size: 14px;
-    color: #666;
+    color: $color-icons;
 
     &-btn {
       background: none;
       border: none;
-      color: #1a1a1a;
+      color: $color-accent;
       font-weight: 600;
       cursor: pointer;
       text-decoration: underline;
       padding: 0;
 
       &:hover {
-        color: #333;
+        color: $color-accent-hover;
+      }
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .auth-modal {
+    background: rgba(0, 0, 0, 0.6);
+
+    &__content {
+      background: $color-surface-dark;
+      border-color: $color-elements-dark;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+    }
+
+    &__title {
+      color: $color-primary-dark;
+    }
+
+    &__promo {
+      color: $color-icons-dark;
+    }
+
+    &__error {
+      background: rgba(31, 99, 108, 0.1);
+      color: $color-aquamarine;
+    }
+
+    &__input {
+      background: rgba(255, 255, 255, 0.1);
+      color: $color-primary-dark;
+
+      &::placeholder {
+        color: $color-icons-dark;
+      }
+    }
+
+    &__error-text {
+      color: $color-aquamarine;
+    }
+
+    &__submit {
+      background: $color-aquamarine;
+
+      &:hover:not(:disabled) {
+        background: $color-aquamarine-hover;
+      }
+    }
+
+    &__divider {
+      color: $color-icons-dark;
+
+      &::before,
+      &::after {
+        background: $color-elements-dark;
+      }
+    }
+
+    &__google {
+      background: rgba(255, 255, 255, 0.1);
+      color: $color-primary-dark;
+      border-color: $color-elements-dark;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    &__switch {
+      color: $color-icons-dark;
+
+      &-btn {
+        color: $color-aquamarine;
+
+        &:hover {
+          color: $color-aquamarine-hover;
+        }
       }
     }
   }

@@ -89,7 +89,6 @@ export const ProductPage = () => {
 
   const inCart = cartIds.includes(book.id);
   const isFavorite = favoriteIds.includes(book.id);
-
   const type = book.type;
 
   const imageSrc = getImageUrl(activeImage || book.images[0]);

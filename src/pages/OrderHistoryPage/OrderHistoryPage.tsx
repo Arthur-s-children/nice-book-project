@@ -4,6 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import './OrderHistoryPage.scss';
 import { useTranslation } from 'react-i18next';
 
+const STATUS_COLORS: Record<string, string> = {
+  completed: '#10b981',
+  processing: '#3b82f6',
+  cancelled: '#ef4444',
+  pending: '#f59e0b',
+};
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
+
 export function OrderHistoryPage() {
   const { user } = useAuthContext();
   const { orders, isLoading } = useOrders(user?.id);
@@ -19,30 +38,6 @@ export function OrderHistoryPage() {
   if (isLoading) {
     return <div className="order-history">{t('orderHistory.loading')}</div>;
   }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return '#10b981';
-      case 'processing':
-        return '#3b82f6';
-      case 'cancelled':
-        return '#ef4444';
-      default:
-        return '#f59e0b';
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
 
   const handleItemClick = (bookSlug: string) => {
     navigate(`/products/${bookSlug}`);
@@ -79,7 +74,10 @@ export function OrderHistoryPage() {
                   </div>
                   <div
                     className="order-history__status"
-                    style={{ color: getStatusColor(order.status) }}
+                    style={{
+                      color:
+                        STATUS_COLORS[order.status] ?? STATUS_COLORS.pending,
+                    }}
                   >
                     {t(`orderHistory.status.${order.status}`)}
                   </div>

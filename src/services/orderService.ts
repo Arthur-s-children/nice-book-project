@@ -5,18 +5,18 @@ export const orderService = {
   async getOrders(userId: string): Promise<Order[]> {
     const { data, error } = await supabase
       .from('orders')
-      .select('*, order_items (*)')
+      .select('*, order_items(*)')
       .eq('user_id', userId)
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    return data || [];
+    return data ?? [];
   },
 
   async getOrder(orderId: string): Promise<Order | null> {
     const { data, error } = await supabase
       .from('orders')
-      .select('*, order_items (*)')
+      .select('*, order_items(*)')
       .eq('id', orderId)
       .single();
 

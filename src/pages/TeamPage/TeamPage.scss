@@ -3,18 +3,18 @@
 .team-page {
   max-width: 1136px;
   margin: 0 auto;
-  padding: 40px 32px 80px;
+  padding: 100px 32px 80px;
   display: flex;
   flex-direction: column;
   gap: 56px;
 
   @media (max-width: $breakpoint-tablet) {
-    padding: 32px 24px 64px;
+    padding: 100px 24px 64px;
     gap: 40px;
   }
 
   @media (max-width: $breakpoint-mobile) {
-    padding: 24px 16px 48px;
+    padding: 100px 16px 48px;
     gap: 32px;
   }
 
