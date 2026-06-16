@@ -6,6 +6,7 @@ import './BookCard.scss';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
+import { toast } from 'sonner';
 
 type Props = {
   book: Book;
@@ -26,6 +27,28 @@ export function BookCard({
   const imageSrc = getImageUrl(book.images[0]);
 
   const { t } = useTranslation();
+
+  const handleAddToFavorite = () => {
+    onToggleFavorite(book.id);
+
+    if (!isFavorite) {
+      toast.success(
+        `${book.name} ${t('product.addedToFavorites', { defaultValue: 'додано в обране!' })}`,
+      );
+    } else {
+      toast.info(
+        `${book.name} ${t('product.removedFromFavorites', { defaultValue: 'видалено з обраного' })}`,
+      );
+    }
+  };
+
+  const handleAddToCart = () => {
+    onAddToCart(book.id);
+
+    toast.success(
+      `${book.name} ${t('product.addedToCartSuccess', { defaultValue: 'упішно додано до кошика!' })}`,
+    );
+  };
 
   return (
     <article className="book-card">
@@ -67,13 +90,13 @@ export function BookCard({
       <div className="book-card__actions">
         <AppButton
           variant={inCart ? 'selected' : 'primary'}
-          onClick={() => !inCart && onAddToCart(book.id)}
+          onClick={() => !inCart && handleAddToCart()}
         >
           {inCart ? t('product.added') : t('product.addToCart')}
         </AppButton>
         <LikeButton
           isSelected={isFavorite}
-          onClick={() => onToggleFavorite(book.id)}
+          onClick={handleAddToFavorite}
           colored
         />
       </div>
