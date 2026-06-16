@@ -23,7 +23,6 @@ export const HomePage = () => {
   ];
   const { t } = useTranslation();
   const newBooks = books.slice(30, 40); // Перші 10 нових книг
-  const suggestedBooks = books.slice(40, 50); // Книги для рекомендацій
 
   return (
     <>
@@ -32,6 +31,9 @@ export const HomePage = () => {
       <div style={{ width: '100%', marginTop: '24px' }}>
         <DiscountsSection
           books={books}
+          isLoading={isLoading}
+        />
+      </div>
       <div className="home-page">
         <BooksSwiper
           title={t('home.newBooks')}

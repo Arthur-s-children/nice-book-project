@@ -6,6 +6,8 @@ import './HeroSection.scss';
 
 export const HeroSection = () => {
   const { isDark } = useTheme();
+  const heroImage = `${import.meta.env.BASE_URL}img/hero/hero-photo.jpg`;
+  const nightHeroImage = `${import.meta.env.BASE_URL}img/hero/night-theme-hero.jpg`;
 
   return (
     <section className="hero">
@@ -15,10 +17,7 @@ export const HeroSection = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, ease: 'easeOut' }}
         style={{
-          backgroundImage:
-            isDark ?
-              'url(/img/hero/night-theme-hero.jpg)'
-            : 'url(/img/hero/hero-photo.jpg)',
+          backgroundImage: `url(${isDark ? nightHeroImage : heroImage})`,
         }}
       />
       <div className="hero__content">

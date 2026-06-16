@@ -33,7 +33,10 @@ export function SettingsMenu({
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   return (
@@ -61,7 +64,10 @@ export function SettingsMenu({
             className="settings-menu__modal"
             onClick={(event) => event.stopPropagation()}
           >
-            <h3 className="settings-menu__title">Preferences</h3>
+            <h3 className="settings-menu__title">
+              {t('settingsMenu.preferences')}
+            </h3>
+
             {onSignUpClick && (
               <button
                 className="settings-menu__option settings-menu__option--primary"
@@ -70,9 +76,10 @@ export function SettingsMenu({
                   setIsOpen(false);
                 }}
               >
-                Sign Up
+                {t('settingsMenu.signUp')}
               </button>
             )}
+
             <button
               className="settings-menu__option"
               onClick={() => {
@@ -80,8 +87,9 @@ export function SettingsMenu({
                 setIsOpen(false);
               }}
             >
-              Change Language
+              {t('settingsMenu.changeLanguage')}
             </button>
+
             <button
               className="settings-menu__option"
               onClick={() => {
@@ -89,17 +97,9 @@ export function SettingsMenu({
                 setIsOpen(false);
               }}
             >
-              Change Theme
+              {t('settingsMenu.changeTheme')}
             </button>
           </div>
-            {t('settingsMenu.changeLanguage')}
-          </button>
-          <button
-            className="settings-menu__option"
-            onClick={() => onThemeChange(theme === 'light' ? 'dark' : 'light')}
-          >
-            {t('settingsMenu.changeTheme')}
-          </button>
         </div>
       )}
     </div>

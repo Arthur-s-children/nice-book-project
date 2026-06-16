@@ -33,14 +33,14 @@ export const BooksSwiper = ({
   const { t } = useTranslation();
   const showLoader = useMinimumLoader(isLoading, 1500);
 
-  if (showLoader) {
-    return <PageLoader />;
-  }
-
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
+
+  if (showLoader) {
+    return <PageLoader />;
+  }
 
   return (
     <section
@@ -53,7 +53,7 @@ export const BooksSwiper = ({
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <h2 className="books-swiper__title">{title}</h2>
+        <h2 className="books-swiper__title">{t(title)}</h2>
 
         <div className="books-swiper__nav">
           <button
