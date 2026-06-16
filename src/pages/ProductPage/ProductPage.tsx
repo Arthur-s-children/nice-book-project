@@ -8,8 +8,9 @@ import { BooksSwiper } from '../../components/shared/BooksSwiper/BooksSwiper';
 import { useBook } from '../../hooks/useBook.ts';
 import { useBooks } from '../../hooks/useBooks.ts';
 import { getImageUrl } from '../../services/getImageUrl.ts';
+import { Icon } from '../../components/ui/Icon/Icon.tsx';
 import { useTranslation } from 'react-i18next';
-import { Icon } from '../../components/ui/Icon';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -76,7 +77,7 @@ export const ProductPage = () => {
   );
 
   if (isBookPending) {
-    return <h2>{t('common.loading')}</h2>;
+    return <PageLoader />;
   }
 
   if (isBookError || !book) {

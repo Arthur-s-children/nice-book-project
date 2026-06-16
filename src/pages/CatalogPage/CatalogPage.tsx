@@ -8,6 +8,14 @@ import type { Book } from '../../types/BooksAPI.ts';
 import './CatalogPage.scss';
 import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
+
+const TITLES: Record<string, string> = {
+  all: 'All books',
+  paperback: 'Paper books',
+  kindle: 'Kindle books',
+  audiobook: 'Audiobooks',
+};
 
 function getPrice(book: Book) {
   return book.price_discount ?? book.price_regular;
@@ -45,14 +53,8 @@ export function CatalogPage() {
   const start = (page - 1) * perPage;
   const booksOnPage = sortedBooks.slice(start, start + perPage);
 
-  const TITLES: Record<string, string> = {
-    all: t('catalog.title.all'),
-    paperback: t('catalog.title.paperback'),
-    kindle: t('catalog.title.kindle'),
-    audiobook: t('catalog.title.audiobook'),
-  };
   if (isLoading) {
-    return <h2>{t('common.loading')}</h2>;
+    return <PageLoader />;
   }
 
   if (error) {

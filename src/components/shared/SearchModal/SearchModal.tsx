@@ -4,6 +4,7 @@ import { Icon } from '../../ui/Icon';
 import './SearchModal.scss';
 import { categoryStructure } from './searchCategories.ts';
 import { useBooks } from '../../../hooks/useBooks.ts';
+import { PageLoader } from '../PageLoader/PageLoader.tsx';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
@@ -102,7 +103,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
   if (!isOpen) return null;
 
   if (isLoading) {
-    return <h2>{t('common.loading')}</h2>;
+    return <PageLoader />;
   }
 
   return (
