@@ -4,6 +4,7 @@ import Footer from '../Footer/Footer';
 import { ScrollToTop } from './ScrollToTop.ts';
 import { AuthPromptModal } from '../../ui/AuthPromptModal';
 import { useState, useEffect } from 'react';
+import { SoundMenu } from '../../shared/SoundMenu/SoundMenu.tsx';
 
 export function AppLayout() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -34,6 +35,7 @@ export function AppLayout() {
       </main>
 
       <Footer />
+      <SoundMenu />
 
       <AuthPromptModal />
     </>
