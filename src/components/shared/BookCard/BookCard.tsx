@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
 import { Headphones, Truck } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { animateFlyingIcon } from '../../../services/animations/animateFlyingIcon';
 
 type Props = {
@@ -29,6 +30,28 @@ export function BookCard({
   const [isHovered, setIsHovered] = useState(false);
 
   const { t } = useTranslation();
+
+  const handleAddToFavorite = () => {
+    onToggleFavorite(book.id);
+
+    if (!isFavorite) {
+      toast.success(
+        `${book.name} ${t('product.addedToFavorites', { defaultValue: 'додано в обране!' })}`,
+      );
+    } else {
+      toast.info(
+        `${book.name} ${t('product.removedFromFavorites', { defaultValue: 'видалено з обраного' })}`,
+      );
+    }
+  };
+
+  const handleAddToCart = () => {
+    onAddToCart(book.id);
+
+    toast.success(
+      `${book.name} ${t('product.addedToCartSuccess', { defaultValue: 'упішно додано до кошика!' })}`,
+    );
+  };
 
   return (
     <article
@@ -77,36 +100,36 @@ export function BookCard({
         className={`book-card__actions ${isHovered ? 'book-card__actions--visible' : ''}`}
       >
         <AppButton
-          variant={inCart ? 'selected' : 'primary'}
-          onClick={(event) => {
-            if (inCart) return;
+  variant={inCart ? 'selected' : 'primary'}
+  onClick={(event) => {
+    if (inCart) return;
 
-            onAddToCart(book.id);
+    handleAddToCart();
 
-            animateFlyingIcon({
-              source: event.currentTarget,
-              targetSelector: '[data-cart-target]',
-              content: '🛒',
-            });
-          }}
-        >
-          {inCart ? t('product.added') : t('product.addToCart')}
-        </AppButton>
+    animateFlyingIcon({
+      source: event.currentTarget,
+      targetSelector: '[data-cart-target]',
+      content: '🛒',
+    });
+  }}
+>
+  {inCart ? t('product.added') : t('product.addToCart')}
+</AppButton>
         <LikeButton
-          isSelected={isFavorite}
-          onClick={(event) => {
-            onToggleFavorite(book.id);
+  isSelected={isFavorite}
+  onClick={(event) => {
+    handleAddToFavorite();
 
-            if (!isFavorite) {
-              animateFlyingIcon({
-                source: event.currentTarget,
-                targetSelector: '[data-favorites-target]',
-                content: '❤️',
-              });
-            }
-          }}
-          colored
-        />
+    if (!isFavorite) {
+      animateFlyingIcon({
+        source: event.currentTarget,
+        targetSelector: '[data-favorites-target]',
+        content: '❤️',
+      });
+    }
+  }}
+  colored
+/>
       </div>
     </article>
   );
