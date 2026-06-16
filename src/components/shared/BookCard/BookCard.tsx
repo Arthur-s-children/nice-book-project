@@ -6,6 +6,7 @@ import './BookCard.scss';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
+import { animateFlyingIcon } from '../../../services/animations/animateFlyingIcon';
 
 type Props = {
   book: Book;
@@ -67,13 +68,33 @@ export function BookCard({
       <div className="book-card__actions">
         <AppButton
           variant={inCart ? 'selected' : 'primary'}
-          onClick={() => !inCart && onAddToCart(book.id)}
+          onClick={(event) => {
+            if (inCart) return;
+
+            onAddToCart(book.id);
+
+            animateFlyingIcon({
+              source: event.currentTarget,
+              targetSelector: '[data-cart-target]',
+              content: '🛒',
+            });
+          }}
         >
           {inCart ? t('product.added') : t('product.addToCart')}
         </AppButton>
         <LikeButton
           isSelected={isFavorite}
-          onClick={() => onToggleFavorite(book.id)}
+          onClick={(event) => {
+            onToggleFavorite(book.id);
+
+            if (!isFavorite) {
+              animateFlyingIcon({
+                source: event.currentTarget,
+                targetSelector: '[data-favorites-target]',
+                content: '❤️',
+              });
+            }
+          }}
           colored
         />
       </div>
