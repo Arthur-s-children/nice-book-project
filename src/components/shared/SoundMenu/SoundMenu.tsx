@@ -2,15 +2,28 @@ import { useRef, useState, useCallback } from 'react';
 import styles from './SoundMenu.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { getImageUrl } from '../../../services/getImageUrl.ts';
 
 const SOUNDS = [
-  { id: 'forest', label: 'Ліс', icon: '/forest.png' },
-  { id: 'bonfire', label: 'Вогнище', icon: '/bonfire.png' },
-  { id: 'rain', label: 'Дощ', icon: '/rain.png' },
+  {
+    id: 'forest',
+    label: 'Ліс',
+    icon: getImageUrl('icons/forest.png'),
+  },
+  {
+    id: 'bonfire',
+    label: 'Вогнище',
+    icon: getImageUrl('icons/bonfire.png'),
+  },
+  {
+    id: 'rain',
+    label: 'Дощ',
+    icon: getImageUrl('icons/rain.png'),
+  },
   {
     id: 'mindfulness',
     label: 'Усвідомленість',
-    icon: '/mindfulness.png',
+    icon: getImageUrl('icons/mindfulness.png'),
   },
 ] as const;
 
@@ -73,7 +86,7 @@ export const SoundMenu = () => {
 
   const toggleSound = useCallback((id: SoundId) => {
     if (!audioRefs.current[id]) {
-      const audio = new Audio(`/sounds/${id}.mp3`);
+      const audio = new Audio(`${import.meta.env.BASE_URL}sounds/${id}.mp3`);
       audio.loop = true;
       audioRefs.current[id] = audio;
     }
@@ -133,7 +146,7 @@ export const SoundMenu = () => {
         onClick={handleTrigger}
       >
         <img
-          src="/wave-sound.png"
+          src={getImageUrl('icons/wave-sound.png')}
           className={styles.trigger__icon}
           alt="Sound waves"
           aria-hidden={true}

@@ -14,6 +14,7 @@ import { LanguageSwitcher } from '../../ui/LanguageSwitcher/LanguageSwitcher';
 import { useTheme } from './useTheme';
 import { useCart } from '../../../hooks/useCart.tsx';
 import { useFavorites } from '../../../hooks/useFavorites.tsx';
+import { toast } from 'sonner';
 import { useTypingPlaceholder } from '../../../hooks/useTypingPlaceholder.ts';
 
 interface Props {
@@ -94,6 +95,30 @@ export function Header({
       });
     }
   }, [location, i18n.language]);
+
+  useEffect(() => {
+    if (!i18n.language) return;
+
+    if (i18n.language === 'uk') {
+      toast.success('Мову успішно змінено на українську! 🇺🇦');
+    } else if (i18n.language === 'en') {
+      toast.success('Language successfully changed to English! 🇬🇧');
+    }
+  }, [i18n.language]);
+
+  const handleThemeToggle = () => {
+    toggleTheme();
+
+    if (isDark) {
+      toast.info(
+        t('theme.lightEnabled', { defaultValue: 'Увімкнено світлу тему ☀️' }),
+      );
+    } else {
+      toast.info(
+        t('theme.darkEnabled', { defaultValue: 'Увімкнено темну тему 🌙' }),
+      );
+    }
+  };
 
   return (
     <header className={isMenuOpen ? 'header header--menu-open' : 'header'}>
@@ -242,7 +267,7 @@ export function Header({
 
           <button
             className="icon icon--theme"
-            onClick={toggleTheme}
+            onClick={handleThemeToggle}
           >
             {isDark ? '☀️' : '🌘'}
           </button>
