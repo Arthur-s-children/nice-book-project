@@ -7,13 +7,14 @@ import { UserMenu } from '../../ui/UserMenu';
 import { SettingsMenu } from '../../ui/SettingsMenu';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import '../Header/header.scss';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '../../ui/LanguageSwitcher/LanguageSwitcher';
 import { useTheme } from './useTheme';
 import { useCart } from '../../../hooks/useCart.tsx';
 import { useFavorites } from '../../../hooks/useFavorites.tsx';
+import { useTypingPlaceholder } from '../../../hooks/useTypingPlaceholder.ts';
 
 interface Props {
   isAuthModalOpen?: boolean;
@@ -55,10 +56,29 @@ export function Header({
   };
 
   const { t, i18n } = useTranslation();
+
+  const placeholderBooks = useMemo(
+    () => [
+      t('search.examples.harryPotter'),
+      t('search.examples.lookingForAlaska'),
+      t('search.examples.grokkkingAlgorithms'),
+      t('search.examples.emotionalInheritance'),
+      t('search.examples.anxiousPeople'),
+      t('search.examples.theCatcherInRye'),
+      t('search.examples.aLittleLife'),
+      t('search.examples.codependentNoMore'),
+    ],
+    [t],
+  );
+
   const openSearchModal = (event: React.MouseEvent) => {
     event.preventDefault();
     setIsSearchModalOpen(true);
   };
+
+  const animatedPlaceholder = useTypingPlaceholder({
+    words: placeholderBooks,
+  });
 
   useEffect(() => {
     const activeLink = navListRef.current?.querySelector(
@@ -171,6 +191,7 @@ export function Header({
           <input
             type="text"
             className="input"
+            placeholder={isSearchModalOpen ? '' : animatedPlaceholder}
             onClick={openSearchModal}
             readOnly
           />
