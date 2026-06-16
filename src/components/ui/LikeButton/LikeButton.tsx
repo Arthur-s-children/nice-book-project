@@ -4,7 +4,7 @@ import styles from './LikeButton.module.scss';
 
 type Props = {
   isSelected: boolean;
-  onClick: () => void;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
   colored?: boolean;
 };
 

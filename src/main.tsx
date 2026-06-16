@@ -3,8 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import './index.scss';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
+import { IntroAnimation } from './pages/IntroAnimation';
 import { router } from './app/router';
+import './locales/i18n';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './components/layout/Header/useTheme';
 import { CursorBlur } from './components/ui/CursorBlur/CursorBlur';
@@ -17,7 +18,9 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <AuthProvider>
           <CursorBlur />
+        <IntroAnimation>
           <RouterProvider router={router} />
+          </IntroAnimation>
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>

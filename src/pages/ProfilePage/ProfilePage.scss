@@ -1,4 +1,4 @@
-@use '../../styles/variables' as *;
+@use '../../styles/variables.scss' as *;
 
 .profile-page {
   padding: 100px 20px 60px;
@@ -41,6 +41,7 @@
     border-radius: 50%;
     background: linear-gradient(135deg, $color-accent 0%, $color-primary 100%);
     background-size: cover;
+    font: 1em sans-serif;
     background-position: center;
     cursor: pointer;
     display: flex;

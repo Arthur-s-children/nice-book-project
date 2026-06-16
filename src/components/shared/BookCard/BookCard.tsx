@@ -3,9 +3,11 @@ import { LikeButton } from '../../ui/LikeButton';
 import type { Book } from '../../../types/BooksAPI.ts';
 import './BookCard.scss';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
 import { Headphones, Truck } from 'lucide-react';
 import { useState } from 'react';
+import { animateFlyingIcon } from '../../../services/animations/animateFlyingIcon';
 
 type Props = {
   book: Book;
@@ -25,6 +27,8 @@ export function BookCard({
   const price = book.price_discount ?? book.price_regular;
   const imageSrc = getImageUrl(book.images[0]);
   const [isHovered, setIsHovered] = useState(false);
+
+  const { t } = useTranslation();
 
   return (
     <article
@@ -74,13 +78,33 @@ export function BookCard({
       >
         <AppButton
           variant={inCart ? 'selected' : 'primary'}
-          onClick={() => !inCart && onAddToCart(book.id)}
+          onClick={(event) => {
+            if (inCart) return;
+
+            onAddToCart(book.id);
+
+            animateFlyingIcon({
+              source: event.currentTarget,
+              targetSelector: '[data-cart-target]',
+              content: '🛒',
+            });
+          }}
         >
-          {inCart ? 'Added' : 'Add to cart'}
+          {inCart ? t('product.added') : t('product.addToCart')}
         </AppButton>
         <LikeButton
           isSelected={isFavorite}
-          onClick={() => onToggleFavorite(book.id)}
+          onClick={(event) => {
+            onToggleFavorite(book.id);
+
+            if (!isFavorite) {
+              animateFlyingIcon({
+                source: event.currentTarget,
+                targetSelector: '[data-favorites-target]',
+                content: '❤️',
+              });
+            }
+          }}
           colored
         />
       </div>

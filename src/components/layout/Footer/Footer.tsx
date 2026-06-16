@@ -1,11 +1,14 @@
 import './Footer.scss';
 import { Link } from 'react-router-dom';
 import { ArrowUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function Footer() {
   const handleBackToTop = (): void => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const { t } = useTranslation();
 
   return (
     <footer className="footer">

@@ -2,6 +2,7 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { useOrders } from '../../hooks/useOrders';
 import { useNavigate } from 'react-router-dom';
 import './OrderHistoryPage.scss';
+import { useTranslation } from 'react-i18next';
 
 const STATUS_COLORS: Record<string, string> = {
   completed: '#10b981',
@@ -26,17 +27,16 @@ export function OrderHistoryPage() {
   const { user } = useAuthContext();
   const { orders, isLoading } = useOrders(user?.id);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   if (!user) {
     return (
-      <div className="order-history">
-        Please sign in to view your order history
-      </div>
+      <div className="order-history">{t('orderHistory.pleaseSignIn')}</div>
     );
   }
 
   if (isLoading) {
-    return <div className="order-history">Loading orders...</div>;
+    return <div className="order-history">{t('orderHistory.loading')}</div>;
   }
 
   const handleItemClick = (bookSlug: string) => {
@@ -46,13 +46,15 @@ export function OrderHistoryPage() {
   return (
     <div className="order-history">
       <div className="order-history__container">
-        <h1 className="order-history__title">Order History</h1>
+        <h1 className="order-history__title">{t('orderHistory.title')}</h1>
 
         {orders.length === 0 ?
           <div className="order-history__empty">
-            <p className="order-history__empty-text">No orders yet</p>
+            <p className="order-history__empty-text">
+              {t('orderHistory.emptyTitle')}
+            </p>
             <p className="order-history__empty-subtext">
-              Start shopping to see your orders here
+              {t('orderHistory.emptyText')}
             </p>
           </div>
         : <div className="order-history__list">
@@ -63,7 +65,9 @@ export function OrderHistoryPage() {
               >
                 <div className="order-history__card-header">
                   <div className="order-history__order-id">
-                    <span className="order-history__label">Order #</span>
+                    <span className="order-history__label">
+                      {t('orderHistory.order')} #
+                    </span>
                     <span className="order-history__value">
                       {order.id.slice(0, 8)}
                     </span>
@@ -75,21 +79,24 @@ export function OrderHistoryPage() {
                         STATUS_COLORS[order.status] ?? STATUS_COLORS.pending,
                     }}
                   >
-                    {order.status.charAt(0).toUpperCase() +
-                      order.status.slice(1)}
+                    {t(`orderHistory.status.${order.status}`)}
                   </div>
                 </div>
 
                 <div className="order-history__card-body">
                   <div className="order-history__info">
-                    <span className="order-history__label">Date:</span>
+                    <span className="order-history__label">
+                      {t('orderHistory.date')}:
+                    </span>
                     <span className="order-history__value">
                       {formatDate(order.created_at)}
                     </span>
                   </div>
 
                   <div className="order-history__info">
-                    <span className="order-history__label">Total:</span>
+                    <span className="order-history__label">
+                      {t('orderHistory.total')}:
+                    </span>
                     <span className="order-history__value order-history__value--price">
                       ${order.total_price.toFixed(2)}
                     </span>
@@ -98,7 +105,7 @@ export function OrderHistoryPage() {
                   {order.shipping_address && (
                     <div className="order-history__info">
                       <span className="order-history__label">
-                        Shipping Address:
+                        {t('orderHistory.shippingAddress')}:
                       </span>
                       <span className="order-history__value">
                         {order.shipping_address}
@@ -108,7 +115,9 @@ export function OrderHistoryPage() {
 
                   {order.phone && (
                     <div className="order-history__info">
-                      <span className="order-history__label">Phone:</span>
+                      <span className="order-history__label">
+                        {t('orderHistory.phone')}:
+                      </span>
                       <span className="order-history__value">
                         {order.phone}
                       </span>
@@ -117,7 +126,9 @@ export function OrderHistoryPage() {
 
                   {order.order_items && order.order_items.length > 0 && (
                     <div className="order-history__items">
-                      <h3 className="order-history__items-title">Items</h3>
+                      <h3 className="order-history__items-title">
+                        {t('orderHistory.items')}
+                      </h3>
                       <div className="order-history__items-list">
                         {order.order_items.map((item) => (
                           <div
@@ -140,7 +151,9 @@ export function OrderHistoryPage() {
                                 {item.book_author}
                               </div>
                               <div className="order-history__item-meta">
-                                <span>Qty: {item.quantity}</span>
+                                <span>
+                                  {t('orderHistory.qty')}: {item.quantity}
+                                </span>
                                 <span className="order-history__item-price">
                                   ${item.price.toFixed(2)}
                                 </span>

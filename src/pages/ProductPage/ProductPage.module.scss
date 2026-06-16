@@ -2,7 +2,7 @@
 
 .item_card {
   padding-inline: 8px;
-  max-width: 1136px;
+  max-width: 1200px;
   margin-inline: auto;
   padding: 112px 16px 32px;
 
@@ -26,22 +26,35 @@
   margin-bottom: 16px;
 }
 
+.separator {
+  display: flex;
+  justify-content: center;
+  color: $color-elements;
+}
+
 .link {
   color: $color-elements;
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1%;
+  font-size: 12px;
+  line-height: 11px;
+  font-weight: $font-bold;
+  font-family: $font-main;
 
   &:hover {
     color: $color-primary;
   }
 }
 
-.separator {
-  color: $color-icons;
-}
-
 .current {
-  color: $color-primary;
-  font-weight: $font-medium;
+  color: $color-elements;
+  text-transform: uppercase;
+  letter-spacing: 1%;
+  font-size: 12px;
+  line-height: 11px;
+  font-weight: $font-bold;
+  font-family: $font-main;
 }
 
 .book_grid {
@@ -201,7 +214,7 @@
   display: block;
   border-radius: 4px;
 
-  transition: transform 0.6s ease;
+  transition: all 0.9s ease;
 }
 
 .thumb:hover .thumbnail_image {

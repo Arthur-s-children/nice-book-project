@@ -6,7 +6,10 @@ import { CatalogControls } from '../../components/ui/CatalogControls/CatalogCont
 import { Pagination } from '../../components/ui/Pagination/Pagination.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
 import './CatalogPage.scss';
+import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
+import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
 
 const TITLES: Record<string, string> = {
   all: 'All books',
@@ -39,8 +42,10 @@ export function CatalogPage() {
   const { sort, type, perPage, page, setParam } = useCatalogParams();
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
+  const { t } = useTranslation();
 
   const { data: books = [], isLoading, error } = useBooks();
+  const showLoader = useMinimumLoader(isLoading, 1500);
 
   const filteredBooks =
     type === 'all' ? books : books.filter((book) => book.type === type);
@@ -50,19 +55,21 @@ export function CatalogPage() {
   const start = (page - 1) * perPage;
   const booksOnPage = sortedBooks.slice(start, start + perPage);
 
-  if (isLoading) {
-    return <h2>Loading books...</h2>;
+  if (showLoader) {
+    return <PageLoader />;
   }
 
   if (error) {
-    return <h2>Failed to load books</h2>;
+    return <h2>{t('common.errorLoading')}</h2>;
   }
 
   return (
     <section className="catalog">
-      <h1 className="catalog-title">{TITLES[type] ?? 'All books'}</h1>
+      <h1 className="catalog-title">
+        {TITLES[type] ?? t('catalog.title.all')}
+      </h1>
       <p className="catalog-count">
-        {sortedBooks.length.toLocaleString()} books
+        {t('catalog.count', { count: sortedBooks.length })}
       </p>
 
       <CatalogControls
@@ -72,7 +79,7 @@ export function CatalogPage() {
       />
 
       {booksOnPage.length === 0 ?
-        <p className="catalog-empty">No books found.</p>
+        <p className="catalog-empty">{t('catalog.empty')}</p>
       : <div className="catalog-grid">
           {booksOnPage.map((book) => (
             <BookCard

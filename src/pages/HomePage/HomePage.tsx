@@ -5,6 +5,7 @@ import { CategoriesSection } from '../../components/shared/CategoriesSection/Cat
 import { DiscountsSection } from '../../components/shared/DiscountsSection/DiscountsSection';
 import { DontMissSection } from '../../components/shared/DontMissSection/DontMissSection';
 import './HomePage.scss';
+import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
 
 export const HomePage = () => {
@@ -20,6 +21,9 @@ export const HomePage = () => {
       author: 'Cicero',
     },
   ];
+  const { t } = useTranslation();
+  const newBooks = books.slice(30, 40); // Перші 10 нових книг
+  const suggestedBooks = books.slice(40, 50); // Книги для рекомендацій
 
   return (
     <>
@@ -28,6 +32,10 @@ export const HomePage = () => {
       <div style={{ width: '100%', marginTop: '24px' }}>
         <DiscountsSection
           books={books}
+      <div className="home-page">
+        <BooksSwiper
+          title={t('home.newBooks')}
+          books={newBooks}
           isLoading={isLoading}
         />
       </div>

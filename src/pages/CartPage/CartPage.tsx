@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { useCart } from '../../hooks/useCart.tsx';
 import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
+import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
+import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
 import './CartPage.scss';
 
 function getPrice(book: Book) {
@@ -11,6 +14,8 @@ function getPrice(book: Book) {
 
 export function CartPage() {
   const { items, updateQuantity, removeFromCart } = useCart();
+
+  const { t } = useTranslation();
   const { data: books = [], isLoading, error } = useBooks();
 
   const [deliveryType, setDeliveryType] = useState<'warehouse' | 'poshtomat'>(
@@ -95,7 +100,7 @@ export function CartPage() {
 
   const handleCheckout = async () => {
     if (!selectedWarehouse) {
-      alert('Будь ласка, оберіть відділення або поштомат для доставки.');
+      alert(t('cart.pleaseSelectWarehouse'));
       return;
     }
 
@@ -139,15 +144,20 @@ export function CartPage() {
     }
   };
 
-  if (isLoading) return <h2>Loading...</h2>;
-  if (error) return <h2>Failed to load books</h2>;
+  const showLoader = useMinimumLoader(isLoading, 1500);
+
+  if (showLoader) {
+    return <PageLoader />;
+  }
+
+  if (error) return <h2>{t('common.errorLoading')}</h2>;
 
   return (
     <section className="cart-page">
-      <h1 className="cart-page__title">Cart</h1>
+      <h1 className="cart-page__title">{t('cart.title')}</h1>
 
       {cartBooks.length === 0 ?
-        <p className="cart-page__empty">Your cart is empty.</p>
+        <p className="cart-page__empty">{t('cart.empty')}</p>
       : <div className="cart-page__content">
           <div className="cart-page__list">
             {cartBooks.map(({ book, quantity }) => (
@@ -164,7 +174,9 @@ export function CartPage() {
 
           <aside className="cart-page__sidebar">
             <div className="cart-page__delivery">
-              <p className="cart-page__section-title">Доставка Нова Пошта</p>
+              <p className="cart-page__section-title">
+                {t('cart.deliveryTitle')}
+              </p>
 
               <div className="cart-page__delivery-types">
                 <label
@@ -181,7 +193,7 @@ export function CartPage() {
                     onChange={() => setDeliveryType('warehouse')}
                   />
                   <span className="cart-page__delivery-type-title">
-                    Відділення
+                    {t('cart.warehouse')}
                   </span>
                 </label>
 
@@ -199,7 +211,7 @@ export function CartPage() {
                     onChange={() => setDeliveryType('poshtomat')}
                   />
                   <span className="cart-page__delivery-type-title">
-                    Поштомат
+                    {t('cart.poshtomat')}
                   </span>
                 </label>
               </div>
@@ -207,7 +219,7 @@ export function CartPage() {
               <div className="cart-page__field">
                 <input
                   type="text"
-                  placeholder="Введіть місто, наприклад Київ"
+                  placeholder={t('cart.cityPlaceholder')}
                   value={searchCity}
                   onChange={(e) => {
                     const value = e.target.value;
@@ -245,7 +257,12 @@ export function CartPage() {
                     onChange={(e) => setSelectedWarehouse(e.target.value)}
                     className="cart-page__select"
                   >
-                    <option value="">Оберіть адресу призначення</option>
+                    <option
+                      value=""
+                      disabled
+                    >
+                      {t('cart.selectWarehouse')}
+                    </option>
                     {warehouses.map((w) => (
                       <option
                         key={w.ref}
@@ -260,14 +277,14 @@ export function CartPage() {
             </div>
 
             <div className="cart-page__summary">
-              <p className="cart-page__total-label">Total</p>
+              <p className="cart-page__total-label">{t('cart.total')}</p>
               <p className="cart-page__total-value">₴{total.toFixed(2)}</p>
               <button
                 type="button"
                 className="cart-page__checkout-btn"
                 onClick={handleCheckout}
               >
-                Checkout
+                {t('cart.checkout')}
               </button>
             </div>
           </aside>

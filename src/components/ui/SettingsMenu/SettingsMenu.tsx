@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { SlidersHorizontal } from 'lucide-react';
 import './SettingsMenu.scss';
+import { useTranslation } from 'react-i18next';
 
 type Language = 'en' | 'uk';
 type Theme = 'light' | 'dark';
@@ -22,6 +23,7 @@ export function SettingsMenu({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -90,6 +92,14 @@ export function SettingsMenu({
               Change Theme
             </button>
           </div>
+            {t('settingsMenu.changeLanguage')}
+          </button>
+          <button
+            className="settings-menu__option"
+            onClick={() => onThemeChange(theme === 'light' ? 'dark' : 'light')}
+          >
+            {t('settingsMenu.changeTheme')}
+          </button>
         </div>
       )}
     </div>

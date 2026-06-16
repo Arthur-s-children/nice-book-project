@@ -1,6 +1,7 @@
 import { categories } from './categories';
 import { CategoryCard } from './CategoryCard';
 import './CategoriesSection.scss';
+import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../../hooks/useBooks.ts';
 import { useTimeCounter } from '../../../hooks/useTimeCounter.ts';
 import { useInView } from 'react-intersection-observer';
@@ -31,6 +32,8 @@ export const CategoriesSection = () => {
   const kindlesCount = useTimeCounter(counts.kindle * 39, 4, inView);
 
   const paperbacksCount = useTimeCounter(counts.paperback * 29, 6, inView);
+
+  const { t } = useTranslation();
 
   return (
     <section

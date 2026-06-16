@@ -8,11 +8,14 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import '../Header/header.scss';
 import { useRef, useEffect, useState, useMemo } from 'react';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '../../ui/LanguageSwitcher/LanguageSwitcher';
 import { useTheme } from './useTheme';
 import { useCart } from '../../../hooks/useCart.tsx';
 import { useFavorites } from '../../../hooks/useFavorites.tsx';
 import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
 import { Search, Heart, ShoppingBag, Menu, X } from 'lucide-react';
+import { useTypingPlaceholder } from '../../../hooks/useTypingPlaceholder.ts';
 
 interface Props {
   isAuthModalOpen?: boolean;
@@ -56,6 +59,22 @@ export function Header({
     setIsOpenMenu(!isMenuOpen);
   };
 
+  const { t, i18n } = useTranslation();
+
+  const placeholderBooks = useMemo(
+    () => [
+      t('search.examples.harryPotter'),
+      t('search.examples.lookingForAlaska'),
+      t('search.examples.grokkkingAlgorithms'),
+      t('search.examples.emotionalInheritance'),
+      t('search.examples.anxiousPeople'),
+      t('search.examples.theCatcherInRye'),
+      t('search.examples.aLittleLife'),
+      t('search.examples.codependentNoMore'),
+    ],
+    [t],
+  );
+
   const openSearchModal = (event: React.MouseEvent) => {
     event.preventDefault();
     setIsSearchModalOpen(true);
@@ -84,6 +103,9 @@ export function Header({
     headerBackground.set(source.get());
     return source.on('change', (v) => headerBackground.set(v));
   }, [isDark]);
+  const animatedPlaceholder = useTypingPlaceholder({
+    words: placeholderBooks,
+  });
 
   useEffect(() => {
     const activeLink = navListRef.current?.querySelector(
@@ -98,7 +120,7 @@ export function Header({
         visible: true,
       });
     }
-  }, [location]);
+  }, [location, i18n.language]);
 
   return (
     <motion.header
@@ -130,7 +152,7 @@ export function Header({
                 }
                 to="/"
               >
-                Home
+                {t('common.home')}
               </NavLink>
             </li>
             <li className="nav__item">
@@ -145,7 +167,7 @@ export function Header({
                 }
                 to="/catalog?type=paperback"
               >
-                Paper
+                {t('header.paper')}
               </NavLink>
             </li>
             <li className="nav__item">
@@ -160,7 +182,7 @@ export function Header({
                 }
                 to="/catalog?type=kindle"
               >
-                Kindle
+                {t('header.kindle')}
               </NavLink>
             </li>
             <li className="nav__item">
@@ -175,7 +197,7 @@ export function Header({
                 }
                 to="/catalog?type=audiobook"
               >
-                Audiobook
+                {t('header.audio')}
               </NavLink>
             </li>
             <div
@@ -190,9 +212,19 @@ export function Header({
         </nav>
 
         <div className="top-bar__icons">
+          {!isLoading && !isAuthenticated && (
+            <button
+              className="header__sign-up-btn"
+              onClick={() => setIsAuthModalOpen(true)}
+            >
+              {t('auth.signUp')}
+            </button>
+          )}
+
           <input
             type="text"
             className="input"
+            placeholder={isSearchModalOpen ? '' : animatedPlaceholder}
             onClick={openSearchModal}
             readOnly
           />
@@ -207,6 +239,7 @@ export function Header({
             onClick={closeMenu}
             className="icon icon--favourite"
             to={'favorites'}
+            data-favorites-target
           >
             <Heart size={20} />
             {favoritesCount > 0 && (
@@ -217,6 +250,7 @@ export function Header({
             onClick={closeMenu}
             className="icon icon--cart"
             to={'cart'}
+            data-cart-target
           >
             <ShoppingBag size={20} />
             {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
@@ -249,6 +283,8 @@ export function Header({
             : <Menu size={20} />}
           </a>
         </div>
+
+        <LanguageSwitcher />
       </div>
 
       <SearchModal

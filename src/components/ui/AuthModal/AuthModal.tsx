@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { Icon } from '../Icon';
 import './AuthModal.scss';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export function AuthModal({ isOpen, onClose }: Props) {
   const [error, setError] = useState<string>('');
   const { signIn, signUp, signInWithGoogle, isSigningIn, isSigningUp } =
     useAuthContext();
+  const { t } = useTranslation();
 
   const {
     register,
@@ -43,7 +45,7 @@ export function AuthModal({ isOpen, onClose }: Props) {
       );
       onClose();
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : t('auth.error'));
     }
   };
 
@@ -53,7 +55,7 @@ export function AuthModal({ isOpen, onClose }: Props) {
       await signInWithGoogle();
       onClose();
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : t('auth.error'));
     }
   };
 
@@ -96,7 +98,7 @@ export function AuthModal({ isOpen, onClose }: Props) {
             <div className="auth-modal__field">
               <input
                 type="text"
-                placeholder="Full Name"
+                placeholder={t('auth.fullName')}
                 className="auth-modal__input"
                 {...register('fullName')}
               />
@@ -106,14 +108,14 @@ export function AuthModal({ isOpen, onClose }: Props) {
           <div className="auth-modal__field">
             <input
               type="email"
-              placeholder="Email"
+              placeholder={t('auth.email')}
               className="auth-modal__input"
               onDoubleClick={(e) => (e.target as HTMLInputElement).select()}
               {...register('email', {
-                required: 'Email is required',
+                required: t('auth.emailRequired'),
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address',
+                  message: t('auth.invalidEmail'),
                 },
               })}
             />
@@ -127,14 +129,14 @@ export function AuthModal({ isOpen, onClose }: Props) {
           <div className="auth-modal__field">
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t('auth.password')}
               className="auth-modal__input"
               onDoubleClick={(e) => (e.target as HTMLInputElement).select()}
               {...register('password', {
-                required: 'Password is required',
+                required: t('auth.passwordRequired'),
                 minLength: {
                   value: 6,
-                  message: 'Password must be at least 6 characters',
+                  message: t('auth.passwordMin'),
                 },
               })}
             />
@@ -151,15 +153,15 @@ export function AuthModal({ isOpen, onClose }: Props) {
             disabled={isSigningIn || isSigningUp}
           >
             {isSigningIn || isSigningUp ?
-              'Loading...'
+              t('auth.loading')
             : isLogin ?
-              'Sign In'
-            : 'Sign Up'}
+              t('auth.signIn')
+            : t('auth.signUp')}
           </button>
         </form>
 
         <div className="auth-modal__divider">
-          <span>or</span>
+          <span>{t('auth.or')}</span>
         </div>
 
         <button
@@ -172,17 +174,17 @@ export function AuthModal({ isOpen, onClose }: Props) {
             alt="Google"
             className="auth-modal__google-icon"
           />
-          Continue with Google
+          {t('auth.continueWithGoogle')}
         </button>
 
         <div className="auth-modal__switch">
-          {isLogin ? "Don't have an account? " : 'Already have an account? '}
+          {isLogin ? t('auth.noAccount') : t('auth.haveAccount')}
           <button
             type="button"
             className="auth-modal__switch-btn"
             onClick={handleSwitchMode}
           >
-            {isLogin ? 'Sign Up' : 'Sign In'}
+            {isLogin ? t('auth.signUp') : t('auth.signIn')}
           </button>
         </div>
       </div>

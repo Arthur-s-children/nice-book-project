@@ -4,7 +4,7 @@ import styles from './Button.module.scss';
 type Props = {
   variant?: 'primary' | 'selected';
   children: React.ReactNode;
-  onClick: () => void;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const AppButton = ({

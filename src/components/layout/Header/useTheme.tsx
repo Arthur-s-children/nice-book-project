@@ -20,7 +20,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-  }, [isDark]);
+  }, [isDark, theme]);
 
   const toggleTheme = () => setIsDark((prev) => !prev);
 
