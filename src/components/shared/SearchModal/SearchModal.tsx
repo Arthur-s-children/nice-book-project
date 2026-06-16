@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { SearchResultCard } from '../SearchResultCard/SearchResultCard';
 import { Icon } from '../../ui/Icon';
 import './SearchModal.scss';
-import { categoryStructure } from './searchCategories.ts';
+import { categoryStructure } from '../../constants/searchCategories.ts';
 import { useBooks } from '../../../hooks/useBooks.ts';
 import { PageLoader } from '../PageLoader/PageLoader.tsx';
 import { useTranslation } from 'react-i18next';
