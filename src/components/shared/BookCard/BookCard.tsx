@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
 import { toast } from 'sonner';
+import { animateFlyingIcon } from '../../../services/animations/animateFlyingIcon';
 
 type Props = {
   book: Book;
@@ -89,16 +90,36 @@ export function BookCard({
 
       <div className="book-card__actions">
         <AppButton
-          variant={inCart ? 'selected' : 'primary'}
-          onClick={() => !inCart && handleAddToCart()}
-        >
-          {inCart ? t('product.added') : t('product.addToCart')}
-        </AppButton>
+  variant={inCart ? 'selected' : 'primary'}
+  onClick={(event) => {
+    if (inCart) return;
+
+    handleAddToCart();
+
+    animateFlyingIcon({
+      source: event.currentTarget,
+      targetSelector: '[data-cart-target]',
+      content: '🛒',
+    });
+  }}
+>
+  {inCart ? t('product.added') : t('product.addToCart')}
+</AppButton>
         <LikeButton
-          isSelected={isFavorite}
-          onClick={handleAddToFavorite}
-          colored
-        />
+  isSelected={isFavorite}
+  onClick={(event) => {
+    handleAddToFavorite();
+
+    if (!isFavorite) {
+      animateFlyingIcon({
+        source: event.currentTarget,
+        targetSelector: '[data-favorites-target]',
+        content: '❤️',
+      });
+    }
+  }}
+  colored
+/>
       </div>
     </article>
   );

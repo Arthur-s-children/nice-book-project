@@ -231,6 +231,7 @@ export function Header({
             onClick={closeMenu}
             className="icon icon--favourite"
             to={'favorites'}
+            data-favorites-target
           >
             <Icon name="heart" />
             {favoritesCount > 0 && (
@@ -241,6 +242,7 @@ export function Header({
             onClick={closeMenu}
             className="icon icon--cart"
             to={'cart'}
+            data-cart-target
           >
             <Icon name="cart" />
             {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
