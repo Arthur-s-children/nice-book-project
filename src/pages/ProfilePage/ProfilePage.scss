@@ -1,4 +1,4 @@
-@use '../../styles/variables' as *;
+@use '../../styles/variables.scss' as *;
 
 .profile-page {
   padding: 60px 20px;
@@ -39,6 +39,7 @@
       $color-elements 100%
     );
     background-size: cover;
+    font: 1em sans-serif;
     background-position: center;
     cursor: pointer;
     display: flex;
@@ -73,7 +74,7 @@
     transition: all 0.3s ease;
 
     &:hover {
-      background: $color-primary;
+      background: $color-elements;
     }
   }
 
@@ -141,7 +142,7 @@
     margin-top: 16px;
 
     &:hover:not(:disabled) {
-      background: $color-primary;
+      background: $color-elements;
     }
 
     &:disabled {

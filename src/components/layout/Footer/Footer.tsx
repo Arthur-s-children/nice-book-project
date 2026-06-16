@@ -40,7 +40,7 @@ export function Footer() {
             className="footer__category"
             to="team"
           >
-            TEAM
+            {t('footer.team')}
           </Link>
           <Link
             className="footer__category"

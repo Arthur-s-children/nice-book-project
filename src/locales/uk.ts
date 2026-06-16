@@ -8,9 +8,9 @@ export const uk = {
   },
 
   header: {
-    paper: 'Паперова книга',
-    kindle: 'Електронна',
-    audio: 'Аудіокнига',
+    paper: 'Паперові книги',
+    kindle: 'Електронні',
+    audio: 'Аудіокниги',
   },
 
   footer: {
@@ -18,6 +18,7 @@ export const uk = {
     contacts: 'Контакти',
     rights: 'Права',
     backToTop: 'Вгору',
+    team: 'Команда',
   },
 
   product: {
@@ -44,6 +45,31 @@ export const uk = {
 
   category: {
     shopByCategory: 'Перегляд за категоріями',
+  },
+
+  categories: {
+    fiction: 'Художня література',
+    sciFi: 'Наукова фантастика',
+    fantasy: 'Фентезі',
+    mystery: 'Детективи та трилери',
+    romance: 'Романтика',
+    historical: 'Історична проза',
+    horror: 'Жахи',
+
+    nonFiction: 'Нон-фікшн',
+    business: 'Бізнес та менеджмент',
+    psychology: 'Психологія',
+    finance: 'Фінанси та інвестиції',
+    biographies: 'Біографії',
+
+    technology: 'Технології',
+    programming: 'Програмування',
+    design: 'Дизайн',
+    gaming: 'Комп\u2019ютерні ігри',
+
+    children: 'Дитячі книги',
+    fairyTales: 'Казки',
+    educational: 'Навчальні',
   },
 
   notFound: {
@@ -86,6 +112,13 @@ export const uk = {
   cart: {
     title: 'Кошик',
     empty: 'Ваш кошик порожній.',
+    deliveryTitle: 'Доставка Нова Пошта',
+    warehouse: 'Відділення',
+    poshtomat: 'Поштомат',
+    cityPlaceholder: 'Введіть місто, наприклад Київ',
+    selectWarehouse: 'Оберіть адресу призначення',
+    pleaseSelectWarehouse:
+      'Будь ласка, оберіть відділення або поштомат для доставки.',
     total: 'Разом',
     checkout: 'Оформити замовлення',
     payment: 'Оплата карткою',
@@ -171,7 +204,7 @@ export const uk = {
 
     limitationTitle: 'Обмеження відповідальності',
     limitationText:
-      'NiceBooks не несе відповідальності за будь-які збитки, пов’язані з використанням сайту.',
+      'NiceBooks не несе відповідальності за будь-які збитки, пов\u2019язані з використанням сайту.',
 
     changesTitle: 'Зміни умов',
     changesText:
@@ -180,5 +213,143 @@ export const uk = {
     contactsTitle: 'Контакти',
     contactsText:
       'Якщо у вас є питання, звертайтесь до нашої служби підтримки через контактну форму на сайті.',
+  },
+
+  contacts: {
+    title: 'Контактна інформація',
+    phone: 'Телефон:',
+    email: 'Email:',
+    address: 'Адреса:',
+    website: 'Вебсайт:',
+    hoursTitle: 'Години роботи',
+    mondayFriday: 'Понеділок - П\u0027ятниця: 9:00 - 18:00',
+    saturday: 'Субота: 10:00 - 16:00',
+    sunday: 'Неділя: Зачинено',
+    mapTitle: 'Мапа Google',
+  },
+
+  authCallback: {
+    confirmTitle: 'Підтвердження електронної пошти...',
+    confirmText:
+      'Будь ласка, зачекайте, поки ми перевіримо ваш обліковий запис.',
+    successTitle: 'Успішно!',
+    emailConfirm:
+      'Електронну пошту успішно підтверджено! Ви увійшли в систему.',
+    alreadySignIn: 'Ви вже увійшли в систему.',
+    redirect: 'Перенаправлення на головну сторінку...',
+    errorTitle: 'Помилка',
+    invalidLink: 'Недійсне посилання для підтвердження або сесію не знайдено.',
+    confirmError: 'Під час підтвердження електронної пошти сталася помилка.',
+    goHome: 'На головну',
+  },
+
+  search: {
+    sales: 'Знижки',
+    allCategories: 'Усі категорії',
+    previous: ' Попередня',
+    next: 'Наступна',
+    startTyping: 'Почніть вводити...',
+    notFound: 'Нічого не знайдено',
+    placeholder: 'Пошук за ключовими словами, темами або повідомленнями',
+
+    examples: {
+      harryPotter: 'Гаррі Поттер',
+      lookingForAlaska: 'В пошуках Аляски',
+      grokkkingAlgorithms: 'Грокаємо алгоритми',
+      emotionalInheritance: 'Емоційний спадок',
+      anxiousPeople: 'Тривожні люди',
+      theCatcherInRye: 'Ловець у житі',
+      aLittleLife: 'Маленьке життя',
+      codependentNoMore: 'Долаємо співзалежність',
+    },
+  },
+
+  orderHistory: {
+    status: {
+      completed: 'Завершено',
+      processing: 'Обробляється',
+      cancelled: 'Скасовано',
+      pending: 'Очікує',
+    },
+    title: 'Історія замовлень',
+    pleaseSignIn: 'Увійдіть, щоб переглянути історію замовлень',
+    loading: 'Завантаження замовлень...',
+    emptyTitle: 'Замовлень ще немає',
+    emptyText: 'Почніть покупки, щоб побачити їх тут',
+    order: 'Замовлення',
+    date: 'Дата',
+    total: 'Сума',
+    shippingAddress: 'Адреса доставки',
+    phone: 'Телефон',
+    items: 'Товари',
+    qty: 'К-сть',
+  },
+
+  userMenu: {
+    personalData: 'Особисті дані',
+    orderHistory: 'Історія замовлень',
+    changeLanguage: 'Змінити мову',
+    changeTheme: 'Змінити тему',
+    signOut: 'Вийти',
+  },
+
+  settingsMenu: {
+    changeLanguage: 'Змінити мову',
+    changeTheme: 'Змінити тему',
+  },
+
+  auth: {
+    signIn: 'Увійти',
+    signUp: 'Реєстрація',
+    fullName: 'Повне ім\u2019я',
+    emailRequired: 'Email обов\u2019язковий',
+    invalidEmail: 'Невірний email',
+    passwordRequired: 'Пароль обов\u2019язковий',
+    passwordMin: 'Пароль має містити мінімум 6 символів',
+    loading: 'Завантаження...',
+    or: 'або',
+    continueWithGoogle: 'Продовжити з Google',
+    noAccount: 'Немає акаунта?',
+    haveAccount: 'Вже маєте акаунт?',
+    error: 'Сталася помилка',
+    email: 'Електронна пошта',
+    password: 'Пароль',
+    registrationSuccess:
+      'Реєстрація успішна! Перевірте свою електронну пошту для підтвердження акаунта.',
+  },
+
+  authPrompt: {
+    title: 'Увійти',
+    text: 'Увійдіть у свій акаунт, щоб отримати доступ до особистих даних, історії замовлень та інших можливостей.',
+    maybeLater: 'Можливо пізніше',
+  },
+
+  bookAdvisor: {
+    triggerLabel: 'Порадитись з AI Мурком',
+    triggerAriaLabel: 'Порадитись з Мурком',
+    name: 'Мурко 🐾',
+    status: 'книжковий порадник',
+    closeAriaLabel: 'Закрити',
+    footerText: '🐾 Мурко читає тисячі книг, щоб знайти найкращу для вас',
+    inputPlaceholder: 'Напишіть відповідь...',
+    sendAriaLabel: 'Надіслати',
+    skip: 'Пропустити',
+    resetButton: '🔄 Підібрати ще раз',
+    viewBook: 'Переглянути →',
+    greet1: 'Привіт! Я Мурко 🐾',
+    greet2:
+      'Я обожнюю книги і знаю, як знайти саме ту, яка подарує незабутні враження. Допоможу підібрати ідеальну книгу для вас!',
+    greet3: 'Який жанр вам найближчий?',
+    reset1: 'Спробуємо ще раз! 🐾',
+    reset2: 'Передивляюсь книжкові полиці..',
+    reset3: 'Який жанр вам найближчий?',
+    genreSelected:
+      'Чудовий вибір! 😊 Назвіть будь-яку книгу, яку ви нещодавно читали — постараюсь не повторюватись. Або натисніть «Пропустити».',
+    searching: 'Шукаю найкращі книги для вас... ⏳',
+    noBooks:
+      'На жаль, за цим жанром поки немає книг у каталозі. Спробуйте інший жанр!',
+    found: 'Ось що я підібрав для вас 👇',
+    notFound: 'На жаль, не вдалось підібрати книги. Спробуйте інший жанр!',
+    error: 'Упс, щось пішло не так 😕',
   },
 } as const;

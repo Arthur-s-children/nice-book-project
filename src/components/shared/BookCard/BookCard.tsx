@@ -6,6 +6,8 @@ import './BookCard.scss';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
+import { toast } from 'sonner';
+import { animateFlyingIcon } from '../../../services/animations/animateFlyingIcon';
 
 type Props = {
   book: Book;
@@ -26,6 +28,28 @@ export function BookCard({
   const imageSrc = getImageUrl(book.images[0]);
 
   const { t } = useTranslation();
+
+  const handleAddToFavorite = () => {
+    onToggleFavorite(book.id);
+
+    if (!isFavorite) {
+      toast.success(
+        `${book.name} ${t('product.addedToFavorites', { defaultValue: 'додано в обране!' })}`,
+      );
+    } else {
+      toast.info(
+        `${book.name} ${t('product.removedFromFavorites', { defaultValue: 'видалено з обраного' })}`,
+      );
+    }
+  };
+
+  const handleAddToCart = () => {
+    onAddToCart(book.id);
+
+    toast.success(
+      `${book.name} ${t('product.addedToCartSuccess', { defaultValue: 'упішно додано до кошика!' })}`,
+    );
+  };
 
   return (
     <article className="book-card">
@@ -66,16 +90,36 @@ export function BookCard({
 
       <div className="book-card__actions">
         <AppButton
-          variant={inCart ? 'selected' : 'primary'}
-          onClick={() => !inCart && onAddToCart(book.id)}
-        >
-          {inCart ? t('product.added') : t('product.addToCart')}
-        </AppButton>
+  variant={inCart ? 'selected' : 'primary'}
+  onClick={(event) => {
+    if (inCart) return;
+
+    handleAddToCart();
+
+    animateFlyingIcon({
+      source: event.currentTarget,
+      targetSelector: '[data-cart-target]',
+      content: '🛒',
+    });
+  }}
+>
+  {inCart ? t('product.added') : t('product.addToCart')}
+</AppButton>
         <LikeButton
-          isSelected={isFavorite}
-          onClick={() => onToggleFavorite(book.id)}
-          colored
-        />
+  isSelected={isFavorite}
+  onClick={(event) => {
+    handleAddToFavorite();
+
+    if (!isFavorite) {
+      animateFlyingIcon({
+        source: event.currentTarget,
+        targetSelector: '[data-favorites-target]',
+        content: '❤️',
+      });
+    }
+  }}
+  colored
+/>
       </div>
     </article>
   );
