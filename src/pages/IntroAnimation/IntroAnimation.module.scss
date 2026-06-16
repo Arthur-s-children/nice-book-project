@@ -16,6 +16,10 @@
   position: absolute;
   inset: 0;
   z-index: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  display: flex;
 }
 
 .opened .site {
