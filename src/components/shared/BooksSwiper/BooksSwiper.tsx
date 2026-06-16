@@ -11,6 +11,7 @@ import './BooksSwiper.scss';
 import 'swiper/css';
 import { PageLoader } from '../PageLoader/PageLoader.tsx';
 import { useTranslation } from 'react-i18next';
+import { useMinimumLoader } from '../../../hooks/useMinimumLoader.ts';
 
 interface BooksSwiperProps {
   title: string;
@@ -28,6 +29,11 @@ export const BooksSwiper = ({
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
   const { t } = useTranslation();
+  const showLoader = useMinimumLoader(isLoading, 1500);
+
+  if (showLoader) {
+    return <PageLoader />;
+  }
 
   return (
     <section className="books-swiper">
