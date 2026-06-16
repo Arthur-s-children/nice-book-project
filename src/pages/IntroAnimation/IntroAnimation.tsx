@@ -11,8 +11,7 @@ type IntroAnimationProps = {
 
 export const IntroAnimation = ({ children }: IntroAnimationProps) => {
   const isHomePage =
-    window.location.pathname === '/' &&
-    (window.location.hash === '' || window.location.hash === '#/');
+    window.location.hash === '' || window.location.hash === '#/';
   const [isOpened, setIsOpened] = useState(!isHomePage);
 
   const enterButtonRef = useRef<HTMLButtonElement>(null);

@@ -4,6 +4,7 @@ import Footer from '../Footer/Footer';
 import { ScrollToTop } from './ScrollToTop.ts';
 import { AuthPromptModal } from '../../ui/AuthPromptModal';
 import { useState, useEffect } from 'react';
+import { BookAdvisorChat } from '../../shared/BookAdvisorChat';
 import { SoundMenu } from '../../shared/SoundMenu/SoundMenu.tsx';
 
 export function AppLayout() {
@@ -38,6 +39,8 @@ export function AppLayout() {
       <SoundMenu />
 
       <AuthPromptModal />
+
+      <BookAdvisorChat />
     </>
   );
 }

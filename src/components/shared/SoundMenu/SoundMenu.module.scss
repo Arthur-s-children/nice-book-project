@@ -2,8 +2,8 @@
 
 .widget {
   position: fixed;
-  bottom: 32px;
-  right: 32px;
+  bottom: 145px;
+  right: 50px;
   z-index: 500;
 }
 
@@ -83,7 +83,7 @@
   align-items: center;
   justify-content: center;
   background: $color-elements;
-  box-shadow: $shadow-button;
+  box-shadow: $shadow-card;
   transition:
     background 0.25s,
     color 0.25s;
