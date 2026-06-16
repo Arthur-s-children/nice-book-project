@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { cartService, type CartItem } from '../services/cartService';
+import { cartService, type CartItem } from '../services/cart/cart.service.ts';
 
 import { cartKeys } from '../services/cart/cart.keys';
 
@@ -34,7 +34,7 @@ export function useCart() {
   };
 
   const clearCart = () => {
-    localStorage.removeItem('cart');
+    localStorage.removeItem('nice-book-cart');
 
     queryClient.setQueryData(cartKeys.all, []);
   };

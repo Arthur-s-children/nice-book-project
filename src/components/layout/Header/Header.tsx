@@ -9,6 +9,8 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import '../Header/header.scss';
 import { useRef, useEffect, useState } from 'react';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '../../ui/LanguageSwitcher/LanguageSwitcher';
 import { useTheme } from './useTheme';
 import { useCart } from '../../../hooks/useCart.tsx';
 import { useFavorites } from '../../../hooks/useFavorites.tsx';
@@ -42,7 +44,6 @@ export function Header({
 
   const navListRef = useRef<HTMLUListElement>(null);
 
-  // const location = useLocation();
   const { cartCount } = useCart();
   const { favoritesCount } = useFavorites();
 
@@ -53,6 +54,7 @@ export function Header({
     setIsOpenMenu(!isMenuOpen);
   };
 
+  const { t, i18n } = useTranslation();
   const openSearchModal = (event: React.MouseEvent) => {
     event.preventDefault();
     setIsSearchModalOpen(true);
@@ -71,7 +73,7 @@ export function Header({
         visible: true,
       });
     }
-  }, [location]);
+  }, [location, i18n.language]);
 
   return (
     <header className={isMenuOpen ? 'header header--menu-open' : 'header'}>
@@ -97,7 +99,7 @@ export function Header({
                 }
                 to="/"
               >
-                Home
+                {t('common.home')}
               </NavLink>
             </li>
             <li className="nav__item">
@@ -112,7 +114,7 @@ export function Header({
                 }
                 to="/catalog?type=paperback"
               >
-                Paper
+                {t('header.paper')}
               </NavLink>
             </li>
             <li className="nav__item">
@@ -127,7 +129,7 @@ export function Header({
                 }
                 to="/catalog?type=kindle"
               >
-                Kindle
+                {t('header.kindle')}
               </NavLink>
             </li>
             <li className="nav__item">
@@ -142,7 +144,7 @@ export function Header({
                 }
                 to="/catalog?type=audiobook"
               >
-                Audiobook
+                {t('header.audio')}
               </NavLink>
             </li>
             <div
@@ -162,7 +164,7 @@ export function Header({
               className="header__sign-up-btn"
               onClick={() => setIsAuthModalOpen(true)}
             >
-              Sign Up
+              {t('auth.signUp')}
             </button>
           )}
 
@@ -229,6 +231,8 @@ export function Header({
             <Icon name={isMenuOpen ? 'close' : 'burger'} />
           </a>
         </div>
+
+        <LanguageSwitcher />
       </div>
 
       <SearchModal

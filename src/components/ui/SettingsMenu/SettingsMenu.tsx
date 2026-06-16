@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import './SettingsMenu.scss';
+import { useTranslation } from 'react-i18next';
 
 type Language = 'en' | 'uk';
 type Theme = 'light' | 'dark';
@@ -19,6 +20,7 @@ export function SettingsMenu({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -54,13 +56,13 @@ export function SettingsMenu({
             className="settings-menu__option"
             onClick={() => onLanguageChange(language === 'en' ? 'uk' : 'en')}
           >
-            Change Language
+            {t('settingsMenu.changeLanguage')}
           </button>
           <button
             className="settings-menu__option"
             onClick={() => onThemeChange(theme === 'light' ? 'dark' : 'light')}
           >
-            Change Theme
+            {t('settingsMenu.changeTheme')}
           </button>
         </div>
       )}

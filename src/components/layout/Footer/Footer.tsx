@@ -2,11 +2,14 @@ import './Footer.scss';
 import { Logo } from '../../Logo';
 import { Icon } from '../../ui/Icon';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function Footer() {
   const handleBackToTop = (): void => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const { t } = useTranslation();
 
   return (
     <footer className="footer">
@@ -25,25 +28,25 @@ export function Footer() {
             target="_blank"
             rel="noreferrer noopener"
           >
-            GITHUB
+            {t('footer.github')}
           </Link>
           <Link
             className="footer__category"
             to="contacts"
           >
-            CONTACTS
+            {t('footer.contacts')}
           </Link>
           <Link
             className="footer__category"
             to="team"
           >
-            TEAM
+            {t('footer.team')}
           </Link>
           <Link
             className="footer__category"
             to="rights"
           >
-            RIGHTS
+            {t('footer.rights')}
           </Link>
         </nav>
 
@@ -52,7 +55,7 @@ export function Footer() {
           className="backTop"
           onClick={handleBackToTop}
         >
-          Back to top
+          {t('footer.backToTop')}
           <Icon
             name="arrow-up-dark"
             size={8}

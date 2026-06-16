@@ -1,2 +1,2 @@
-export { cartService } from './cartService';
-export { favoritesService } from './favoritesService';
+export { cartService } from './cart/cart.service';
+export { favoritesService } from './favorites/favorites.service';

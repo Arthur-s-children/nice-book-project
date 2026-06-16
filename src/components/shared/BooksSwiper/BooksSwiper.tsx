@@ -10,6 +10,7 @@ import './BooksSwiper.scss';
 
 import 'swiper/css';
 import { PageLoader } from '../PageLoader/PageLoader.tsx';
+import { useTranslation } from 'react-i18next';
 
 interface BooksSwiperProps {
   title: string;
@@ -26,11 +27,12 @@ export const BooksSwiper = ({
   const nextRef = useRef<HTMLButtonElement>(null);
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
+  const { t } = useTranslation();
 
   return (
     <section className="books-swiper">
       <div className="books-swiper__header">
-        <h2 className="books-swiper__title">{title}</h2>
+        <h2 className="books-swiper__title">{t(title)}</h2>
 
         <div className="books-swiper__nav">
           <button
