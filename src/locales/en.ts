@@ -279,6 +279,7 @@ export const en = {
     saving: 'Saving...',
     success: 'Successfully changed',
     uploadError: 'Failed to upload avatar. Please try again',
+  },
   bookAdvisor: {
     triggerLabel: 'Ask AI Murko',
     triggerAriaLabel: 'Ask Murko',
