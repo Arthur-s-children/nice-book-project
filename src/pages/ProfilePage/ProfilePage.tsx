@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useProfile } from '../../hooks/useProfile';
 import './ProfilePage.scss';
+import { useTranslation } from 'react-i18next';
 
 type FormData = {
   full_name: string;
@@ -15,6 +16,7 @@ export function ProfilePage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const { t } = useTranslation();
 
   const { register, getValues, reset } = useForm<FormData>({
     defaultValues: {
@@ -46,7 +48,7 @@ export function ProfilePage() {
         }
       } catch (error) {
         console.error('Failed to upload avatar:', error);
-        alert('Failed to upload avatar. Please try again.');
+        alert(t('profile.uploadError'));
       }
     }
   };
@@ -70,9 +72,7 @@ export function ProfilePage() {
   };
 
   if (!user) {
-    return (
-      <div className="profile-page">Please sign in to view your profile</div>
-    );
+    return <div className="profile-page">{t('profile.pleaseSignIn')}</div>;
   }
 
   const avatarUrl = profile?.avatar_url || '';
@@ -80,7 +80,7 @@ export function ProfilePage() {
   return (
     <div className="profile-page">
       <div className="profile-page__container">
-        <h1 className="profile-page__title">Personal Data</h1>
+        <h1 className="profile-page__title">{t('profile.title')}</h1>
 
         <div className="profile-page__avatar-section">
           <div
@@ -99,7 +99,7 @@ export function ProfilePage() {
             className="profile-page__avatar-btn"
             onClick={handleAvatarClick}
           >
-            Change Photo
+            {t('profile.changePhoto')}
           </button>
           <input
             ref={fileInputRef}
@@ -112,7 +112,7 @@ export function ProfilePage() {
 
         <form className="profile-page__form">
           <div className="profile-page__field">
-            <label className="profile-page__label">Email</label>
+            <label className="profile-page__label">{t('profile.email')}</label>
             <input
               type="email"
               value={user.email}
@@ -122,7 +122,9 @@ export function ProfilePage() {
           </div>
 
           <div className="profile-page__field">
-            <label className="profile-page__label">Full Name</label>
+            <label className="profile-page__label">
+              {t('profile.fullName')}
+            </label>
             <input
               type="text"
               className="profile-page__input"
@@ -131,7 +133,7 @@ export function ProfilePage() {
           </div>
 
           <div className="profile-page__field">
-            <label className="profile-page__label">Phone</label>
+            <label className="profile-page__label">{t('profile.phone')}</label>
             <input
               type="tel"
               className="profile-page__input"
@@ -145,11 +147,11 @@ export function ProfilePage() {
             disabled={isSaving}
             onClick={handleSaveChanges}
           >
-            {isSaving ? 'Saving...' : 'Save Changes'}
+            {isSaving ? t('profile.saving') : t('profile.save')}
           </button>
 
           {showSuccess && (
-            <div className="profile-page__success">Successfully changed</div>
+            <div className="profile-page__success">{t('profile.success')}</div>
           )}
         </form>
       </div>

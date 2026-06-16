@@ -268,6 +268,18 @@ export const en = {
     maybeLater: 'Maybe later',
   },
 
+  profile: {
+    title: 'Personal Data',
+    pleaseSignIn: 'Please sign in to view your profile',
+    changePhoto: 'Change Photo',
+    email: 'Email',
+    fullName: 'Full Name',
+    phone: 'Phone',
+    save: 'Save Changes',
+    saving: 'Saving...',
+    success: 'Successfully changed',
+    uploadError: 'Failed to upload avatar. Please try again',
+  },
   bookAdvisor: {
     triggerLabel: 'Ask AI Murko',
     triggerAriaLabel: 'Ask Murko',
