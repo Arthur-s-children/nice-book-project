@@ -6,6 +6,7 @@ import { categoryStructure } from './searchCategories.ts';
 import { useBooks } from '../../../hooks/useBooks.ts';
 import { PageLoader } from '../PageLoader/PageLoader.tsx';
 import { useTranslation } from 'react-i18next';
+import { useMinimumLoader } from '../../../hooks/useMinimumLoader.ts';
 
 type Props = {
   isOpen: boolean;
@@ -23,6 +24,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
   const { data: books = [], isLoading } = useBooks();
   const { t } = useTranslation();
+  const showLoader = useMinimumLoader(isLoading, 1500);
 
   const filteredBooks = useMemo(() => {
     let results = books;
@@ -102,7 +104,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
 
   if (!isOpen) return null;
 
-  if (isLoading) {
+  if (showLoader) {
     return <PageLoader />;
   }
 
