@@ -195,6 +195,17 @@ export const en = {
     startTyping: 'Start typing...',
     notFound: 'Nothing found',
     placeholder: 'Search by keywords, topics, or messages',
+
+    examples: {
+      harryPotter: 'Harry Potter',
+      lookingForAlaska: 'Looking For Alaska',
+      grokkkingAlgorithms: 'Grokking Algorithms',
+      emotionalInheritance: 'Emotional Inheritance',
+      anxiousPeople: 'Anxious People',
+      theCatcherInRye: 'The Catcher in the Rye',
+      aLittleLife: 'A Little Life',
+      codependentNoMore: 'Codependent No More',
+    },
   },
 
   orderHistory: {
