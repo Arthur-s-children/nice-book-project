@@ -8,6 +8,7 @@ import type { Book } from '../../types/BooksAPI.ts';
 import './CatalogPage.scss';
 import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
 
 const TITLES: Record<string, string> = {
   all: 'All books',
@@ -53,7 +54,7 @@ export function CatalogPage() {
   const booksOnPage = sortedBooks.slice(start, start + perPage);
 
   if (isLoading) {
-    return <h2>Loading books...</h2>;
+    return <PageLoader />;
   }
 
   if (error) {
