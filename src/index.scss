@@ -40,3 +40,20 @@ body[data-theme='dark'] #root {
   width: 100%;
   flex: 1;
 }
+
+.cn-toast {
+  // Перевизначаємо внутрішні змінні Sonner через твої SCSS-змінні
+  --normal-bg: #{$color-hover-bg-light};
+  --normal-text: #{$color-primary};
+  --normal-border: #{$color-primary};
+
+  border-radius: 12px;
+}
+
+[data-theme='dark'] {
+  .cn-toast {
+    --normal-bg: #{$color-icons-dark};
+    --normal-text: #{$color-primary-dark};
+    --normal-border: #{$color-hover-bg-dark};
+  }
+}

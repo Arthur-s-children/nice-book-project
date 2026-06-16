@@ -31,7 +31,7 @@ export function Footer() {
                     to="/catalog?type=paperback"
                     className="footer__link"
                   >
-                    Paper Books
+                    {t('header.paper')}
                   </Link>
                 </li>
                 <li>
@@ -39,7 +39,7 @@ export function Footer() {
                     to="/catalog?type=kindle"
                     className="footer__link"
                   >
-                    Kindle
+                    {t('header.kindle')}
                   </Link>
                 </li>
                 <li>
@@ -47,7 +47,7 @@ export function Footer() {
                     to="/catalog?type=audiobook"
                     className="footer__link"
                   >
-                    Audiobooks
+                    {t('header.audio')}
                   </Link>
                 </li>
               </ul>
@@ -63,7 +63,7 @@ export function Footer() {
                     rel="noreferrer noopener"
                     className="footer__link"
                   >
-                    GitHub
+                    {t('footer.github')}
                   </Link>
                 </li>
                 <li>
@@ -71,7 +71,7 @@ export function Footer() {
                     to="contacts"
                     className="footer__link"
                   >
-                    Contact
+                    {t('footer.contacts')}
                   </Link>
                 </li>
                 <li>
@@ -79,7 +79,7 @@ export function Footer() {
                     to="team"
                     className="footer__link"
                   >
-                    Team
+                    {t('footer.team')}
                   </Link>
                 </li>
               </ul>
@@ -93,7 +93,7 @@ export function Footer() {
                     to="rights"
                     className="footer__link"
                   >
-                    Rights
+                    {t('footer.rights')}
                   </Link>
                 </li>
               </ul>

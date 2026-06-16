@@ -15,6 +15,7 @@ import { useCart } from '../../../hooks/useCart.tsx';
 import { useFavorites } from '../../../hooks/useFavorites.tsx';
 import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
 import { Search, Heart, ShoppingBag, Menu, X } from 'lucide-react';
+import { toast } from 'sonner';
 import { useTypingPlaceholder } from '../../../hooks/useTypingPlaceholder.ts';
 
 interface Props {
@@ -80,10 +81,6 @@ export function Header({
     setIsSearchModalOpen(true);
   };
 
-  const handleThemeChange = () => {
-    toggleTheme();
-  };
-
   const { scrollY } = useScroll();
   const headerBackgroundDark = useTransform(
     scrollY,
@@ -121,6 +118,30 @@ export function Header({
       });
     }
   }, [location, i18n.language]);
+
+  useEffect(() => {
+    if (!i18n.language) return;
+
+    if (i18n.language === 'uk') {
+      toast.success('Мову успішно змінено на українську! 🇺🇦');
+    } else if (i18n.language === 'en') {
+      toast.success('Language successfully changed to English! 🇬🇧');
+    }
+  }, [i18n.language]);
+
+  const handleThemeToggle = () => {
+    toggleTheme();
+
+    if (isDark) {
+      toast.info(
+        t('theme.lightEnabled', { defaultValue: 'Увімкнено світлу тему ☀️' }),
+      );
+    } else {
+      toast.info(
+        t('theme.darkEnabled', { defaultValue: 'Увімкнено темну тему 🌙' }),
+      );
+    }
+  };
 
   return (
     <motion.header
@@ -262,14 +283,14 @@ export function Header({
               language={language}
               theme={theme}
               onLanguageChange={setLanguage}
-              onThemeChange={handleThemeChange}
+              onThemeChange={handleThemeToggle}
             />
           : !isLoading && !isAuthenticated ?
             <SettingsMenu
               language={language}
               theme={theme}
               onLanguageChange={setLanguage}
-              onThemeChange={handleThemeChange}
+              onThemeChange={handleThemeToggle}
               onSignUpClick={() => setIsAuthModalOpen(true)}
             />
           : null}

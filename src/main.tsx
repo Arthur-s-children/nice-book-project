@@ -9,6 +9,7 @@ import './locales/i18n';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './components/layout/Header/useTheme';
 import { CursorBlur } from './components/ui/CursorBlur/CursorBlur';
+import { Toaster } from '../src/components/shared/Toastify/sonner';
 
 const queryClient = new QueryClient();
 
@@ -18,8 +19,9 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <AuthProvider>
           <CursorBlur />
-        <IntroAnimation>
-          <RouterProvider router={router} />
+          <IntroAnimation>
+            <Toaster position="bottom-right" />
+            <RouterProvider router={router} />
           </IntroAnimation>
         </AuthProvider>
       </ThemeProvider>
