@@ -13,6 +13,7 @@ interface BookAdvisorPayload {
   genre: string;
   lastBook: string;
   books: AdvisorBook[];
+  language: string;
 }
 
 export const bookAdvisorService = {

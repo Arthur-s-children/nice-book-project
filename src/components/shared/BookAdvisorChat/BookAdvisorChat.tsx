@@ -53,7 +53,7 @@ export function BookAdvisorChat() {
     [],
   );
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const murkoAvatar = getImageUrl('murko-avatar.png');
 
   const messageSound = useRef(new Audio('/sounds/assistant-message.wav'));
@@ -85,13 +85,11 @@ export function BookAdvisorChat() {
     if (step === 'idle') {
       setStep('ask_genre');
       setTimeout(() => {
-        addBotMessage('Привіт! Я Мурко 🐾');
+        addBotMessage(t('bookAdvisor.greet1'));
         setTimeout(() => {
-          addBotMessage(
-            'Я обожнюю книги і знаю, як знайти саме ту, яка подарує незабутні враження. Допоможу підібрати ідеальну книгу для вас!',
-          );
+          addBotMessage(t('bookAdvisor.greet2'));
           setTimeout(() => {
-            addBotMessage('Який жанр вам найближчий?');
+            addBotMessage(t('bookAdvisor.greet3'));
           }, 2200);
         }, 1500);
       }, 500);
@@ -105,11 +103,11 @@ export function BookAdvisorChat() {
     setInputValue('');
     setRecommendedBooks([]);
     setTimeout(() => {
-      addBotMessage('Спробуємо ще раз! 🐾');
+      addBotMessage(t('bookAdvisor.reset1'));
       setTimeout(() => {
-        addBotMessage('Передивляюсь книжкові полиці..');
+        addBotMessage(t('bookAdvisor.reset2'));
         setTimeout(() => {
-          addBotMessage('Який жанр вам найближчий?');
+          addBotMessage(t('bookAdvisor.reset3'));
         }, 1700);
       }, 1200);
     }, 800);
@@ -125,15 +123,13 @@ export function BookAdvisorChat() {
     addUserMessage(`${genre.icon} ${t(genre.nameKey)}`);
     setStep('ask_last_book');
     setTimeout(() => {
-      addBotMessage(
-        'Чудовий вибір! 😊 Назвіть будь-яку книгу, яку ви нещодавно читали — постараюсь не повторюватись. Або натисніть «Пропустити».',
-      );
+      addBotMessage(t('bookAdvisor.genreSelected'));
     }, 400);
   };
 
   const handleLastBookSubmit = async (skip = false) => {
     const lastBook = skip ? '' : inputValue.trim();
-    addUserMessage(skip ? 'Пропустити' : lastBook);
+    addUserMessage(skip ? t('bookAdvisor.skip') : lastBook);
     setInputValue('');
     await fetchAndRecommend(selectedGenre!, lastBook);
   };
@@ -148,7 +144,7 @@ export function BookAdvisorChat() {
     lastBook: string,
   ) => {
     setStep('loading');
-    addBotMessage('Шукаю найкращі книги для вас... ⏳');
+    addBotMessage(t('bookAdvisor.searching'));
 
     try {
       const books = allBooks
@@ -163,16 +159,17 @@ export function BookAdvisorChat() {
 
       if (books.length === 0) {
         setStep('result');
-        setMessages((prev) => prev.filter((m) => !m.text.includes('Шукаю')));
-        addBotMessage(
-          'На жаль, за цим жанром поки немає книг у каталозі. Спробуйте інший жанр!',
+        setMessages((prev) =>
+          prev.filter((m) => !m.text.includes(t('bookAdvisor.searching'))),
         );
+        addBotMessage(t('bookAdvisor.noBooks'));
         return;
       }
 
       const fnData = await advisorMutation.mutateAsync({
         genre: t(genre.nameKey),
         lastBook,
+        language: i18n.language,
         books: books.map((book) => ({
           id: book.id,
           name: book.name,
@@ -189,13 +186,13 @@ export function BookAdvisorChat() {
       setRecommendedBooks(recommended);
 
       setMessages((prev) => [
-        ...prev.filter((m) => !m.text.includes('Шукаю')),
+        ...prev.filter((m) => !m.text.includes(t('bookAdvisor.searching'))),
         {
           from: 'bot',
           text:
             recommended.length > 0 ?
-              'Ось що я підібрав для вас 👇'
-            : 'На жаль, не вдалось підібрати книги. Спробуйте інший жанр!',
+              t('bookAdvisor.found')
+            : t('bookAdvisor.notFound'),
           time: getTime(),
         },
       ]);
@@ -204,10 +201,10 @@ export function BookAdvisorChat() {
       setStep('error');
       const errText = err instanceof Error ? err.message : String(err);
       setMessages((prev) => [
-        ...prev.filter((m) => !m.text.includes('Шукаю')),
+        ...prev.filter((m) => !m.text.includes(t('bookAdvisor.searching'))),
         {
           from: 'bot',
-          text: `Упс, щось пішло не так 😕\n\n${errText}`,
+          text: `${t('bookAdvisor.error')}\n\n${errText}`,
           time: getTime(),
         },
       ]);
@@ -220,15 +217,15 @@ export function BookAdvisorChat() {
         <button
           className="book-advisor__trigger"
           onClick={handleOpen}
-          aria-label="Порадитись з Мурком"
+          aria-label={t('bookAdvisor.triggerAriaLabel')}
         >
           <img
             className="book-advisor__trigger-avatar"
             src={murkoAvatar}
-            alt="Мурко"
+            alt={t('bookAdvisor.name')}
           />
           <span className="book-advisor__trigger-label">
-            Порадитись з AI Мурком
+            {t('bookAdvisor.triggerLabel')}
           </span>
         </button>
       )}
@@ -240,17 +237,21 @@ export function BookAdvisorChat() {
               <img
                 className="book-advisor__avatar"
                 src={murkoAvatar}
-                alt="Мурко"
+                alt={t('bookAdvisor.name')}
               />
               <div>
-                <div className="book-advisor__name">Мурко 🐾</div>
-                <div className="book-advisor__status">книжковий порадник</div>
+                <div className="book-advisor__name">
+                  {t('bookAdvisor.name')}
+                </div>
+                <div className="book-advisor__status">
+                  {t('bookAdvisor.status')}
+                </div>
               </div>
             </div>
             <button
               className="book-advisor__close"
               onClick={() => setIsOpen(false)}
-              aria-label="Закрити"
+              aria-label={t('bookAdvisor.closeAriaLabel')}
             >
               ✕
             </button>
@@ -266,7 +267,7 @@ export function BookAdvisorChat() {
                   <img
                     className="book-advisor__msg-avatar"
                     src={murkoAvatar}
-                    alt="Мурко"
+                    alt={t('bookAdvisor.name')}
                   />
                 )}
                 <div className="book-advisor__msg-bubble">
@@ -296,7 +297,7 @@ export function BookAdvisorChat() {
               <div className="book-advisor__input-row">
                 <input
                   className="book-advisor__input"
-                  placeholder="Напишіть відповідь..."
+                  placeholder={t('bookAdvisor.inputPlaceholder')}
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) =>
@@ -312,7 +313,7 @@ export function BookAdvisorChat() {
                     inputValue.trim() && handleLastBookSubmit(false)
                   }
                   disabled={!inputValue.trim()}
-                  aria-label="Надіслати"
+                  aria-label={t('bookAdvisor.sendAriaLabel')}
                 >
                   ➤
                 </button>
@@ -320,7 +321,7 @@ export function BookAdvisorChat() {
                   className="book-advisor__skip"
                   onClick={() => handleLastBookSubmit(true)}
                 >
-                  Пропустити
+                  {t('bookAdvisor.skip')}
                 </button>
               </div>
             )}
@@ -330,7 +331,7 @@ export function BookAdvisorChat() {
                 <img
                   className="book-advisor__msg-avatar"
                   src={murkoAvatar}
-                  alt="Мурко"
+                  alt={t('bookAdvisor.name')}
                 />
                 <div className="book-advisor__typing-dots">
                   <span />
@@ -354,7 +355,7 @@ export function BookAdvisorChat() {
                       {book.reason}
                     </span>
                     <span className="book-advisor__rec-link">
-                      Переглянути →
+                      {t('bookAdvisor.viewBook')}
                     </span>
                   </Link>
                 ))}
@@ -366,7 +367,7 @@ export function BookAdvisorChat() {
                 className="book-advisor__reset"
                 onClick={handleReset}
               >
-                🔄 Підібрати ще раз
+                {t('bookAdvisor.resetButton')}
               </button>
             )}
 
@@ -374,7 +375,7 @@ export function BookAdvisorChat() {
           </div>
 
           <div className="book-advisor__footer">
-            🐾 Мурко читає тисячі книг, щоб знайти найкращу для вас
+            {t('bookAdvisor.footerText')}
           </div>
         </div>
       )}
