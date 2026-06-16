@@ -207,6 +207,17 @@ export const uk = {
     startTyping: 'Почніть вводити...',
     notFound: 'Нічого не знайдено',
     placeholder: 'Пошук за ключовими словами, темами або повідомленнями',
+
+    examples: {
+      harryPotter: 'Гаррі Поттер',
+      lookingForAlaska: 'В пошуках Аляски',
+      grokkkingAlgorithms: 'Грокаємо алгоритми',
+      emotionalInheritance: 'Емоційний спадок',
+      anxiousPeople: 'Тривожні люди',
+      theCatcherInRye: 'Ловець у житі',
+      aLittleLife: 'Маленьке життя',
+      codependentNoMore: 'Долаємо співзалежність',
+    },
   },
 
   orderHistory: {

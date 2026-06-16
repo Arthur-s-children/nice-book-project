@@ -9,6 +9,7 @@ import './CatalogPage.scss';
 import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
 import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
+import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
 
 const TITLES: Record<string, string> = {
   all: 'All books',
@@ -44,6 +45,7 @@ export function CatalogPage() {
   const { t } = useTranslation();
 
   const { data: books = [], isLoading, error } = useBooks();
+  const showLoader = useMinimumLoader(isLoading, 1500);
 
   const filteredBooks =
     type === 'all' ? books : books.filter((book) => book.type === type);
@@ -53,7 +55,7 @@ export function CatalogPage() {
   const start = (page - 1) * perPage;
   const booksOnPage = sortedBooks.slice(start, start + perPage);
 
-  if (isLoading) {
+  if (showLoader) {
     return <PageLoader />;
   }
 
