@@ -65,7 +65,7 @@ export const uk = {
     technology: 'Технології',
     programming: 'Програмування',
     design: 'Дизайн',
-    gaming: 'Комп’ютерні ігри',
+    gaming: 'Комп\u2019ютерні ігри',
 
     children: 'Дитячі книги',
     fairyTales: 'Казки',
@@ -160,7 +160,7 @@ export const uk = {
 
     limitationTitle: 'Обмеження відповідальності',
     limitationText:
-      'NiceBooks не несе відповідальності за будь-які збитки, пов’язані з використанням сайту.',
+      'NiceBooks не несе відповідальності за будь-які збитки, пов\u2019язані з використанням сайту.',
 
     changesTitle: 'Зміни умов',
     changesText:
@@ -178,7 +178,7 @@ export const uk = {
     address: 'Адреса:',
     website: 'Вебсайт:',
     hoursTitle: 'Години роботи',
-    mondayFriday: 'Понеділок - П`ятниця: 9:00 - 18:00',
+    mondayFriday: 'Понеділок - П\u0027ятниця: 9:00 - 18:00',
     saturday: 'Субота: 10:00 - 16:00',
     sunday: 'Неділя: Зачинено',
     mapTitle: 'Мапа Google',
@@ -207,6 +207,17 @@ export const uk = {
     startTyping: 'Почніть вводити...',
     notFound: 'Нічого не знайдено',
     placeholder: 'Пошук за ключовими словами, темами або повідомленнями',
+
+    examples: {
+      harryPotter: 'Гаррі Поттер',
+      lookingForAlaska: 'В пошуках Аляски',
+      grokkkingAlgorithms: 'Грокаємо алгоритми',
+      emotionalInheritance: 'Емоційний спадок',
+      anxiousPeople: 'Тривожні люди',
+      theCatcherInRye: 'Ловець у житі',
+      aLittleLife: 'Маленьке життя',
+      codependentNoMore: 'Долаємо співзалежність',
+    },
   },
 
   orderHistory: {
@@ -246,10 +257,10 @@ export const uk = {
   auth: {
     signIn: 'Увійти',
     signUp: 'Реєстрація',
-    fullName: 'Повне ім’я',
-    emailRequired: 'Email обов’язковий',
+    fullName: 'Повне ім\u2019я',
+    emailRequired: 'Email обов\u2019язковий',
     invalidEmail: 'Невірний email',
-    passwordRequired: 'Пароль обов’язковий',
+    passwordRequired: 'Пароль обов\u2019язковий',
     passwordMin: 'Пароль має містити мінімум 6 символів',
     loading: 'Завантаження...',
     or: 'або',
@@ -280,5 +291,32 @@ export const uk = {
     saving: 'Збереження...',
     success: 'Успішно змінено',
     uploadError: 'Не вдалося завантажити аватар. Спробуйте ще раз.',
+  bookAdvisor: {
+    triggerLabel: 'Порадитись з AI Мурком',
+    triggerAriaLabel: 'Порадитись з Мурком',
+    name: 'Мурко 🐾',
+    status: 'книжковий порадник',
+    closeAriaLabel: 'Закрити',
+    footerText: '🐾 Мурко читає тисячі книг, щоб знайти найкращу для вас',
+    inputPlaceholder: 'Напишіть відповідь...',
+    sendAriaLabel: 'Надіслати',
+    skip: 'Пропустити',
+    resetButton: '🔄 Підібрати ще раз',
+    viewBook: 'Переглянути →',
+    greet1: 'Привіт! Я Мурко 🐾',
+    greet2:
+      'Я обожнюю книги і знаю, як знайти саме ту, яка подарує незабутні враження. Допоможу підібрати ідеальну книгу для вас!',
+    greet3: 'Який жанр вам найближчий?',
+    reset1: 'Спробуємо ще раз! 🐾',
+    reset2: 'Передивляюсь книжкові полиці..',
+    reset3: 'Який жанр вам найближчий?',
+    genreSelected:
+      'Чудовий вибір! 😊 Назвіть будь-яку книгу, яку ви нещодавно читали — постараюсь не повторюватись. Або натисніть «Пропустити».',
+    searching: 'Шукаю найкращі книги для вас... ⏳',
+    noBooks:
+      'На жаль, за цим жанром поки немає книг у каталозі. Спробуйте інший жанр!',
+    found: 'Ось що я підібрав для вас 👇',
+    notFound: 'На жаль, не вдалось підібрати книги. Спробуйте інший жанр!',
+    error: 'Упс, щось пішло не так 😕',
   },
 } as const;

@@ -195,6 +195,17 @@ export const en = {
     startTyping: 'Start typing...',
     notFound: 'Nothing found',
     placeholder: 'Search by keywords, topics, or messages',
+
+    examples: {
+      harryPotter: 'Harry Potter',
+      lookingForAlaska: 'Looking For Alaska',
+      grokkkingAlgorithms: 'Grokking Algorithms',
+      emotionalInheritance: 'Emotional Inheritance',
+      anxiousPeople: 'Anxious People',
+      theCatcherInRye: 'The Catcher in the Rye',
+      aLittleLife: 'A Little Life',
+      codependentNoMore: 'Codependent No More',
+    },
   },
 
   orderHistory: {
@@ -268,5 +279,33 @@ export const en = {
     saving: 'Saving...',
     success: 'Successfully changed',
     uploadError: 'Failed to upload avatar. Please try again',
+  bookAdvisor: {
+    triggerLabel: 'Ask AI Murko',
+    triggerAriaLabel: 'Ask Murko',
+    name: 'Murko 🐾',
+    status: 'book advisor',
+    closeAriaLabel: 'Close',
+    footerText:
+      '🐾 Murko reads thousands of books to find the best one for you',
+    inputPlaceholder: 'Type your answer...',
+    sendAriaLabel: 'Send',
+    skip: 'Skip',
+    resetButton: '🔄 Find more books',
+    viewBook: 'View →',
+    greet1: "Hi! I'm Murko 🐾",
+    greet2:
+      'I love books and know how to find the one that will leave a lasting impression. Let me help you pick the perfect book!',
+    greet3: 'What genre do you prefer?',
+    reset1: "Let's try again! 🐾",
+    reset2: 'Browsing the shelves..',
+    reset3: 'What genre do you prefer?',
+    genreSelected:
+      'Great choice! 😊 Name any book you\'ve read recently — I\'ll try not to repeat it. Or press "Skip".',
+    searching: 'Searching for the best books for you... ⏳',
+    noBooks:
+      'Unfortunately, there are no books in this genre yet. Try another genre!',
+    found: "Here's what I picked for you 👇",
+    notFound: "Sorry, couldn't find any books. Try a different genre!",
+    error: 'Oops, something went wrong 😕',
   },
 } as const;

@@ -7,13 +7,15 @@ import { UserMenu } from '../../ui/UserMenu';
 import { SettingsMenu } from '../../ui/SettingsMenu';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import '../Header/header.scss';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '../../ui/LanguageSwitcher/LanguageSwitcher';
 import { useTheme } from './useTheme';
 import { useCart } from '../../../hooks/useCart.tsx';
 import { useFavorites } from '../../../hooks/useFavorites.tsx';
+import { toast } from 'sonner';
+import { useTypingPlaceholder } from '../../../hooks/useTypingPlaceholder.ts';
 
 interface Props {
   isAuthModalOpen?: boolean;
@@ -55,10 +57,29 @@ export function Header({
   };
 
   const { t, i18n } = useTranslation();
+
+  const placeholderBooks = useMemo(
+    () => [
+      t('search.examples.harryPotter'),
+      t('search.examples.lookingForAlaska'),
+      t('search.examples.grokkkingAlgorithms'),
+      t('search.examples.emotionalInheritance'),
+      t('search.examples.anxiousPeople'),
+      t('search.examples.theCatcherInRye'),
+      t('search.examples.aLittleLife'),
+      t('search.examples.codependentNoMore'),
+    ],
+    [t],
+  );
+
   const openSearchModal = (event: React.MouseEvent) => {
     event.preventDefault();
     setIsSearchModalOpen(true);
   };
+
+  const animatedPlaceholder = useTypingPlaceholder({
+    words: placeholderBooks,
+  });
 
   useEffect(() => {
     const activeLink = navListRef.current?.querySelector(
@@ -74,6 +95,30 @@ export function Header({
       });
     }
   }, [location, i18n.language]);
+
+  useEffect(() => {
+    if (!i18n.language) return;
+
+    if (i18n.language === 'uk') {
+      toast.success('Мову успішно змінено на українську! 🇺🇦');
+    } else if (i18n.language === 'en') {
+      toast.success('Language successfully changed to English! 🇬🇧');
+    }
+  }, [i18n.language]);
+
+  const handleThemeToggle = () => {
+    toggleTheme();
+
+    if (isDark) {
+      toast.info(
+        t('theme.lightEnabled', { defaultValue: 'Увімкнено світлу тему ☀️' }),
+      );
+    } else {
+      toast.info(
+        t('theme.darkEnabled', { defaultValue: 'Увімкнено темну тему 🌙' }),
+      );
+    }
+  };
 
   return (
     <header className={isMenuOpen ? 'header header--menu-open' : 'header'}>
@@ -171,6 +216,7 @@ export function Header({
           <input
             type="text"
             className="input"
+            placeholder={isSearchModalOpen ? '' : animatedPlaceholder}
             onClick={openSearchModal}
             readOnly
           />
@@ -185,6 +231,7 @@ export function Header({
             onClick={closeMenu}
             className="icon icon--favourite"
             to={'favorites'}
+            data-favorites-target
           >
             <Icon name="heart" />
             {favoritesCount > 0 && (
@@ -195,6 +242,7 @@ export function Header({
             onClick={closeMenu}
             className="icon icon--cart"
             to={'cart'}
+            data-cart-target
           >
             <Icon name="cart" />
             {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
@@ -219,7 +267,7 @@ export function Header({
 
           <button
             className="icon icon--theme"
-            onClick={toggleTheme}
+            onClick={handleThemeToggle}
           >
             {isDark ? '☀️' : '🌘'}
           </button>
