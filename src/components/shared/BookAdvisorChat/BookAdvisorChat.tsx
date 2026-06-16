@@ -6,6 +6,7 @@ import { genreIcons } from './genreIcons.ts';
 import { useTranslation } from 'react-i18next';
 import { useBookAdvisor } from '../../../hooks/useBookAdvisor.ts';
 import { useBooks } from '../../../hooks/useBooks.ts';
+import { getImageUrl } from '../../../services/getImageUrl.ts';
 
 interface RecommendedBook {
   id: string;
@@ -25,6 +26,14 @@ type Step =
 interface Message {
   from: 'bot' | 'user';
   text: string;
+  time?: string;
+}
+
+function getTime() {
+  return new Date().toLocaleTimeString('uk-UA', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }
 
 export function BookAdvisorChat() {
@@ -45,25 +54,23 @@ export function BookAdvisorChat() {
   );
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
+  const murkoAvatar = getImageUrl('murko-avatar.png');
 
-  const messageSound = useRef(
-    new Audio('./public/sounds/assistant-message.wav'),
-  );
+  const messageSound = useRef(new Audio('/sounds/assistant-message.wav'));
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const addBotMessage = (text: string) => {
-    setMessages((prev) => [...prev, { from: 'bot', text }]);
-
-    messageSound.current.volume = 0.15;
+    setMessages((prev) => [...prev, { from: 'bot', text, time: getTime() }]);
+    messageSound.current.volume = 0.25;
     messageSound.current.currentTime = 0;
     messageSound.current.play().catch(() => {});
   };
 
   const addUserMessage = (text: string) => {
-    setMessages((prev) => [...prev, { from: 'user', text }]);
+    setMessages((prev) => [...prev, { from: 'user', text, time: getTime() }]);
   };
 
   const advisorGenres = categoryStructure.flatMap((category) =>
@@ -78,12 +85,15 @@ export function BookAdvisorChat() {
     if (step === 'idle') {
       setStep('ask_genre');
       setTimeout(() => {
-        addBotMessage('Привіт! 👋 Я Алекс, ваш книжковий консультант.');
+        addBotMessage('Привіт! Я Мурко 🐾');
         setTimeout(() => {
           addBotMessage(
-            'Підберу для вас ідеальну книгу за пару хвилин. Який жанр вам найближчий?',
+            'Я обожнюю книги і знаю, як знайти саме ту, яка подарує незабутні враження. Допоможу підібрати ідеальну книгу для вас!',
           );
-        }, 1000);
+          setTimeout(() => {
+            addBotMessage('Який жанр вам найближчий?');
+          }, 2200);
+        }, 1500);
       }, 500);
     }
   };
@@ -95,11 +105,14 @@ export function BookAdvisorChat() {
     setInputValue('');
     setRecommendedBooks([]);
     setTimeout(() => {
-      addBotMessage('Давайте спробуємо ще раз!');
+      addBotMessage('Спробуємо ще раз! 🐾');
       setTimeout(() => {
-        addBotMessage('Який жанр вам найближчий?');
-      }, 700);
-    }, 300);
+        addBotMessage('Передивляюсь книжкові полиці..');
+        setTimeout(() => {
+          addBotMessage('Який жанр вам найближчий?');
+        }, 1700);
+      }, 1200);
+    }, 800);
   };
 
   const handleGenreSelect = (genre: {
@@ -109,11 +122,8 @@ export function BookAdvisorChat() {
     icon: string;
   }) => {
     setSelectedGenre(genre);
-
     addUserMessage(`${genre.icon} ${t(genre.nameKey)}`);
-
     setStep('ask_last_book');
-
     setTimeout(() => {
       addBotMessage(
         'Чудовий вибір! 😊 Назвіть будь-яку книгу, яку ви нещодавно читали — постараюсь не повторюватись. Або натисніть «Пропустити».',
@@ -154,11 +164,9 @@ export function BookAdvisorChat() {
       if (books.length === 0) {
         setStep('result');
         setMessages((prev) => prev.filter((m) => !m.text.includes('Шукаю')));
-
         addBotMessage(
           'На жаль, за цим жанром поки немає книг у каталозі. Спробуйте інший жанр!',
         );
-
         return;
       }
 
@@ -188,20 +196,19 @@ export function BookAdvisorChat() {
             recommended.length > 0 ?
               'Ось що я підібрав для вас 👇'
             : 'На жаль, не вдалось підібрати книги. Спробуйте інший жанр!',
+          time: getTime(),
         },
       ]);
     } catch (err) {
       console.error(err);
-
       setStep('error');
-
       const errText = err instanceof Error ? err.message : String(err);
-
       setMessages((prev) => [
         ...prev.filter((m) => !m.text.includes('Шукаю')),
         {
           from: 'bot',
           text: `Упс, щось пішло не так 😕\n\n${errText}`,
+          time: getTime(),
         },
       ]);
     }
@@ -213,10 +220,16 @@ export function BookAdvisorChat() {
         <button
           className="book-advisor__trigger"
           onClick={handleOpen}
-          aria-label="Відкрити книжкового консультанта"
+          aria-label="Порадитись з Мурком"
         >
-          <span className="book-advisor__trigger-icon">📚</span>
-          <span className="book-advisor__trigger-label">Підібрати книгу</span>
+          <img
+            className="book-advisor__trigger-avatar"
+            src={murkoAvatar}
+            alt="Мурко"
+          />
+          <span className="book-advisor__trigger-label">
+            Порадитись з AI Мурком
+          </span>
         </button>
       )}
 
@@ -224,12 +237,14 @@ export function BookAdvisorChat() {
         <div className="book-advisor">
           <div className="book-advisor__header">
             <div className="book-advisor__header-info">
-              <div className="book-advisor__avatar">📚</div>
+              <img
+                className="book-advisor__avatar"
+                src={murkoAvatar}
+                alt="Мурко"
+              />
               <div>
-                <div className="book-advisor__name">Алекс</div>
-                <div className="book-advisor__status">
-                  книжковий консультант
-                </div>
+                <div className="book-advisor__name">Мурко 🐾</div>
+                <div className="book-advisor__status">книжковий порадник</div>
               </div>
             </div>
             <button
@@ -247,11 +262,23 @@ export function BookAdvisorChat() {
                 key={i}
                 className={`book-advisor__message book-advisor__message--${msg.from}`}
               >
-                {msg.text}
+                {msg.from === 'bot' && (
+                  <img
+                    className="book-advisor__msg-avatar"
+                    src={murkoAvatar}
+                    alt="Мурко"
+                  />
+                )}
+                <div className="book-advisor__msg-bubble">
+                  <span className="book-advisor__msg-text">{msg.text}</span>
+                  {msg.time && (
+                    <span className="book-advisor__msg-time">{msg.time}</span>
+                  )}
+                </div>
               </div>
             ))}
 
-            {step === 'ask_genre' && messages.length >= 2 && (
+            {step === 'ask_genre' && messages.length >= 3 && (
               <div className="book-advisor__chips">
                 {advisorGenres.map((genre) => (
                   <button
@@ -269,7 +296,7 @@ export function BookAdvisorChat() {
               <div className="book-advisor__input-row">
                 <input
                   className="book-advisor__input"
-                  placeholder="Назва книги..."
+                  placeholder="Напишіть відповідь..."
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) =>
@@ -285,8 +312,9 @@ export function BookAdvisorChat() {
                     inputValue.trim() && handleLastBookSubmit(false)
                   }
                   disabled={!inputValue.trim()}
+                  aria-label="Надіслати"
                 >
-                  →
+                  ➤
                 </button>
                 <button
                   className="book-advisor__skip"
@@ -299,9 +327,16 @@ export function BookAdvisorChat() {
 
             {step === 'loading' && (
               <div className="book-advisor__typing">
-                <span />
-                <span />
-                <span />
+                <img
+                  className="book-advisor__msg-avatar"
+                  src={murkoAvatar}
+                  alt="Мурко"
+                />
+                <div className="book-advisor__typing-dots">
+                  <span />
+                  <span />
+                  <span />
+                </div>
               </div>
             )}
 
@@ -336,6 +371,10 @@ export function BookAdvisorChat() {
             )}
 
             <div ref={messagesEndRef} />
+          </div>
+
+          <div className="book-advisor__footer">
+            🐾 Мурко читає тисячі книг, щоб знайти найкращу для вас
           </div>
         </div>
       )}
