@@ -291,6 +291,8 @@ export const uk = {
     saving: 'Збереження...',
     success: 'Успішно змінено',
     uploadError: 'Не вдалося завантажити аватар. Спробуйте ще раз.',
+  },
+  
   bookAdvisor: {
     triggerLabel: 'Порадитись з AI Мурком',
     triggerAriaLabel: 'Порадитись з Мурком',
