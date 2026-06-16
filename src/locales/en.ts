@@ -256,4 +256,17 @@ export const en = {
     text: 'Sign in to access your personal data, order history, and more features.',
     maybeLater: 'Maybe later',
   },
+
+  profile: {
+    title: 'Personal Data',
+    pleaseSignIn: 'Please sign in to view your profile',
+    changePhoto: 'Change Photo',
+    email: 'Email',
+    fullName: 'Full Name',
+    phone: 'Phone',
+    save: 'Save Changes',
+    saving: 'Saving...',
+    success: 'Successfully changed',
+    uploadError: 'Failed to upload avatar. Please try again',
+  },
 } as const;
