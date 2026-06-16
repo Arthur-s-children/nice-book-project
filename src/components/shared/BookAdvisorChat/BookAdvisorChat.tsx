@@ -56,7 +56,11 @@ export function BookAdvisorChat() {
   const { t } = useTranslation();
   const murkoAvatar = getImageUrl('murko-avatar.png');
 
-  const messageSound = useRef(new Audio('/sounds/assistant-message.wav'));
+  const messageSound = useRef(
+  new Audio(
+    `${import.meta.env.BASE_URL}sounds/assistant-message.wav`
+  )
+);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
