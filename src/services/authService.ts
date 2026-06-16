@@ -1,6 +1,25 @@
 import { supabase } from '../api/supabase';
 import type { LoginCredentials, SignupCredentials, User } from '../types/User';
 
+type AuthUser = {
+  id: string;
+  email?: string | null;
+  user_metadata?: {
+    full_name?: string;
+    avatar_url?: string;
+  };
+};
+
+type ProfileRecord = {
+  id: string;
+  email?: string | null;
+  full_name?: string | null;
+  avatar_url?: string | null;
+  phone?: string | null;
+  address?: string | null;
+  favorite_genres?: string[] | null;
+};
+
 export const authService = {
   async signInWithPassword(credentials: LoginCredentials) {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -25,15 +44,7 @@ export const authService = {
     if (error) throw error;
 
     if (data.user) {
-      const { error: profileError } = await supabase.from('profiles').insert({
-        id: data.user.id,
-        email: data.user.email,
-        full_name: credentials.full_name || '',
-      });
-
-      if (profileError) {
-        console.error('Failed to create profile:', profileError);
-      }
+      await this.ensureProfile(data.user);
     }
 
     return data;
@@ -62,73 +73,61 @@ export const authService = {
 
     if (error || !user) return null;
 
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', user.id)
-      .single();
-
-    if (profileError || !profile) {
-      if (!profile) {
-        try {
-          await supabase.from('profiles').insert({
-            id: user.id,
-            email: user.email || '',
-            full_name: user.user_metadata?.full_name || '',
-          });
-        } catch (err) {
-          console.error('Failed to create profile:', err);
-        }
-      }
-
-      return {
-        id: user.id,
-        email: user.email || '',
-        full_name: user.user_metadata?.full_name || '',
-        avatar_url: user.user_metadata?.avatar_url || '',
-        phone: '',
-        address: '',
-        favorite_genres: [],
-      };
-    }
-
-    return {
-      id: profile.id,
-      email: profile.email || user.email || '',
-      full_name: profile.full_name || '',
-      avatar_url: profile.avatar_url || '',
-      phone: profile.phone || '',
-      address: profile.address || '',
-      favorite_genres: profile.favorite_genres || [],
-    };
+    const profile = await this.ensureProfile(user);
+    return this.mapUser(user, profile);
   },
 
   onAuthStateChange(callback: (user: User | null) => void) {
     return supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN' && session?.user) {
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-
-        if (!profile) {
-          try {
-            await supabase.from('profiles').insert({
-              id: session.user.id,
-              email: session.user.email || '',
-              full_name: session.user.user_metadata?.full_name || '',
-            });
-          } catch (err) {
-            console.error('Failed to create profile on sign in:', err);
-          }
-        }
-
-        const user = await this.getCurrentUser();
-        callback(user);
-      } else if (event === 'SIGNED_OUT') {
+      if (event === 'SIGNED_OUT') {
         callback(null);
+        return;
       }
+
+      if (event !== 'SIGNED_IN' || !session?.user) {
+        return;
+      }
+
+      const profile = await this.ensureProfile(session.user);
+      callback(this.mapUser(session.user, profile));
     });
+  },
+
+  async ensureProfile(user: AuthUser): Promise<ProfileRecord | null> {
+    const { data: existingProfile, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    if (error) throw error;
+    if (existingProfile) return existingProfile as ProfileRecord;
+
+    const fallbackProfile = {
+      id: user.id,
+      email: user.email || '',
+      full_name: user.user_metadata?.full_name || '',
+    };
+
+    const { error: insertError } = await supabase
+      .from('profiles')
+      .insert(fallbackProfile);
+
+    if (insertError) throw insertError;
+
+    return fallbackProfile as ProfileRecord;
+  },
+
+  mapUser(authUser: AuthUser, profile: ProfileRecord | null): User {
+    return {
+      id: authUser.id,
+      email: profile?.email || authUser.email || '',
+      full_name: profile?.full_name || authUser.user_metadata?.full_name || '',
+      avatar_url:
+        profile?.avatar_url || authUser.user_metadata?.avatar_url || '',
+      phone: profile?.phone || '',
+      address: profile?.address || '',
+      favorite_genres: profile?.favorite_genres || [],
+    };
   },
 };

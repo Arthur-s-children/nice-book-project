@@ -7,14 +7,13 @@ export function AuthPromptModal() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Check if already shown in this session
     const hasShownThisSession = sessionStorage.getItem('authPromptShown');
 
     if (!isAuthenticated && !hasShownThisSession) {
       const timer = setTimeout(() => {
         setIsOpen(true);
         sessionStorage.setItem('authPromptShown', 'true');
-      }, 60000); // 1 minute
+      }, 4000);
 
       return () => clearTimeout(timer);
     }
@@ -40,9 +39,7 @@ export function AuthPromptModal() {
           className="auth-prompt-modal__button"
           onClick={() => {
             setIsOpen(false);
-            // Trigger auth modal - this will be handled by parent component
-            const event = new CustomEvent('openAuthModal');
-            window.dispatchEvent(event);
+            window.dispatchEvent(new CustomEvent('openAuthModal'));
           }}
         >
           Sign In

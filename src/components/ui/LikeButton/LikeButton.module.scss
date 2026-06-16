@@ -5,19 +5,20 @@
   height: 40px !important;
   min-width: 40px !important;
   border-radius: 8px !important;
-  border: 1px solid $color-elements !important;
-  background-color: $color-white !important;
-  color: $color-primary !important;
+  border: 1px solid $color-elements-light !important;
+  background-color: transparent !important;
+  color: $color-primary-light !important;
   transition: transform 300ms ease;
 
   &:hover {
-    border-color: $color-primary !important;
+    border-color: $color-terracotta-light !important;
     transform: scale(1.02);
   }
 }
 
 .selected {
-  border-color: $color-elements !important;
+  border-color: $color-terracotta-light !important;
+  color: $color-terracotta-light !important;
 }
 
 [data-theme='dark'] {
@@ -27,11 +28,13 @@
     color: $color-primary-dark !important;
 
     &:hover {
-      border-color: $color-primary-dark !important;
+      border-color: $color-aquamarine !important;
+      color: $color-aquamarine !important;
     }
   }
 
   .selected {
-    border-color: $color-elements-dark !important;
+    border-color: $color-aquamarine !important;
+    color: $color-aquamarine !important;
   }
 }

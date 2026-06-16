@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as *;
+
 .user-menu {
   position: relative;
   display: inline-block;
@@ -7,16 +9,17 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: none;
-    background: #f5f5f5;
+    border: 2px solid $color-terracotta-light;
+    background: $color-cream;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: all 0.2s;
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
 
     &:hover {
       opacity: 0.8;
+      transform: scale(1.05);
     }
   }
 
@@ -24,12 +27,13 @@
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    background: white;
-    border: 1px solid #e2e6e9;
-    border-radius: 0;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-    min-width: 200px;
+    background: $color-cream;
+    border: 1px solid rgba(122, 99, 85, 0.2);
+    border-radius: $border-radius-lg;
+    box-shadow: 0 12px 40px rgba(45, 34, 26, 0.18);
+    min-width: 220px;
     z-index: 100;
+    padding: 8px;
   }
 
   &__item {
@@ -39,26 +43,62 @@
     border: none;
     text-align: left;
     font-size: 14px;
-    color: #1a1a1a;
+    color: $color-primary;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    border-radius: $border-radius-md;
 
     &:hover {
-      background: #f5f5f5;
+      background: rgba(229, 92, 59, 0.12);
+      color: $color-terracotta-light;
     }
 
     &--danger {
-      color: #c33;
+      color: $color-terracotta-light;
 
       &:hover {
-        background: #fee;
+        background: rgba(229, 92, 59, 0.12);
       }
     }
   }
 
   &__divider {
     height: 1px;
-    background: #e2e6e9;
-    margin: 4px 0;
+    background: rgba(122, 99, 85, 0.2);
+    margin: 8px 0;
+  }
+}
+
+[data-theme='dark'] {
+  .user-menu {
+    &__avatar {
+      border-color: $color-accent-light;
+    }
+
+    &__dropdown {
+      background: $color-surface-dark;
+      border-color: $color-elements-dark;
+    }
+
+    &__item {
+      color: $color-primary-dark;
+
+      &:hover {
+        background: rgba(0, 188, 212, 0.12);
+        color: $color-aquamarine;
+      }
+
+      &--danger {
+        color: $color-aquamarine;
+
+        &:hover {
+          background: rgba(31, 99, 108, 0.12);
+        }
+      }
+    }
+
+    &__divider {
+      background: $color-elements-dark;
+    }
   }
 }

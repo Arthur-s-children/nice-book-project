@@ -6,27 +6,29 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: transparent;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  z-index: 1000;
+  z-index: 2000;
   padding: 20px;
 
   &__content {
-    background-color: $color-white;
-    border-radius: 16px;
+    background-color: $color-cream;
+    border-radius: $border-radius-xl;
     width: 100%;
     max-width: 1000px;
     max-height: 90vh;
     display: flex;
     overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
   }
 
   &__sidebar {
     width: 280px;
-    background-color: $color-white;
-    border-right: 1px solid $color-elements;
+    background-color: rgba(245, 240, 232, 0.98);
+    border-right: 1px solid $color-elements-light;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -46,22 +48,22 @@
   &__input {
     width: 100%;
     height: 48px;
-    background-color: $color-icons;
-    border: 1px solid $color-elements;
+    background-color: rgba(196, 127, 107, 0.08);
+    border: none;
     border-radius: 8px;
     padding: 0 16px;
-    color: $color-white;
+    color: $color-primary-light;
     font-size: 16px;
-    font-family: $font-main;
+    font-family: $font-body;
     outline: none;
-    transition: border-color 0.2s ease;
+    transition: all 0.2s ease;
 
     &::placeholder {
-      color: $color-elements;
+      color: $color-elements-light;
     }
 
     &:focus {
-      border-color: $color-primary;
+      background-color: rgba(196, 127, 107, 0.15);
     }
   }
 
@@ -72,25 +74,25 @@
   &__sales-btn {
     width: 100%;
     padding: 12px 24px;
-    background-color: $color-accent;
+    background-color: $color-terracotta-light;
     border: none;
     border-radius: 8px;
-    color: $color-white;
+    color: $color-white-light;
     font-size: 16px;
-    font-family: $font-main;
+    font-family: $font-body;
     font-weight: $font-semibold;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
 
     &:hover {
-      background-color: $color-accent-hover;
+      background-color: $color-terracotta-hover-light;
       transform: translateY(-1px);
     }
 
     &--active {
-      background-color: $color-accent-active;
-      box-shadow: 0 0 12px rgba(249, 115, 22, 0.5);
+      background-color: $color-terracotta-active-light;
+      box-shadow: 0 0 12px rgba(196, 127, 107, 0.5);
     }
   }
 
@@ -110,11 +112,11 @@
     width: 100%;
     padding: 10px 16px;
     background-color: transparent;
-    border: 1px solid $color-elements;
+    border: 1px solid $color-elements-light;
     border-radius: 8px;
-    color: $color-primary;
+    color: $color-primary-light;
     font-size: 14px;
-    font-family: $font-main;
+    font-family: $font-body;
     font-weight: $font-medium;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -124,14 +126,14 @@
     align-items: center;
 
     &:hover {
-      background-color: $color-primary;
-      color: $color-white;
+      background-color: $color-primary-light;
+      color: $color-white-light;
     }
 
     &--active {
-      background-color: $color-primary;
-      border-color: $color-primary;
-      color: $color-white;
+      background-color: $color-primary-light;
+      border-color: $color-primary-light;
+      color: $color-white-light;
     }
   }
 
@@ -152,11 +154,11 @@
     width: 100%;
     padding: 8px 16px;
     background-color: transparent;
-    border: 1px solid $color-primary;
+    border: 1px solid $color-primary-light;
     border-radius: 6px;
-    color: $color-elements;
+    color: $color-elements-light;
     font-size: 13px;
-    font-family: $font-main;
+    font-family: $font-body;
     font-weight: $font-medium;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -164,14 +166,14 @@
     text-align: left;
 
     &:hover {
-      background-color: $color-primary;
-      color: $color-white;
+      background-color: $color-primary-light;
+      color: $color-white-light;
     }
 
     &--active {
-      background-color: $color-primary;
-      border-color: $color-primary;
-      color: $color-white;
+      background-color: $color-primary-light;
+      border-color: $color-primary-light;
+      color: $color-white-light;
     }
   }
 
@@ -207,9 +209,9 @@
   }
 
   &__empty-text {
-    color: $color-primary;
+    color: $color-primary-light;
     font-size: 16px;
-    font-family: $font-main;
+    font-family: $font-body;
     margin: 0;
   }
 
@@ -218,8 +220,8 @@
     justify-content: center;
     align-items: center;
     padding: 16px 24px;
-    border-top: 1px solid $color-elements;
-    background-color: $color-icons;
+    border-top: 1px solid $color-elements-light;
+    background-color: rgba(196, 127, 107, 0.05);
   }
 
   &__pagination {
@@ -230,24 +232,23 @@
   &__prev-btn,
   &__next-btn {
     padding: 8px 16px;
-    background-color: $color-primary;
-    border: 1px solid $color-elements;
+    background-color: $color-primary-light;
+    border: 1px solid $color-elements-light;
     border-radius: 8px;
-    color: $color-white;
+    color: $color-white-light;
     font-size: 14px;
-    font-family: $font-main;
+    font-family: $font-body;
     font-weight: $font-medium;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
 
     &:hover {
-      background-color: $color-elements;
+      background-color: $color-elements-light;
     }
   }
 }
 
-// Scrollbar styling
 .search-modal__results::-webkit-scrollbar,
 .search-modal__sidebar::-webkit-scrollbar {
   width: 8px;
@@ -255,18 +256,18 @@
 
 .search-modal__results::-webkit-scrollbar-track,
 .search-modal__sidebar::-webkit-scrollbar-track {
-  background: $color-primary;
+  background: $color-bg-light;
 }
 
 .search-modal__results::-webkit-scrollbar-thumb,
 .search-modal__sidebar::-webkit-scrollbar-thumb {
-  background: $color-accent;
+  background: $color-terracotta-light;
   border-radius: 4px;
 }
 
 .search-modal__results::-webkit-scrollbar-thumb:hover,
 .search-modal__sidebar::-webkit-scrollbar-thumb:hover {
-  background: $color-elements;
+  background: $color-elements-light;
 }
 
 [data-theme='dark'] {
@@ -332,6 +333,19 @@
     &__footer {
       background-color: $color-bg-dark;
       border-top-color: $color-elements-dark;
+    }
+
+    &__sales-btn {
+      background-color: $color-accent-light;
+
+      &:hover {
+        background-color: $color-accent-hover-light;
+      }
+
+      &--active {
+        background-color: $color-accent-active-light;
+        box-shadow: 0 0 12px rgba(31, 99, 108, 0.5);
+      }
     }
 
     &__prev-btn,

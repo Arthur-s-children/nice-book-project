@@ -1,10 +1,11 @@
-import { Icon } from '../../ui/Icon';
 import { AppButton } from '../../ui/Button';
 import { LikeButton } from '../../ui/LikeButton';
 import type { Book } from '../../../types/BooksAPI.ts';
 import './BookCard.scss';
 import { Link } from 'react-router-dom';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
+import { Headphones, Truck } from 'lucide-react';
+import { useState } from 'react';
 
 type Props = {
   book: Book;
@@ -23,9 +24,14 @@ export function BookCard({
 }: Props) {
   const price = book.price_discount ?? book.price_regular;
   const imageSrc = getImageUrl(book.images[0]);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <article className="book-card">
+    <article
+      className="book-card"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="book-card__image-wrap">
         <Link to={`/products/${book.slug}`}>
           <img
@@ -36,19 +42,21 @@ export function BookCard({
         </Link>
         {book.type === 'audiobook' && (
           <span className="book-card__badge">
-            <Icon name="headphones" />
+            <Headphones size={16} />
           </span>
         )}
       </div>
 
       <div className="book-card__body">
         <p className="book-card__author">{book.author}</p>
-        <Link
-          to={`/products/${book.slug}`}
-          className="book-card__name"
-        >
-          {book.name}
-        </Link>
+        <div className="book-card__name-container">
+          <Link
+            to={`/products/${book.slug}`}
+            className="book-card__name"
+          >
+            {book.name}
+          </Link>
+        </div>
         <div className="book-card__prices">
           <span className="book-card__price">₴{price}</span>
           {book.price_discount && (
@@ -56,12 +64,14 @@ export function BookCard({
           )}
         </div>
         <p className="book-card__stock">
-          <Icon name="truck" />
+          <Truck size={14} />
           In stock
         </p>
       </div>
 
-      <div className="book-card__actions">
+      <div
+        className={`book-card__actions ${isHovered ? 'book-card__actions--visible' : ''}`}
+      >
         <AppButton
           variant={inCart ? 'selected' : 'primary'}
           onClick={() => !inCart && onAddToCart(book.id)}
