@@ -6,33 +6,42 @@ body {
 }
 
 .header {
-  width: 100%;
-  background-color: $color-white;
-  border-bottom: 1px solid $color-elements;
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  right: 16px;
+  width: auto;
+  max-width: 1180px;
+  backdrop-filter: blur(10px);
+  border-radius: $border-radius-lg;
   margin: 0 auto;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
+  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition:
+    background 0.3s ease,
+    all 0.3s ease;
 }
 
 .top-bar__logo-image {
   display: block;
-  width: 63px;
-  height: 27px;
+  width: 54px;
+  height: 24px;
 }
 
 .top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 48px;
-  padding-left: 16px;
-  padding-right: 0;
+  height: 52px;
+  padding: 0 20px;
 
   &__logo {
     display: flex;
     align-items: center;
     text-decoration: none;
-    height: 22px;
+    height: 100%;
   }
 
   .header__nav {
@@ -43,6 +52,7 @@ body {
     display: flex;
     align-items: center;
     height: 100%;
+    gap: 8px;
 
     .input,
     .dropdouwn,
@@ -56,11 +66,12 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100%;
-      width: 48px;
-      border-left: 1px solid $color-elements;
+      height: 36px;
+      width: 36px;
+      border-radius: $border-radius-md;
       text-decoration: none;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
   }
 }
@@ -72,27 +83,33 @@ body {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: $color-primary;
-  font-weight: 700;
+  font-weight: 600;
+  font-family: $font-heading;
+  font-size: 14px;
   transition: all 0.2s ease;
-
-  &:hover {
-    color: $color-accent;
-  }
-
-  &--active {
-    color: $color-accent;
-  }
 }
 
+// ─── Mobile ──────────────────────────────────────────────────────────────────
+
 @media (max-width: $breakpoint-mobile) {
+  .header {
+    top: 10px;
+    width: calc(100% - 32px);
+    border-radius: $border-radius-lg;
+  }
+
+  .top-bar {
+    height: 56px;
+    padding: 0 20px;
+  }
+
   .header--menu-open {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: $color-white;
+    border-radius: 0;
     z-index: 999;
 
     .top-bar {
@@ -144,27 +161,17 @@ body {
           display: block;
           width: 288px;
           height: 40px;
-          border: 1px solid $color-elements;
-          border-radius: 8px;
-          background-color: $color-white;
+          border-radius: $border-radius-md;
           box-sizing: border-box;
-          color: $color-primary;
-
-          &::placeholder {
-            color: $color-elements;
-          }
         }
 
         .dropdouwn {
           display: block;
           width: 288px;
           height: 40px;
-          border: 1px solid $color-elements;
-          border-radius: 8px;
+          border-radius: $border-radius-md;
           font-size: 16px;
-          background-color: $color-white;
           box-sizing: border-box;
-          color: $color-primary;
         }
 
         .icon--menu {
@@ -183,26 +190,25 @@ body {
           box-sizing: border-box;
           position: fixed;
           bottom: 0;
-          height: 64px;
+          height: 58px;
           width: 50%;
-          border-top: 1px solid $color-elements;
           align-items: center;
           justify-content: center;
-          background-color: $color-white;
           z-index: 1000;
+          left: 0;
         }
+
         .icon--cart {
           display: flex;
           box-sizing: border-box;
           position: fixed;
           bottom: 0;
-          height: 64px;
+          height: 58px;
           width: 50%;
-          border-top: 1px solid $color-elements;
           align-items: center;
           justify-content: center;
-          background-color: $color-white;
           z-index: 1000;
+          right: 0;
         }
 
         .icon--theme {
@@ -212,38 +218,29 @@ body {
           bottom: 0;
           height: 64px;
           width: 50%;
-          border-top: 1px solid $color-elements;
           align-items: center;
           justify-content: center;
-          background-color: $color-white;
           z-index: 1000;
           background: transparent;
           border: none;
           cursor: pointer;
           padding: 0;
         }
-
-        .icon--favourite {
-          left: 0;
-        }
-
-        .icon--cart {
-          right: 0;
-        }
       }
     }
   }
 }
 
+// ─── Tablet+ ─────────────────────────────────────────────────────────────────
+
 @media (min-width: $breakpoint-mobile) {
   .top-bar {
-    height: 48px;
-    padding-left: 16px;
-    padding-right: 0;
-    justify-content: flex-start;
+    height: 64px;
+    padding: 0 32px;
+    justify-content: space-between;
 
     &__logo {
-      margin-right: 32px;
+      margin-right: 0;
     }
 
     .header__nav {
@@ -254,7 +251,7 @@ body {
       display: flex;
       margin-left: auto;
       height: 100%;
-      gap: 0;
+      gap: 8px;
 
       .icon--menu,
       .dropdouwn,
@@ -270,11 +267,12 @@ body {
         position: relative;
         align-items: center;
         justify-content: center;
-        width: 48px;
-        height: 100%;
-        border-left: 1px solid $color-elements;
+        width: 36px;
+        height: 36px;
+        border-radius: $border-radius-md;
         cursor: pointer;
         text-decoration: none;
+        transition: all 0.2s ease;
       }
 
       .favorites-counter,
@@ -282,8 +280,8 @@ body {
         position: absolute;
         top: 20%;
         right: 20%;
-        color: $color-white;
-        background-color: $color-red;
+        color: $color-white-light;
+        background-color: $color-terracotta-light;
         font-size: 9px;
         font-weight: $font-semibold;
         width: 13px;
@@ -298,30 +296,34 @@ body {
     position: relative;
     display: flex;
     flex-direction: row;
-    gap: 24px;
+    gap: 32px;
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
   .nav__link {
-    height: 48px;
+    height: 64px;
     padding-bottom: 0;
   }
 }
 
+// ─── Desktop ─────────────────────────────────────────────────────────────────
+
 @media (min-width: $breakpoint-tablet) {
+  .header {
+    top: 24px;
+    max-width: 1400px;
+  }
+
   .top-bar {
-    height: 64px;
-    padding-left: 0px;
-    padding-right: 0;
+    height: 72px;
+    padding: 0 48px;
 
     &__logo {
       display: flex;
-      padding-left: 30px;
+      padding-left: 0;
       height: 100%;
-
-      border-left: 1px solid $color-elements;
     }
 
     &__icons {
@@ -339,9 +341,10 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 64px;
-        height: 100%;
-        border-left: 1px solid $color-elements;
+        width: 40px;
+        height: 40px;
+        border-radius: $border-radius-md;
+        transition: all 0.2s ease;
       }
 
       .favorites-counter,
@@ -354,42 +357,53 @@ body {
         display: block;
         width: 298px;
         height: 40px;
-        border: 1px solid $color-elements;
-        border-radius: 8px;
-        padding: 0 12px;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        border-radius: $border-radius-md;
+        padding: 0 16px;
         margin-right: 16px;
         font-family: $font-main;
+        transition: all 0.2s ease;
+
+        &:focus {
+          outline: none;
+          border: none;
+        }
       }
 
       .dropdouwn {
         display: block;
         width: 176px;
-        height: 40px;
-        border: 1px solid $color-elements;
-        border-radius: 8px;
-        padding: 0 12px;
+        height: 44px;
+        border-radius: $border-radius-md;
+        padding: 0 16px;
         margin-right: 24px;
       }
     }
   }
 
   .nav__list {
-    padding-left: 24px;
-    gap: 64px;
+    padding-left: 48px;
+    gap: 48px;
   }
 
   .nav__link {
-    height: 64px;
+    height: 72px;
   }
 
   .header__user-avatar {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid $color-elements;
     margin-right: 16px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .header__avatar-img {
@@ -404,64 +418,88 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: $color-elements;
-    color: $color-primary;
     font-weight: 600;
     font-size: 16px;
   }
 
   .header__sign-up-btn {
-    background: none;
     border: none;
-    color: $color-primary;
-    font-weight: 700;
-    font-size: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: $font-heading;
     text-transform: uppercase;
     cursor: pointer;
-    padding: 0 16px;
-    height: 100%;
-    transition: color 0.2s;
+    padding: 12px 24px;
+    height: 44px;
+    border-radius: $border-radius-md;
+    transition: all 0.2s ease;
 
     &:hover {
-      color: $color-primary;
+      transform: scale(1.05);
     }
   }
 }
+
+// ─── Nav indicator ───────────────────────────────────────────────────────────
 
 .nav__indicator {
   position: absolute;
   bottom: 0;
   height: 3px;
-  background-color: $color-accent;
   transition:
     left 0.3s ease,
     width 0.3s ease;
+  border-radius: 2px;
 }
 
 .icon--theme {
   background: transparent;
   border: none;
-  border-left: 1px solid $color-elements;
   cursor: pointer;
   padding: 0;
   font-size: 16px;
+  transition: all 0.2s ease;
 }
 
-[data-theme='dark'] {
-  .header {
-    background-color: $color-surface-dark;
-    border-bottom-color: $color-elements-dark;
+// ─── Default theme (light UI) ─────────────────────────────────────────────────
+
+body:not([data-theme='dark']) {
+  .nav__link {
+    color: $color-primary-light;
+
+    &:hover,
+    &--active {
+      color: $color-terracotta-light;
+    }
   }
 
-  .nav__link {
-    color: $color-primary-dark;
+  .nav__indicator {
+    background-color: $color-terracotta-light;
+  }
 
-    &:hover {
-      color: $color-accent;
+  .header--menu-open {
+    background-color: $color-bg-light;
+
+    .input {
+      border: 1px solid $color-elements-light;
+      background-color: rgba(0, 0, 0, 0.05);
+      color: $color-primary-light;
+
+      &::placeholder {
+        color: $color-elements-light;
+      }
     }
 
-    &--active {
-      color: $color-accent;
+    .dropdouwn {
+      border: 1px solid $color-elements-light;
+      background-color: rgba(0, 0, 0, 0.05);
+      color: $color-primary-light;
+    }
+
+    .icon--favourite,
+    .icon--cart {
+      background-color: $color-bg-light;
+      border-top: 1px solid $color-elements-light;
     }
   }
 
@@ -470,28 +508,156 @@ body {
   .icon--favourite,
   .icon--cart,
   .icon--theme {
-    border-left-color: $color-icons-dark;
-    color: $color-primary-dark;
+    color: $color-icons-light;
+    background-color: transparent;
+
+    &:hover {
+      background-color: rgba(229, 92, 59, 0.1);
+      color: $color-terracotta-light;
+    }
+  }
+
+  .icon--favourite,
+  .icon--cart {
+    color: $color-terracotta-light;
+
+    &:hover {
+      color: $color-terracotta-hover-light;
+    }
   }
 
   .input {
-    background-color: $color-surface-dark;
-    border-color: $color-icons-dark;
+    background-color: rgba(212, 196, 176, 0.3);
+    border-color: $color-elements-light;
+    color: $color-primary-light;
+
+    &::placeholder {
+      color: $color-elements-light;
+    }
+
+    &:focus {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .header__sign-up-btn {
+    background: rgba(0, 0, 0, 0.08);
+    color: $color-primary-light;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.15);
+      color: $color-terracotta-light;
+    }
+  }
+
+  .header__avatar-placeholder {
+    background: $color-elements-light;
+    color: $color-primary-light;
+  }
+
+  .header__user-avatar {
+    border: 2px solid $color-elements-light;
+
+    &:hover {
+      border-color: $color-terracotta-light;
+    }
+  }
+}
+
+// ─── Dark theme (dark UI) ───────────────────────────────────────────────────
+
+body[data-theme='dark'] {
+  .nav__link {
+    color: $color-primary-dark;
+
+    &:hover,
+    &--active {
+      color: $color-accent-light;
+    }
+  }
+
+  .nav__indicator {
+    background-color: $color-accent-light;
+  }
+
+  .header--menu-open {
+    background-color: $color-bg-dark;
+
+    .input {
+      border: 1px solid $color-elements-dark;
+      background-color: $color-surface-dark;
+      color: $color-primary-dark;
+
+      &::placeholder {
+        color: $color-icons-dark;
+      }
+    }
+
+    .dropdouwn {
+      border: 1px solid $color-elements-dark;
+      background-color: $color-surface-dark;
+      color: $color-primary-dark;
+    }
+
+    .icon--favourite,
+    .icon--cart {
+      background-color: $color-bg-dark;
+      border-top: 1px solid $color-elements-dark;
+    }
+  }
+
+  .icon--search,
+  .icon--menu,
+  .icon--favourite,
+  .icon--cart,
+  .icon--theme {
+    color: $color-primary-dark;
+    background-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: $color-accent-light;
+    }
+  }
+
+  .input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: $color-elements-dark;
     color: $color-primary-dark;
 
     &::placeholder {
       color: $color-icons-dark;
     }
+
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
   }
 
-  .header--menu-open {
-    background-color: $color-surface-dark;
+  .header__sign-up-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-primary-dark;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
   }
 
-  .icon--favourite,
-  .icon--cart,
-  .icon--theme {
-    background-color: $color-surface-dark;
-    border-top-color: $color-elements-dark;
+  .header__avatar-placeholder {
+    background: $color-elements-dark;
+    color: $color-primary-dark;
+  }
+
+  .header__user-avatar {
+    border: 2px solid $color-elements-dark;
+
+    &:hover {
+      border-color: $color-accent-light;
+    }
+  }
+
+  .favorites-counter,
+  .cart-counter {
+    background-color: $color-accent-light;
   }
 }

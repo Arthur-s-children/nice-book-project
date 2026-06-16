@@ -99,7 +99,11 @@
   }
 
   &__quote {
-    @include h5;
+    font-family: $font-heading;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+    letter-spacing: 0;
     color: $color-primary;
     font-style: italic;
     margin: 0;

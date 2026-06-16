@@ -1,10 +1,10 @@
 import { Button } from '@mui/material';
-import { Icon } from '../Icon';
+import { Heart, Heart as HeartFilled } from 'lucide-react';
 import styles from './LikeButton.module.scss';
 
 type Props = {
   isSelected: boolean;
-  onClick: () => void;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
   colored?: boolean;
 };
 
@@ -20,11 +20,11 @@ export const LikeButton = ({
       disableRipple
     >
       {isSelected ?
-        <Icon
-          name="heart-filled"
-          colored={colored}
+        <HeartFilled
+          size={20}
+          fill={colored ? 'currentColor' : 'none'}
         />
-      : <Icon name="heart" />}
+      : <Heart size={20} />}
     </Button>
   );
 };

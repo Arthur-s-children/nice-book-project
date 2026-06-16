@@ -8,8 +8,10 @@ import { BooksSwiper } from '../../components/shared/BooksSwiper/BooksSwiper';
 import { useBook } from '../../hooks/useBook.ts';
 import { useBooks } from '../../hooks/useBooks.ts';
 import { getImageUrl } from '../../services/getImageUrl.ts';
+import { Icon } from '../../components/ui/Icon/Icon.tsx';
 import { useTranslation } from 'react-i18next';
-import { Icon } from '../../components/ui/Icon';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
+import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -22,6 +24,8 @@ export const ProductPage = () => {
     isPending: isBookPending,
     error: isBookError,
   } = useBook(slug ?? '');
+
+  const showLoader = useMinimumLoader(isBookPending, 1500);
 
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
@@ -75,8 +79,8 @@ export const ProductPage = () => {
     [languageVersions, navigate],
   );
 
-  if (isBookPending) {
-    return <h2>{t('common.loading')}</h2>;
+  if (showLoader) {
+    return <PageLoader />;
   }
 
   if (isBookError || !book) {
@@ -85,7 +89,6 @@ export const ProductPage = () => {
 
   const inCart = cartIds.includes(book.id);
   const isFavorite = favoriteIds.includes(book.id);
-
   const type = book.type;
 
   const imageSrc = getImageUrl(activeImage || book.images[0]);

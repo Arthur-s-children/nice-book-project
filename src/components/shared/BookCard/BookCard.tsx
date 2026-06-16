@@ -1,4 +1,3 @@
-import { Icon } from '../../ui/Icon';
 import { AppButton } from '../../ui/Button';
 import { LikeButton } from '../../ui/LikeButton';
 import type { Book } from '../../../types/BooksAPI.ts';
@@ -6,6 +5,10 @@ import './BookCard.scss';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
+import { Headphones, Truck } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { animateFlyingIcon } from '../../../services/animations/animateFlyingIcon';
 
 type Props = {
   book: Book;
@@ -24,11 +27,38 @@ export function BookCard({
 }: Props) {
   const price = book.price_discount ?? book.price_regular;
   const imageSrc = getImageUrl(book.images[0]);
+  const [isHovered, setIsHovered] = useState(false);
 
   const { t } = useTranslation();
 
+  const handleAddToFavorite = () => {
+    onToggleFavorite(book.id);
+
+    if (!isFavorite) {
+      toast.success(
+        `${book.name} ${t('product.addedToFavorites', { defaultValue: 'додано в обране!' })}`,
+      );
+    } else {
+      toast.info(
+        `${book.name} ${t('product.removedFromFavorites', { defaultValue: 'видалено з обраного' })}`,
+      );
+    }
+  };
+
+  const handleAddToCart = () => {
+    onAddToCart(book.id);
+
+    toast.success(
+      `${book.name} ${t('product.addedToCartSuccess', { defaultValue: 'упішно додано до кошика!' })}`,
+    );
+  };
+
   return (
-    <article className="book-card">
+    <article
+      className="book-card"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="book-card__image-wrap">
         <Link to={`/products/${book.slug}`}>
           <img
@@ -39,19 +69,21 @@ export function BookCard({
         </Link>
         {book.type === 'audiobook' && (
           <span className="book-card__badge">
-            <Icon name="headphones" />
+            <Headphones size={16} />
           </span>
         )}
       </div>
 
       <div className="book-card__body">
         <p className="book-card__author">{book.author}</p>
-        <Link
-          to={`/products/${book.slug}`}
-          className="book-card__name"
-        >
-          {book.name}
-        </Link>
+        <div className="book-card__name-container">
+          <Link
+            to={`/products/${book.slug}`}
+            className="book-card__name"
+          >
+            {book.name}
+          </Link>
+        </div>
         <div className="book-card__prices">
           <span className="book-card__price">₴{price}</span>
           {book.price_discount && (
@@ -59,21 +91,43 @@ export function BookCard({
           )}
         </div>
         <p className="book-card__stock">
-          <Icon name="truck" />
-          {t('product.inStock')}
+          <Truck size={14} />
+          In stock
         </p>
       </div>
 
-      <div className="book-card__actions">
+      <div
+        className={`book-card__actions ${isHovered ? 'book-card__actions--visible' : ''}`}
+      >
         <AppButton
           variant={inCart ? 'selected' : 'primary'}
-          onClick={() => !inCart && onAddToCart(book.id)}
+          onClick={(event) => {
+            if (inCart) return;
+
+            handleAddToCart();
+
+            animateFlyingIcon({
+              source: event.currentTarget,
+              targetSelector: '[data-cart-target]',
+              content: '🛒',
+            });
+          }}
         >
           {inCart ? t('product.added') : t('product.addToCart')}
         </AppButton>
         <LikeButton
           isSelected={isFavorite}
-          onClick={() => onToggleFavorite(book.id)}
+          onClick={(event) => {
+            handleAddToFavorite();
+
+            if (!isFavorite) {
+              animateFlyingIcon({
+                source: event.currentTarget,
+                targetSelector: '[data-favorites-target]',
+                content: '❤️',
+              });
+            }
+          }}
           colored
         />
       </div>

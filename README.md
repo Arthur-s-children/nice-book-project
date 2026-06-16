@@ -10,79 +10,79 @@ Nice Book is a full-featured e-commerce web application that allows users to dis
 
 ### Frontend
 
-* React 19
-* TypeScript
-* Vite
-* React Router 7
-* SCSS
+- React 19
+- TypeScript
+- Vite
+- React Router 7
+- SCSS
 
 ### State & Data Management
 
-* TanStack React Query
-* React Context API
+- TanStack React Query
+- React Context API
 
 ### Forms & Validation
 
-* React Hook Form
+- React Hook Form
 
 ### Backend & Services
 
-* Supabase
-* Cloudflare CDN
+- Supabase
+- Cloudflare CDN
 
 ### UI & Libraries
 
-* Shadcn
-* Swiper
-* Classnames
+- Shadcn
+- Swiper
+- Classnames
 
 ### Development Tools
 
-* ESLint
-* Prettier
-* Husky
+- ESLint
+- Prettier
+- Husky
 
 ## Key Features
 
 ### 📖 Book Catalog
 
-* Browse books by categories
-* Product details pages
-* Dynamic filtering and sorting
-* Responsive product grid
+- Browse books by categories
+- Product details pages
+- Dynamic filtering and sorting
+- Responsive product grid
 
 ### 🔍 Smart Search
 
-* Fast book discovery
-* Search modal interface
-* Real-time filtering experience
+- Fast book discovery
+- Search modal interface
+- Real-time filtering experience
 
 ### ❤️ User Experience
 
-* Favorites management
-* Persistent shopping cart
-* Recently viewed products
-* Smooth UI interactions and animations
+- Favorites management
+- Persistent shopping cart
+- Recently viewed products
+- Smooth UI interactions and animations
 
 ### 👤 Authentication & Profile
 
-* Secure authentication with Supabase
-* Personal profile management
-* Order history tracking
-* User-specific favorites and cart synchronization
+- Secure authentication with Supabase
+- Personal profile management
+- Order history tracking
+- User-specific favorites and cart synchronization
 
 ### 🌍 Internationalization
 
-* English localization
-* Ukrainian localization
-* Instant language switching
+- English localization
+- Ukrainian localization
+- Instant language switching
 
 ### 💳 Commerce Features
 
-* Shopping cart system
-* Checkout workflow
-* Payment integration support
-* Delivery service integration 
+- Shopping cart system
+- Checkout workflow
+- Payment integration support
+- Delivery service integration
 
 ## Project Structure
 
@@ -90,12 +90,12 @@ The application follows a scalable architecture based on reusable components, cu
 
 ## Performance & Quality
 
-* Responsive design
-* Optimized asset loading
-* Type-safe codebase
-* Modular architecture
-* Reusable UI components
-* Modern development workflow
+- Responsive design
+- Optimized asset loading
+- Type-safe codebase
+- Modular architecture
+- Reusable UI components
+- Modern development workflow
 
 ## Getting Started
 
@@ -111,7 +111,6 @@ npm run build
 ```
 
 ---
-
 
 ### 👥 Developed By
 

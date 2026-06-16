@@ -9,12 +9,12 @@ export function useOrders(userId: string | undefined) {
   } = useQuery({
     queryKey: ['orders', userId],
     queryFn: () => (userId ? orderService.getOrders(userId) : []),
-    enabled: !!userId,
+    enabled: Boolean(userId),
     staleTime: 5 * 60 * 1000,
   });
 
   return {
-    orders: orders || [],
+    orders: orders ?? [],
     isLoading,
     error,
   };

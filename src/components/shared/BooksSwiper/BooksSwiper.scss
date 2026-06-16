@@ -1,149 +1,125 @@
 @use '../../../styles/variables' as *;
 
 .books-swiper {
-  position: relative;
-  margin-top: 0;
-  gap: 16px;
-  padding: 0;
-  box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 32px;
   width: 100%;
-  overflow: visible;
-
-  @media (min-width: 320px) and (max-width: $breakpoint-tablet) {
-    padding: 0 16px;
-  }
-
-  @media (min-width: 320px) and (max-width: $breakpoint-mobile) {
-    min-height: 455px;
-  }
-
-  @media (min-width: 640px) and (max-width: $breakpoint-tablet) {
-    min-height: 571px;
-  }
-
-  @media (min-width: 1200px) {
-    width: 1136px;
-    min-height: 571px;
-    padding: 0;
-  }
+  box-sizing: border-box;
 
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
   &__title {
     @include h2;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.1;
     color: $color-primary;
-    margin: 0;
-    padding: 0;
   }
 
   &__nav {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
-    padding: 0;
-
-    @media (max-width: $breakpoint-mobile) {
-      display: none;
-    }
-
-    @media (min-width: 640px) {
-      margin-right: 8px;
-    }
+    gap: 12px;
   }
 
   &__arrow {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 16px;
-    height: 16px;
-    margin: 0;
-    padding: 0;
-    background: transparent;
+    width: 48px;
+    height: 48px;
     border: none;
+    border-radius: $border-radius-md;
+    background: rgba(255, 255, 255, 0.8);
+    color: $color-primary;
     cursor: pointer;
-    color: $color-primary;
-    color: $color-primary;
-    transition:
-      color 0.2s ease,
-      opacity 0.2s ease,
-      transform 300ms ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 
     &:hover {
-      transform: scale(1.3);
+      background: $color-accent;
+      color: $color-white;
+      transform: scale(1.1);
     }
 
-    &.swiper-button-disabled {
-      color: $color-icons;
-      opacity: 0.5;
-      cursor: not-allowed;
-
-      &:hover {
-        transform: none;
-      }
-    }
-
-    &--prev {
-      margin-right: 40px;
+    &:active {
+      transform: scale(1.05);
     }
   }
 
   &__slider-wrapper {
-    position: relative;
-    display: flex;
-    align-items: stretch;
-    min-width: 0;
-    overflow-x: clip;
-    padding: 12px;
-    margin: 0 -12px;
-    width: calc(100% + 24px);
+    padding: 0 8px;
   }
 
   &__container {
+    padding: 0 8px;
     width: 100%;
-    overflow: visible !important;
+    max-width: 100%;
+    overflow: hidden;
+
+    .swiper-wrapper {
+      align-items: stretch;
+    }
   }
 
   &__slide {
+    padding: 8px;
+    height: auto;
     display: flex;
     justify-content: center;
-    align-items: stretch;
-    margin: 0;
-    padding: 0;
+  }
 
-    width: 215px !important;
-    flex-shrink: 0 !important;
-    overflow: visible;
+  &__skeleton {
+    width: 100%;
+    height: 506px;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.05) 25%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: $border-radius-lg;
+  }
 
-    @media (min-width: 640px) {
-      width: 272px !important;
+  @media (max-width: $breakpoint-mobile) {
+    padding: 48px 20px;
+
+    &__header {
+      margin-bottom: 24px;
+    }
+
+    &__title {
+      font-size: 28px;
+    }
+
+    &__arrow {
+      width: 40px;
+      height: 40px;
+    }
+
+    &__skeleton {
+      height: 400px;
     }
   }
 
-  &__card-placeholder {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    width: 100%;
-    width: 100%;
+  @media (max-width: $breakpoint-tablet) {
+    max-width: 100%;
+    margin: 0 16px;
+  }
+}
 
-    @media (min-width: 320px) and (max-width: $breakpoint-mobile) {
-      height: 400px;
-    }
-
-    @media (min-width: 640px) {
-      height: 506px;
-    }
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }
 
@@ -154,11 +130,22 @@
     }
 
     &__arrow {
+      background: rgba(255, 255, 255, 0.1);
       color: $color-primary-dark;
 
-      &.swiper-button-disabled {
-        color: $color-icons-dark;
+      &:hover {
+        background: $color-accent;
+        color: $color-white;
       }
+    }
+
+    &__skeleton {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+      );
     }
   }
 }

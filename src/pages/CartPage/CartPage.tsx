@@ -4,6 +4,8 @@ import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
 import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';
+import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
+import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
 import './CartPage.scss';
 
 function getPrice(book: Book) {
@@ -142,7 +144,12 @@ export function CartPage() {
     }
   };
 
-  if (isLoading) return <h2>{t('common.loading')}</h2>;
+  const showLoader = useMinimumLoader(isLoading, 1500);
+
+  if (showLoader) {
+    return <PageLoader />;
+  }
+
   if (error) return <h2>{t('common.errorLoading')}</h2>;
 
   return (

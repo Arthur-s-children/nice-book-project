@@ -2,9 +2,11 @@ import { useState, useEffect, useMemo } from 'react';
 import { SearchResultCard } from '../SearchResultCard/SearchResultCard';
 import { Icon } from '../../ui/Icon';
 import './SearchModal.scss';
-import { categoryStructure } from './searchCategories.ts';
+import { categoryStructure } from '../../constants/searchCategories.ts';
 import { useBooks } from '../../../hooks/useBooks.ts';
+import { PageLoader } from '../PageLoader/PageLoader.tsx';
 import { useTranslation } from 'react-i18next';
+import { useMinimumLoader } from '../../../hooks/useMinimumLoader.ts';
 
 type Props = {
   isOpen: boolean;
@@ -22,6 +24,32 @@ export function SearchModal({ isOpen, onClose }: Props) {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
   const { data: books = [], isLoading } = useBooks();
   const { t } = useTranslation();
+  const showLoader = useMinimumLoader(isLoading, 1500);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      const modal = document.querySelector('.search-modal__content');
+      if (modal && !modal.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
 
   const filteredBooks = useMemo(() => {
     let results = books;
@@ -101,19 +129,13 @@ export function SearchModal({ isOpen, onClose }: Props) {
 
   if (!isOpen) return null;
 
-  if (isLoading) {
-    return <h2>{t('common.loading')}</h2>;
+  if (showLoader) {
+    return <PageLoader />;
   }
 
   return (
-    <div
-      className="search-modal"
-      onClick={onClose}
-    >
-      <div
-        className="search-modal__content"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className="search-modal">
+      <div className="search-modal__content">
         {/* Sidebar */}
         <div className="search-modal__sidebar">
           <div className="search-modal__sales-section">

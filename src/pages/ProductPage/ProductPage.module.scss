@@ -4,14 +4,14 @@
   padding-inline: 8px;
   max-width: 1200px;
   margin-inline: auto;
-  padding: 26.5px 16px 32px;
+  padding: 112px 16px 32px;
 
   @media (min-width: 640px) {
-    padding: 24px 24px 80px;
+    padding: 112px 24px 80px;
   }
 
   @media (min-width: 1200px) {
-    padding: 24px 32px 80px;
+    padding: 120px 32px 80px;
   }
 }
 
@@ -40,7 +40,7 @@
   font-size: 12px;
   line-height: 11px;
   font-weight: $font-bold;
-  font-family: $font-main;
+  font-family: $font-body;
 
   &:hover {
     color: $color-primary;
@@ -54,7 +54,7 @@
   font-size: 12px;
   line-height: 11px;
   font-weight: $font-bold;
-  font-family: $font-main;
+  font-family: $font-body;
 }
 
 .book_grid {
@@ -95,7 +95,7 @@
 }
 
 .title {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 22px;
   line-height: 140%;
   font-weight: $font-bold;
@@ -110,7 +110,7 @@
 }
 
 .paragraph {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0;
@@ -119,7 +119,7 @@
 }
 
 .section_title {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 20px;
   font-weight: $font-semibold;
   letter-spacing: 0;
@@ -135,7 +135,7 @@
 }
 
 .block_label_gray {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
@@ -222,7 +222,7 @@
 }
 
 .thumb_active {
-  border: 1px solid #000;
+  border: 1px solid $color-primary;
   border-radius: 4px;
 }
 
@@ -303,7 +303,7 @@
   align-items: center;
   justify-content: center;
 
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0;
@@ -327,7 +327,7 @@
 }
 
 .btn_lang_ua {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0;
@@ -342,7 +342,7 @@
 }
 
 .btn_lang_eng {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0;
@@ -369,7 +369,7 @@
   color: $color-primary;
   font-size: 22px;
   font-weight: $font-bold;
-  font-family: $font-main;
+  font-family: $font-body;
   line-height: 140%;
 
   @media (min-width: 640px) {
@@ -380,9 +380,9 @@
 }
 
 .old_price {
-  color: $color-red;
+  color: $color-brick;
   font-weight: $font-semibold;
-  font-family: $font-main;
+  font-family: $font-body;
   line-height: 100%;
   letter-spacing: 0;
   text-decoration: line-through;
@@ -396,23 +396,23 @@
 }
 
 .btn_add {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0;
-  background-color: $color-accent;
-  color: $color-white;
+  background-color: $color-terracotta-light;
+  color: rgba(245, 240, 232, 0.95);
   font-weight: $font-bold;
   width: 100%;
   height: 40px;
   padding: 9.5px;
-  border: 1px solid $color-accent;
+  border: 1px solid $color-terracotta-light;
   border-radius: 8px;
   cursor: pointer;
   transition: all 300ms ease;
 
   &:hover {
-    background-color: $color-accent-hover;
+    background-color: $color-terracotta-hover-light;
     transform: scale(1.02);
   }
 }
@@ -464,7 +464,7 @@
   }
 
   td:first-child {
-    font-family: $font-main;
+    font-family: $font-body;
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0;
@@ -475,7 +475,7 @@
   }
 
   td:last-child {
-    font-family: $font-main;
+    font-family: $font-body;
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0;
@@ -548,12 +548,23 @@
     border-color: $color-elements-dark;
   }
 
-  .btn_favorite {
-    border-color: $color-elements-dark;
-    color: $color-icons-dark;
+  .btn_add {
+    background-color: $color-accent-light;
+    color: $color-white-light;
+    border-color: $color-accent-light;
 
     &:hover {
-      border-color: $color-primary-dark;
+      background-color: $color-accent-hover-light;
+    }
+  }
+
+  .btn_favorite {
+    border-color: $color-elements-dark;
+    color: $color-white-light;
+
+    &:hover {
+      border-color: $color-accent-light;
+      color: $color-accent-light;
     }
   }
 

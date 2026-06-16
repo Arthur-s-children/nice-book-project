@@ -2,14 +2,18 @@ import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { BookCard } from '../BookCard/BookCard';
-import { Icon } from '../../ui/Icon';
 import { useCart } from '../../../hooks/useCart';
 import { useFavorites } from '../../../hooks/useFavorites';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Book } from '../../../types/BooksAPI.ts';
 import './BooksSwiper.scss';
 
 import 'swiper/css';
+import { PageLoader } from '../PageLoader/PageLoader.tsx';
 import { useTranslation } from 'react-i18next';
+import { useMinimumLoader } from '../../../hooks/useMinimumLoader.ts';
 
 interface BooksSwiperProps {
   title: string;
@@ -27,39 +31,61 @@ export const BooksSwiper = ({
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
   const { t } = useTranslation();
+  const showLoader = useMinimumLoader(isLoading, 1500);
+
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  if (showLoader) {
+    return <PageLoader />;
+  }
 
   return (
-    <section className="books-swiper">
-      <div className="books-swiper__header">
+    <section
+      className="books-swiper"
+      ref={ref}
+    >
+      <motion.div
+        className="books-swiper__header"
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
         <h2 className="books-swiper__title">{t(title)}</h2>
 
         <div className="books-swiper__nav">
           <button
             ref={prevRef}
             className="books-swiper__arrow books-swiper__arrow--prev"
+            aria-label="Previous slide"
           >
-            <Icon
-              name="arrow-left-dark"
-              size={12}
-            />
+            <ChevronLeft size={24} />
           </button>
           <button
             ref={nextRef}
             className="books-swiper__arrow books-swiper__arrow--next"
+            aria-label="Next slide"
           >
-            <Icon
-              name="arrow-right-dark"
-              size={12}
-            />
+            <ChevronRight size={24} />
           </button>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="books-swiper__slider-wrapper">
+      <motion.div
+        className="books-swiper__slider-wrapper"
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+      >
         <Swiper
           modules={[Navigation]}
-          spaceBetween={16}
+          spaceBetween={24}
           slidesPerGroup={1}
+          observer
+          observeParents
+          resizeObserver
           navigation={true}
           onBeforeInit={(swiper) => {
             if (
@@ -99,11 +125,11 @@ export const BooksSwiper = ({
                   inCart={cartIds.includes(book.id)}
                   isFavorite={favoriteIds.includes(book.id)}
                 />
-              : <h2>{t('common.loading')}</h2>}
+              : <div className="books-swiper__skeleton" />}
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
+      </motion.div>
     </section>
   );
 };

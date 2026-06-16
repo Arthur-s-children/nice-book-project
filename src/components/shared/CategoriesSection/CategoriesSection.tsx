@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../../hooks/useBooks.ts';
 import { useTimeCounter } from '../../../hooks/useTimeCounter.ts';
 import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 
 export const CategoriesSection = () => {
   const { data = [] } = useBooks();
@@ -23,7 +24,7 @@ export const CategoriesSection = () => {
 
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.8,
+    threshold: 0.2,
   });
 
   const audiobooksCount = useTimeCounter(counts.audiobook * 33, 3, inView);
@@ -39,9 +40,21 @@ export const CategoriesSection = () => {
       className="categories"
       ref={ref}
     >
-      <h2 className="categories__title">{t('category.shopByCategory')}</h2>
+      <motion.h2
+        className="categories__title"
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
+        {t('category.shopByCategory')}
+      </motion.h2>
 
-      <div className="categories__grid">
+      <motion.div
+        className="categories__grid"
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+      >
         <CategoryCard
           {...categories[0]}
           amount={audiobooksCount}
@@ -56,7 +69,7 @@ export const CategoriesSection = () => {
           {...categories[2]}
           amount={paperbacksCount}
         />
-      </div>
+      </motion.div>
     </section>
   );
 };

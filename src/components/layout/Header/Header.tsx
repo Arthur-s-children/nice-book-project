@@ -1,6 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { Logo } from '../../Logo';
-import { Icon } from '../../ui/Icon';
 import { SearchModal } from '../../shared/SearchModal/SearchModal';
 import { AuthModal } from '../../ui/AuthModal';
 import { UserMenu } from '../../ui/UserMenu';
@@ -14,6 +13,9 @@ import { LanguageSwitcher } from '../../ui/LanguageSwitcher/LanguageSwitcher';
 import { useTheme } from './useTheme';
 import { useCart } from '../../../hooks/useCart.tsx';
 import { useFavorites } from '../../../hooks/useFavorites.tsx';
+import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
+import { Search, Heart, ShoppingBag, Menu, X } from 'lucide-react';
+import { toast } from 'sonner';
 import { useTypingPlaceholder } from '../../../hooks/useTypingPlaceholder.ts';
 
 interface Props {
@@ -29,7 +31,6 @@ export function Header({
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [internalIsAuthModalOpen, setInternalIsAuthModalOpen] = useState(false);
   const [language, setLanguage] = useState<'en' | 'uk'>('en');
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const location = useLocation();
   const { user, isAuthenticated, isLoading } = useAuthContext();
 
@@ -42,6 +43,10 @@ export function Header({
     visible: false,
   });
   const { isDark, toggleTheme } = useTheme();
+  const theme = useMemo<'light' | 'dark'>(
+    () => (isDark ? 'dark' : 'light'),
+    [isDark],
+  );
 
   const navListRef = useRef<HTMLUListElement>(null);
 
@@ -76,6 +81,25 @@ export function Header({
     setIsSearchModalOpen(true);
   };
 
+  const { scrollY } = useScroll();
+  const headerBackgroundDark = useTransform(
+    scrollY,
+    [0, 20],
+    ['rgba(34, 39, 61, 0)', 'rgba(20, 30, 50, 0.95)'],
+  );
+  const headerBackgroundLight = useTransform(
+    scrollY,
+    [0, 20],
+    ['rgba(212, 196, 176, 0)', 'rgba(200, 185, 165, 0.95)'],
+  );
+  const headerBackground = useMotionValue('rgba(34, 39, 61, 0)');
+  const headerScale = useTransform(scrollY, [0, 20], [1, 0.98]);
+
+  useEffect(() => {
+    const source = isDark ? headerBackgroundDark : headerBackgroundLight;
+    headerBackground.set(source.get());
+    return source.on('change', (v) => headerBackground.set(v));
+  }, [isDark]);
   const animatedPlaceholder = useTypingPlaceholder({
     words: placeholderBooks,
   });
@@ -95,8 +119,38 @@ export function Header({
     }
   }, [location, i18n.language]);
 
+  useEffect(() => {
+    if (!i18n.language) return;
+
+    if (i18n.language === 'uk') {
+      toast.success('Мову успішно змінено на українську! 🇺🇦');
+    } else if (i18n.language === 'en') {
+      toast.success('Language successfully changed to English! 🇬🇧');
+    }
+  }, [i18n.language]);
+
+  const handleThemeToggle = () => {
+    toggleTheme();
+
+    if (isDark) {
+      toast.info(
+        t('theme.lightEnabled', { defaultValue: 'Увімкнено світлу тему ☀️' }),
+      );
+    } else {
+      toast.info(
+        t('theme.darkEnabled', { defaultValue: 'Увімкнено темну тему 🌙' }),
+      );
+    }
+  };
+
   return (
-    <header className={isMenuOpen ? 'header header--menu-open' : 'header'}>
+    <motion.header
+      className={isMenuOpen ? 'header header--menu-open' : 'header'}
+      style={{
+        backgroundColor: headerBackground,
+        scale: headerScale,
+      }}
+    >
       <div className="top-bar">
         <a
           href="#"
@@ -200,14 +254,15 @@ export function Header({
             className="icon icon--search"
             onClick={openSearchModal}
           >
-            <Icon name="search" />
+            <Search size={20} />
           </a>
           <NavLink
             onClick={closeMenu}
             className="icon icon--favourite"
             to={'favorites'}
+            data-favorites-target
           >
-            <Icon name="heart" />
+            <Heart size={20} />
             {favoritesCount > 0 && (
               <span className="favorites-counter">{favoritesCount}</span>
             )}
@@ -216,8 +271,9 @@ export function Header({
             onClick={closeMenu}
             className="icon icon--cart"
             to={'cart'}
+            data-cart-target
           >
-            <Icon name="cart" />
+            <ShoppingBag size={20} />
             {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
           </NavLink>
 
@@ -227,29 +283,25 @@ export function Header({
               language={language}
               theme={theme}
               onLanguageChange={setLanguage}
-              onThemeChange={setTheme}
+              onThemeChange={handleThemeToggle}
             />
           : !isLoading && !isAuthenticated ?
             <SettingsMenu
               language={language}
               theme={theme}
               onLanguageChange={setLanguage}
-              onThemeChange={setTheme}
+              onThemeChange={handleThemeToggle}
+              onSignUpClick={() => setIsAuthModalOpen(true)}
             />
           : null}
-
-          <button
-            className="icon icon--theme"
-            onClick={toggleTheme}
-          >
-            {isDark ? '☀️' : '🌘'}
-          </button>
           <a
             href=""
             className="icon icon--menu"
             onClick={toggleMenu}
           >
-            <Icon name={isMenuOpen ? 'close' : 'burger'} />
+            {isMenuOpen ?
+              <X size={20} />
+            : <Menu size={20} />}
           </a>
         </div>
 
@@ -265,6 +317,6 @@ export function Header({
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
       />
-    </header>
+    </motion.header>
   );
 }
