@@ -7,6 +7,7 @@ import { CatalogPage } from '../pages/CatalogPage';
 import { FavoritesPage } from '../pages/FavoritesPage';
 import { CartPage } from '../pages/CartPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { CheckoutPage } from '../pages/CheckoutPage';
 import { ProductPage } from '../pages/ProductPage';
 import { RightsPage } from '../pages/RightsPage';
 import { TeamPage } from '../pages/TeamPage';
@@ -35,6 +36,10 @@ export const router = createHashRouter([
       {
         path: 'cart',
         element: <CartPage />,
+      },
+      {
+        path: 'checkout',
+        element: <CheckoutPage />,
       },
       {
         path: '*',

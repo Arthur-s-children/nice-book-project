@@ -4,7 +4,7 @@ export const en = {
     books: 'Books',
     ourTeam: 'Our team',
     loading: 'Loading...',
-    errorLoading: 'Failed to load data',
+    error: 'An error occurred while loading data.',
   },
 
   header: {
@@ -120,6 +120,20 @@ export const en = {
     pleaseSelectWarehouse: 'Please select a delivery warehouse.',
     total: 'Total',
     checkout: 'Checkout',
+    processing: 'Processing...',
+  },
+
+  delivery: {
+    title: 'Nova Poshta Delivery',
+    warehouse: 'Warehouse',
+    poshtomat: 'Parcel Locker',
+    cityPlaceholder: 'Enter city, e.g. Kyiv',
+    searching: 'Searching for city...',
+    errorCities: 'Failed to load cities.',
+    errorWarehouses: 'Failed to load addresses.',
+    selectWarehouse: 'Select delivery address',
+    loadingWarehouses: 'Loading addresses...',
+    alertWarehouse: 'Please select a warehouse or parcel locker for delivery.',
   },
 
   home: {
