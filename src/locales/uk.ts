@@ -5,12 +5,15 @@ export const uk = {
     ourTeam: 'Наша команда',
     loading: 'Завантаження...',
     error: 'Сталася помилка при завантаженні даних.',
+    mistake: 'Не вдалося завантажити книги',
   },
 
   header: {
     paper: 'Паперові книги',
     kindle: 'Електронні',
     audio: 'Аудіокниги',
+    lightEnabled: 'Увімкнено світлу тему ☀️',
+    darkEnabled: 'Увімкнено темну тему 🌙',
   },
 
   footer: {
@@ -19,6 +22,11 @@ export const uk = {
     rights: 'Права',
     backToTop: 'Вгору',
     team: 'Команда',
+    explore: 'Навігація',
+    company: 'Компанія',
+    info: 'Інформація',
+    slogan1: 'Книги, що надихають,',
+    slogan2: 'історії, які живуть вічно',
   },
 
   product: {
@@ -41,6 +49,9 @@ export const uk = {
     characteristics: 'Характеристики',
     recommended: 'Вам також може сподобатися',
     books: 'книг',
+    addedToFavorites: 'додано в обране!',
+    removedFromFavorites: 'видалено з обраного',
+    addedToCartSuccess: 'успішно додано до кошика!',
   },
 
   category: {
@@ -177,6 +188,17 @@ export const uk = {
     discountTitle: 'Акційні пропозиції',
     discountDescription:
       'Обирайте книги зі знижками та заощаджуйте на улюблених виданнях.',
+
+    quotes: {
+      reading1: {
+        text: 'Читання — це розмова між читачем і автором.',
+        author: 'Ріта Дав',
+      },
+      reading2: {
+        text: 'Кімната без книжок — як тіло без душі.',
+        author: 'Цицерон',
+      },
+    },
   },
 
   rights: {
@@ -372,5 +394,95 @@ export const uk = {
     found: 'Ось що я підібрав для вас 👇',
     notFound: 'На жаль, не вдалось підібрати книги. Спробуйте інший жанр!',
     error: 'Упс, щось пішло не так 😕',
+  },
+
+  dontMiss: {
+    eyebrow: 'Новинки',
+    title: 'Не пропустіть',
+    subtitle:
+      'Відкрийте для себе наші нові надходження та бестселери, поки вони доступні',
+  },
+
+  hero: {
+    shopNow: 'Купити зараз',
+  },
+
+  intro: {
+    loadingText: 'Відкриваємо вашу наступну історію',
+    enterHint: 'Натисни, щоб увійти',
+  },
+
+  checkout: {
+    title: 'Оформлення замовлення',
+
+    recipientTitle: '1. Дані одержувача',
+    deliveryTitle: '2. Доставка Новою Поштою',
+    paymentTitle: '3. Оплата карткою',
+    orderTitle: 'Ваше замовлення',
+
+    firstName: "Ім'я",
+    lastName: 'Прізвище',
+    phone: 'Номер телефону',
+
+    cityPlaceholder: 'Почніть вводити місто...',
+    warehousePlaceholder: 'Оберіть пункт видачі',
+
+    warehouse: 'Відділення',
+    postomat: 'Поштомат',
+
+    loadingCities: 'Пошук міст...',
+    loadingWarehouses: 'Завантаження адрес...',
+    processingPayment: 'Обробка платежу...',
+
+    pay: (price: string) => `Оплатити ${price} ₴`,
+
+    total: 'Сума',
+    discount: 'Очікувана знижка:',
+
+    firstPurchaseBadge:
+      '🎉 Знижка 10% на першу покупку буде застосована автоматично!',
+
+    successTitle: 'Дякуємо за замовлення!',
+    successText:
+      'Оплата пройшла успішно. Наш менеджер вже звʼязується з вами для підтвердження.',
+    errorTitle: 'Помилка',
+    errorText:
+      'Сталася помилка при проведенні транзакції. Будь ласка, перевірте дані картки.',
+
+    successBtn: 'До історії замовлень',
+    errorBtn: 'Спробувати знову',
+    homeBtn: 'На головну',
+
+    validateAlert: 'Будь ласка, виправте помилки у формі оформлення.',
+
+    cardNumberPlaceholder: 'Номер картки (16 цифр)',
+    cardNamePlaceholder: 'Імʼя власника картки',
+    cardExpiryPlaceholder: 'ММ/РР',
+    cardCvcPlaceholder: 'CVC',
+
+    error: {
+      firstNameRequired: 'Імʼя є обовʼязковим',
+      firstNameShort: 'Імʼя занадто коротке',
+
+      lastNameRequired: 'Прізвище є обовʼязковим',
+      lastNameShort: 'Прізвище занадто коротке',
+
+      phoneRequired: 'Номер телефону є обовʼязковим',
+      phoneInvalid: 'Некоректний формат номера',
+
+      cityRequired: 'Оберіть місто зі списку',
+      warehouseRequired: 'Оберіть відділення або поштомат',
+
+      cardNumberRequired: 'Вкажіть номер картки',
+      cardNumberInvalid: 'Недійсний номер картки',
+
+      cardNameRequired: 'Вкажіть імʼя на картці',
+
+      cardExpiryInvalid: 'Формат MM/YY',
+      cardExpiryExpired: 'Картка протермінована',
+
+      cardCvcRequired: 'CVC обовʼязковий',
+      cardCvcInvalid: 'CVC має містити 3 цифри',
+    },
   },
 } as const;

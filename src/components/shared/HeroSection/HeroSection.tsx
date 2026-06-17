@@ -38,7 +38,7 @@ export const HeroSection = () => {
             to="/catalog"
             className="hero__button"
           >
-            Shop Now
+            {t('hero.shopNow')}
             <ArrowRight size={20} />
           </Link>
         </motion.div>

@@ -7,12 +7,14 @@
   align-items: flex-start;
   justify-content: center;
   z-index: 1000;
-  padding: 88px 16px 24px;
+  padding: 0 16px 24px;
   background: rgba(26, 21, 18, 0.35);
+  border-radius: 32px;
 
   &__content {
     background: $color-cream;
     padding: 32px 24px;
+    margin-top: 12%;
     width: 100%;
     max-width: 400px;
     position: relative;
@@ -79,11 +81,11 @@
     box-shadow: none;
     outline: none;
     font-size: 14px;
-    background: $color-white;
+    background: $color-icons-light;
     border-radius: 12px;
 
     &::placeholder {
-      color: $color-icons;
+      color: $color-bg-light;
     }
   }
 
@@ -94,7 +96,7 @@
 
   &__submit {
     padding: 12px 24px;
-    background: $color-accent;
+    background: $color-terracotta-light;
     color: white;
     border: none;
     font-size: 14px;
@@ -104,13 +106,23 @@
     transition: all 0.2s ease;
 
     &:hover:not(:disabled) {
-      background: $color-accent-hover;
+      background: $color-terracotta-hover-light;
       transform: translateY(-1px);
     }
 
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+
+    &--secondary {
+      background: rgba(0, 0, 0, 0.08);
+      color: $color-primary-light;
+
+      &:hover:not(:disabled) {
+        background: rgba(0, 0, 0, 0.15);
+        color: $color-terracotta-light;
+      }
     }
   }
 
@@ -169,6 +181,7 @@
 
     &-btn {
       background: none;
+      margin-left: 5px;
       border: none;
       color: $color-accent;
       font-weight: 600;

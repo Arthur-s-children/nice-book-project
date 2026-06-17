@@ -31,7 +31,9 @@ export function OrderHistoryPage() {
 
   if (!user) {
     return (
-      <div className="order-history">{t('orderHistory.pleaseSignIn')}</div>
+      <div className="order-history order-history-error">
+        {t('orderHistory.pleaseSignIn')}
+      </div>
     );
   }
 

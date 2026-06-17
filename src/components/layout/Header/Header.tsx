@@ -92,12 +92,17 @@ export function Header({
   );
   const headerBackground = useMotionValue('rgba(34, 39, 61, 0)');
   const headerScale = useTransform(scrollY, [0, 20], [1, 0.98]);
+  const textColorLight = useTransform(
+    scrollY,
+    [0, 20],
+    ['rgba(200, 180, 160, 0.95)', 'rgba(0, 0, 0, 0.85)'],
+  );
 
   useEffect(() => {
     const source = isDark ? headerBackgroundDark : headerBackgroundLight;
     headerBackground.set(source.get());
     return source.on('change', (v) => headerBackground.set(v));
-  }, [isDark]);
+  }, [isDark, headerBackground, headerBackgroundDark, headerBackgroundLight]);
   const animatedPlaceholder = useTypingPlaceholder({
     words: placeholderBooks,
   });
@@ -108,6 +113,11 @@ export function Header({
     ) as HTMLElement | null;
 
     if (!activeLink || !navListRef.current) {
+      setIndicator((prev) => ({
+        ...prev,
+        visible: false,
+      }));
+
       return;
     }
 
@@ -140,11 +150,11 @@ export function Header({
 
     if (isDark) {
       toast.info(
-        t('theme.lightEnabled', { defaultValue: 'Увімкнено світлу тему ☀️' }),
+        t('theme.lightEnabled', { defaultValue: t('header.lightEnabled') }),
       );
     } else {
       toast.info(
-        t('theme.darkEnabled', { defaultValue: 'Увімкнено темну тему 🌙' }),
+        t('theme.darkEnabled', { defaultValue: t('header.darkEnabled') }),
       );
     }
   };
@@ -167,6 +177,7 @@ export function Header({
       style={{
         backgroundColor: headerBackground,
         scale: headerScale,
+        color: isDark ? undefined : textColorLight,
       }}
     >
       <div className="top-bar">

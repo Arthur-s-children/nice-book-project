@@ -8,7 +8,6 @@
     border: none;
     cursor: pointer;
     padding: 8px;
-    color: $color-brown;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
@@ -35,19 +34,17 @@
     justify-content: flex-end;
     align-items: flex-start;
     padding: 72px 20px 20px;
-
-    backdrop-filter: blur(6px);
   }
 
   &__modal {
-    background: transparent;
+    background: $color-cream;
     border-radius: $border-radius-lg;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
-    min-width: 240px;
-    padding: 16px;
+    min-width: 320px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
     border: 1px solid rgba(122, 99, 85, 0.2);
   }
 
@@ -62,27 +59,39 @@
     background: none;
     border: none;
     text-align: left;
-    padding: 10px 12px;
+    padding: 12px 16px;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     color: $color-primary;
     transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
     &:hover {
       background: rgba(196, 127, 107, 0.12);
-      color: $color-accent;
+      color: $color-terracotta-light;
+    }
+
+    &--with-icon {
+      gap: 10px;
     }
 
     &--primary {
-      background: $color-accent;
-      color: $color-white;
+      background: $color-terracotta-light;
+      color: $color-cream;
       font-weight: $font-semibold;
       text-align: center;
+      justify-content: center;
+      padding: 16px 18px;
+      font-size: 16px;
+      transition: all 0.2s ease;
 
       &:hover {
-        background: darken($color-accent, 5%);
-        color: $color-white;
+        background: $color-terracotta-hover-light;
+        color: $color-cream;
+        transform: scale(1.05);
       }
     }
   }
@@ -108,11 +117,11 @@
       }
 
       &--primary {
-        background: $color-aquamarine;
+        background: $color-accent-light;
         color: $color-white;
 
         &:hover {
-          background: $color-aquamarine-hover;
+          background: $color-accent-hover-light;
           color: $color-white;
         }
       }

@@ -30,7 +30,7 @@ export const ProductPage = () => {
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
 
-  const [activeImage, setActiveImage] = useState<string>();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const TITLES: Record<string, string> = {
     paperback: t('catalog.title.paperback'),
@@ -41,13 +41,26 @@ export const ProductPage = () => {
   const relatedBooks = useMemo(() => {
     if (!book) return [];
 
-    return books
-      .filter(
-        (item) =>
-          item.id !== book.id &&
-          item.category.some((cat) => book.category.includes(cat)),
-      )
-      .slice(0, 10);
+    const similarBooks = books.filter(
+      (item) =>
+        item.id !== book.id &&
+        item.category.some((cat) => book.category.includes(cat)),
+    );
+
+    if (similarBooks.length >= 4) {
+      return similarBooks.slice(0, 10);
+    }
+
+    const additionalBooks = books.filter(
+      (item) =>
+        item.id !== book.id &&
+        !similarBooks.some((similar) => similar.id === item.id),
+    );
+
+    return [
+      ...similarBooks,
+      ...additionalBooks.slice(0, 4 - similarBooks.length),
+    ];
   }, [books, book]);
 
   const languageVersions = useMemo(() => {
@@ -91,10 +104,17 @@ export const ProductPage = () => {
   const isFavorite = favoriteIds.includes(book.id);
   const type = book.type;
 
-  const imageSrc = getImageUrl(activeImage || book.images[0]);
+  const imageSrc = getImageUrl(
+    selectedImage && book.images.includes(selectedImage) ?
+      selectedImage
+    : book.images[0],
+  );
 
   return (
-    <div className={styles.item_card}>
+    <div
+      key={book.id}
+      className={styles.item_card}
+    >
       <nav className={styles.breadcrumbs}>
         <Link
           to="/"
@@ -140,7 +160,7 @@ export const ProductPage = () => {
                 key={img}
                 type="button"
                 className={styles.thumb}
-                onClick={() => setActiveImage(img)}
+                onClick={() => setSelectedImage(img)}
               >
                 <img
                   src={getImageUrl(img)}

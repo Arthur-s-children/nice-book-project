@@ -72,7 +72,11 @@ export function ProfilePage() {
   };
 
   if (!user) {
-    return <div className="profile-page">{t('profile.pleaseSignIn')}</div>;
+    return (
+      <div className="profile-page profile-page-error">
+        {t('profile.pleaseSignIn')}
+      </div>
+    );
   }
 
   const avatarUrl = profile?.avatar_url || '';

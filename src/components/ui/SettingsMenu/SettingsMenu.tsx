@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { SlidersHorizontal } from 'lucide-react';
+import { SlidersHorizontal, Globe, Moon, Sun } from 'lucide-react';
 import './SettingsMenu.scss';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../../layout/Header/useTheme';
 
 type Language = 'en' | 'uk';
 type Theme = 'light' | 'dark';
@@ -24,6 +25,7 @@ export function SettingsMenu({
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -48,6 +50,7 @@ export function SettingsMenu({
         className="settings-menu__button"
         onClick={() => setIsOpen(true)}
         aria-label="Settings"
+        style={{ color: isDark ? '#1F636C' : '#E55C3B' }}
       >
         <SlidersHorizontal
           size={18}
@@ -68,6 +71,30 @@ export function SettingsMenu({
               {t('settingsMenu.preferences')}
             </h3>
 
+            <button
+              className="settings-menu__option settings-menu__option--with-icon"
+              onClick={() => {
+                onLanguageChange(language === 'en' ? 'uk' : 'en');
+                setIsOpen(false);
+              }}
+            >
+              <Globe size={16} />
+              <span>{language === 'en' ? 'Українська' : 'English'}</span>
+            </button>
+
+            <button
+              className="settings-menu__option settings-menu__option--with-icon"
+              onClick={() => {
+                onThemeChange(theme === 'light' ? 'dark' : 'light');
+                setIsOpen(false);
+              }}
+            >
+              {theme === 'light' ?
+                <Moon size={16} />
+              : <Sun size={16} />}
+              <span>{theme === 'light' ? 'Dark Theme' : 'Light Theme'}</span>
+            </button>
+
             {onSignUpClick && (
               <button
                 className="settings-menu__option settings-menu__option--primary"
@@ -79,27 +106,6 @@ export function SettingsMenu({
                 {t('auth.signUp')}
               </button>
             )}
-
-            <button
-              className="settings-menu__option"
-              onClick={() => {
-                onLanguageChange(language === 'en' ? 'uk' : 'en');
-                setIsOpen(false);
-              }}
-            >
-              {t('settingsMenu.changeLanguage')}{' '}
-              {language === 'en' ? 'to Uk' : 'на En'}
-            </button>
-
-            <button
-              className="settings-menu__option"
-              onClick={() => {
-                onThemeChange(theme === 'light' ? 'dark' : 'light');
-                setIsOpen(false);
-              }}
-            >
-              {t('settingsMenu.changeTheme')}
-            </button>
           </div>
         </div>
       )}
