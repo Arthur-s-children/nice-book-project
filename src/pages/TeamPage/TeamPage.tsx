@@ -1,6 +1,6 @@
 import React from 'react';
 import { TeamMemberCard } from '../../components/shared/TeamMemberCard';
-import Team from './people/Team.json';
+import { team } from './people/Team.ts';
 import './TeamPage.scss';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +13,7 @@ export interface TeamMember {
 }
 
 export const TeamPage: React.FC = () => {
-  const teamMembers = Team as TeamMember[];
+  const teamMembers = team as TeamMember[];
 
   const { t } = useTranslation();
 
