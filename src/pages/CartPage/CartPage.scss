@@ -3,17 +3,30 @@
 
 .cart-page {
   @include grid.page-container;
+  padding-top: 140px;
   display: flex;
   flex: 1;
   flex-direction: column;
-  min-height: calc(100dvh + 120px);
-  padding-bottom: 140px;
+  min-height: 100dvh;
+  padding-bottom: 60px;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding-top: 100px;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    padding-bottom: 40px;
+  }
 }
 
 .cart-page__title {
   @include h1;
   color: $color-primary;
   margin-bottom: 28px;
+
+  @media (max-width: $breakpoint-mobile) {
+    margin-bottom: 20px;
+  }
 }
 
 .cart-page__empty {
@@ -28,7 +41,7 @@
   min-height: 320px;
   border: 1px solid $color-elements;
   border-radius: $border-radius-xl;
-  background: rgba($color-white, 0.6);
+  background: rgba($color-surface, 0.6);
 }
 
 .cart-page__content {
@@ -36,19 +49,232 @@
   align-items: flex-start;
   gap: 24px;
   flex: 1;
+  width: 100%;
 
   @media (max-width: $breakpoint-tablet) {
     flex-direction: column;
+    align-items: center;
+    gap: 32px;
   }
 }
 
 .cart-page__list {
   flex: 1;
   min-width: 0;
-  padding: 8px 12px;
+  width: 100%;
+  padding: 24px;
   border: 1px solid $color-elements;
   border-radius: $border-radius-xl;
-  background: rgba($color-white, 0.6);
+  background: linear-gradient(
+    145deg,
+    rgba($color-surface, 0.95),
+    rgba($color-cream, 0.9)
+  );
+  box-shadow: 0 12px 30px rgba(92, 74, 63, 0.08);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 20px 16px;
+    border-radius: $border-radius-lg;
+  }
+
+  // --- СТИЛІ КАРТКИ ТОВАРУ (CART ITEM) ---
+  .cart-item {
+    background: rgba($color-primary, 0.05);
+    border: 1px solid rgba($color-primary, 0.1);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    gap: 16px;
+    box-sizing: border-box;
+    width: 100%;
+
+    @media (max-width: $breakpoint-mobile) {
+      display: grid;
+      // 1: картинка, 2: текст, 3: хрестик, 4: каунтер
+      grid-template-columns: max-content 1fr max-content max-content;
+      gap: 12px;
+      padding: 16px 12px 12px 12px;
+    }
+
+    // Тільки для головної обкладинки книги
+    & > img,
+    .cart-item__img {
+      width: 70px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      flex-shrink: 0;
+      background: none;
+      border: none;
+
+      @media (max-width: $breakpoint-mobile) {
+        grid-column: 1;
+        grid-row: 1;
+      }
+    }
+
+    p,
+    h2,
+    h3,
+    span,
+    div {
+      min-width: 0;
+      word-wrap: break-word;
+    }
+
+    // Автор книги (Світла тема)
+    .cart-item__author,
+    &__author {
+      @include small-text;
+      color: $color-elements; // м'який сіро-коричневий відтінок
+    }
+
+    // Блок з текстом (назва, автор, ціна)
+    .cart-item__title,
+    &__title,
+    .cart-item__info,
+    &__info {
+      @include body-text;
+      font-weight: bold;
+      color: $color-primary;
+      line-height: 1.3;
+      flex: 1;
+
+      @media (max-width: $breakpoint-mobile) {
+        grid-column: 2 / -1;
+        grid-row: 1;
+        align-self: center;
+      }
+    }
+
+    // Ціна книги (Світла тема)
+    .cart-item__price,
+    &__price {
+      font-weight: bold;
+      color: $color-primary;
+    }
+
+    // Кнопка видалення (Хрестик)
+    .cart-item__delete-btn,
+    &__delete-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: $color-elements;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
+      flex-shrink: 0;
+
+      svg,
+      img {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+      }
+
+      &:hover {
+        color: $color-terracotta-active-light;
+      }
+
+      @media (max-width: $breakpoint-mobile) {
+        grid-column: 3;
+        grid-row: 2;
+        justify-self: end;
+        align-self: end;
+        margin-top: 12px;
+        margin-bottom: 4px;
+      }
+    }
+
+    // Лічильник кількості книг (Каунтер)
+    .cart-item__quantity,
+    &__quantity {
+      @media (max-width: $breakpoint-mobile) {
+        grid-column: 4;
+        grid-row: 2;
+        justify-self: end;
+        align-self: center;
+        margin-top: 10px;
+      }
+    }
+
+    // Обгортка .actions (якщо є)
+    .cart-item__actions,
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+
+      @media (max-width: 480px) {
+        gap: 8px;
+      }
+
+      @media (max-width: $breakpoint-mobile) {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        margin-top: 4px;
+        padding-top: 12px;
+        border-top: 1px dashed rgba($color-elements, 0.2);
+      }
+    }
+  }
+}
+
+// Базові стилі лічильника для десктопу
+.cart-item__quantity {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba($color-elements, 0.3);
+  border-radius: $border-radius-lg;
+  background: $color-surface;
+  height: 32px;
+  width: fit-content;
+  flex-shrink: 0;
+
+  .cart-item__qty-btn {
+    width: 32px;
+    height: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: $color-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+
+    svg,
+    img {
+      width: 12px;
+      height: 12px;
+      object-fit: contain;
+    }
+
+    &:hover {
+      background: rgba($color-elements, 0.1);
+    }
+  }
+
+  .cart-item__qty-value {
+    width: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: $color-primary;
+  }
 }
 
 .cart-page__sidebar {
@@ -59,10 +285,11 @@
   border-radius: $border-radius-xl;
   background: linear-gradient(
     145deg,
-    rgba($color-white, 0.95),
+    rgba($color-surface, 0.95),
     rgba($color-cream, 0.9)
   );
   box-shadow: 0 12px 30px rgba(92, 74, 63, 0.08);
+  box-sizing: border-box;
 
   @media (max-width: $breakpoint-tablet) {
     width: 100%;
@@ -88,7 +315,7 @@
   padding: 4px;
   border: 1px solid rgba($color-elements, 0.25);
   border-radius: $border-radius-full;
-  background: rgba($color-accent, 0.1);
+  background: rgba($color-primary, 0.1);
 
   label {
     flex: 1;
@@ -120,7 +347,7 @@
 
   &:hover {
     color: $color-primary;
-    background: rgba($color-white, 0.65);
+    background: rgba($color-surface, 0.65);
   }
 
   &:has(input:focus-visible) {
@@ -129,12 +356,12 @@
 }
 
 .cart-page__delivery-type--active {
-  background: $color-accent;
-  color: $color-white;
+  background: $color-primary;
+  color: $raw-ice;
 
   &:hover {
-    background: $color-accent;
-    color: $color-white;
+    background: $color-primary;
+    color: $raw-ice;
   }
 }
 
@@ -155,14 +382,14 @@
   padding: 0 16px;
   border: 1px solid rgba($color-elements, 0.35);
   border-radius: $border-radius-full;
-  background: rgba($color-white, 0.9);
+  background: rgba($color-surface, 0.9);
   @include body-text;
   outline: none;
   box-sizing: border-box;
 
   &:focus {
-    border-color: $color-accent;
-    box-shadow: 0 0 0 3px rgba($color-accent, 0.16);
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.16);
   }
 
   &:disabled {
@@ -186,7 +413,7 @@
   top: calc(100% + 6px);
   left: 0;
   right: 0;
-  background: $color-white;
+  background: $color-surface;
   border: 1px solid rgba($color-elements, 0.2);
   border-radius: $border-radius-md;
   max-height: 200px;
@@ -203,7 +430,7 @@
     @include body-text;
 
     &:hover {
-      background: rgba($color-accent, 0.12);
+      background: rgba($color-primary, 0.12);
     }
   }
 }
@@ -225,8 +452,8 @@
   height: 50px;
   border: none;
   border-radius: $border-radius-full;
-  background: $color-accent;
-  color: $color-white;
+  background: $color-primary;
+  color: $raw-ice;
   cursor: pointer;
   @include button-text;
   transition:
@@ -244,7 +471,9 @@
   }
 }
 
+/* --- DARK THEME --- */
 [data-theme='dark'] {
+  label,
   .cart-page__title,
   .cart-page__total-label,
   .cart-page__total-value,
@@ -257,11 +486,37 @@
   .cart-page__sidebar {
     border-color: rgba($color-elements-dark, 0.45);
     background: rgba($color-surface-dark, 0.9);
-    color: $color-icons-dark;
+    color: $color-primary-dark;
+  }
+
+  // Обгортка картки в темній темі
+  .cart-item {
+    background: rgba($color-bg-dark, 0.6);
+    border-color: $color-elements-dark;
+
+    // Автор у темній темі
+    .cart-item__author,
+    &__author {
+      color: rgba($color-primary-dark, 0.6); // приглушений світлий колір
+    }
+
+    // Назва книги у темній темі
+    .cart-item__title,
+    &__title,
+    .cart-item__info,
+    &__info {
+      color: $color-primary-dark;
+    }
+
+    // Ціна книги у темній темі
+    .cart-item__price,
+    &__price {
+      color: $color-primary-dark; // чіткий світлий колір для ціни
+    }
   }
 
   .cart-page__hint {
-    color: $color-icons-dark;
+    color: $color-primary-dark;
   }
 
   .cart-page__hint--error {
@@ -282,7 +537,7 @@
   }
 
   .cart-page__delivery-types {
-    background: rgba($color-accent, 0.16);
+    background: rgba($color-primary, 0.16);
   }
 
   .cart-page__sidebar,
@@ -333,5 +588,21 @@
   .cart-page__checkout-btn {
     background: $color-primary-dark;
     color: $color-bg-dark;
+  }
+
+  .cart-item__quantity {
+    border-color: $color-elements-dark;
+    background: $color-surface-dark;
+
+    .cart-item__qty-btn {
+      color: $color-primary-dark;
+      &:hover {
+        background: $color-hover-bg-dark;
+      }
+    }
+
+    .cart-item__qty-value {
+      color: $color-primary-dark;
+    }
   }
 }
