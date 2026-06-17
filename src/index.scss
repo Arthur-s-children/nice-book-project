@@ -43,7 +43,7 @@ body[data-theme='dark'] #root {
 
 .cn-toast {
   // Перевизначаємо внутрішні змінні Sonner через твої SCSS-змінні
-  --normal-bg: #{$color-hover-bg-light};
+  --normal-bg: #{$color-surface-light};
   --normal-text: #{$color-primary};
   --normal-border: #{$color-primary};
 
