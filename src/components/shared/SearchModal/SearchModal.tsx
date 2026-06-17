@@ -7,6 +7,7 @@ import { useBooks } from '../../../hooks/useBooks.ts';
 import { PageLoader } from '../PageLoader/PageLoader.tsx';
 import { useTranslation } from 'react-i18next';
 import { useMinimumLoader } from '../../../hooks/useMinimumLoader.ts';
+import { createPortal } from 'react-dom';
 
 type Props = {
   isOpen: boolean;
@@ -50,6 +51,21 @@ export function SearchModal({ isOpen, onClose }: Props) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen, onClose]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('modal-open');
+      document.documentElement.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+      document.documentElement.classList.remove('modal-open');
+    }
+
+    return () => {
+      document.body.classList.remove('modal-open');
+      document.documentElement.classList.remove('modal-open');
+    };
+  }, [isOpen]);
 
   const filteredBooks = useMemo(() => {
     let results = books;
@@ -133,7 +149,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
     return <PageLoader />;
   }
 
-  return (
+  return createPortal(
     <div className="search-modal">
       <div className="search-modal__content">
         {/* Sidebar */}
@@ -278,6 +294,7 @@ export function SearchModal({ isOpen, onClose }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
