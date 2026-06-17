@@ -4,8 +4,7 @@ import { useCart } from '../../hooks/useCart.tsx';
 import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
 import type { Book } from '../../types/BooksAPI.ts';
 import { useBooks } from '../../hooks/useBooks.ts';
-import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
-import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
+
 import './CartPage.scss';
 
 function getPrice(book: Book) {
