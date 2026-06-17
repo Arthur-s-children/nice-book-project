@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useTheme } from '../../layout/Header/useTheme';
 import './HeroSection.scss';
+import { useTranslation } from 'react-i18next';
 
 export const HeroSection = () => {
   const { isDark } = useTheme();
   const heroImage = `${import.meta.env.BASE_URL}img/hero/hero-photo.jpg`;
   const nightHeroImage = `${import.meta.env.BASE_URL}img/hero/night-theme-hero.jpg`;
+  const { t } = useTranslation();
 
   return (
     <section className="hero">
@@ -28,12 +30,10 @@ export const HeroSection = () => {
           transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
         >
           <h1 className="hero__title">
-            Discover Your Next <span className="hero__accent">Great Read</span>
+            {t('home.titleP1')} <br />
+            <span className="hero__accent">{t('home.titleP2')}</span>
           </h1>
-          <p className="hero__subtitle">
-            Explore our curated collection of books that inspire, educate, and
-            entertain. From timeless classics to modern masterpieces.
-          </p>
+          <p className="hero__subtitle">{t('home.titleDescription')}</p>
           <Link
             to="/catalog"
             className="hero__button"

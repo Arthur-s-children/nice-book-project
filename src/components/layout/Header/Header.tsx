@@ -9,7 +9,6 @@ import '../Header/header.scss';
 import { useRef, useEffect, useState, useMemo } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { LanguageSwitcher } from '../../ui/LanguageSwitcher/LanguageSwitcher';
 import { useTheme } from './useTheme';
 import { useCart } from '../../../hooks/useCart.tsx';
 import { useFavorites } from '../../../hooks/useFavorites.tsx';
@@ -30,7 +29,6 @@ export function Header({
   const [isMenuOpen, setIsOpenMenu] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [internalIsAuthModalOpen, setInternalIsAuthModalOpen] = useState(false);
-  const [language, setLanguage] = useState<'en' | 'uk'>('en');
   const location = useLocation();
   const { user, isAuthenticated, isLoading } = useAuthContext();
 
@@ -104,30 +102,38 @@ export function Header({
     words: placeholderBooks,
   });
 
-  useEffect(() => {
+  const updateIndicator = () => {
     const activeLink = navListRef.current?.querySelector(
       '.nav__link--active',
-    ) as HTMLElement;
-    if (activeLink && navListRef.current) {
-      const navRect = navListRef.current.getBoundingClientRect();
-      const linkRect = activeLink.getBoundingClientRect();
-      setIndicator({
-        left: linkRect.left - navRect.left,
-        width: linkRect.width,
-        visible: true,
-      });
+    ) as HTMLElement | null;
+
+    if (!activeLink || !navListRef.current) {
+      return;
     }
+
+    const navRect = navListRef.current.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+
+    setIndicator({
+      left: linkRect.left - navRect.left,
+      width: linkRect.width,
+      visible: true,
+    });
+  };
+
+  useEffect(() => {
+    updateIndicator();
   }, [location, i18n.language]);
 
   useEffect(() => {
-    if (!i18n.language) return;
+    updateIndicator();
 
-    if (i18n.language === 'uk') {
-      toast.success('Мову успішно змінено на українську! 🇺🇦');
-    } else if (i18n.language === 'en') {
-      toast.success('Language successfully changed to English! 🇬🇧');
-    }
-  }, [i18n.language]);
+    window.addEventListener('resize', updateIndicator);
+
+    return () => {
+      window.removeEventListener('resize', updateIndicator);
+    };
+  }, []);
 
   const handleThemeToggle = () => {
     toggleTheme();
@@ -140,6 +146,18 @@ export function Header({
       toast.info(
         t('theme.darkEnabled', { defaultValue: 'Увімкнено темну тему 🌙' }),
       );
+    }
+  };
+  const language = i18n.language as 'en' | 'uk';
+
+  const handleLanguageChange = (lang: 'en' | 'uk') => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem('language', lang);
+
+    if (lang === 'uk') {
+      toast.success('Мову успішно змінено на українську! 🇺🇦');
+    } else {
+      toast.success('Language successfully changed to English! 🇬🇧');
     }
   };
 
@@ -282,14 +300,14 @@ export function Header({
               avatarUrl={user.avatar_url}
               language={language}
               theme={theme}
-              onLanguageChange={setLanguage}
+              onLanguageChange={handleLanguageChange}
               onThemeChange={handleThemeToggle}
             />
           : !isLoading && !isAuthenticated ?
             <SettingsMenu
               language={language}
               theme={theme}
-              onLanguageChange={setLanguage}
+              onLanguageChange={handleLanguageChange}
               onThemeChange={handleThemeToggle}
               onSignUpClick={() => setIsAuthModalOpen(true)}
             />
@@ -304,8 +322,6 @@ export function Header({
             : <Menu size={20} />}
           </a>
         </div>
-
-        <LanguageSwitcher />
       </div>
 
       <SearchModal
