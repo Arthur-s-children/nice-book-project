@@ -30,7 +30,7 @@ export const ProductPage = () => {
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
 
-  const [activeImage, setActiveImage] = useState<string>();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const TITLES: Record<string, string> = {
     paperback: t('catalog.title.paperback'),
@@ -92,10 +92,17 @@ export const ProductPage = () => {
 
   const type = book.type;
 
-  const imageSrc = getImageUrl(activeImage || book.images[0]);
+  const imageSrc = getImageUrl(
+    selectedImage && book.images.includes(selectedImage) ?
+      selectedImage
+    : book.images[0],
+  );
 
   return (
-    <div className={styles.item_card}>
+    <div
+      key={book.id}
+      className={styles.item_card}
+    >
       <nav className={styles.breadcrumbs}>
         <Link
           to="/"
@@ -141,7 +148,7 @@ export const ProductPage = () => {
                 key={img}
                 type="button"
                 className={styles.thumb}
-                onClick={() => setActiveImage(img)}
+                onClick={() => setSelectedImage(img)}
               >
                 <img
                   src={getImageUrl(img)}
