@@ -10,18 +10,19 @@ import { useBooks } from '../../hooks/useBooks.ts';
 
 export const HomePage = () => {
   const { data: books = [], isLoading } = useBooks();
+  const { t } = useTranslation();
   const suggestedBooks = books.slice(40, 50);
   const readingQuotes = [
     {
-      text: 'Reading is a conversation between the reader and the author.',
-      author: 'Rita Dove',
+      text: t('home.quotes.reading1.text'),
+      author: t('home.quotes.reading1.author'),
     },
     {
-      text: 'A room without books is like a body without a soul.',
-      author: 'Cicero',
+      text: t('home.quotes.reading2.text'),
+      author: t('home.quotes.reading2.author'),
     },
   ];
-  const { t } = useTranslation();
+
   const newBooks = books.slice(30, 40); // Перші 10 нових книг
 
   return (

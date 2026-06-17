@@ -32,11 +32,11 @@ export function CartPage() {
   );
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <h2>{t('common.error')}</h2>;
   }
 
   if (error) {
-    return <h2>Failed to load books</h2>;
+    return <h2>{t('common.mistake')}</h2>;
   }
 
   return (

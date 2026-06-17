@@ -15,16 +15,16 @@ export function Footer() {
       <div className="footer__content">
         <div className="footer__left">
           <h2 className="footer__slogan">
-            Books that inspire,
+            {t('footer.slogan1')}
             <br />
-            stories that last
+            {t('footer.slogan2')}
           </h2>
         </div>
 
         <div className="footer__right">
           <nav className="footer__links">
             <div className="footer__column">
-              <h3 className="footer__column-title">Explore</h3>
+              <h3 className="footer__column-title">{t('footer.explore')}</h3>
               <ul className="footer__column-list">
                 <li>
                   <Link
@@ -54,7 +54,7 @@ export function Footer() {
             </div>
 
             <div className="footer__column">
-              <h3 className="footer__column-title">Company</h3>
+              <h3 className="footer__column-title">{t('footer.company')}</h3>
               <ul className="footer__column-list">
                 <li>
                   <Link
@@ -86,7 +86,7 @@ export function Footer() {
             </div>
 
             <div className="footer__column">
-              <h3 className="footer__column-title">Info</h3>
+              <h3 className="footer__column-title">{t('footer.info')}</h3>
               <ul className="footer__column-list">
                 <li>
                   <Link
@@ -109,7 +109,7 @@ export function Footer() {
           className="footer__back-to-top"
           onClick={handleBackToTop}
         >
-          Back to top
+          {t('footer.backToTop')}
           <ArrowUp size={20} />
         </button>
       </div>
