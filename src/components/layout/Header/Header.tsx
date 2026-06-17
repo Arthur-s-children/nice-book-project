@@ -113,6 +113,11 @@ export function Header({
     ) as HTMLElement | null;
 
     if (!activeLink || !navListRef.current) {
+      setIndicator((prev) => ({
+        ...prev,
+        visible: false,
+      }));
+
       return;
     }
 
