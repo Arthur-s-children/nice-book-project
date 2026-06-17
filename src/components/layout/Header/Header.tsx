@@ -92,6 +92,11 @@ export function Header({
   );
   const headerBackground = useMotionValue('rgba(34, 39, 61, 0)');
   const headerScale = useTransform(scrollY, [0, 20], [1, 0.98]);
+  const textColorLight = useTransform(
+    scrollY,
+    [0, 20],
+    ['rgba(200, 180, 160, 0.95)', 'rgba(0, 0, 0, 0.85)'],
+  );
 
   useEffect(() => {
     const source = isDark ? headerBackgroundDark : headerBackgroundLight;
@@ -167,6 +172,7 @@ export function Header({
       style={{
         backgroundColor: headerBackground,
         scale: headerScale,
+        color: isDark ? undefined : textColorLight,
       }}
     >
       <div className="top-bar">

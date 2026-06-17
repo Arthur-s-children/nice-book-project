@@ -94,7 +94,7 @@
 
   &__submit {
     padding: 12px 24px;
-    background: $color-accent;
+    background: $color-terracotta-light;
     color: white;
     border: none;
     font-size: 14px;
@@ -104,13 +104,23 @@
     transition: all 0.2s ease;
 
     &:hover:not(:disabled) {
-      background: $color-accent-hover;
+      background: $color-terracotta-hover-light;
       transform: translateY(-1px);
     }
 
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+
+    &--secondary {
+      background: rgba(0, 0, 0, 0.08);
+      color: $color-primary-light;
+
+      &:hover:not(:disabled) {
+        background: rgba(0, 0, 0, 0.15);
+        color: $color-terracotta-light;
+      }
     }
   }
 

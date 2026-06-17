@@ -15,7 +15,7 @@ export function AuthPromptModal() {
       const timer = setTimeout(() => {
         setIsOpen(true);
         sessionStorage.setItem('authPromptShown', 'true');
-      }, 4000);
+      }, 13000);
 
       return () => clearTimeout(timer);
     }
