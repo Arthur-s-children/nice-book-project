@@ -99,35 +99,38 @@ export function CheckoutPage() {
 
     const newErrors: Record<string, string> = {};
 
-    if (!values.firstName.trim()) newErrors.firstName = 'Імʼя є обовʼязковим';
+    if (!values.firstName.trim())
+      newErrors.firstName = t('checkout.errors.firstNameRequired');
     else if (values.firstName.trim().length < 2)
-      newErrors.firstName = 'Імʼя занадто коротке';
+      newErrors.firstName = t('checkout.errors.firstNameShort');
 
-    if (!values.lastName.trim()) newErrors.lastName = 'Прізвище є обовʼязковим';
+    if (!values.lastName.trim())
+      newErrors.lastName = t('checkout.errors.lastNameRequired');
     else if (values.lastName.trim().length < 2)
-      newErrors.lastName = 'Прізвище занадто коротке';
+      newErrors.lastName = t('checkout.errors.lastNameShort');
 
     const phoneDigits = values.phoneNumber.replace(/\D/g, '');
     if (!values.phoneNumber.trim()) {
-      newErrors.phoneNumber = 'Номер телефону є обовʼязковим';
+      newErrors.phoneNumber = t('checkout.errors.phoneRequired');
     } else if (!(phoneDigits.length === 10 || phoneDigits.length === 12)) {
-      newErrors.phoneNumber =
-        'Некоректний формат номера (має бути 10 або 12 цифр)';
+      newErrors.phoneNumber = t('checkout.errors.phoneInvalid');
     }
 
     if (!values.selectedCityRef)
-      newErrors.searchCity = 'Оберіть місто зі списку';
+      newErrors.searchCity = t('checkout.errors.cityRequired');
     if (!values.selectedWarehouse)
-      newErrors.selectedWarehouse = 'Оберіть відділення або поштомат';
+      newErrors.selectedWarehouse = t('checkout.errors.warehouseRequired');
 
-    if (!values.cardNumber) newErrors.cardNumber = 'Вкажіть номер картки';
+    if (!values.cardNumber)
+      newErrors.cardNumber = t('checkout.errors.cardNumberRequired');
     else if (!validateCardNumber(values.cardNumber))
-      newErrors.cardNumber = 'Недійсний номер картки';
+      newErrors.cardNumber = t('checkout.errors.cardNumberInvalid');
 
-    if (!values.cardName.trim()) newErrors.cardName = 'Вкажіть імʼя на картці';
+    if (!values.cardName.trim())
+      newErrors.cardName = t('checkout.errors.cardNameRequired');
 
     if (!values.cardExpiry || !/^\d{2}\/\d{2}$/.test(values.cardExpiry)) {
-      newErrors.cardExpiry = 'Формат MM/YY';
+      newErrors.cardExpiry = t('checkout.errors.cardExpiryInvalid');
     } else {
       const [month, year] = values.cardExpiry
         .split('/')
@@ -140,17 +143,19 @@ export function CheckoutPage() {
       );
 
       if (month < 1 || month > 12) {
-        newErrors.cardExpiry = 'Місяць 01-12';
+        newErrors.cardExpiry = t('checkout.errors.cardExpiryInvalid');
       } else if (
         year < currentYear ||
         (year === currentYear && month < currentMonth)
       ) {
-        newErrors.cardExpiry = 'Картка протермінована';
+        newErrors.cardExpiry = t('checkout.errors.cardExpiryExpired');
       }
     }
 
-    if (!values.cardCvc) newErrors.cardCvc = 'Обовʼязково';
-    else if (!/^\d{3}$/.test(values.cardCvc)) newErrors.cardCvc = '3 цифри';
+    if (!values.cardCvc)
+      newErrors.cardCvc = t('checkout.errors.cardCvcRequired');
+    else if (!/^\d{3}$/.test(values.cardCvc))
+      newErrors.cardCvc = t('checkout.errors.cardCvcInvalid');
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -258,7 +263,7 @@ export function CheckoutPage() {
 
     const isValid = validateForm();
     if (!isValid) {
-      alert('Будь ласка, виправте помилки у формі оформлення.');
+      alert(t('checkout.validateAlert'));
       return;
     }
 
@@ -278,7 +283,7 @@ export function CheckoutPage() {
 
   return (
     <section className="checkout-page">
-      <h1 className="checkout-page__title">Оформлення замовлення</h1>
+      <h1 className="checkout-page__title">{t('checkout.title')}</h1>
 
       <form
         className="checkout-page__content"
@@ -286,12 +291,14 @@ export function CheckoutPage() {
       >
         <div className="checkout-page__form-section">
           <div className="checkout-page__section">
-            <h3 className="checkout-page__section-title">1. Дані одержувача</h3>
+            <h3 className="checkout-page__section-title">
+              {t('checkout.recipientTitle')}
+            </h3>
             <div className="checkout-page__field-group">
               <div style={{ flex: 1 }}>
                 <input
                   type="text"
-                  placeholder="Ім'я"
+                  placeholder={t('checkout.firstName')}
                   value={firstName}
                   onBlur={() => handleBlur('firstName')}
                   onChange={(e) => {
@@ -307,7 +314,7 @@ export function CheckoutPage() {
               <div style={{ flex: 1 }}>
                 <input
                   type="text"
-                  placeholder="Прізвище"
+                  placeholder={t('checkout.lastName')}
                   value={lastName}
                   onBlur={() => handleBlur('lastName')}
                   onChange={(e) => {
@@ -324,7 +331,7 @@ export function CheckoutPage() {
             <div style={{ marginTop: '12px' }}>
               <input
                 type="tel"
-                placeholder="Номер телефону"
+                placeholder={t('checkout.phone')}
                 value={phoneNumber}
                 onBlur={() => handleBlur('phoneNumber')}
                 onChange={(e) => {
@@ -341,7 +348,7 @@ export function CheckoutPage() {
 
           <div className="checkout-page__section">
             <h3 className="checkout-page__section-title">
-              2. Доставка Новою Поштою
+              {t('checkout.deliveryTitle')}
             </h3>
             <div className="checkout-page__delivery-types">
               <button
@@ -353,7 +360,7 @@ export function CheckoutPage() {
                   handleInputChange('selectedWarehouse', '');
                 }}
               >
-                Відділення
+                {t('checkout.warehouse')}
               </button>
               <button
                 type="button"
@@ -364,14 +371,14 @@ export function CheckoutPage() {
                   handleInputChange('selectedWarehouse', '');
                 }}
               >
-                Поштомат
+                {t('checkout.postomat')}
               </button>
             </div>
 
             <div style={{ position: 'relative', marginTop: '12px' }}>
               <input
                 type="text"
-                placeholder="Почніть вводити місто..."
+                placeholder={t('checkout.cityPlaceholder')}
                 value={searchCity}
                 onBlur={() => handleBlur('searchCity')}
                 onChange={(e) => {
@@ -381,7 +388,9 @@ export function CheckoutPage() {
                 className={`checkout-page__input checkout-page__input--full ${touched.searchCity && errors.searchCity ? 'checkout-page__input--error' : ''}`}
               />
               {isCitiesFetching && (
-                <span className="checkout-page__loader">Пошук міст...</span>
+                <span className="checkout-page__loader">
+                  {t('checkout.loadingCities')}
+                </span>
               )}
               {touched.searchCity && errors.searchCity && (
                 <span className="error-message">{errors.searchCity}</span>
@@ -426,7 +435,7 @@ export function CheckoutPage() {
                 >
                   <option value="">
                     {isWarehousesFetching ?
-                      'Завантаження адрес...'
+                      t('checkout.loadingWarehouses')
                     : 'Оберіть пункт видачі'}
                   </option>
                   {warehouses.map((w) => (
@@ -448,11 +457,13 @@ export function CheckoutPage() {
           </div>
 
           <div className="checkout-page__section">
-            <h3 className="checkout-page__section-title">3. Оплата карткою</h3>
+            <h3 className="checkout-page__section-title">
+              {t('checkout.paymentTitle')}
+            </h3>
             <div>
               <input
                 type="text"
-                placeholder="Номер картки (16 цифр)"
+                placeholder={t('checkout.cardNumberPlaceholder')}
                 maxLength={19}
                 value={cardNumber}
                 onBlur={() => handleBlur('cardNumber')}
@@ -480,7 +491,7 @@ export function CheckoutPage() {
             <div style={{ marginTop: '12px' }}>
               <input
                 type="text"
-                placeholder="Cardholder Name"
+                placeholder={t('checkout.cardNamePlaceholder')}
                 value={cardName}
                 onBlur={() => handleBlur('cardName')}
                 onChange={(e) => {
@@ -502,7 +513,7 @@ export function CheckoutPage() {
               <div style={{ flex: 1 }}>
                 <input
                   type="text"
-                  placeholder="ММ/РР"
+                  placeholder={t('checkout.cardExpiryPlaceholder')}
                   maxLength={5}
                   value={cardExpiry}
                   onBlur={() => handleBlur('cardExpiry')}
@@ -524,7 +535,7 @@ export function CheckoutPage() {
               <div style={{ flex: 1 }}>
                 <input
                   type="password"
-                  placeholder="CVC"
+                  placeholder={t('checkout.cardCvcPlaceholder')}
                   maxLength={3}
                   value={cardCvc}
                   onBlur={() => handleBlur('cardCvc')}
@@ -544,7 +555,9 @@ export function CheckoutPage() {
         </div>
 
         <aside className="checkout-page__sidebar">
-          <h3 className="checkout-page__section-title">Ваше замовлення</h3>
+          <h3 className="checkout-page__section-title">
+            {t('checkout.orderTitle')}
+          </h3>
 
           {isFirstPurchase && (
             <div
@@ -561,7 +574,7 @@ export function CheckoutPage() {
                 marginBottom: '15px',
               }}
             >
-              🎉 Знижка 10% на першу покупку буде застосована автоматично!
+              {t('checkout.firstPurchaseBadge')}
             </div>
           )}
 
@@ -628,7 +641,7 @@ export function CheckoutPage() {
                 color: '#666',
               }}
             >
-              <span>Сума:</span>
+              <span>{t('checkout.total')}</span>
               <span>₴{baseTotal.toFixed(2)}</span>
             </div>
             {isFirstPurchase && (
@@ -640,7 +653,7 @@ export function CheckoutPage() {
                   fontWeight: '500',
                 }}
               >
-                <span>Очікувана знижка:</span>
+                <span>{t('checkout.discount')}</span>
                 <span>- ₴{discountAmount.toFixed(2)}</span>
               </div>
             )}
@@ -678,8 +691,8 @@ export function CheckoutPage() {
             }}
           >
             {checkoutMutation.isPending ?
-              'Обробка платежу...'
-            : `Оплатити ₴${finalTotal.toFixed(2)}`}
+              t('checkout.processingPayment')
+            : t('checkout.pay', finalTotal.toFixed(2))}
           </button>
         </aside>
       </form>
@@ -690,13 +703,14 @@ export function CheckoutPage() {
             className={`checkout-modal ${modalStatus === 'error' ? 'checkout-modal--error' : ''}`}
           >
             <h3>
-              {modalStatus === 'success' ? 'Дякуємо за замовлення!' : 'Помилка'}
+              {modalStatus === 'success' ?
+                t('checkout.successTitle')
+              : t('checkout.errorTitle')}
             </h3>
             <p>
               {modalStatus === 'success' ?
-                'Оплата пройшла успішно. Наш менеджер вже звʼязується з вами для підтвердження.'
-              : 'Сталася помилка при проведенні транзакції. Будь ласка, перевірте дані картки.'
-              }
+                t('checkout.successText')
+              : t('checkout.errorText')}
             </p>
             <button
               type="button"
@@ -705,9 +719,9 @@ export function CheckoutPage() {
             >
               {modalStatus === 'success' ?
                 isAuthenticated ?
-                  'До історії замовлень'
-                : 'На головну'
-              : 'Спробувати знову'}
+                  t('checkout.successBtn')
+                : t('checkout.homeBtn')
+              : t('checkout.errorBtn')}
             </button>
           </div>
         </div>

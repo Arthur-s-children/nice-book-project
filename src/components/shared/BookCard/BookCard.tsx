@@ -36,11 +36,11 @@ export function BookCard({
 
     if (!isFavorite) {
       toast.success(
-        `${book.name} ${t('product.addedToFavorites', { defaultValue: 'додано в обране!' })}`,
+        `${book.name} ${t('product.addedToFavorites', { defaultValue: t('product.addedToFavorites') })}`,
       );
     } else {
       toast.info(
-        `${book.name} ${t('product.removedFromFavorites', { defaultValue: 'видалено з обраного' })}`,
+        `${book.name} ${t('product.removedFromFavorites', { defaultValue: t('product.removedFromFavorites') })}`,
       );
     }
   };
@@ -49,7 +49,7 @@ export function BookCard({
     onAddToCart(book.id);
 
     toast.success(
-      `${book.name} ${t('product.addedToCartSuccess', { defaultValue: 'упішно додано до кошика!' })}`,
+      `${book.name} ${t('product.addedToCartSuccess', { defaultValue: t('product.addedToCartSuccess') })}`,
     );
   };
 
@@ -92,7 +92,7 @@ export function BookCard({
         </div>
         <p className="book-card__stock">
           <Truck size={14} />
-          In stock
+          {t('product.inStock')}
         </p>
       </div>
 

@@ -97,7 +97,7 @@ export function Header({
     const source = isDark ? headerBackgroundDark : headerBackgroundLight;
     headerBackground.set(source.get());
     return source.on('change', (v) => headerBackground.set(v));
-  }, [isDark]);
+  }, [isDark, headerBackground, headerBackgroundDark, headerBackgroundLight]);
   const animatedPlaceholder = useTypingPlaceholder({
     words: placeholderBooks,
   });
@@ -140,11 +140,11 @@ export function Header({
 
     if (isDark) {
       toast.info(
-        t('theme.lightEnabled', { defaultValue: 'Увімкнено світлу тему ☀️' }),
+        t('theme.lightEnabled', { defaultValue: t('header.lightEnabled') }),
       );
     } else {
       toast.info(
-        t('theme.darkEnabled', { defaultValue: 'Увімкнено темну тему 🌙' }),
+        t('theme.darkEnabled', { defaultValue: t('header.darkEnabled') }),
       );
     }
   };

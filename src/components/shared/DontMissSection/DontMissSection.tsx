@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useBooks } from '../../../hooks/useBooks.ts';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
 import './DontMissSection.scss';
+import { useTranslation } from 'react-i18next';
 
 export const DontMissSection = () => {
   const { data: books = [] } = useBooks();
@@ -13,6 +14,7 @@ export const DontMissSection = () => {
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const { t } = useTranslation();
 
   const featuredBooks = books.slice(0, 6);
 
@@ -38,10 +40,12 @@ export const DontMissSection = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <div className="dont-miss-section__text">
-          <span className="dont-miss-section__eyebrow">Fresh picks</span>
-          <h2 className="dont-miss-section__title">Don't Miss Out</h2>
+          <span className="dont-miss-section__eyebrow">
+            {t('dontMiss.eyebrow')}
+          </span>
+          <h2 className="dont-miss-section__title">{t('dontMiss.title')}</h2>
           <p className="dont-miss-section__subtitle">
-            Discover our latest arrivals and bestsellers before they're gone
+            {t('dontMiss.subtitle')}
           </p>
         </div>
 

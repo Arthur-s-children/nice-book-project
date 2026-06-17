@@ -5,12 +5,15 @@ export const en = {
     ourTeam: 'Our team',
     loading: 'Loading...',
     error: 'An error occurred while loading data.',
+    mistake: 'Failed to load books',
   },
 
   header: {
     paper: 'Paperbacks',
     kindle: 'Kindles',
     audio: 'Audiobooks',
+    lightEnabled: 'Switched to light theme ☀️',
+    darkEnabled: 'Switched to dark theme 🌙',
   },
 
   footer: {
@@ -19,6 +22,11 @@ export const en = {
     rights: 'Rights',
     backToTop: 'Back to top',
     team: 'Team',
+    explore: 'Explore',
+    company: 'Company',
+    info: 'Info',
+    slogan1: 'Books that inspire,',
+    slogan2: 'stories that last',
   },
 
   product: {
@@ -41,6 +49,9 @@ export const en = {
     characteristics: 'Characteristics',
     recommended: 'You may also like',
     books: 'books',
+    addedToFavorites: 'added to favorites!',
+    removedFromFavorites: 'removed from favorites',
+    addedToCartSuccess: 'successfully added to cart!',
   },
 
   category: {
@@ -146,6 +157,17 @@ export const en = {
     discountTitle: 'Available Discounts',
     discountDescription:
       "Special offers on selected books. Don't miss out on these amazing deals!",
+
+    quotes: {
+      reading1: {
+        text: 'Reading is a conversation between the reader and the author.',
+        author: 'Rita Dove',
+      },
+      reading2: {
+        text: 'A room without books is like a body without a soul.',
+        author: 'Cicero',
+      },
+    },
   },
 
   rights: {
@@ -302,6 +324,7 @@ export const en = {
     success: 'Successfully changed',
     uploadError: 'Failed to upload avatar. Please try again',
   },
+
   bookAdvisor: {
     triggerLabel: 'Ask AI Murko',
     triggerAriaLabel: 'Ask Murko',
@@ -330,5 +353,95 @@ export const en = {
     found: "Here's what I picked for you 👇",
     notFound: "Sorry, couldn't find any books. Try a different genre!",
     error: 'Oops, something went wrong 😕',
+  },
+
+  dontMiss: {
+    eyebrow: 'Fresh picks',
+    title: "Don't Miss Out",
+    subtitle:
+      "Discover our latest arrivals and bestsellers before they're gone",
+  },
+
+  hero: {
+    shopNow: 'Shop Now',
+  },
+
+  intro: {
+    loadingText: 'Opening your next story',
+    enterHint: 'Click to enter',
+  },
+
+  checkout: {
+    title: 'Checkout',
+
+    recipientTitle: '1. Recipient details',
+    deliveryTitle: '2. Nova Poshta delivery',
+    paymentTitle: '3. Card payment',
+    orderTitle: 'Your order',
+
+    firstName: 'First name',
+    lastName: 'Last name',
+    phone: 'Phone number',
+
+    cityPlaceholder: 'Start typing a city...',
+    warehousePlaceholder: 'Select pickup point',
+
+    warehouse: 'Branch',
+    postomat: 'Parcel locker',
+
+    loadingCities: 'Searching cities...',
+    loadingWarehouses: 'Loading locations...',
+    processingPayment: 'Processing payment...',
+
+    pay: (price: string) => `Pay ${price} ₴`,
+
+    total: 'Total',
+    discount: 'Expected discount:',
+
+    firstPurchaseBadge:
+      '🎉 10% discount for first purchase will be applied automatically!',
+
+    successTitle: 'Thank you for your order!',
+    successText:
+      'Payment was successful. Our manager will contact you for confirmation.',
+    errorTitle: 'Error',
+    errorText:
+      'An error occurred during payment. Please check your card details.',
+
+    successBtn: 'Go to order history',
+    errorBtn: 'Try again',
+    homeBtn: 'Go home',
+
+    validateAlert: 'Please fix the errors in the checkout form.',
+
+    cardNumberPlaceholder: 'Card number (16 digits)',
+    cardNamePlaceholder: 'Cardholder name',
+    cardExpiryPlaceholder: 'MM/YY',
+    cardCvcPlaceholder: 'CVC',
+
+    errors: {
+      firstNameRequired: 'First name is required',
+      firstNameShort: 'First name is too short',
+
+      lastNameRequired: 'Last name is required',
+      lastNameShort: 'Last name is too short',
+
+      phoneRequired: 'Phone number is required',
+      phoneInvalid: 'Invalid phone format',
+
+      cityRequired: 'Please select a city',
+      warehouseRequired: 'Please select warehouse or locker',
+
+      cardNumberRequired: 'Card number is required',
+      cardNumberInvalid: 'Invalid card number',
+
+      cardNameRequired: 'Name on card is required',
+
+      cardExpiryInvalid: 'Format MM/YY',
+      cardExpiryExpired: 'Card expired',
+
+      cardCvcRequired: 'CVC is required',
+      cardCvcInvalid: 'CVC must be 3 digits',
+    },
   },
 } as const;
