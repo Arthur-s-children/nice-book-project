@@ -125,6 +125,13 @@ export const en = {
   home: {
     newBooks: 'New books',
     youMightLike: 'You might like',
+    titleP1: 'Discover Your Next',
+    titleP2: 'Great Read',
+    titleDescription:
+      'Explore our curated collection of books that inspire, educate, and entertain. From timeless classics to modern masterpieces.',
+    discountTitle: 'Available Discounts',
+    discountDescription:
+      "Special offers on selected books. Don't miss out on these amazing deals!",
   },
 
   rights: {
@@ -240,6 +247,7 @@ export const en = {
   settingsMenu: {
     changeLanguage: 'Change Language',
     changeTheme: 'Change Theme',
+    preferences: 'Settings',
   },
 
   auth: {

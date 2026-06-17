@@ -126,6 +126,13 @@ export const uk = {
   home: {
     newBooks: 'Нові книги',
     youMightLike: 'Вам також може сподобатися',
+    titleP1: 'Читайте Більше.',
+    titleP2: 'Відкривайте Нове.',
+    titleDescription:
+      'Досліджуйте світ захопливих історій, нових знань і незабутніх вражень. Ми зібрали найкращі книги — від перевіреної часом класики до найяскравіших сучасних видань.',
+    discountTitle: 'Акційні пропозиції',
+    discountDescription:
+      'Обирайте книги зі знижками та заощаджуйте на улюблених виданнях.',
   },
 
   rights: {
@@ -252,6 +259,7 @@ export const uk = {
   settingsMenu: {
     changeLanguage: 'Змінити мову',
     changeTheme: 'Змінити тему',
+    preferences: 'Налаштування',
   },
 
   auth: {
@@ -292,7 +300,7 @@ export const uk = {
     success: 'Успішно змінено',
     uploadError: 'Не вдалося завантажити аватар. Спробуйте ще раз.',
   },
-  
+
   bookAdvisor: {
     triggerLabel: 'Порадитись з AI Мурком',
     triggerAriaLabel: 'Порадитись з Мурком',

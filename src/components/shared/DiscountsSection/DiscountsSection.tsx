@@ -11,6 +11,7 @@ import type { Book } from '../../../types/BooksAPI.ts';
 import './DiscountsSection.scss';
 
 import 'swiper/css';
+import { useTranslation } from 'react-i18next';
 
 interface DiscountsSectionProps {
   books: Book[];
@@ -25,6 +26,7 @@ export const DiscountsSection = ({
   const nextRef = useRef<HTMLButtonElement>(null);
   const { cartIds, addToCart } = useCart();
   const { favoriteIds, toggleFavorite } = useFavorites();
+  const { t } = useTranslation();
 
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -51,11 +53,13 @@ export const DiscountsSection = ({
             className="discounts-section__icon"
             size={32}
           />
-          <h2 className="discounts-section__title">Available Discounts</h2>
+          <h2 className="discounts-section__title">
+            {' '}
+            {t('home.discountTitle')}
+          </h2>
         </div>
         <p className="discounts-section__subtitle">
-          Special offers on selected books. Don't miss out on these amazing
-          deals!
+          {t('home.discountDescription')}
         </p>
       </motion.div>
 

@@ -76,7 +76,7 @@ export function SettingsMenu({
                   setIsOpen(false);
                 }}
               >
-                {t('settingsMenu.signUp')}
+                {t('auth.signUp')}
               </button>
             )}
 
@@ -87,7 +87,8 @@ export function SettingsMenu({
                 setIsOpen(false);
               }}
             >
-              {t('settingsMenu.changeLanguage')}
+              {t('settingsMenu.changeLanguage')}{' '}
+              {language === 'en' ? 'to Uk' : 'на En'}
             </button>
 
             <button
