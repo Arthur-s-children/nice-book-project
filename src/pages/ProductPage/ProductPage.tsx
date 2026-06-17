@@ -41,13 +41,26 @@ export const ProductPage = () => {
   const relatedBooks = useMemo(() => {
     if (!book) return [];
 
-    return books
-      .filter(
-        (item) =>
-          item.id !== book.id &&
-          item.category.some((cat) => book.category.includes(cat)),
-      )
-      .slice(0, 10);
+    const similarBooks = books.filter(
+      (item) =>
+        item.id !== book.id &&
+        item.category.some((cat) => book.category.includes(cat)),
+    );
+
+    if (similarBooks.length >= 4) {
+      return similarBooks.slice(0, 10);
+    }
+
+    const additionalBooks = books.filter(
+      (item) =>
+        item.id !== book.id &&
+        !similarBooks.some((similar) => similar.id === item.id),
+    );
+
+    return [
+      ...similarBooks,
+      ...additionalBooks.slice(0, 4 - similarBooks.length),
+    ];
   }, [books, book]);
 
   const languageVersions = useMemo(() => {

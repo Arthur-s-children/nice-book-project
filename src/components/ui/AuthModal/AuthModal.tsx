@@ -4,6 +4,7 @@ import { useAuthContext } from '../../../contexts/AuthContext';
 import { Icon } from '../Icon';
 import './AuthModal.scss';
 import { useTranslation } from 'react-i18next';
+import { getImageUrl } from '../../../services/getImageUrl.ts';
 
 type Props = {
   isOpen: boolean;
@@ -182,7 +183,7 @@ export function AuthModal({ isOpen, onClose }: Props) {
           onClick={handleGoogleSignIn}
         >
           <img
-            src="/icons/google-icon.png"
+            src={getImageUrl('icons/Google_logo.svg')}
             alt="Google"
             className="auth-modal__google-icon"
           />
