@@ -147,17 +147,29 @@ export function AuthModal({ isOpen, onClose }: Props) {
             )}
           </div>
 
-          <button
-            type="submit"
-            className="auth-modal__submit"
-            disabled={isSigningIn || isSigningUp}
-          >
-            {isSigningIn || isSigningUp ?
-              t('auth.loading')
-            : isLogin ?
-              t('auth.signIn')
-            : t('auth.signUp')}
-          </button>
+          {isLogin && (
+            <button
+              type="submit"
+              className="auth-modal__submit auth-modal__submit--secondary"
+              disabled={isSigningIn || isSigningUp}
+            >
+              {isSigningIn || isSigningUp ?
+                t('auth.loading')
+              : t('auth.signIn')}
+            </button>
+          )}
+
+          {!isLogin && (
+            <button
+              type="submit"
+              className="auth-modal__submit"
+              disabled={isSigningIn || isSigningUp}
+            >
+              {isSigningIn || isSigningUp ?
+                t('auth.loading')
+              : t('auth.signUp')}
+            </button>
+          )}
         </form>
 
         <div className="auth-modal__divider">
