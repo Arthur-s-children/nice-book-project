@@ -324,6 +324,19 @@ export const uk = {
     maybeLater: 'Можливо пізніше',
   },
 
+  profile: {
+    title: 'Особисті дані',
+    pleaseSignIn: 'Будь ласка, увійдіть, щоб переглянути профіль',
+    changePhoto: 'Змінити фото',
+    email: 'Email',
+    fullName: 'Повне імʼя',
+    phone: 'Телефон',
+    save: 'Зберегти зміни',
+    saving: 'Збереження...',
+    success: 'Успішно змінено',
+    uploadError: 'Не вдалося завантажити аватар. Спробуйте ще раз.',
+  },
+  
   bookAdvisor: {
     triggerLabel: 'Порадитись з AI Мурком',
     triggerAriaLabel: 'Порадитись з Мурком',

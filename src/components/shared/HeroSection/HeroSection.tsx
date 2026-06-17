@@ -1,67 +1,48 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-
-import 'swiper/css';
-import 'swiper/css/pagination';
-
-import { heroSlides } from './HeroSlides';
-import { Icon } from '../../ui/Icon';
-
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { useTheme } from '../../layout/Header/useTheme';
 import './HeroSection.scss';
 
 export const HeroSection = () => {
+  const { isDark } = useTheme();
+  const heroImage = `${import.meta.env.BASE_URL}img/hero/hero-photo.jpg`;
+  const nightHeroImage = `${import.meta.env.BASE_URL}img/hero/night-theme-hero.jpg`;
+
   return (
     <section className="hero">
-      <button
-        className="hero__button hero__button--prev"
-        type="button"
-      >
-        <Icon name="arrow-left" />
-      </button>
-
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        navigation={{
-          prevEl: '.hero__button--prev',
-          nextEl: '.hero__button--next',
+      <motion.div
+        className="hero__background"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+        style={{
+          backgroundImage: `url(${isDark ? nightHeroImage : heroImage})`,
         }}
-        pagination={{ clickable: true }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        loop
-        className="hero__swiper"
-      >
-        {heroSlides.map((slide, index) => (
-          <SwiperSlide key={index}>
-            <picture>
-              <source
-                media="(max-width: 639px)"
-                srcSet={slide.mobile}
-              />
-
-              <source
-                media="(max-width: 1199px)"
-                srcSet={slide.tablet}
-              />
-
-              <img
-                src={slide.desktop}
-                alt="Promotion banner"
-                className="hero__image"
-              />
-            </picture>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      <button
-        className="hero__button hero__button--next"
-        type="button"
-      >
-        <Icon name="arrow-right" />
-      </button>
+      />
+      <div className="hero__content">
+        <motion.div
+          className="hero__text"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
+        >
+          <h1 className="hero__title">
+            Discover Your Next <span className="hero__accent">Great Read</span>
+          </h1>
+          <p className="hero__subtitle">
+            Explore our curated collection of books that inspire, educate, and
+            entertain. From timeless classics to modern masterpieces.
+          </p>
+          <Link
+            to="/catalog"
+            className="hero__button"
+          >
+            Shop Now
+            <ArrowRight size={20} />
+          </Link>
+        </motion.div>
+      </div>
     </section>
   );
 };

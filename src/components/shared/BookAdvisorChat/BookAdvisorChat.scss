@@ -17,7 +17,7 @@
 
   background: $color-accent;
   color: $color-white;
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 15px;
   font-weight: $font-semibold;
 
@@ -131,7 +131,7 @@
 }
 
 .book-advisor__name {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 15px;
   font-weight: $font-semibold;
   color: $color-white;
@@ -139,7 +139,7 @@
 }
 
 .book-advisor__status {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 11px;
   font-weight: $font-regular;
   color: rgba(255, 255, 255, 0.55);
@@ -220,7 +220,7 @@
   display: block;
   padding: 10px 13px;
   border-radius: 16px;
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 13px;
   line-height: 1.55;
   white-space: pre-wrap;
@@ -246,7 +246,7 @@
 }
 
 .book-advisor__msg-time {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 10px;
   color: rgba(81, 59, 53, 0.4);
   text-align: right;
@@ -276,7 +276,7 @@
   border: 1.5px solid #d4b8a5;
   background: #fff;
   color: #3b2314;
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 12.5px;
   font-weight: $font-medium;
   cursor: pointer;
@@ -332,7 +332,7 @@
   border: 1.5px solid #d4b8a5;
   border-radius: 24px;
   background: #fdf6f0;
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 13px;
   color: #3b2314;
   outline: none;
@@ -386,7 +386,7 @@
   padding: 5px;
   border: none;
   background: none;
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 12px;
   color: rgba(81, 59, 53, 0.5);
   cursor: pointer;
@@ -496,7 +496,7 @@
 }
 
 .book-advisor__rec-name {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 13px;
   font-weight: $font-semibold;
   color: #3b2314;
@@ -508,7 +508,7 @@
 }
 
 .book-advisor__rec-reason {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 12px;
   font-weight: $font-regular;
   color: rgba(81, 59, 53, 0.55);
@@ -520,7 +520,7 @@
 }
 
 .book-advisor__rec-link {
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 12px;
   font-weight: $font-semibold;
   color: $color-accent;
@@ -535,7 +535,7 @@
   border: 1.5px solid $color-accent;
   background: transparent;
   color: $color-accent;
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 13px;
   font-weight: $font-semibold;
   cursor: pointer;
@@ -554,7 +554,7 @@
   padding: 8px 16px;
   background: #fff;
   border-top: 1px solid #ecddd4;
-  font-family: $font-main;
+  font-family: $font-body;
   font-size: 11px;
   color: rgba(81, 59, 53, 0.45);
   text-align: center;

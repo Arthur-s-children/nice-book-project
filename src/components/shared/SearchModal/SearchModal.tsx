@@ -26,6 +26,31 @@ export function SearchModal({ isOpen, onClose }: Props) {
   const { t } = useTranslation();
   const showLoader = useMinimumLoader(isLoading, 1500);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      const modal = document.querySelector('.search-modal__content');
+      if (modal && !modal.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
   const filteredBooks = useMemo(() => {
     let results = books;
 
@@ -109,14 +134,8 @@ export function SearchModal({ isOpen, onClose }: Props) {
   }
 
   return (
-    <div
-      className="search-modal"
-      onClick={onClose}
-    >
-      <div
-        className="search-modal__content"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className="search-modal">
+      <div className="search-modal__content">
         {/* Sidebar */}
         <div className="search-modal__sidebar">
           <div className="search-modal__sales-section">
