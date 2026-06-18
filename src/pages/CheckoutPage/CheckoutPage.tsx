@@ -6,7 +6,7 @@ import { useCart } from '../../hooks/useCart.tsx';
 import { useBooks } from '../../hooks/useBooks.ts';
 import { useDebouncedValue } from '../../hooks/useDebouncedValue.ts';
 import { getImageUrl } from '../../services/getImageUrl.ts';
-import type { Book } from '../../types/BooksAPI.ts';
+import type { Book } from '../../types/Book.ts';
 import { supabase } from '../../api/supabase';
 
 import { useAuth } from '../../hooks/useAuth';
@@ -225,7 +225,7 @@ export function CheckoutPage() {
                 <label className="checkout-page__label">
                   {t('checkout.firstName')}
                 </label>
-                <input 
+                <input
                   type="text"
                   placeholder={t('checkout.firstName')}
                   value={firstName}
@@ -363,7 +363,6 @@ export function CheckoutPage() {
                 <label className="checkout-page__label">
                   {t('checkout.warehouseLabel')}
                 </label>{' '}
-
                 <select
                   value={selectedWarehouse}
                   onBlur={() => handleBlur('selectedWarehouse')}
@@ -378,7 +377,6 @@ export function CheckoutPage() {
                     {isWarehousesFetching ?
                       t('checkout.loadingWarehouses')
                     : t('checkout.warehousePlaceholder')}{' '}
-
                   </option>
                   {warehouses.map((w) => (
                     <option
@@ -407,7 +405,6 @@ export function CheckoutPage() {
               <label className="checkout-page__label">
                 {t('checkout.cardNumberLabel')}
               </label>{' '}
-
               <input
                 type="text"
                 placeholder={t('checkout.cardNumberPlaceholder')}
@@ -439,7 +436,6 @@ export function CheckoutPage() {
               <label className="checkout-page__label">
                 {t('checkout.cardNameLabel')}
               </label>{' '}
-
               <input
                 type="text"
                 placeholder={t('checkout.cardNamePlaceholder')}
@@ -487,7 +483,6 @@ export function CheckoutPage() {
                 <label className="checkout-page__label">
                   {t('checkout.cardCvcLabel')}
                 </label>{' '}
-
                 <input
                   type="password"
                   placeholder={t('checkout.cardCvcPlaceholder')}
@@ -517,7 +512,6 @@ export function CheckoutPage() {
           {isFirstPurchase && (
             <div className="first-purchase-badge">
               {' '}
-
               {t('checkout.firstPurchaseBadge')}
             </div>
           )}

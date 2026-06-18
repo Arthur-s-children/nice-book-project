@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import { useAuthContext } from '../../../context/AuthContext';
 import './UserMenu.scss';
 import { useTranslation } from 'react-i18next';
 import { Globe, Moon, Sun } from 'lucide-react';

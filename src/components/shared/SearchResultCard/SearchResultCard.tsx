@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import type { Book } from '../../../types/BooksAPI.ts';
+import type { Book } from '../../../types/Book.ts';
 import './SearchResultCard.scss';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
 

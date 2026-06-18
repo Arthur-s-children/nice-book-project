@@ -2,8 +2,8 @@
 
 .book-advisor__trigger {
   position: fixed;
-  bottom: 5%;
-  right: 2%;
+  bottom: 47px;
+  right: 50px;
   z-index: 900;
 
   display: flex;
@@ -39,8 +39,8 @@
   }
 
   @media (max-width: $breakpoint-mobile) {
-    bottom: 20px;
-    right: 43px;
+    bottom: 25px;
+    right: 30px;
     padding: 8px;
   }
 }
@@ -51,6 +51,11 @@
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .book-advisor__trigger-label {
@@ -243,9 +248,13 @@
   }
 
   .book-advisor__message--user & {
-    background: $color-accent;
+    background: $color-terracotta-light;
     color: #fff;
     border-bottom-right-radius: 4px;
+
+    [data-theme='dark'] & {
+      background: $color-accent-light;
+    }
   }
 }
 
@@ -292,8 +301,8 @@
   box-shadow: 0 1px 4px rgba(81, 59, 53, 0.07);
 
   &:hover {
-    background: $color-accent;
-    border-color: $color-accent;
+    background: $color-terracotta-light;
+    border-color: $color-terracotta-light;
     color: #fff;
     box-shadow: 0 3px 10px rgba(255, 107, 43, 0.3);
   }
@@ -483,7 +492,7 @@
     box-shadow 0.15s;
 
   &:hover {
-    border-color: $color-accent;
+    border-color: $color-terracotta-light;
     background: #fff8f5;
     box-shadow: 0 3px 12px rgba(255, 107, 43, 0.12);
   }
@@ -536,9 +545,9 @@
   margin-top: 4px;
   padding: 9px 20px;
   border-radius: 20px;
-  border: 1.5px solid $color-accent;
+  border: 1.5px solid $color-terracotta-light;
   background: transparent;
-  color: $color-accent;
+  color: $color-terracotta-light;
   font-family: $font-body;
   font-size: 13px;
   font-weight: $font-semibold;
@@ -547,9 +556,18 @@
     background 0.15s,
     color 0.15s;
 
+  [data-theme='dark'] & {
+    border-color: $color-accent;
+    color: $color-accent;
+  }
+
   &:hover {
-    background: $color-accent;
+    background: $color-terracotta-light;
     color: #fff;
+
+    [data-theme='dark'] & {
+      background: $color-accent;
+    }
   }
 }
 

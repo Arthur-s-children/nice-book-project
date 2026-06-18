@@ -1,5 +1,5 @@
 import { Icon } from '../../ui/Icon';
-import type { Book } from '../../../types/BooksAPI.ts';
+import type { Book } from '../../../types/Book.ts';
 import './CartItem.scss';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import { useAuthContext } from '../../../context/AuthContext';
 import { Icon } from '../Icon';
 import './AuthModal.scss';
 import { useTranslation } from 'react-i18next';

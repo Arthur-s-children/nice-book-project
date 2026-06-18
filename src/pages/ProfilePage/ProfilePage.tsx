@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../context/AuthContext';
 import { useProfile } from '../../hooks/useProfile';
 import './ProfilePage.scss';
 import { useTranslation } from 'react-i18next';
