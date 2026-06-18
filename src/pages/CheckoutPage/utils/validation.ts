@@ -1,5 +1,3 @@
-import type { TFunction } from 'i18next';
-
 export const validateCardNumber = (num: string): boolean => {
   const sanitized = num.replace(/\s+/g, '');
   if (!/^\d{16}$/.test(sanitized)) return false;
@@ -28,40 +26,41 @@ export interface CheckoutValidationValues {
   cardCvc: string;
 }
 
-export const validateCheckoutForm = (
-  values: CheckoutValidationValues,
-  t: TFunction,
-) => {
+export const validateCheckoutForm = (values: CheckoutValidationValues) => {
   const newErrors: Record<string, string> = {};
 
   if (!values.firstName.trim())
-    newErrors.firstName = t('cart.firstNameRequired');
+    newErrors.firstName = 'checkout.error.firstNameRequired';
   else if (values.firstName.trim().length < 2)
-    newErrors.firstName = t('cart.firstNameRequired');
+    newErrors.firstName = 'checkout.error.firstNameShort';
 
-  if (!values.lastName.trim()) newErrors.lastName = t('cart.lastNameRequired');
+  if (!values.lastName.trim())
+    newErrors.lastName = 'checkout.error.lastNameRequired';
   else if (values.lastName.trim().length < 2)
-    newErrors.lastName = t('cart.lastNameRequired');
+    newErrors.lastName = 'checkout.error.lastNameShort';
 
   const phoneDigits = values.phoneNumber.replace(/\D/g, '');
   if (!values.phoneNumber.trim()) {
-    newErrors.phoneNumber = t('cart.phoneNumberRequired');
+    newErrors.phoneNumber = 'checkout.error.phoneRequired';
   } else if (!(phoneDigits.length === 10 || phoneDigits.length === 12)) {
-    newErrors.phoneNumber = t('cart.phoneNumberInvalid');
+    newErrors.phoneNumber = 'checkout.error.phoneInvalid';
   }
 
-  if (!values.selectedCityRef) newErrors.searchCity = t('cart.cityPlaceholder');
+  if (!values.selectedCityRef)
+    newErrors.searchCity = 'checkout.error.cityRequired';
   if (!values.selectedWarehouse)
-    newErrors.selectedWarehouse = t('cart.pleaseSelectWarehouse');
+    newErrors.selectedWarehouse = 'checkout.error.warehouseRequired';
 
-  if (!values.cardNumber) newErrors.cardNumber = t('cart.cardNumberRequired');
+  if (!values.cardNumber)
+    newErrors.cardNumber = 'checkout.error.cardNumberRequired';
   else if (!validateCardNumber(values.cardNumber))
-    newErrors.cardNumber = t('cart.cardNumberInvalid');
+    newErrors.cardNumber = 'checkout.error.cardNumberInvalid';
 
-  if (!values.cardName.trim()) newErrors.cardName = t('cart.cardNameRequired');
+  if (!values.cardName.trim())
+    newErrors.cardName = 'checkout.error.cardNameRequired';
 
   if (!values.cardExpiry || !/^\d{2}\/\d{2}$/.test(values.cardExpiry)) {
-    newErrors.cardExpiry = t('cart.cardExpiryInvalid');
+    newErrors.cardExpiry = 'checkout.error.cardExpiryInvalid';
   } else {
     const [month, year] = values.cardExpiry
       .split('/')
@@ -74,18 +73,18 @@ export const validateCheckoutForm = (
     );
 
     if (month < 1 || month > 12) {
-      newErrors.cardExpiry = t('cart.cardExpiryInvalid');
+      newErrors.cardExpiry = 'checkout.error.cardExpiryInvalid';
     } else if (
       year < currentYear ||
       (year === currentYear && month < currentMonth)
     ) {
-      newErrors.cardExpiry = t('cart.cardExpiryPast');
+      newErrors.cardExpiry = 'checkout.error.cardExpiryExpired';
     }
   }
 
-  if (!values.cardCvc) newErrors.cardCvc = t('cart.cardCvcRequired');
+  if (!values.cardCvc) newErrors.cardCvc = 'checkout.error.cardCvcRequired';
   else if (!/^\d{3}$/.test(values.cardCvc)) {
-    newErrors.cardCvc = t('cart.cardCvcInvalid');
+    newErrors.cardCvc = 'checkout.error.cardCvcInvalid';
   }
 
   return newErrors;

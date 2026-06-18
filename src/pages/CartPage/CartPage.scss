@@ -81,7 +81,6 @@
     border-radius: $border-radius-lg;
   }
 
-  // --- СТИЛІ КАРТКИ ТОВАРУ (CART ITEM) ---
   .cart-item {
     background: rgba($color-primary, 0.05);
     border: 1px solid rgba($color-primary, 0.1);
@@ -95,13 +94,11 @@
 
     @media (max-width: $breakpoint-mobile) {
       display: grid;
-      // 1: картинка, 2: текст, 3: хрестик, 4: каунтер
       grid-template-columns: max-content 1fr max-content max-content;
       gap: 12px;
       padding: 16px 12px 12px 12px;
     }
 
-    // Тільки для головної обкладинки книги
     & > img,
     .cart-item__img {
       width: 70px;
@@ -127,14 +124,12 @@
       word-wrap: break-word;
     }
 
-    // Автор книги (Світла тема)
     .cart-item__author,
     &__author {
       @include small-text;
       color: $color-elements; // м'який сіро-коричневий відтінок
     }
 
-    // Блок з текстом (назва, автор, ціна)
     .cart-item__title,
     &__title,
     .cart-item__info,
@@ -152,14 +147,12 @@
       }
     }
 
-    // Ціна книги (Світла тема)
     .cart-item__price,
     &__price {
       font-weight: bold;
       color: $color-primary;
     }
 
-    // Кнопка видалення (Хрестик)
     .cart-item__delete-btn,
     &__delete-btn {
       background: none;
@@ -194,7 +187,6 @@
       }
     }
 
-    // Лічильник кількості книг (Каунтер)
     .cart-item__quantity,
     &__quantity {
       @media (max-width: $breakpoint-mobile) {
@@ -206,7 +198,6 @@
       }
     }
 
-    // Обгортка .actions (якщо є)
     .cart-item__actions,
     &__actions {
       display: flex;
@@ -232,7 +223,6 @@
   }
 }
 
-// Базові стилі лічильника для десктопу
 .cart-item__quantity {
   display: flex;
   align-items: center;
@@ -471,7 +461,6 @@
   }
 }
 
-/* --- DARK THEME --- */
 [data-theme='dark'] {
   label,
   .cart-page__title,
