@@ -143,7 +143,7 @@ export const IntroAnimation = ({ children }: IntroAnimationProps) => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isOpened]);
 
   return (
     <div className={`${styles.wrapper} ${isOpened ? styles.opened : ''}`}>
@@ -201,7 +201,6 @@ export const IntroAnimation = ({ children }: IntroAnimationProps) => {
                   alt="Nice Books"
                 />
               </span>
-              {/* <span className={styles.hint}>{t('intro.enterHint')}</span> */}
             </div>
           </div>
         </>

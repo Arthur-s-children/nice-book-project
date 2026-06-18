@@ -3,26 +3,27 @@ import styles from './SoundMenu.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
+import { useTranslation } from 'react-i18next';
 
 const SOUNDS = [
   {
     id: 'forest',
-    label: 'Ліс',
+    key: 'forest',
     icon: getImageUrl('icons/forest.png'),
   },
   {
     id: 'bonfire',
-    label: 'Вогнище',
+    key: 'bonfire',
     icon: getImageUrl('icons/bonfire.png'),
   },
   {
     id: 'rain',
-    label: 'Дощ',
+    key: 'rain',
     icon: getImageUrl('icons/rain.png'),
   },
   {
     id: 'mindfulness',
-    label: 'Усвідомленість',
+    key: 'mindfulness',
     icon: getImageUrl('icons/mindfulness.png'),
   },
 ] as const;
@@ -51,6 +52,7 @@ const getArcPositions = () => {
 export const SoundMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState<Set<SoundId>>(new Set());
+  const { t } = useTranslation();
 
   const itemRefs = useRef<HTMLButtonElement[]>([]);
   const audioRefs = useRef<Partial<Record<SoundId, HTMLAudioElement>>>({});
@@ -128,14 +130,14 @@ export const SoundMenu = () => {
             if (el) itemRefs.current[i] = el;
           }}
           type="button"
-          aria-label={sound.label}
+          aria-label={t(`sound.${sound.key}`)}
           aria-pressed={active.has(sound.id)}
           className={`${styles.item} ${active.has(sound.id) ? styles.itemActive : ''}`}
           onClick={() => toggleSound(sound.id)}
         >
           <img
             src={sound.icon}
-            alt={sound.label}
+            alt={t(`sound.${sound.key}`)}
             className={styles.icon}
             aria-hidden="true"
           />

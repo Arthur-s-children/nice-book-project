@@ -326,6 +326,10 @@ export const uk = {
     changeLanguage: 'Змінити мову',
     changeTheme: 'Змінити тему',
     preferences: 'Налаштування',
+    lightTheme: 'Світла тема',
+    darkTheme: 'Темна тема',
+    ukrainian: 'Українська',
+    english: 'Англійська',
   },
 
   auth: {
@@ -346,6 +350,7 @@ export const uk = {
     password: 'Пароль',
     registrationSuccess:
       'Реєстрація успішна! Перевірте свою електронну пошту для підтвердження акаунта.',
+    promoText: 'Зареєструйся та отримай 10% знижки на перше замовлення',
   },
 
   authPrompt: {
@@ -490,5 +495,12 @@ export const uk = {
       cardCvcRequired: 'CVC обовʼязковий',
       cardCvcInvalid: 'CVC має містити 3 цифри',
     },
+  },
+
+  sound: {
+    forest: 'Ліс',
+    bonfire: 'Вогнище',
+    rain: 'Дощ',
+    mindfulness: 'Усвідомленність',
   },
 } as const;
