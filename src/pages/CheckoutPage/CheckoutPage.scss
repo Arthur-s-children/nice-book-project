@@ -3,8 +3,13 @@
 
 .checkout-page {
   @include grid.page-container;
-  padding: 40px 20px;
+  padding: 120px 20px 40px;
   position: relative;
+  min-height: 100dvh;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 80px 16px 20px;
+  }
 
   &__title {
     @include h1;
@@ -30,14 +35,57 @@
     width: 100%;
   }
 
+  &__section {
+    background: $color-surface;
+    padding: 24px;
+    border: 1px solid rgba($color-elements, 0.2);
+    border-radius: $border-radius-lg;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__section-title {
+    @include h3;
+    color: $color-primary;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  &__section-number {
+    color: $color-primary;
+    font-weight: 700;
+    margin-right: 12px;
+  }
+
+  &__field-group {
+    display: flex;
+    gap: 16px;
+
+    @media (max-width: $breakpoint-mobile) {
+      flex-direction: column;
+    }
+  }
+
+  &__field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &--relative {
+      position: relative;
+    }
+  }
+
   &__sidebar {
     width: 368px;
     padding: 24px;
-    border: 1px solid $color-elements;
-    background: $color-white;
+    border: 1px solid rgba($color-elements, 0.2);
+    background: $color-surface;
     position: sticky;
     top: 24px;
-    border-radius: 4px;
+    border-radius: $border-radius-md;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -48,6 +96,14 @@
     }
   }
 
+  &__submit-error {
+    color: #eb5757;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 12px;
+  }
+
   &__mini-cart {
     max-height: 340px;
     overflow-y: auto;
@@ -55,7 +111,6 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    border-bottom: 1px solid $color-elements;
     padding-bottom: 16px;
   }
 
@@ -85,17 +140,46 @@
   &__select {
     width: 100%;
     height: 48px;
-    padding: 0 16px;
-    border: 1px solid $color-elements;
-    border-radius: 4px;
-    margin-bottom: 16px;
+    padding: 0 20px;
+    border-radius: $border-radius-lg;
     font-size: 14px;
-    background: $color-white;
+    transition: all 0.2s ease;
+
+    // Стилі скопійовані з .input у header.scss (Light UI)
+    background-color: rgba(212, 196, 176, 0.3);
+    border: 1px solid $color-elements-light;
+    color: $color-primary-light;
+
+    &::placeholder {
+      color: $color-elements-light;
+    }
 
     &:focus {
       outline: none;
+      background-color: rgba(0, 0, 0, 0.15);
       border-color: $color-primary;
     }
+
+    &--error {
+      border-color: #eb5757 !important;
+    }
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: $color-primary;
+    @include small-text;
+  }
+
+  .error-message {
+    display: block;
+    color: #eb5757;
+    font-size: 12px;
+    margin-top: 2px;
+    font-weight: 500;
   }
 
   &__delivery-types {
@@ -111,10 +195,10 @@
     align-items: center;
     justify-content: center;
     border: 1px solid $color-primary;
-    background-color: $color-white;
+    background-color: $color-surface;
     color: $color-primary;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: $border-radius-lg;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
@@ -124,12 +208,12 @@
     }
 
     &:hover {
-      background-color: $color-white;
+      background-color: $color-surface;
     }
 
     &--active {
       background-color: $color-primary;
-      color: $color-white;
+      color: $raw-ice;
       font-weight: bold;
 
       &:hover {
@@ -147,9 +231,9 @@
     top: 50px;
     left: 0;
     right: 0;
-    background: $color-white;
+    background: $color-surface;
     border: 1px solid $color-elements;
-    border-radius: 4px;
+    border-radius: $border-radius-lg;
     z-index: 10;
     max-height: 220px;
     overflow-y: auto;
@@ -163,7 +247,7 @@
       cursor: pointer;
       font-size: 14px;
       &:hover {
-        background: #f5f5f5;
+        background: rgba($color-elements, 0.1);
         color: $color-primary;
       }
     }
@@ -186,16 +270,16 @@
     padding: 10px 14px;
     background: rgba(#eb5757, 0.08);
     border-left: 3px solid #eb5757;
-    border-radius: 4px;
+    border-radius: 8px;
   }
 
   &__submit-btn {
     width: 100%;
     height: 52px;
     background: $color-primary;
-    color: $color-white;
+    color: $raw-ice;
     border: none;
-    border-radius: 4px;
+    border-radius: $border-radius-lg;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
@@ -211,12 +295,13 @@
 
 .checkout-mini-item {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 12px;
   padding: 12px;
-  background: #f1f5f9;
-  border: 1px solid $color-elements;
-  border-radius: 6px;
+  background: rgba($color-primary, 0.05);
+  border: 1px solid rgba($color-primary, 0.1);
+  border-radius: 12px;
+  position: relative;
 
   &__main {
     display: flex;
@@ -225,24 +310,16 @@
   }
 
   &__img {
-    width: 48px;
-    height: 64px;
+    width: 60px;
+    height: 80px;
     object-fit: cover;
-    border-radius: 4px;
-    background-color: #e2e8f0;
+    border-radius: 8px;
+    background-color: rgba($color-elements, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.05);
     flex-shrink: 0;
   }
 
-  &__details {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0;
-    flex: 1;
-  }
-
-  &__name {
+  &__title {
     font-size: 13px;
     font-weight: 600;
     color: $color-primary;
@@ -253,26 +330,41 @@
 
   &__price {
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 500;
     color: $color-primary;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
   }
 
   &__actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+    border-top: 1px dashed rgba($color-elements, 0.2);
     padding-top: 8px;
   }
 
   &__delete-btn {
-    background: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba($color-elements, 0.1);
     border: none;
     color: #eb5757;
     cursor: pointer;
-    font-size: 14px;
-    padding: 4px 8px;
-    border-radius: 4px;
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
     transition: background 0.2s;
 
     &:hover {
@@ -284,18 +376,19 @@
 .checkout-mini-counter {
   display: flex;
   align-items: center;
-  border: 1px solid $color-elements;
-  border-radius: 4px;
-  background: $color-white;
-  height: 28px;
+  border: 1px solid rgba($color-elements, 0.3);
+  border-radius: $border-radius-lg;
+  background: $color-surface;
+  height: 32px;
+  width: fit-content;
 
   &__btn {
-    width: 28px;
+    width: 32px;
     height: 100%;
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
     color: $color-primary;
     display: flex;
     align-items: center;
@@ -303,30 +396,16 @@
     font-weight: bold;
 
     &:hover {
-      background: #f0f0f0;
+      background: rgba($color-elements, 0.1);
     }
   }
 
   &__value {
-    width: 32px;
+    width: 40px;
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     color: $color-primary;
-  }
-}
-
-.checkout-section {
-  background: $color-white;
-  padding: 24px;
-  border: 1px solid $color-elements;
-  border-radius: 4px;
-
-  &__title {
-    margin-top: 0;
-    margin-bottom: 24px;
-    color: $color-primary;
-    @include h3;
   }
 }
 
@@ -478,18 +557,18 @@
 }
 
 .checkout-modal {
-  background: $color-white;
+  background: $color-surface;
   padding: 32px;
   border-radius: 8px;
   max-width: 480px;
   width: 100%;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border-top: 6px solid #27ae60;
+  border-top: 6px solid $color-primary;
 
   h3 {
     @include h2;
-    color: #27ae60;
+    color: $color-primary;
     margin-top: 0;
     margin-bottom: 16px;
   }
@@ -511,7 +590,7 @@
     height: 44px;
     padding: 0 24px;
     background: $color-primary;
-    color: $color-white;
+    color: $raw-ice;
     border: none;
     border-radius: 4px;
     font-weight: bold;
@@ -524,33 +603,76 @@
   }
 }
 
+.first-purchase-badge {
+  background-color: rgba($color-primary, 0.1);
+  color: $color-primary;
+  padding: 12px;
+  border-radius: $border-radius-lg;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px dashed $color-primary;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.checkout-page__summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid rgba($color-elements, 0.2);
+  padding-top: 16px;
+}
+
+.checkout-page__summary-item {
+  display: flex;
+  justify-content: space-between;
+  color: $color-primary;
+  @include small-text;
+
+  &--discount {
+    color: $color-primary;
+    font-weight: 600;
+  }
+}
+
 /* СТИЛІ ДЛЯ ТЕМНОЇ ТЕМИ ENHANCEMENT */
 [data-theme='dark'] {
   .checkout-page__title,
-  .checkout-section__title,
+  .checkout-page__section-title,
   .checkout-page__summary-row .checkout-page__total-label,
-  .checkout-page__summary-row .checkout-page__total-value {
+  .checkout-page__summary-row .checkout-page__total-value,
+  .checkout-page__summary-item,
+  .checkout-page__summary-item--discount {
     color: $color-primary-dark;
   }
 
-  .checkout-section,
+  .checkout-page__section-number {
+    color: $color-accent-dark;
+  }
+
+  .checkout-page__section,
   .checkout-page__sidebar,
   .checkout-modal {
     background: $color-surface-dark;
     border-color: $color-elements-dark;
   }
 
-  .checkout-page__mini-cart {
-    border-bottom-color: $color-elements-dark;
-  }
-
   .checkout-mini-item {
     background: rgba($color-bg-dark, 0.6);
     border-color: $color-elements-dark;
 
-    &__name,
+    .checkout-page__label {
+      color: $color-primary-dark;
+    }
+
+    &__title,
     &__price {
-      color: $color-white;
+      color: $color-primary-dark;
+    }
+
+    &__delete-btn {
+      background: rgba($color-elements-dark, 0.5);
+      color: #ff4d4d;
     }
 
     &__actions {
@@ -589,13 +711,26 @@
     color: $color-white;
   }
 
+  .first-purchase-badge {
+    background-color: rgba($color-accent-dark, 0.1);
+    color: $color-accent-dark;
+    border-color: $color-accent-dark;
+  }
+
   .checkout-page__input,
   .checkout-page__select {
-    background: $color-bg-dark;
-    border-color: $color-elements-dark;
-    color: $color-white;
+    // Скопійовані стилі інпута для темної теми з файлу header.scss
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid $color-elements-dark;
+    color: $color-primary-dark;
+
+    &::placeholder {
+      color: $color-icons-dark;
+      opacity: 1;
+    }
 
     &:focus {
+      background-color: rgba(255, 255, 255, 0.2);
       border-color: $color-primary-dark;
     }
   }

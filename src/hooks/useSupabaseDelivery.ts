@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '../api/supabase'; 
+import { supabase } from '../api/supabase';
 
 interface DeliveryItem {
   ref: string;
   name: string;
 }
-
 
 export function useSupabaseDeliveryCities(search: string) {
   const cleanSearch = search.trim();
@@ -14,7 +13,6 @@ export function useSupabaseDeliveryCities(search: string) {
     queryKey: ['supabase-delivery-cities', cleanSearch],
     queryFn: async () => {
       if (cleanSearch.length < 2) return [];
-
 
       const { data, error } = await supabase.functions.invoke('nova-poshta', {
         body: { action: 'getCities', search: cleanSearch },
@@ -33,7 +31,6 @@ export function useSupabaseDeliveryCities(search: string) {
     staleTime: 1000 * 60 * 5,
   });
 }
-
 
 export function useSupabaseDeliveryWarehouses(
   cityRef: string,

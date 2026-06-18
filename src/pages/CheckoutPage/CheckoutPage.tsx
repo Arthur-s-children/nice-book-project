@@ -15,27 +15,9 @@ import {
   useSupabaseDeliveryCities,
   useSupabaseDeliveryWarehouses,
 } from '../../hooks/useSupabaseDelivery';
+import { getPrice } from './utils/price';
+import { validateCheckoutForm } from './utils/validation';
 import './CheckoutPage.scss';
-
-function getPrice(book: Book) {
-  return book.price_discount ?? book.price_regular;
-}
-
-function validateCardNumber(num: string): boolean {
-  const sanitized = num.replace(/\s+/g, '');
-  if (!/^\d{16}$/.test(sanitized)) return false;
-
-  let sum = 0;
-  for (let i = 0; i < sanitized.length; i++) {
-    let intVal = parseInt(sanitized[i], 10);
-    if (i % 2 === 0) {
-      intVal *= 2;
-      if (intVal > 9) intVal -= 9;
-    }
-    sum += intVal;
-  }
-  return sum % 10 === 0;
-}
 
 export function CheckoutPage() {
   const { t } = useTranslation();
@@ -71,6 +53,7 @@ export function CheckoutPage() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const [modalStatus, setModalStatus] = useState<'success' | 'error' | null>(
     null,
@@ -97,66 +80,7 @@ export function CheckoutPage() {
       ...currentValues,
     };
 
-    const newErrors: Record<string, string> = {};
-
-    if (!values.firstName.trim())
-      newErrors.firstName = t('checkout.errors.firstNameRequired');
-    else if (values.firstName.trim().length < 2)
-      newErrors.firstName = t('checkout.errors.firstNameShort');
-
-    if (!values.lastName.trim())
-      newErrors.lastName = t('checkout.errors.lastNameRequired');
-    else if (values.lastName.trim().length < 2)
-      newErrors.lastName = t('checkout.errors.lastNameShort');
-
-    const phoneDigits = values.phoneNumber.replace(/\D/g, '');
-    if (!values.phoneNumber.trim()) {
-      newErrors.phoneNumber = t('checkout.errors.phoneRequired');
-    } else if (!(phoneDigits.length === 10 || phoneDigits.length === 12)) {
-      newErrors.phoneNumber = t('checkout.errors.phoneInvalid');
-    }
-
-    if (!values.selectedCityRef)
-      newErrors.searchCity = t('checkout.errors.cityRequired');
-    if (!values.selectedWarehouse)
-      newErrors.selectedWarehouse = t('checkout.errors.warehouseRequired');
-
-    if (!values.cardNumber)
-      newErrors.cardNumber = t('checkout.errors.cardNumberRequired');
-    else if (!validateCardNumber(values.cardNumber))
-      newErrors.cardNumber = t('checkout.errors.cardNumberInvalid');
-
-    if (!values.cardName.trim())
-      newErrors.cardName = t('checkout.errors.cardNameRequired');
-
-    if (!values.cardExpiry || !/^\d{2}\/\d{2}$/.test(values.cardExpiry)) {
-      newErrors.cardExpiry = t('checkout.errors.cardExpiryInvalid');
-    } else {
-      const [month, year] = values.cardExpiry
-        .split('/')
-        .map((num) => parseInt(num, 10));
-      const now = new Date();
-      const currentMonth = now.getMonth() + 1;
-      const currentYear = parseInt(
-        now.getFullYear().toString().substring(2, 4),
-        10,
-      );
-
-      if (month < 1 || month > 12) {
-        newErrors.cardExpiry = t('checkout.errors.cardExpiryInvalid');
-      } else if (
-        year < currentYear ||
-        (year === currentYear && month < currentMonth)
-      ) {
-        newErrors.cardExpiry = t('checkout.errors.cardExpiryExpired');
-      }
-    }
-
-    if (!values.cardCvc)
-      newErrors.cardCvc = t('checkout.errors.cardCvcRequired');
-    else if (!/^\d{3}$/.test(values.cardCvc))
-      newErrors.cardCvc = t('checkout.errors.cardCvcInvalid');
-
+    const newErrors = validateCheckoutForm(values, t);
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -263,10 +187,12 @@ export function CheckoutPage() {
 
     const isValid = validateForm();
     if (!isValid) {
-      alert(t('checkout.validateAlert'));
+      setSubmitError('Будь ласка, виправте помилки у формі оформлення.');
+      setSubmitError('Будь ласка, введіть дані коректно');
       return;
     }
 
+    setSubmitError(null);
     checkoutMutation.mutate();
   };
 
@@ -292,10 +218,12 @@ export function CheckoutPage() {
         <div className="checkout-page__form-section">
           <div className="checkout-page__section">
             <h3 className="checkout-page__section-title">
+              <span className="checkout-page__section-number">1.</span>
               {t('checkout.recipientTitle')}
             </h3>
             <div className="checkout-page__field-group">
-              <div style={{ flex: 1 }}>
+              <div className="checkout-page__field">
+                <label className="checkout-page__label">Ім'я</label>
                 <input
                   type="text"
                   placeholder={t('checkout.firstName')}
@@ -311,7 +239,8 @@ export function CheckoutPage() {
                   <span className="error-message">{errors.firstName}</span>
                 )}
               </div>
-              <div style={{ flex: 1 }}>
+              <div className="checkout-page__field">
+                <label className="checkout-page__label">Прізвище</label>
                 <input
                   type="text"
                   placeholder={t('checkout.lastName')}
@@ -328,7 +257,8 @@ export function CheckoutPage() {
                 )}
               </div>
             </div>
-            <div style={{ marginTop: '12px' }}>
+            <div className="checkout-page__field">
+              <label className="checkout-page__label">Номер телефону</label>
               <input
                 type="tel"
                 placeholder={t('checkout.phone')}
@@ -348,6 +278,7 @@ export function CheckoutPage() {
 
           <div className="checkout-page__section">
             <h3 className="checkout-page__section-title">
+              <span className="checkout-page__section-number">2.</span>
               {t('checkout.deliveryTitle')}
             </h3>
             <div className="checkout-page__delivery-types">
@@ -375,7 +306,8 @@ export function CheckoutPage() {
               </button>
             </div>
 
-            <div style={{ position: 'relative', marginTop: '12px' }}>
+            <div className="checkout-page__field checkout-page__field--relative">
+              <label className="checkout-page__label">Місто</label>
               <input
                 type="text"
                 placeholder={t('checkout.cityPlaceholder')}
@@ -421,7 +353,10 @@ export function CheckoutPage() {
             </div>
 
             {selectedCityRef && (
-              <div style={{ marginTop: '12px' }}>
+              <div className="checkout-page__field">
+                <label className="checkout-page__label">
+                  Відділення або поштомат
+                </label>
                 <select
                   value={selectedWarehouse}
                   onBlur={() => handleBlur('selectedWarehouse')}
@@ -431,7 +366,6 @@ export function CheckoutPage() {
                   }}
                   className={`checkout-page__select ${touched.selectedWarehouse && errors.selectedWarehouse ? 'checkout-page__input--error' : ''}`}
                   disabled={isWarehousesFetching}
-                  style={{ width: '100%' }}
                 >
                   <option value="">
                     {isWarehousesFetching ?
@@ -458,9 +392,11 @@ export function CheckoutPage() {
 
           <div className="checkout-page__section">
             <h3 className="checkout-page__section-title">
-              {t('checkout.paymentTitle')}
+              <span className="checkout-page__section-number">3.</span>
+              Оплата карткою
             </h3>
-            <div>
+            <div className="checkout-page__field">
+              <label className="checkout-page__label">Номер картки</label>
               <input
                 type="text"
                 placeholder={t('checkout.cardNumberPlaceholder')}
@@ -488,7 +424,8 @@ export function CheckoutPage() {
               )}
             </div>
 
-            <div style={{ marginTop: '12px' }}>
+            <div className="checkout-page__field">
+              <label className="checkout-page__label">Ім'я на картці</label>
               <input
                 type="text"
                 placeholder={t('checkout.cardNamePlaceholder')}
@@ -506,11 +443,9 @@ export function CheckoutPage() {
               )}
             </div>
 
-            <div
-              className="checkout-page__field-group"
-              style={{ marginTop: '12px' }}
-            >
-              <div style={{ flex: 1 }}>
+            <div className="checkout-page__field-group">
+              <div className="checkout-page__field">
+                <label className="checkout-page__label">Термін дії</label>
                 <input
                   type="text"
                   placeholder={t('checkout.cardExpiryPlaceholder')}
@@ -532,7 +467,8 @@ export function CheckoutPage() {
                   <span className="error-message">{errors.cardExpiry}</span>
                 )}
               </div>
-              <div style={{ flex: 1 }}>
+              <div className="checkout-page__field">
+                <label className="checkout-page__label">CVC</label>
                 <input
                   type="password"
                   placeholder={t('checkout.cardCvcPlaceholder')}
@@ -560,21 +496,8 @@ export function CheckoutPage() {
           </h3>
 
           {isFirstPurchase && (
-            <div
-              className="first-purchase-badge"
-              style={{
-                backgroundColor: '#e8f8f0',
-                color: '#2ecc71',
-                padding: '10px',
-                borderRadius: '4px',
-                fontSize: '14px',
-                fontWeight: '500',
-                border: '1px dashed #2ecc71',
-                textAlign: 'center',
-                marginBottom: '15px',
-              }}
-            >
-              {t('checkout.firstPurchaseBadge')}
+            <div className="first-purchase-badge">
+              🎉 Знижка 10% на першу покупку буде застосована автоматично!
             </div>
           )}
 
@@ -613,60 +536,30 @@ export function CheckoutPage() {
                       +
                     </button>
                   </div>
-                  <button
-                    type="button"
-                    className="checkout-mini-item__delete-btn"
-                    onClick={() => removeFromCart(book.id)}
-                  >
-                    ✕
-                  </button>
                 </div>
+                <button
+                  type="button"
+                  className="checkout-mini-item__delete-btn"
+                  onClick={() => removeFromCart(book.id)}
+                >
+                  ✕
+                </button>
               </div>
             ))}
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '8px',
-              borderTop: '1px solid #eee',
-              paddingTop: '12px',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                color: '#666',
-              }}
-            >
-              <span>{t('checkout.total')}</span>
+          <div className="checkout-page__summary-details">
+            <div className="checkout-page__summary-item">
+              <span>Сума:</span>
               <span>₴{baseTotal.toFixed(2)}</span>
             </div>
             {isFirstPurchase && (
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  color: '#2ecc71',
-                  fontWeight: '500',
-                }}
-              >
-                <span>{t('checkout.discount')}</span>
+              <div className="checkout-page__summary-item checkout-page__summary-item--discount">
+                <span>Очікувана знижка:</span>
                 <span>- ₴{discountAmount.toFixed(2)}</span>
               </div>
             )}
-            <div
-              className="checkout-page__summary-row"
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                fontWeight: 'bold',
-                fontSize: '18px',
-                marginTop: '8px',
-              }}
-            >
+            <div className="checkout-page__summary-row">
               <span>{t('cart.total')}</span>
               <span>₴{finalTotal.toFixed(2)}</span>
             </div>
@@ -677,23 +570,15 @@ export function CheckoutPage() {
             className="checkout-page__submit-btn"
             onClick={handleCheckout}
             disabled={checkoutMutation.isPending || cartBooks.length === 0}
-            style={{
-              width: '100%',
-              padding: '14px',
-              backgroundColor: '#2ecc71',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '4px',
-              fontSize: '16px',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              marginTop: '10px',
-            }}
           >
             {checkoutMutation.isPending ?
               t('checkout.processingPayment')
             : t('checkout.pay', finalTotal.toFixed(2))}
           </button>
+
+          {submitError && (
+            <p className="checkout-page__submit-error">{submitError}</p>
+          )}
         </aside>
       </form>
 
