@@ -1,15 +1,7 @@
 import React from 'react';
 import './TeamMember.scss';
 import linkedinLogo from '../../../../public/icons/LinkedIn_icon.svg.webp';
-
-export interface TeamMember {
-  photo: string;
-  first_name: string;
-  last_name: string;
-  role: string;
-  quote: string;
-  linkedin: string;
-}
+import type { TeamMember } from '../../../pages/TeamPage/TeamPage.tsx';
 
 interface TeamMemberCardProps {
   member: TeamMember;

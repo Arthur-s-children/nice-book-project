@@ -14,12 +14,14 @@ export function AuthCallbackPage() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const handleEmailConfirmation = async () => {
+    let subscription: { unsubscribe: () => void } | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const handleCallback = async () => {
       try {
-        const hash = window.location.hash;
-        const params = new URLSearchParams(hash.substring(1));
-        const accessToken = params.get('access_token');
-        const refreshToken = params.get('refresh_token');
+        const searchParams = new URLSearchParams(window.location.search);
+        const accessToken = searchParams.get('access_token');
+        const refreshToken = searchParams.get('refresh_token');
 
         if (accessToken && refreshToken) {
           const { error } = await supabase.auth.setSession({
@@ -31,27 +33,40 @@ export function AuthCallbackPage() {
 
           setStatus('success');
           setMessage(t('authCallback.emailConfirm'));
+          setTimeout(() => navigate('/'), 2000);
+          return;
+        }
 
-          setTimeout(() => {
-            navigate('/');
-          }, 2000);
-        } else {
-          const { data, error } = await supabase.auth.getSession();
-          if (error) throw error;
+        const { data, error } = await supabase.auth.getSession();
+        if (error) throw error;
 
-          if (data.session) {
+        if (data.session) {
+          setStatus('success');
+          setMessage(t('authCallback.alreadySignIn'));
+          setTimeout(() => navigate('/'), 1500);
+          return;
+        }
+
+        const {
+          data: { subscription: sub },
+        } = supabase.auth.onAuthStateChange((event, session) => {
+          if (event === 'SIGNED_IN' && session) {
+            if (timeoutId) clearTimeout(timeoutId);
+            sub.unsubscribe();
             setStatus('success');
             setMessage(t('authCallback.alreadySignIn'));
-            setTimeout(() => {
-              navigate('/');
-            }, 2000);
-          } else {
-            setStatus('error');
-            setMessage(t('authCallback.invalidLink'));
+            setTimeout(() => navigate('/'), 1500);
           }
-        }
+        });
+        subscription = sub;
+
+        timeoutId = setTimeout(() => {
+          sub.unsubscribe();
+          setStatus('error');
+          setMessage(t('authCallback.invalidLink'));
+        }, 5000);
       } catch (error: unknown) {
-        console.error('Email confirmation error:', error);
+        console.error('Auth callback error:', error);
         setStatus('error');
         setMessage(
           error instanceof Error ?
@@ -61,7 +76,12 @@ export function AuthCallbackPage() {
       }
     };
 
-    handleEmailConfirmation();
+    void handleCallback();
+
+    return () => {
+      subscription?.unsubscribe();
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [navigate, t]);
 
   return (
