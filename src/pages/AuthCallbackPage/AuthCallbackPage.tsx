@@ -18,6 +18,9 @@ export function AuthCallbackPage() {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     const handleCallback = async () => {
+      console.log('FULL URL:', window.location.href);
+  console.log('HASH:', window.location.hash);
+  console.log('SEARCH:', window.location.search);
       try {
         const searchParams = new URLSearchParams(window.location.search);
         const accessToken = searchParams.get('access_token');
