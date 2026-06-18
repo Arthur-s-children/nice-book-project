@@ -4,6 +4,7 @@ import SplitType from 'split-type';
 import styles from './IntroAnimation.module.scss';
 import { ShaderBackground } from '../../components/shared/ShaderBackground/ShaderBackground';
 import LogoIntro from '../../assets/logo/Logo-intro.png';
+import { useTranslation } from 'react-i18next';
 
 type IntroAnimationProps = {
   children: React.ReactNode;
@@ -11,9 +12,10 @@ type IntroAnimationProps = {
 
 export const IntroAnimation = ({ children }: IntroAnimationProps) => {
   const isHomePage =
-    window.location.pathname === '/' &&
-    (window.location.hash === '' || window.location.hash === '#/');
+    window.location.hash === '' || window.location.hash === '#/';
+
   const [isOpened, setIsOpened] = useState(!isHomePage);
+  const { t } = useTranslation();
 
   const enterButtonRef = useRef<HTMLButtonElement>(null);
   const leftDoorRef = useRef<HTMLDivElement>(null);
@@ -154,7 +156,7 @@ export const IntroAnimation = ({ children }: IntroAnimationProps) => {
                 ref={loadingTextRef}
                 className={styles.loadingText}
               >
-                Opening your next story
+                {t('intro.loadingText')}
               </p>
 
               <div className={styles.loadingDots}>
@@ -192,7 +194,7 @@ export const IntroAnimation = ({ children }: IntroAnimationProps) => {
                   alt="Nice Books"
                 />
               </span>
-              <span className={styles.hint}>Натисни, щоб увійти</span>
+              <span className={styles.hint}>{t('intro.enterHint')}</span>
             </button>
           </div>
         </>
