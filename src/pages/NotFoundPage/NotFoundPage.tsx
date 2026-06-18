@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { AppButton } from '../../components/ui/Button';
 import styles from './NotFoundPage.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,21 @@ export const NotFoundPage = () => {
   const navigate = useNavigate();
 
   const { t } = useTranslation();
+
+  const hash = window.location.hash;
+
+  if (
+    hash.includes('access_token=') ||
+    hash.includes('refresh_token=') ||
+    hash.includes('provider_token=')
+  ) {
+    return (
+      <Navigate
+        to="/"
+        replace
+      />
+    );
+  }
 
   return (
     <div className={styles['not-found']}>
