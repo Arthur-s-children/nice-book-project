@@ -284,6 +284,10 @@ export const en = {
     changeLanguage: 'Change Language',
     changeTheme: 'Change Theme',
     preferences: 'Settings',
+    lightTheme: 'Light Theme',
+    darkTheme: 'Dark Theme',
+    ukrainian: 'Ukrainian',
+    english: 'English',
   },
 
   auth: {
@@ -304,6 +308,7 @@ export const en = {
     password: 'Password',
     registrationSuccess:
       'Registration successful! Please check your email to confirm your account.',
+    promoText: 'Sign up and get 10% off your first order',
   },
 
   authPrompt: {
@@ -374,9 +379,9 @@ export const en = {
   checkout: {
     title: 'Checkout',
 
-    recipientTitle: '1. Recipient details',
-    deliveryTitle: '2. Nova Poshta delivery',
-    paymentTitle: '3. Card payment',
+    recipientTitle: 'Recipient details',
+    deliveryTitle: 'Nova Poshta delivery',
+    paymentTitle: 'Card payment',
     orderTitle: 'Your order',
 
     firstName: 'First name',
@@ -393,7 +398,7 @@ export const en = {
     loadingWarehouses: 'Loading locations...',
     processingPayment: 'Processing payment...',
 
-    pay: (price: string) => `Pay ${price} ₴`,
+    pay: 'Pay {{price}} ₴',
 
     total: 'Total',
     discount: 'Expected discount:',
@@ -418,8 +423,14 @@ export const en = {
     cardNamePlaceholder: 'Cardholder name',
     cardExpiryPlaceholder: 'MM/YY',
     cardCvcPlaceholder: 'CVC',
+    cityLabel: 'City',
+    warehouseLabel: 'Branch or Parcel locker',
+    cardNumberLabel: 'Card number',
+    cardNameLabel: 'Name on card',
+    cardExpiryLabel: 'Expiry date',
+    cardCvcLabel: 'CVC',
 
-    errors: {
+    error: {
       firstNameRequired: 'First name is required',
       firstNameShort: 'First name is too short',
 
@@ -443,5 +454,12 @@ export const en = {
       cardCvcRequired: 'CVC is required',
       cardCvcInvalid: 'CVC must be 3 digits',
     },
+  },
+
+  sound: {
+    forest: 'Forest',
+    bonfire: 'Bonfire',
+    rain: 'Rain',
+    mindfulness: 'Mindfulness',
   },
 } as const;

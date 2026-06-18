@@ -326,6 +326,10 @@ export const uk = {
     changeLanguage: 'Змінити мову',
     changeTheme: 'Змінити тему',
     preferences: 'Налаштування',
+    lightTheme: 'Світла тема',
+    darkTheme: 'Темна тема',
+    ukrainian: 'Українська',
+    english: 'Англійська',
   },
 
   auth: {
@@ -346,6 +350,7 @@ export const uk = {
     password: 'Пароль',
     registrationSuccess:
       'Реєстрація успішна! Перевірте свою електронну пошту для підтвердження акаунта.',
+    promoText: 'Зареєструйся та отримай 10% знижки на перше замовлення',
   },
 
   authPrompt: {
@@ -415,9 +420,9 @@ export const uk = {
   checkout: {
     title: 'Оформлення замовлення',
 
-    recipientTitle: '1. Дані одержувача',
-    deliveryTitle: '2. Доставка Новою Поштою',
-    paymentTitle: '3. Оплата карткою',
+    recipientTitle: 'Дані одержувача',
+    deliveryTitle: 'Доставка Новою Поштою',
+    paymentTitle: 'Оплата карткою',
     orderTitle: 'Ваше замовлення',
 
     firstName: "Ім'я",
@@ -434,7 +439,7 @@ export const uk = {
     loadingWarehouses: 'Завантаження адрес...',
     processingPayment: 'Обробка платежу...',
 
-    pay: (price: string) => `Оплатити ${price} ₴`,
+    pay: 'Оплатити {{price}} ₴',
 
     total: 'Сума',
     discount: 'Очікувана знижка:',
@@ -459,6 +464,12 @@ export const uk = {
     cardNamePlaceholder: 'Імʼя власника картки',
     cardExpiryPlaceholder: 'ММ/РР',
     cardCvcPlaceholder: 'CVC',
+    cityLabel: 'Місто',
+    warehouseLabel: 'Відділення або поштомат',
+    cardNumberLabel: 'Номер картки',
+    cardNameLabel: 'Імʼя на картці',
+    cardExpiryLabel: 'Термін дії',
+    cardCvcLabel: 'CVC',
 
     error: {
       firstNameRequired: 'Імʼя є обовʼязковим',
@@ -484,5 +495,12 @@ export const uk = {
       cardCvcRequired: 'CVC обовʼязковий',
       cardCvcInvalid: 'CVC має містити 3 цифри',
     },
+  },
+
+  sound: {
+    forest: 'Ліс',
+    bonfire: 'Вогнище',
+    rain: 'Дощ',
+    mindfulness: 'Усвідомленність',
   },
 } as const;
