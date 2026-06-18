@@ -30,7 +30,8 @@
 .loading,
 .enterButton,
 .loadingText {
-  font-family: 'Monrope', sans-serif;
+  font-family: $font-heading;
+  font-weight: bold;
 }
 
 .loading {
@@ -80,6 +81,7 @@
 
   overflow-wrap: normal;
   word-break: normal;
+  text-transform: lowercase;
 }
 
 .loadingText :global(.word) {
@@ -119,7 +121,7 @@
   width: 50%;
   height: 100%;
 
-  background: $color-primary;
+  background: $raw-coffee-dark;
 }
 
 .leftDoor {
@@ -154,7 +156,6 @@
 
   border: 0;
   background: transparent;
-  cursor: pointer;
 }
 
 .logoWrapper {
@@ -181,4 +182,23 @@
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.45);
   text-align: center;
+}
+
+[data-theme='dark'] {
+  .leftDoor,
+  .rightDoor {
+    background: $raw-slate;
+  }
+
+  .hint {
+    color: rgba(240, 242, 245, 0.55);
+  }
+
+  .loadingText {
+    color: $raw-cream;
+  }
+
+  .loadingDots span {
+    background: $raw-cream;
+  }
 }

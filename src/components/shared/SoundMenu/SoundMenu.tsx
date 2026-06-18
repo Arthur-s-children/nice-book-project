@@ -29,22 +29,24 @@ const SOUNDS = [
 
 type SoundId = (typeof SOUNDS)[number]['id'];
 
-const isMobile = window.innerWidth < 640;
-
-const ARC_RADIUS = isMobile ? 88 : 110;
 const START_ANGLE = -90;
 const END_ANGLE = -180;
 
-const arcPosition = SOUNDS.map((_, i) => {
-  const step = (END_ANGLE - START_ANGLE) / (SOUNDS.length - 1);
-  const deg = START_ANGLE + step * i;
-  const rad = (deg * Math.PI) / 180;
+const getArcPositions = () => {
+  const isMobile = window.innerWidth < 640;
+  const arcRadius = isMobile ? 88 : 110;
 
-  return {
-    x: Math.cos(rad) * ARC_RADIUS,
-    y: Math.sin(rad) * ARC_RADIUS,
-  };
-});
+  return SOUNDS.map((_, i) => {
+    const step = (END_ANGLE - START_ANGLE) / (SOUNDS.length - 1);
+    const deg = START_ANGLE + step * i;
+    const rad = (deg * Math.PI) / 180;
+
+    return {
+      x: Math.cos(rad) * arcRadius,
+      y: Math.sin(rad) * arcRadius,
+    };
+  });
+};
 
 export const SoundMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,9 +62,11 @@ export const SoundMenu = () => {
   const openMenu = useCallback(() => {
     setIsOpen(true);
 
+    const arcPositions = getArcPositions();
+
     gsap.to(itemRefs.current, {
-      x: (i) => arcPosition[i].x,
-      y: (i) => arcPosition[i].y,
+      x: (i) => arcPositions[i]?.x ?? 0,
+      y: (i) => arcPositions[i]?.y ?? 0,
       scale: 1,
       opacity: 1,
       duration: 0.5,

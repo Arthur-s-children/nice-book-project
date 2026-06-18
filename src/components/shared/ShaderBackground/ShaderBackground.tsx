@@ -39,7 +39,12 @@ export const ShaderBackground = () => {
 
     const fragmentShader = `
       precision highp float;
+
       uniform float u_time;
+      uniform vec3 u_colorA;
+      uniform vec3 u_colorB;
+      uniform vec3 u_colorC;
+
       varying vec2 v_texCoord;
 
       vec3 permute(vec3 x) {
@@ -98,15 +103,11 @@ export const ShaderBackground = () => {
       void main() {
         vec2 uv = v_texCoord;
 
-        vec3 cream = vec3(0.976, 0.965, 0.941);
-        vec3 terracotta = vec3(0.651, 0.365, 0.275);
-        vec3 espresso = vec3(0.173, 0.118, 0.106);
-
         float n = snoise(uv * 3.0 + u_time * 0.1);
         n += 0.5 * snoise(uv * 6.0 - u_time * 0.15);
 
-        vec3 color = mix(cream, terracotta, smoothstep(-0.5, 0.5, n));
-        color = mix(color, espresso, smoothstep(0.4, 0.9, n) * 0.2);
+        vec3 color = mix(u_colorA, u_colorB, smoothstep(-0.5, 0.5, n));
+        color = mix(color, u_colorC, smoothstep(0.35, 0.9, n) * 0.28);
 
         float grain = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
         color += (grain - 0.5) * 0.03;
@@ -155,6 +156,30 @@ export const ShaderBackground = () => {
     gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
 
     const uTime = gl.getUniformLocation(program, 'u_time');
+    const uColorA = gl.getUniformLocation(program, 'u_colorA');
+    const uColorB = gl.getUniformLocation(program, 'u_colorB');
+    const uColorC = gl.getUniformLocation(program, 'u_colorC');
+
+    const isDarkTheme = document.body.dataset.theme === 'dark';
+
+    const colors =
+      isDarkTheme ?
+        {
+          a: [0.078, 0.267, 0.282], // #144448 aqua-hover
+          b: [0.741, 0.424, 0.357],
+          c: [0.88, 0.85, 0.81], // cream
+        }
+      : {
+          a: [0.961, 0.941, 0.91], // cream
+          b: [0.898, 0.561, 0.475], // neon clay
+          c: [0.259, 0.208, 0.176], // coffee
+        };
+
+    if (uColorA && uColorB && uColorC) {
+      gl.uniform3fv(uColorA, colors.a);
+      gl.uniform3fv(uColorB, colors.b);
+      gl.uniform3fv(uColorC, colors.c);
+    }
 
     let animationId = 0;
 

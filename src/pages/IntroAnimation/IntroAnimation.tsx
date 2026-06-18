@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 import styles from './IntroAnimation.module.scss';
 import { ShaderBackground } from '../../components/shared/ShaderBackground/ShaderBackground';
-import LogoCentered from '../../assets/logo/Logo-centered.svg';
+import LogoIntro from '../../assets/logo/Logo-intro.png';
 import { useTranslation } from 'react-i18next';
 
 type IntroAnimationProps = {
@@ -16,7 +16,7 @@ export const IntroAnimation = ({ children }: IntroAnimationProps) => {
   const [isOpened, setIsOpened] = useState(!isHomePage);
   const { t } = useTranslation();
 
-  const enterButtonRef = useRef<HTMLButtonElement>(null);
+  const enterButtonRef = useRef<HTMLDivElement>(null);
   const leftDoorRef = useRef<HTMLDivElement>(null);
   const rightDoorRef = useRef<HTMLDivElement>(null);
   const centerLineRef = useRef<HTMLDivElement>(null);
@@ -135,6 +135,16 @@ export const IntroAnimation = ({ children }: IntroAnimationProps) => {
       });
   };
 
+  useEffect(() => {
+    if (isOpened) return;
+
+    const timer = setTimeout(() => {
+      handleOpen();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className={`${styles.wrapper} ${isOpened ? styles.opened : ''}`}>
       <div className={styles.site}>{children}</div>
@@ -180,21 +190,19 @@ export const IntroAnimation = ({ children }: IntroAnimationProps) => {
               className={styles.centerLine}
             />
 
-            <button
-              ref={enterButtonRef}
-              type="button"
+            <div
+              ref={enterButtonRef as React.RefObject<HTMLDivElement>}
               className={styles.enterButton}
-              onClick={handleOpen}
             >
               <span className={styles.logoWrapper}>
                 <img
-                  src={LogoCentered}
+                  src={LogoIntro}
                   className={styles.logo}
                   alt="Nice Books"
                 />
               </span>
-              <span className={styles.hint}>{t('intro.enterHint')}</span>
-            </button>
+              {/* <span className={styles.hint}>{t('intro.enterHint')}</span> */}
+            </div>
           </div>
         </>
       )}

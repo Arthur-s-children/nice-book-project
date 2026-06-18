@@ -18,6 +18,7 @@ export const ProductPage = () => {
   const { data: books = [], isLoading: isBooksLoading } = useBooks();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [isImageOpen, setIsImageOpen] = useState(false);
 
   const {
     data: book,
@@ -110,6 +111,24 @@ export const ProductPage = () => {
     : book.images[0],
   );
 
+  const currentImageIndex = book.images.findIndex((img) =>
+    selectedImage ? img === selectedImage : img === book.images[0],
+  );
+
+  const handlePrevImage = () => {
+    const prevIndex =
+      currentImageIndex <= 0 ? book.images.length - 1 : currentImageIndex - 1;
+
+    setSelectedImage(book.images[prevIndex]);
+  };
+
+  const handleNextImage = () => {
+    const nextIndex =
+      currentImageIndex >= book.images.length - 1 ? 0 : currentImageIndex + 1;
+
+    setSelectedImage(book.images[nextIndex]);
+  };
+
   return (
     <div
       key={book.id}
@@ -146,7 +165,10 @@ export const ProductPage = () => {
 
       <div className={styles.book_grid}>
         <div className={styles.image_container}>
-          <div className={styles.main_image_wrap}>
+          <div
+            className={styles.main_image_wrap}
+            onClick={() => setIsImageOpen(true)}
+          >
             <img
               src={imageSrc}
               alt={book.name}
@@ -352,6 +374,57 @@ export const ProductPage = () => {
           isLoading={isBooksLoading}
         />
       </section>
+
+      {isImageOpen && (
+        <div
+          className={styles.image_modal}
+          onClick={() => setIsImageOpen(false)}
+        >
+          <button
+            type="button"
+            className={styles.image_modal_close}
+            aria-label="Close image"
+            onClick={() => setIsImageOpen(false)}
+          >
+            <Icon name="close" />
+          </button>
+
+          {book.images.length > 1 && (
+            <button
+              type="button"
+              className={`${styles.image_modal_arrow} ${styles.image_modal_arrow_prev}`}
+              aria-label="Previous image"
+              onClick={(event) => {
+                event.stopPropagation();
+                handlePrevImage();
+              }}
+            >
+              <Icon name="arrow-left" />
+            </button>
+          )}
+
+          <img
+            src={imageSrc}
+            alt={book.name}
+            className={styles.image_modal_img}
+            onClick={(event) => event.stopPropagation()}
+          />
+
+          {book.images.length > 1 && (
+            <button
+              type="button"
+              className={`${styles.image_modal_arrow} ${styles.image_modal_arrow_next}`}
+              aria-label="Next image"
+              onClick={(event) => {
+                event.stopPropagation();
+                handleNextImage();
+              }}
+            >
+              <Icon name="arrow-right" />
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

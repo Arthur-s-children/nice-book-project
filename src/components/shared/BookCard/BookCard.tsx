@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
 import { Headphones, Truck } from 'lucide-react';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { toast } from 'sonner';
 import { animateFlyingIcon } from '../../../services/animations/animateFlyingIcon';
 
@@ -27,7 +27,7 @@ export function BookCard({
 }: Props) {
   const price = book.price_discount ?? book.price_regular;
   const imageSrc = getImageUrl(book.images[0]);
-  const [isHovered, setIsHovered] = useState(false);
+  // const [isHovered, setIsHovered] = useState(false);
 
   const { t } = useTranslation();
 
@@ -56,8 +56,8 @@ export function BookCard({
   return (
     <article
       className="book-card"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      // onMouseEnter={() => setIsHovered(true)}
+      // onMouseLeave={() => setIsHovered(false)}
     >
       <div className="book-card__image-wrap">
         <Link to={`/products/${book.slug}`}>
@@ -96,9 +96,7 @@ export function BookCard({
         </p>
       </div>
 
-      <div
-        className={`book-card__actions ${isHovered ? 'book-card__actions--visible' : ''}`}
-      >
+      <div className="book-card__actions">
         <AppButton
           variant={inCart ? 'selected' : 'primary'}
           onClick={(event) => {
