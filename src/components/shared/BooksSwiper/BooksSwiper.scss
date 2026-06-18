@@ -2,15 +2,16 @@
 
 .books-swiper {
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   padding: 80px 32px;
-  width: 100%;
   box-sizing: border-box;
 
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
     margin-bottom: 32px;
   }
 
@@ -24,6 +25,7 @@
   &__nav {
     display: flex;
     gap: 12px;
+    flex-shrink: 0;
   }
 
   &__arrow {
@@ -41,7 +43,7 @@
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 
     &:hover {
-      background: $color-accent;
+      background: $color-terracotta-light;
       color: $color-white;
       transform: scale(1.1);
     }
@@ -52,15 +54,15 @@
   }
 
   &__slider-wrapper {
-    padding: 0;
-    overflow: hidden;
+    overflow: visible;
+    padding: 12px 0 18px;
+    margin: -12px 0 -18px;
   }
 
   &__container {
-    width: 100%;
-    max-width: 100%;
     overflow: hidden;
-    padding: 24px 8px 36px;
+    padding: 12px 8px 18px;
+    margin: -12px -8px -18px;
 
     .swiper-wrapper {
       align-items: stretch;
@@ -72,7 +74,7 @@
     display: flex;
     justify-content: center;
     overflow: visible;
-    padding: 8px;
+    padding: 6px;
   }
 
   &__skeleton {
@@ -89,8 +91,18 @@
     border-radius: $border-radius-lg;
   }
 
+  @media (max-width: $breakpoint-tablet) {
+    max-width: 100%;
+    margin: 0;
+    padding: 64px 24px;
+
+    &__slide {
+      padding: 4px;
+    }
+  }
+
   @media (max-width: $breakpoint-mobile) {
-    padding: 48px 20px;
+    padding: 48px 16px;
 
     &__header {
       margin-bottom: 24px;
@@ -100,9 +112,17 @@
       font-size: 28px;
     }
 
+    &__nav {
+      gap: 8px;
+    }
+
     &__arrow {
       width: 40px;
       height: 40px;
+    }
+
+    &__slide {
+      padding: 0;
     }
 
     &__skeleton {
@@ -110,9 +130,20 @@
     }
   }
 
-  @media (max-width: $breakpoint-tablet) {
-    max-width: 100%;
-    margin: 0 16px;
+  @media (max-width: $breakpoint-mobile) {
+    &__slider-wrapper {
+      padding: 10px 0 16px;
+      margin: -10px 0 -16px;
+    }
+
+    &__container {
+      padding: 10px 0 16px;
+      margin: -10px 0 -16px;
+    }
+
+    &__slide {
+      padding: 0;
+    }
   }
 }
 
@@ -120,6 +151,7 @@
   0% {
     background-position: 200% 0;
   }
+
   100% {
     background-position: -200% 0;
   }

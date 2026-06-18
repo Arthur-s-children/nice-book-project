@@ -2,21 +2,40 @@
 
 .catalog-controls {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
+  margin-bottom: 24px;
+
+  @media (max-width: $breakpoint-mobile) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+  }
 }
 
 .catalog-controls__select-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
+
+  @media (max-width: $breakpoint-mobile) {
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
 }
 
 .catalog-controls__label {
   @include body-text;
-  color: $color-elements;
+  color: $color-elements-light;
+  white-space: nowrap;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 11px;
+    line-height: 14px;
+  }
 }
 
 .catalog-controls__select {

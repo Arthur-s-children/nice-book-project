@@ -28,10 +28,14 @@ export const Dropdown = ({ value, onChange, options, placeholder }: Props) => {
           slotProps: {
             paper: {
               sx: {
-                marginTop: '4px',
-                borderRadius: '0',
-                boxShadow: '0px 2px 15px 0px rgba(0, 0, 0, 0.05)',
-                border: '1px solid #E2E6E9 !important',
+                mt: '6px',
+                borderRadius: '10px',
+                overflow: 'hidden',
+              },
+            },
+            list: {
+              sx: {
+                p: 0,
               },
             },
           },
