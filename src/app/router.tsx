@@ -42,10 +42,6 @@ export const router = createHashRouter([
         element: <CheckoutPage />,
       },
       {
-        path: '*',
-        element: <NotFoundPage />,
-      },
-      {
         path: 'products/:slug',
         element: <ProductPage />,
       },
@@ -72,6 +68,10 @@ export const router = createHashRouter([
       {
         path: 'auth/callback',
         element: <AuthCallbackPage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },

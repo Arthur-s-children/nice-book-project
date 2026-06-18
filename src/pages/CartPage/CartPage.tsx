@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart.tsx';
 import { CartItem } from '../../components/shared/CartItem/CartItem.tsx';
-import type { Book } from '../../types/BooksAPI.ts';
+import type { Book } from '../../types/Book.ts';
 import { useBooks } from '../../hooks/useBooks.ts';
 
 import './CartPage.scss';

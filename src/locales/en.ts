@@ -257,6 +257,7 @@ export const en = {
       processing: 'Processing',
       cancelled: 'Cancelled',
       pending: 'Pending',
+      paid: 'Paid',
     },
     title: 'Order History',
     pleaseSignIn: 'Please sign in to view your order history',

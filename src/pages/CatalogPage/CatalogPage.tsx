@@ -4,7 +4,7 @@ import { useFavorites } from '../../hooks/useFavorites.tsx';
 import { BookCard } from '../../components/shared/BookCard/BookCard.tsx';
 import { CatalogControls } from '../../components/ui/CatalogControls/CatalogControls.tsx';
 import { Pagination } from '../../components/ui/Pagination/Pagination.tsx';
-import type { Book } from '../../types/BooksAPI.ts';
+import type { Book } from '../../types/Book.ts';
 import './CatalogPage.scss';
 import { useTranslation } from 'react-i18next';
 import { useBooks } from '../../hooks/useBooks.ts';

@@ -4,7 +4,7 @@ import { SearchModal } from '../../shared/SearchModal/SearchModal';
 import { AuthModal } from '../../ui/AuthModal';
 import { UserMenu } from '../../ui/UserMenu';
 import { SettingsMenu } from '../../ui/SettingsMenu';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import { useAuthContext } from '../../../context/AuthContext';
 import '../Header/header.scss';
 import { useRef, useEffect, useState, useMemo } from 'react';
 import cn from 'classnames';

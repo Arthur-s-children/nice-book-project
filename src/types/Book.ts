@@ -1,40 +1,42 @@
-interface BaseBook {
+export type BookType = 'kindle' | 'paperback' | 'audiobook';
+
+export type BookLanguage = 'en' | 'uk';
+
+export interface Book {
   id: string;
-  namespaceId: string;
+
+  type: BookType;
+
+  namespace_id: string;
+
   name: string;
   slug: string;
   author: string;
-  lang: 'en' | 'uk';
-  langAvailable: ('en' | 'uk')[];
+
+  lang: BookLanguage;
+
+  lang_available: BookLanguage[];
+
   category: string[];
-  priceRegular: number;
-  priceDiscount: number | null;
   images: string[];
-  publicationYear: number;
+
+  price_regular: number;
+  price_discount: number | null;
+
+  publication_year: number;
+
   publication: string;
-  description: string[];
-}
 
-export interface Audiobook extends BaseBook {
-  type: 'audiobook';
-  narrator: string;
-  listeningLength: number;
-}
+  description: string;
 
-export interface KindleBook extends BaseBook {
-  type: 'kindle';
-  coverType: string | null;
-  numberOfPages: number;
-  format: string;
-  illustrations: boolean;
-}
+  cover_type: string | null;
+  number_of_pages: number | null;
+  format: string | null;
+  illustrations: boolean | null;
 
-export interface Paperback extends BaseBook {
-  type: 'paperback';
-  coverType: 'paperback' | 'hardcover' | 'softcover' | 'ebook' | null;
-  numberOfPages: number;
-  format: string;
-  illustrations: boolean;
-}
+  narrator: string | null;
+  listening_length: number | null;
 
-export type Book = Audiobook | KindleBook | Paperback;
+  created_at: string;
+  updated_at: string;
+}

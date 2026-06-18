@@ -299,6 +299,7 @@ export const uk = {
       processing: 'Обробляється',
       cancelled: 'Скасовано',
       pending: 'Очікує',
+      paid: 'Оплачено',
     },
     title: 'Історія замовлень',
     pleaseSignIn: 'Увійдіть, щоб переглянути історію замовлень',

@@ -1,6 +1,6 @@
 import { AppButton } from '../../ui/Button';
 import { LikeButton } from '../../ui/LikeButton';
-import type { Book } from '../../../types/BooksAPI.ts';
+import type { Book } from '../../../types/Book.ts';
 import './BookCard.scss';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

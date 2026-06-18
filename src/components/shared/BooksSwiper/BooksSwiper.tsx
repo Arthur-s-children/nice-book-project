@@ -7,7 +7,7 @@ import { useFavorites } from '../../../hooks/useFavorites';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import type { Book } from '../../../types/BooksAPI.ts';
+import type { Book } from '../../../types/Book.ts';
 import './BooksSwiper.scss';
 
 import 'swiper/css';
