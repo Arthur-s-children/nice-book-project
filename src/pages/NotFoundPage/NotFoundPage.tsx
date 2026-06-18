@@ -3,9 +3,11 @@ import styles from './NotFoundPage.module.scss';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../services/getImageUrl.ts';
 import { PageLoader } from '../../components/shared/PageLoader';
+import { useNavigate } from 'react-router-dom';
 
 export const NotFoundPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const hash = window.location.hash;
 
