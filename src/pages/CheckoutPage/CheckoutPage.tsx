@@ -461,7 +461,7 @@ export function CheckoutPage() {
               <div className="checkout-page__field">
                 <label className="checkout-page__label">
                   {t('checkout.cardExpiryLabel')}
-
+                </label>
                 <input
                   type="text"
                   placeholder={t('checkout.cardExpiryPlaceholder')}
