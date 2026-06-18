@@ -1,12 +1,10 @@
-import { Navigate, useNavigate } from 'react-router-dom';
 import { AppButton } from '../../components/ui/Button';
 import styles from './NotFoundPage.module.scss';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../services/getImageUrl.ts';
+import { PageLoader } from '../../components/shared/PageLoader';
 
 export const NotFoundPage = () => {
-  const navigate = useNavigate();
-
   const { t } = useTranslation();
 
   const hash = window.location.hash;
@@ -17,10 +15,7 @@ export const NotFoundPage = () => {
     hash.includes('provider_token=')
   ) {
     return (
-      <Navigate
-        to="/"
-        replace
-      />
+      <PageLoader />
     );
   }
 
