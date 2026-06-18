@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import './UserMenu.scss';
 import { useTranslation } from 'react-i18next';
+import { Globe, Moon, Sun } from 'lucide-react';
 
 type Language = 'en' | 'uk';
 type Theme = 'light' | 'dark';
@@ -83,16 +84,20 @@ export function UserMenu({
           </button>
           <div className="user-menu__divider" />
           <button
-            className="user-menu__item"
+            className="user-menu__item user-menu__item--with-icon"
             onClick={() => onLanguageChange(language === 'en' ? 'uk' : 'en')}
           >
-            {t('userMenu.changeLanguage')}
+            <Globe size={16} />
+            <span>{t('userMenu.changeLanguage')}</span>
           </button>
           <button
-            className="user-menu__item"
+            className="user-menu__item user-menu__item--with-icon"
             onClick={() => onThemeChange(theme === 'light' ? 'dark' : 'light')}
           >
-            {t('userMenu.changeTheme')}
+            {theme === 'light' ?
+              <Moon size={16} />
+            : <Sun size={16} />}
+            <span>{t('userMenu.changeTheme')}</span>
           </button>
           <div className="user-menu__divider" />
           <button

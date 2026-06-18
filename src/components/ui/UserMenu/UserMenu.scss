@@ -53,6 +53,12 @@
       color: $color-terracotta-light;
     }
 
+    &--with-icon {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     &--danger {
       color: $color-terracotta-light;
 
