@@ -6,10 +6,6 @@
   right: 50px;
   z-index: 500;
 
-  // @media (max-width: $breakpoint-mobile) {
-  //   bottom: max(80px, env(safe-area-inset-bottom) + 70px);
-  // }
-
   @media (max-width: $breakpoint-mobile) {
     bottom: 95px;
     right: 20px;
@@ -80,6 +76,48 @@
   }
 }
 
+.volumeButton {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 22px;
+  height: 22px;
+  border: 1px solid $color-elements-light;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: $color-bg-light;
+  color: $color-primary-light;
+  box-shadow: none;
+  font-size: 7px;
+  font-weight: 700;
+  z-index: 12;
+  will-change: transform;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+
+  &:hover {
+    background-color: $color-terracotta-light;
+    border-color: $color-terracotta-light;
+    color: $color-bg-light;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    bottom: 11px;
+    right: 11px;
+    width: 20px;
+    height: 20px;
+    font-size: 7px;
+  }
+}
+
+.volumeButtonActive {
+  background-color: $color-terracotta-light;
+  border-color: $color-terracotta-light;
+  color: $color-bg-light;
+}
+
 .trigger {
   position: relative;
   z-index: 10;
@@ -140,6 +178,7 @@
     transform: scale(1);
     opacity: 0.6;
   }
+
   100% {
     transform: scale(1.7);
     opacity: 0;
@@ -174,5 +213,23 @@
     &Active {
       background-color: $raw-aqua-active;
     }
+  }
+
+  .volumeButton {
+    border-color: $color-elements-dark;
+    background-color: $color-bg-dark;
+    color: $color-primary-dark;
+
+    &:hover {
+      background-color: $raw-aquamarine;
+      border-color: $raw-aquamarine;
+      color: $color-bg-dark;
+    }
+  }
+
+  .volumeButtonActive {
+    background-color: $raw-aquamarine;
+    border-color: $raw-aquamarine;
+    color: $color-bg-dark;
   }
 }

@@ -12,6 +12,8 @@ import { Icon } from '../../components/ui/Icon/Icon.tsx';
 import { useTranslation } from 'react-i18next';
 import { PageLoader } from '../../components/shared/PageLoader/PageLoader.tsx';
 import { useMinimumLoader } from '../../hooks/useMinimumLoader.ts';
+import { toast } from 'sonner';
+import { animateFlyingIcon } from '../../services/animations/animateFlyingIcon';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -103,6 +105,25 @@ export const ProductPage = () => {
 
   const inCart = cartIds.includes(book.id);
   const isFavorite = favoriteIds.includes(book.id);
+
+  const handleAddToCart = () => {
+    if (inCart) return;
+
+    addToCart(book.id);
+
+    toast.success(`${book.name} ${t('product.addedToCartSuccess')}`);
+  };
+
+  const handleAddToFavorite = () => {
+    toggleFavorite(book.id);
+
+    if (!isFavorite) {
+      toast.success(`${book.name} ${t('product.addedToFavorites')}`);
+    } else {
+      toast.info(`${book.name} ${t('product.removedFromFavorites')}`);
+    }
+  };
+
   const type = book.type;
 
   const imageSrc = getImageUrl(
@@ -246,8 +267,18 @@ export const ProductPage = () => {
             <div className={styles.actions}>
               <button
                 className={styles.btn_add}
-                onClick={() => addToCart(book.id)}
                 disabled={inCart}
+                onClick={(event) => {
+                  if (inCart) return;
+
+                  handleAddToCart();
+
+                  animateFlyingIcon({
+                    source: event.currentTarget,
+                    targetSelector: '[data-cart-target]',
+                    content: '🛒',
+                  });
+                }}
               >
                 {inCart ? t('product.added') : t('product.addToCart')}
               </button>
@@ -255,7 +286,17 @@ export const ProductPage = () => {
               <button
                 className={styles.btn_favorite}
                 aria-label="Favorite"
-                onClick={() => toggleFavorite(book.id)}
+                onClick={(event) => {
+                  handleAddToFavorite();
+
+                  if (!isFavorite) {
+                    animateFlyingIcon({
+                      source: event.currentTarget,
+                      targetSelector: '[data-favorites-target]',
+                      content: '❤️',
+                    });
+                  }
+                }}
               >
                 {isFavorite ?
                   <Icon name="heart-filled" />
