@@ -79,7 +79,11 @@ export function SettingsMenu({
               }}
             >
               <Globe size={16} />
-              <span>{language === 'en' ? 'Українська' : 'English'}</span>
+              <span>
+                {language === 'en' ?
+                  t('settingsMenu.ukrainian')
+                : t('settingsMenu.english')}
+              </span>
             </button>
 
             <button
@@ -92,7 +96,11 @@ export function SettingsMenu({
               {theme === 'light' ?
                 <Moon size={16} />
               : <Sun size={16} />}
-              <span>{theme === 'light' ? 'Dark Theme' : 'Light Theme'}</span>
+              <span>
+                {theme === 'light' ?
+                  t('settingsMenu.darkTheme')
+                : t('settingsMenu.lightTheme')}
+              </span>
             </button>
 
             {onSignUpClick && (
