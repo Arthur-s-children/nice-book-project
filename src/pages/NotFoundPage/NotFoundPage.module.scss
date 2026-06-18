@@ -2,69 +2,83 @@
 
 .not-found {
   position: relative;
-  flex: 1;
+  min-height: 100vh;
+  width: 100%;
   overflow: hidden;
+  background: $color-primary;
+}
 
-  &__gif {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.not-found__gif {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 
-  &__content {
-    position: absolute;
-    top: 50%;
-    right: 80px;
-    transform: translateY(-50%);
-    padding: 10px;
+.not-found__content {
+  position: absolute;
+  top: 50%;
+  right: clamp(24px, 6vw, 80px);
+  transform: translateY(-50%);
+  z-index: 2;
 
-    max-width: 420px;
-    color: $color-white;
-    text-align: right;
+  width: min(420px, calc(100% - 48px));
+  padding: 16px;
+  color: $color-white;
+  text-align: right;
 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 
-  &__title {
-    font-size: 30px;
-  }
+.not-found__title {
+  font-size: clamp(20px, 3vw, 30px);
+}
 
-  &__desc {
-    font-size: 20px;
-    margin-top: 10px;
-  }
+.not-found__title h1,
+.not-found__title h2 {
+  margin: 0;
+}
 
-  &__button {
-    width: 150px;
-    margin-top: 30px;
-  }
+.not-found__desc {
+  font-size: clamp(15px, 2vw, 20px);
+  margin-top: 10px;
+}
+
+.not-found__button {
+  width: 150px;
+  margin-top: 30px;
 }
 
 @media (max-width: $breakpoint-tablet) {
   .not-found__content {
-    justify-content: center;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
     align-items: center;
     text-align: center;
-  }
-
-  .not-found__title {
-    font-size: 20px;
-  }
-
-  .not-found__desc {
-    font-size: 17px;
-    margin-top: 5px;
   }
 }
 
 @media (max-width: $breakpoint-mobile) {
+  .not-found {
+    min-height: 100svh;
+  }
+
+  .not-found__gif {
+    object-position: center;
+  }
+
   .not-found__content {
-    right: 10px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    width: calc(100% - 32px);
+    padding: 12px;
+  }
+
+  .not-found__button {
+    margin-top: 24px;
   }
 }

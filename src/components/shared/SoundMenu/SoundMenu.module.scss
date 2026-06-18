@@ -5,6 +5,15 @@
   bottom: 145px;
   right: 50px;
   z-index: 500;
+
+  // @media (max-width: $breakpoint-mobile) {
+  //   bottom: max(80px, env(safe-area-inset-bottom) + 70px);
+  // }
+
+  @media (max-width: $breakpoint-mobile) {
+    bottom: 95px;
+    right: 20px;
+  }
 }
 
 .item {
@@ -19,7 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $color-primary;
+  background: $color-primary-light;
   box-shadow: $shadow-card;
   will-change: transform;
   transition: background 0.2s;
@@ -32,8 +41,8 @@
     transform: translateX(-50%);
     font-size: 12px;
     white-space: nowrap;
-    background: $color-primary;
-    color: $color-white;
+    background: $raw-coffee-dark;
+    color: $color-bg-light;
     padding: 3px 8px;
     border-radius: 4px;
     opacity: 0;
@@ -42,7 +51,7 @@
   }
 
   &:hover {
-    background: $color-accent;
+    background: $color-hover-bg-light;
 
     &::after {
       opacity: 1;
@@ -50,7 +59,7 @@
   }
 
   &Active {
-    background: $color-accent-active;
+    background: $color-elements-light;
   }
 
   @media (max-width: $breakpoint-mobile) {
@@ -82,14 +91,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $color-elements;
+  background-color: $color-elements-light;
   box-shadow: $shadow-card;
   transition:
     background 0.25s,
     color 0.25s;
 
   &:hover {
-    background: $color-hover-bg;
+    background-color: $color-primary-light;
   }
 
   &::before {
@@ -97,7 +106,7 @@
     position: absolute;
     inset: -3px;
     border-radius: 50%;
-    border: 2px solid $color-accent;
+    border: 2px solid $color-terracotta-light;
     opacity: 0;
     pointer-events: none;
   }
@@ -134,5 +143,36 @@
   100% {
     transform: scale(1.7);
     opacity: 0;
+  }
+}
+
+[data-theme='dark'] {
+  .trigger {
+    background-color: $raw-aquamarine;
+
+    &:hover {
+      background-color: $raw-aqua-deep;
+    }
+
+    &::before {
+      border-color: $raw-aquamarine;
+    }
+  }
+
+  .item {
+    background-color: $raw-aquamarine;
+
+    &:hover {
+      background: $raw-aqua-deep;
+    }
+
+    &::after {
+      background: $raw-aqua-hover;
+      color: $raw-ice;
+    }
+
+    &Active {
+      background-color: $raw-aqua-active;
+    }
   }
 }

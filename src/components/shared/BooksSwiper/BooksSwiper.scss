@@ -52,14 +52,15 @@
   }
 
   &__slider-wrapper {
-    padding: 0 8px;
+    padding: 0;
+    overflow: hidden;
   }
 
   &__container {
-    padding: 0 8px;
     width: 100%;
     max-width: 100%;
     overflow: hidden;
+    padding: 24px 8px 36px;
 
     .swiper-wrapper {
       align-items: stretch;
@@ -67,10 +68,11 @@
   }
 
   &__slide {
-    padding: 8px;
     height: auto;
     display: flex;
     justify-content: center;
+    overflow: visible;
+    padding: 8px;
   }
 
   &__skeleton {

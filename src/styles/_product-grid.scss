@@ -2,18 +2,8 @@
 
 @mixin product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-
-  @media (max-width: $breakpoint-tablet) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  @media (max-width: 767px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px 16px;
 
   @media (max-width: $breakpoint-mobile) {
     grid-template-columns: 1fr;
@@ -25,6 +15,7 @@
   max-width: 1136px;
   margin: 0 auto;
   padding: 112px 32px 80px;
+  box-sizing: border-box;
 
   @media (max-width: $breakpoint-tablet) {
     padding: 104px 24px 64px;
