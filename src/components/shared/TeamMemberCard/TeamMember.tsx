@@ -1,5 +1,6 @@
 import React from 'react';
 import './TeamMember.scss';
+import linkedinLogo from '../../../../public/icons/LinkedIn_icon.svg.webp';
 
 export interface TeamMember {
   photo: string;
@@ -7,6 +8,7 @@ export interface TeamMember {
   last_name: string;
   role: string;
   quote: string;
+  linkedin: string;
 }
 
 interface TeamMemberCardProps {
@@ -14,7 +16,7 @@ interface TeamMemberCardProps {
 }
 
 export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
-  const { photo, first_name, last_name, role, quote } = member;
+  const { photo, first_name, last_name, role, quote, linkedin } = member;
 
   const handleStubClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -39,10 +41,14 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           <div className="team-card__header">
             <h3 className="team-card__name">
               <a
-                href="#"
+                href={linkedin}
                 className="team-card__link"
-                onClick={handleStubClick}
               >
+                <img
+                  src={linkedinLogo}
+                  alt="LinkedIn"
+                  className="team-card__linkedin-image"
+                />
                 {first_name} {last_name}
               </a>
             </h3>
