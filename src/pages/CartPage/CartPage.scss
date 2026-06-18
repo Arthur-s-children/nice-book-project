@@ -127,7 +127,7 @@
     .cart-item__author,
     &__author {
       @include small-text;
-      color: $color-elements; // м'який сіро-коричневий відтінок
+      color: $color-elements;
     }
 
     .cart-item__title,
@@ -478,18 +478,18 @@
     color: $color-primary-dark;
   }
 
-  // Обгортка картки в темній темі
+
   .cart-item {
     background: rgba($color-bg-dark, 0.6);
     border-color: $color-elements-dark;
 
-    // Автор у темній темі
+
     .cart-item__author,
     &__author {
-      color: rgba($color-primary-dark, 0.6); // приглушений світлий колір
+      color: rgba($color-primary-dark, 0.6); 
     }
 
-    // Назва книги у темній темі
+
     .cart-item__title,
     &__title,
     .cart-item__info,
@@ -497,10 +497,10 @@
       color: $color-primary-dark;
     }
 
-    // Ціна книги у темній темі
+
     .cart-item__price,
     &__price {
-      color: $color-primary-dark; // чіткий світлий колір для ціни
+      color: $color-primary-dark; 
     }
   }
 
