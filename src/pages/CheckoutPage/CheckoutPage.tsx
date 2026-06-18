@@ -225,7 +225,7 @@ export function CheckoutPage() {
                 <label className="checkout-page__label">
                   {t('checkout.firstName')}
                 </label>
-                <input // Label for firstName
+                <input 
                   type="text"
                   placeholder={t('checkout.firstName')}
                   value={firstName}
@@ -315,7 +315,6 @@ export function CheckoutPage() {
               <label className="checkout-page__label">
                 {t('checkout.cityLabel')}
               </label>{' '}
-              {/* Label for city */}
               <input
                 type="text"
                 placeholder={t('checkout.cityPlaceholder')}
@@ -364,7 +363,7 @@ export function CheckoutPage() {
                 <label className="checkout-page__label">
                   {t('checkout.warehouseLabel')}
                 </label>{' '}
-                {/* Label for warehouse */}
+
                 <select
                   value={selectedWarehouse}
                   onBlur={() => handleBlur('selectedWarehouse')}
@@ -377,9 +376,9 @@ export function CheckoutPage() {
                 >
                   <option value="">
                     {isWarehousesFetching ?
-                      t('checkout.loadingWarehouses') // Placeholder when loading
+                      t('checkout.loadingWarehouses')
                     : t('checkout.warehousePlaceholder')}{' '}
-                    {/* Placeholder for warehouse selection */}
+
                   </option>
                   {warehouses.map((w) => (
                     <option
@@ -408,7 +407,7 @@ export function CheckoutPage() {
               <label className="checkout-page__label">
                 {t('checkout.cardNumberLabel')}
               </label>{' '}
-              {/* Label for cardNumber */}
+
               <input
                 type="text"
                 placeholder={t('checkout.cardNumberPlaceholder')}
@@ -440,7 +439,7 @@ export function CheckoutPage() {
               <label className="checkout-page__label">
                 {t('checkout.cardNameLabel')}
               </label>{' '}
-              {/* Label for cardName */}
+
               <input
                 type="text"
                 placeholder={t('checkout.cardNamePlaceholder')}
@@ -462,8 +461,7 @@ export function CheckoutPage() {
               <div className="checkout-page__field">
                 <label className="checkout-page__label">
                   {t('checkout.cardExpiryLabel')}
-                </label>{' '}
-                {/* Label for cardExpiry */}
+
                 <input
                   type="text"
                   placeholder={t('checkout.cardExpiryPlaceholder')}
@@ -489,7 +487,7 @@ export function CheckoutPage() {
                 <label className="checkout-page__label">
                   {t('checkout.cardCvcLabel')}
                 </label>{' '}
-                {/* Label for cardCvc */}
+
                 <input
                   type="password"
                   placeholder={t('checkout.cardCvcPlaceholder')}
@@ -519,7 +517,7 @@ export function CheckoutPage() {
           {isFirstPurchase && (
             <div className="first-purchase-badge">
               {' '}
-              {/* First purchase badge */}
+
               {t('checkout.firstPurchaseBadge')}
             </div>
           )}
