@@ -257,6 +257,7 @@ export const en = {
       processing: 'Processing',
       cancelled: 'Cancelled',
       pending: 'Pending',
+      paid: 'Paid',
     },
     title: 'Order History',
     pleaseSignIn: 'Please sign in to view your order history',
@@ -284,6 +285,10 @@ export const en = {
     changeLanguage: 'Change Language',
     changeTheme: 'Change Theme',
     preferences: 'Settings',
+    lightTheme: 'Light Theme',
+    darkTheme: 'Dark Theme',
+    ukrainian: 'Ukrainian',
+    english: 'English',
   },
 
   auth: {
@@ -304,6 +309,7 @@ export const en = {
     password: 'Password',
     registrationSuccess:
       'Registration successful! Please check your email to confirm your account.',
+    promoText: 'Sign up and get 10% off your first order',
   },
 
   authPrompt: {
@@ -449,5 +455,12 @@ export const en = {
       cardCvcRequired: 'CVC is required',
       cardCvcInvalid: 'CVC must be 3 digits',
     },
+  },
+
+  sound: {
+    forest: 'Forest',
+    bonfire: 'Bonfire',
+    rain: 'Rain',
+    mindfulness: 'Mindfulness',
   },
 } as const;

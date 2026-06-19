@@ -10,6 +10,7 @@ export interface TeamMember {
   last_name: string;
   role: string;
   quote: string;
+  linkedin: string;
 }
 
 export const TeamPage: React.FC = () => {

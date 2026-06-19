@@ -1,13 +1,25 @@
-import { useNavigate } from 'react-router-dom';
 import { AppButton } from '../../components/ui/Button';
 import styles from './NotFoundPage.module.scss';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../services/getImageUrl.ts';
+import { PageLoader } from '../../components/shared/PageLoader';
+import { useNavigate } from 'react-router-dom';
 
 export const NotFoundPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { t } = useTranslation();
+  const hash = window.location.hash;
+
+  if (
+    hash.includes('access_token=') ||
+    hash.includes('refresh_token=') ||
+    hash.includes('provider_token=')
+  ) {
+    return (
+      <PageLoader />
+    );
+  }
 
   return (
     <div className={styles['not-found']}>

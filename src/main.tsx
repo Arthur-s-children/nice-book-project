@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { IntroAnimation } from './pages/IntroAnimation';
 import { router } from './app/router';
 import './locales/i18n';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './components/layout/Header/useTheme';
 import { CursorBlur } from './components/ui/CursorBlur/CursorBlur';
 import { Toaster } from '../src/components/shared/Toastify/sonner';

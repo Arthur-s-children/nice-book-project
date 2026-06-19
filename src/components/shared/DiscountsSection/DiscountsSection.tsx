@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Tag } from 'lucide-react';
 import { useCart } from '../../../hooks/useCart';
 import { useFavorites } from '../../../hooks/useFavorites';
-import type { Book } from '../../../types/BooksAPI.ts';
+import type { Book } from '../../../types/Book.ts';
 import './DiscountsSection.scss';
 
 import 'swiper/css';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import { useAuthContext } from '../../../context/AuthContext';
 import './AuthPromptModal.scss';
 import { useTranslation } from 'react-i18next';
 

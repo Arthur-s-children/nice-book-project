@@ -40,6 +40,11 @@
     }
   }
 
+  &__linkedin-image {
+    height: 20px;
+    width: 20px;
+  }
+
   &__image-wrapper {
     display: block;
     width: 100%;
@@ -60,6 +65,12 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+
+    background-color: $color-bg-light;
+
+    [data-theme='dark'] & {
+      background-color: $color-aquamarine-active;
+    }
   }
 
   &__header {
@@ -74,9 +85,16 @@
   }
 
   &__link {
+    display: inline-flex;
+    align-items: center;
     color: $color-primary;
     text-decoration: none;
     transition: color 0.2s ease;
+    gap: 8px;
+
+    [data-theme='dark'] & {
+      color: $color-primary-dark;
+    }
 
     &:hover {
       color: $color-elements;
@@ -86,6 +104,10 @@
   &__role {
     @include uppercase-text;
     color: $color-primary;
+
+    [data-theme='dark'] & {
+      color: $color-primary-dark;
+    }
   }
 
   &__quote-wrapper {
@@ -110,5 +132,9 @@
     border-left: 3px solid $color-icons;
     padding-left: 12px;
     overflow: hidden;
+
+    [data-theme='dark'] & {
+      color: $color-primary-dark;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { supabase } from '../../api/supabase';
-import type { Book } from '../../types/BooksAPI.ts';
+import type { Book } from '../../types/Book.ts';
 
 export const booksService = {
   async getBooks(): Promise<Book[]> {

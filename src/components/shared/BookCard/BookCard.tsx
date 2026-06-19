@@ -1,12 +1,11 @@
 import { AppButton } from '../../ui/Button';
 import { LikeButton } from '../../ui/LikeButton';
-import type { Book } from '../../../types/BooksAPI.ts';
+import type { Book } from '../../../types/Book.ts';
 import './BookCard.scss';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '../../../services/getImageUrl.ts';
 import { Headphones, Truck } from 'lucide-react';
-// import { useState } from 'react';
 import { toast } from 'sonner';
 import { animateFlyingIcon } from '../../../services/animations/animateFlyingIcon';
 
@@ -27,7 +26,6 @@ export function BookCard({
 }: Props) {
   const price = book.price_discount ?? book.price_regular;
   const imageSrc = getImageUrl(book.images[0]);
-  // const [isHovered, setIsHovered] = useState(false);
 
   const { t } = useTranslation();
 
@@ -54,11 +52,7 @@ export function BookCard({
   };
 
   return (
-    <article
-      className="book-card"
-      // onMouseEnter={() => setIsHovered(true)}
-      // onMouseLeave={() => setIsHovered(false)}
-    >
+    <article className="book-card">
       <div className="book-card__image-wrap">
         <Link to={`/products/${book.slug}`}>
           <img
@@ -85,7 +79,7 @@ export function BookCard({
           </Link>
         </div>
         <div className="book-card__prices">
-          <span className="book-card__price">₴{price}</span>
+          <span className="book-card__price">${price}</span>
           {book.price_discount && (
             <span className="book-card__old-price">₴{book.price_regular}</span>
           )}

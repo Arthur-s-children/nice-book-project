@@ -6,7 +6,7 @@ import { useCart } from '../../hooks/useCart.tsx';
 import { useBooks } from '../../hooks/useBooks.ts';
 import { useDebouncedValue } from '../../hooks/useDebouncedValue.ts';
 import { getImageUrl } from '../../services/getImageUrl.ts';
-import type { Book } from '../../types/BooksAPI.ts';
+import type { Book } from '../../types/Book.ts';
 import { supabase } from '../../api/supabase';
 
 import { useAuth } from '../../hooks/useAuth';

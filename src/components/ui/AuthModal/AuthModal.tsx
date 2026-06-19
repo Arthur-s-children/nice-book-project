@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuthContext } from '../../../contexts/AuthContext';
+import { useAuthContext } from '../../../context/AuthContext';
 import { Icon } from '../Icon';
 import './AuthModal.scss';
 import { useTranslation } from 'react-i18next';
@@ -41,9 +41,7 @@ export function AuthModal({ isOpen, onClose }: Props) {
       }
 
       await signUp(data.email, data.password, data.fullName);
-      alert(
-        'Registration successful! Please check your email to confirm your account.',
-      );
+      alert(t('auth.registrationSuccess'));
       onClose();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : t('auth.error'));
@@ -83,10 +81,10 @@ export function AuthModal({ isOpen, onClose }: Props) {
           <Icon name="close" />
         </button>
 
-        <h2 className="auth-modal__title">{isLogin ? 'Sign In' : 'Sign Up'}</h2>
-        <p className="auth-modal__promo">
-          Sign up and get 10% off your first order
-        </p>
+        <h2 className="auth-modal__title">
+          {isLogin ? t('auth.signIn') : t('auth.signUp')}
+        </h2>
+        <p className="auth-modal__promo">{t('auth.promoText')}</p>
 
         {error && <div className="auth-modal__error">{error}</div>}
 
