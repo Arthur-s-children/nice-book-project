@@ -33,7 +33,9 @@ export function AuthPromptModal() {
       />
       <div className="auth-prompt-modal__content">
         <h2 className="auth-prompt-modal__title">{t('authPrompt.title')}</h2>
-        <p className="auth-prompt-modal__text">{t('authPrompt.text')}</p>
+        <p className="auth-prompt-modal__text">
+          Sign up and get 10% off your first order
+        </p>
         <button
           className="auth-prompt-modal__button"
           onClick={() => {
