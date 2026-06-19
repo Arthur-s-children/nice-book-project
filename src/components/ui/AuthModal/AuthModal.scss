@@ -96,7 +96,7 @@
 
   &__submit {
     padding: 12px 24px;
-    background: $color-terracotta-light;
+    background: #e53935;
     color: white;
     border: none;
     font-size: 14px;
@@ -106,7 +106,7 @@
     transition: all 0.2s ease;
 
     &:hover:not(:disabled) {
-      background: $color-terracotta-hover-light;
+      background: #c62828;
       transform: translateY(-1px);
     }
 

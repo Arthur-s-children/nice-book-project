@@ -478,17 +478,14 @@
     color: $color-primary-dark;
   }
 
-
   .cart-item {
     background: rgba($color-bg-dark, 0.6);
     border-color: $color-elements-dark;
 
-
     .cart-item__author,
     &__author {
-      color: rgba($color-primary-dark, 0.6); 
+      color: rgba($color-primary-dark, 0.6);
     }
-
 
     .cart-item__title,
     &__title,
@@ -497,10 +494,9 @@
       color: $color-primary-dark;
     }
 
-
     .cart-item__price,
     &__price {
-      color: $color-primary-dark; 
+      color: $color-primary-dark;
     }
   }
 

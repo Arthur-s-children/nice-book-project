@@ -152,11 +152,7 @@ body {
       padding: 0;
 
       &__logo {
-        position: absolute;
-        margin: 13px 16px;
-        width: 64px;
-        display: flex;
-        align-items: center;
+        display: none;
       }
 
       .header__nav {
@@ -178,85 +174,26 @@ body {
         .nav__link {
           font-size: 18px;
           padding-bottom: 8px;
+          color: rgba(255, 255, 255, 0.9);
         }
       }
 
       &__icons {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 0 16px;
-        gap: 8px;
-        box-sizing: border-box;
-
-        .input {
-          display: block;
-          width: 288px;
-          height: 40px;
-          border-radius: $border-radius-md;
-          box-sizing: border-box;
-        }
-
-        .dropdouwn {
-          display: block;
-          width: 288px;
-          height: 40px;
-          border-radius: $border-radius-md;
-          font-size: 16px;
-          box-sizing: border-box;
+        > *:not(.icon--menu) {
+          display: none !important;
         }
 
         .icon--menu {
+          display: flex !important;
           position: absolute;
           top: 0;
-          right: 0;
+          right: 16px;
           height: 48px;
           width: 48px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .icon--favourite {
-          display: flex;
-          box-sizing: border-box;
-          position: fixed;
-          bottom: 0;
-          height: 58px;
-          width: 50%;
           align-items: center;
           justify-content: center;
           z-index: 1000;
-          left: 0;
-        }
-
-        .icon--cart {
-          display: flex;
-          box-sizing: border-box;
-          position: fixed;
-          bottom: 0;
-          height: 58px;
-          width: 50%;
-          align-items: center;
-          justify-content: center;
-          z-index: 1000;
-          right: 0;
-        }
-
-        .icon--theme {
-          display: flex;
-          box-sizing: border-box;
-          position: fixed;
-          bottom: 0;
-          height: 64px;
-          width: 50%;
-          align-items: center;
-          justify-content: center;
-          z-index: 1000;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          padding: 0;
+          color: rgba(255, 255, 255, 0.9);
         }
       }
     }

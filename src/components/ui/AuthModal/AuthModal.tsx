@@ -85,7 +85,7 @@ export function AuthModal({ isOpen, onClose }: Props) {
 
         <h2 className="auth-modal__title">{isLogin ? 'Sign In' : 'Sign Up'}</h2>
         <p className="auth-modal__promo">
-          Зареєструйся та отримай бонус на 10% на перше замовлення
+          Sign up and get 10% off your first order
         </p>
 
         {error && <div className="auth-modal__error">{error}</div>}
